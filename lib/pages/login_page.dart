@@ -19,8 +19,9 @@ class LoginPage extends StatelessWidget {
                   "UZISHA",
                   style: TextStyle(
                     fontSize: 28,
-                    color: AppTheme.whiteColor,
-                    letterSpacing: 5,
+                    fontWeight: FontWeight.bold,
+                    color: AppTheme.lessWhiteColor,
+                    letterSpacing: 2,
                   ),
                 ),
               ),
@@ -31,9 +32,9 @@ class LoginPage extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    _builTitle(title: "S'inscrire"),
+                    _builTitle(title: "S'inscrire", isActive: false),
                     _buildDivider(),
-                    _builTitle(title: "Se connecter"),
+                    _builTitle(title: "Se connecter", isActive: true),
                   ],
                 ),
               ),
@@ -80,17 +81,37 @@ class LoginPage extends StatelessWidget {
   }
 
   // Building text titles
-  Widget _builTitle({String title}) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
-      child: Text("$title", style: _notActive()),
+  Widget _builTitle({String title, bool isActive}) {
+    return Container(
+      child: Stack(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+            child: Text("$title", style: _notActive()),
+          ),
+          isActive
+              ? Positioned(
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  child: Container(
+                    alignment: Alignment.center,
+                    child: CircleAvatar(
+                      backgroundColor: AppTheme.pinkColor,
+                      radius: 2,
+                    ),
+                  ),
+                )
+              : Container()
+        ],
+      ),
     );
   }
 
   // Building textStyle
   TextStyle _notActive() {
     return TextStyle(
-      fontSize: 18,
+      fontSize: 16,
       color: AppTheme.greyColor,
     );
   }
@@ -109,12 +130,13 @@ class LoginPage extends StatelessWidget {
 
   // Building text field
   Widget _buildTextField({String hint, bool isFirst, bool obscureText}) {
-    EdgeInsets edgeInsets1 = EdgeInsets.only(top: 50, left: 10, right: 10);
+    EdgeInsets edgeInsets1 = EdgeInsets.only(top: 40, left: 10, right: 10);
     EdgeInsets edgeInsets2 = EdgeInsets.only(top: 20, left: 10, right: 10);
     return Padding(
       padding: isFirst ? edgeInsets1 : edgeInsets2,
       child: Container(
         child: TextField(
+          textAlign: TextAlign.center,
           cursorColor: AppTheme.greyColor,
           obscureText: obscureText,
           style: TextStyle(

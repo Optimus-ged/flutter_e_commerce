@@ -6,8 +6,8 @@ export 'package:flutter/services.dart';
 export 'dart:io';
 
 // All pages
-export 'package:e_commerce/pages/login_pages.dart';
+export 'package:e_commerce/pages/login_page.dart';
 
 // All utils
-export 'package:e_commerce/utils/colors.dart';
+export 'package:e_commerce/utils/app_theme.dart';
 export 'package:e_commerce/utils/for_the_view.dart';
