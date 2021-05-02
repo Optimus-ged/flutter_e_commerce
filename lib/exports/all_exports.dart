@@ -1,0 +1,13 @@
+// All flutter depedancies
+export 'package:flutter/material.dart';
+
+// All flutter services
+export 'package:flutter/services.dart';
+export 'dart:io';
+
+// All pages
+export 'package:e_commerce/pages/login_pages.dart';
+
+// All utils
+export 'package:e_commerce/utils/colors.dart';
+export 'package:e_commerce/utils/for_the_view.dart';
