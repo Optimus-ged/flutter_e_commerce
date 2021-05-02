@@ -8,16 +8,8 @@ void main() {
         primaryColor: Colors.black,
         primarySwatch: Colors.grey,
       ),
-      home: MyApp(),
+      home: LoginPage(),
     ),
   );
 }
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      
-    );
-  }
-}
