@@ -5,7 +5,7 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     var screen = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: CustomColors.blueColor,
+      backgroundColor: AppTheme.blueColor,
       body: ScrollConfiguration(
         behavior: RemoveGlow(),
         child: SingleChildScrollView(
@@ -19,7 +19,7 @@ class LoginPage extends StatelessWidget {
                   "UZISHA",
                   style: TextStyle(
                     fontSize: 28,
-                    color: CustomColors.whiteColor,
+                    color: AppTheme.whiteColor,
                     letterSpacing: 5,
                   ),
                 ),
@@ -50,7 +50,7 @@ class LoginPage extends StatelessWidget {
               SizedBox(height: 40),
               Container(
                 decoration: BoxDecoration(
-                  color: CustomColors.pinkColor,
+                  color: AppTheme.pinkColor,
                   borderRadius: BorderRadius.circular(8),
                 ),
                 padding: EdgeInsets.symmetric(vertical: 10, horizontal: 40),
@@ -66,7 +66,7 @@ class LoginPage extends StatelessWidget {
               Text(
                 "Mot de passe oublié",
                 style: TextStyle(
-                  color: CustomColors.greyColor,
+                  color: AppTheme.greyColor,
                   fontSize: 14,
                   decoration: TextDecoration.underline,
                 ),
@@ -91,7 +91,7 @@ class LoginPage extends StatelessWidget {
   TextStyle _notActive() {
     return TextStyle(
       fontSize: 18,
-      color: CustomColors.greyColor,
+      color: AppTheme.greyColor,
     );
   }
 
@@ -102,7 +102,7 @@ class LoginPage extends StatelessWidget {
       child: Container(
         height: 25,
         width: 0.2,
-        color: CustomColors.greyColor,
+        color: AppTheme.greyColor,
       ),
     );
   }
@@ -115,11 +115,11 @@ class LoginPage extends StatelessWidget {
       padding: isFirst ? edgeInsets1 : edgeInsets2,
       child: Container(
         child: TextField(
-          cursorColor: CustomColors.greyColor,
+          cursorColor: AppTheme.greyColor,
           obscureText: obscureText,
           style: TextStyle(
             fontSize: 17,
-            color: CustomColors.greyColor,
+            color: AppTheme.greyColor,
           ),
           decoration: InputDecoration(
             hintText: "$hint",
