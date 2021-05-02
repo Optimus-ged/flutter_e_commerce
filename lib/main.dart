@@ -58,3 +58,11 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+class Test extends ScrollBehavior {
+  @override
+  Widget buildViewportChrome(
+      BuildContext context, Widget child, AxisDirection axisDirection) {
+    return child;
+  }
+}
