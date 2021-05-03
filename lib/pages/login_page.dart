@@ -12,6 +12,7 @@ class LoginPage extends StatelessWidget {
           child: Column(
             children: [
               Container(
+                // color: Colors.black38,
                 height: screen.height * .28,
                 width: double.infinity,
                 alignment: Alignment.bottomCenter,
@@ -25,8 +26,9 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 100),
+              SizedBox(height: screen.height * .12),
               Container(
+                // color: Colors.black38,
                 width: double.infinity,
                 alignment: Alignment.center,
                 child: Row(
@@ -39,16 +41,16 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
               _buildTextField(
-                hint: "Nom d'utilisateur ou email",
-                isFirst: true,
-                obscureText: false,
-              ),
+                  hint: "Nom d'utilisateur ou email",
+                  isFirst: true,
+                  obscureText: false,
+                  top: screen.height * .05),
               _buildTextField(
                 hint: "Mot de passe",
                 isFirst: false,
                 obscureText: true,
               ),
-              SizedBox(height: 40),
+              SizedBox(height: screen.height * .05),
               Container(
                 decoration: BoxDecoration(
                   color: AppTheme.pinkColor,
@@ -63,16 +65,21 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 5),
-              Text(
-                "Mot de passe oublié",
-                style: TextStyle(
-                  color: AppTheme.greyColor,
-                  fontSize: 14,
-                  decoration: TextDecoration.underline,
+              SizedBox(height: 2),
+              Container(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(vertical: 2, horizontal: 5),
+                  child: Text(
+                    "Mot de passe oublié",
+                    style: TextStyle(
+                      color: AppTheme.greyColor,
+                      fontSize: 14,
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
                 ),
               ),
-              SizedBox(height: 100)
+              SizedBox(height: screen.height * .15)
             ],
           ),
         ),
@@ -83,6 +90,7 @@ class LoginPage extends StatelessWidget {
   // Building text titles
   Widget _builTitle({String title, bool isActive}) {
     return Container(
+      // color: Colors.black,
       child: Stack(
         children: [
           Padding(
@@ -91,7 +99,7 @@ class LoginPage extends StatelessWidget {
           ),
           isActive
               ? Positioned(
-                  bottom: 0,
+                  bottom: 4,
                   left: 0,
                   right: 0,
                   child: Container(
@@ -129,8 +137,9 @@ class LoginPage extends StatelessWidget {
   }
 
   // Building text field
-  Widget _buildTextField({String hint, bool isFirst, bool obscureText}) {
-    EdgeInsets edgeInsets1 = EdgeInsets.only(top: 40, left: 10, right: 10);
+  Widget _buildTextField(
+      {String hint, double top, bool isFirst, bool obscureText}) {
+    EdgeInsets edgeInsets1 = EdgeInsets.only(top: top, left: 10, right: 10);
     EdgeInsets edgeInsets2 = EdgeInsets.only(top: 20, left: 10, right: 10);
     return Padding(
       padding: isFirst ? edgeInsets1 : edgeInsets2,
@@ -161,7 +170,7 @@ class LoginPage extends StatelessWidget {
   OutlineInputBorder _outlineBorder({Color color}) {
     return OutlineInputBorder(
       borderRadius: BorderRadius.circular(20),
-      gapPadding: 2,
+      gapPadding: 0,
       borderSide: BorderSide(
         color: color,
         width: 1,
