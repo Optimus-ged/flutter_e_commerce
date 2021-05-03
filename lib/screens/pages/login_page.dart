@@ -1,5 +1,4 @@
 import 'package:e_commerce/exports/all_exports.dart';
-import 'package:e_commerce/screens/widgets/click_animation.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -34,7 +33,17 @@ class LoginPage extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    _builTitle(title: "S'inscrire", isActive: false),
+                    _builTitle(
+                      title: "S'inscrire",
+                      isActive: false,
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => SignupPage(),
+                          ),
+                        );
+                      },
+                    ),
                     _buildDivider(),
                     _builTitle(title: "Se connecter", isActive: true),
                   ],
@@ -94,11 +103,10 @@ class LoginPage extends StatelessWidget {
   }
 
   // Building text titles
-  Widget _builTitle({String title, bool isActive}) {
+  Widget _builTitle({String title, bool isActive, VoidCallback onTap}) {
     return ClickAnimation(
-      onTap: () {},
+      onTap: onTap,
       child: Container(
-        // color: Colors.black,
         child: Stack(
           children: [
             Padding(
