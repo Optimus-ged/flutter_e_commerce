@@ -1,4 +1,5 @@
 import 'package:e_commerce/exports/all_exports.dart';
+import 'package:e_commerce/screens/pages/home_page.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -61,7 +62,13 @@ class LoginPage extends StatelessWidget {
               ),
               SizedBox(height: screen.height * .05),
               ClickAnimation(
-                onTap: () {},
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (_) => HomePage(),
+                    ),
+                  );
+                },
                 child: Container(
                   decoration: BoxDecoration(
                     color: AppTheme.pinkColor,

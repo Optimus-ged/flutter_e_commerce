@@ -1,5 +1,6 @@
 // All flutter depedancies
 export 'package:flutter/material.dart';
+export 'package:google_fonts/google_fonts.dart';
 
 // All flutter services
 export 'package:flutter/services.dart';

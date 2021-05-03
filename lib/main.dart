@@ -1,6 +1,5 @@
 import 'package:e_commerce/exports/all_exports.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations(
@@ -16,11 +15,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.light,
+      statusBarIconBrightness: Brightness.dark,
       statusBarBrightness:
           Platform.isAndroid ? Brightness.dark : Brightness.light,
       systemNavigationBarColor: Colors.white,
-      systemNavigationBarDividerColor: Colors.grey,
+      systemNavigationBarDividerColor: Colors.transparent,
       systemNavigationBarIconBrightness: Brightness.dark,
     ));
     return MaterialApp(

@@ -4,6 +4,7 @@ class SignupPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var screen = MediaQuery.of(context).size;
+    final TextStyle headline4 = Theme.of(context).textTheme.headline4;
     return Scaffold(
       backgroundColor: AppTheme.blueColor,
       body: ScrollConfiguration(
@@ -12,20 +13,22 @@ class SignupPage extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                height: screen.height * .28,
+                height: screen.height * .20,
                 width: double.infinity,
                 alignment: Alignment.bottomCenter,
                 child: Text(
                   "UZISHA",
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                    color: AppTheme.lessWhiteColor,
-                    letterSpacing: 2,
+                  style: GoogleFonts.lato(
+                    textStyle: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                      color: AppTheme.lessWhiteColor,
+                      letterSpacing: 2,
+                    ),
                   ),
                 ),
               ),
-              SizedBox(height: screen.height * .12),
+              SizedBox(height: screen.height * .10),
               Container(
                 // color: Colors.black38,
                 width: double.infinity,
@@ -42,11 +45,7 @@ class SignupPage extends StatelessWidget {
                       title: "Se connecter",
                       isActive: false,
                       onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (_) => LoginPage(),
-                          ),
-                        );
+                        Navigator.of(context).pop();
                       },
                     ),
                   ],
@@ -60,10 +59,15 @@ class SignupPage extends StatelessWidget {
               _buildTextField(
                 hint: "Numero de telephone",
                 isFirst: false,
-                obscureText: true,
+                obscureText: false,
               ),
               _buildTextField(
                 hint: "Mot de passe",
+                isFirst: false,
+                obscureText: true,
+              ),
+              _buildTextField(
+                hint: "Repeter le mot de passe",
                 isFirst: false,
                 obscureText: true,
               ),
@@ -85,7 +89,7 @@ class SignupPage extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: screen.height * .15)
+              SizedBox(height: screen.height * .08)
             ],
           ),
         ),
