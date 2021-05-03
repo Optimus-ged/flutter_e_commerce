@@ -16,7 +16,6 @@ class HomePage extends StatelessWidget {
               automaticallyImplyLeading: false,
               expandedHeight: 100,
               backgroundColor: Colors.white,
-
               flexibleSpace: FlexibleSpaceBar(
                 background: Container(
                   alignment: Alignment.bottomCenter,
@@ -69,6 +68,44 @@ class HomePage extends StatelessWidget {
           child: Container(
             height: 60,
             color: Colors.transparent,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Container(
+                  // color: Colors.amber,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 15),
+                    child: Icon(
+                      Icons.shopping_basket_outlined,
+                      color: AppTheme.greyColor,
+                    ),
+                  ),
+                ),
+                Container(
+                  // color: Colors.amber,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 15),
+                    child: Icon(
+                      Icons.shopping_basket_outlined,
+                      color: AppTheme.greyColor,
+                    ),
+                  ),
+                ),
+                Container(
+                  // color: Colors.amber,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 15),
+                    child: Icon(
+                      Icons.shopping_basket_outlined,
+                      color: AppTheme.greyColor,
+                    ),
+                  ),
+                )
+              ],
+            ),
           ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
