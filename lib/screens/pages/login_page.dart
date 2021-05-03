@@ -1,4 +1,5 @@
 import 'package:e_commerce/exports/all_exports.dart';
+import 'package:e_commerce/screens/widgets/click_animation.dart';
 
 class LoginPage extends StatelessWidget {
   @override
@@ -12,7 +13,6 @@ class LoginPage extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                // color: Colors.black38,
                 height: screen.height * .28,
                 width: double.infinity,
                 alignment: Alignment.bottomCenter,
@@ -51,30 +51,36 @@ class LoginPage extends StatelessWidget {
                 obscureText: true,
               ),
               SizedBox(height: screen.height * .05),
-              Container(
-                decoration: BoxDecoration(
-                  color: AppTheme.pinkColor,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 40),
-                child: Text(
-                  "Connexion",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 17,
+              ClickAnimation(
+                onTap: () {},
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: AppTheme.pinkColor,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 40),
+                  child: Text(
+                    "Connexion",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 17,
+                    ),
                   ),
                 ),
               ),
               SizedBox(height: 2),
-              Container(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 2, horizontal: 5),
-                  child: Text(
-                    "Mot de passe oublié",
-                    style: TextStyle(
-                      color: AppTheme.greyColor,
-                      fontSize: 14,
-                      decoration: TextDecoration.underline,
+              ClickAnimation(
+                onTap: () {},
+                child: Container(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: 2, horizontal: 5),
+                    child: Text(
+                      "Mot de passe oublié",
+                      style: TextStyle(
+                        color: AppTheme.greyColor,
+                        fontSize: 14,
+                        decoration: TextDecoration.underline,
+                      ),
                     ),
                   ),
                 ),
@@ -89,29 +95,32 @@ class LoginPage extends StatelessWidget {
 
   // Building text titles
   Widget _builTitle({String title, bool isActive}) {
-    return Container(
-      // color: Colors.black,
-      child: Stack(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-            child: Text("$title", style: _notActive()),
-          ),
-          isActive
-              ? Positioned(
-                  bottom: 4,
-                  left: 0,
-                  right: 0,
-                  child: Container(
-                    alignment: Alignment.center,
-                    child: CircleAvatar(
-                      backgroundColor: AppTheme.pinkColor,
-                      radius: 2,
+    return ClickAnimation(
+      onTap: () {},
+      child: Container(
+        // color: Colors.black,
+        child: Stack(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              child: Text("$title", style: _notActive()),
+            ),
+            isActive
+                ? Positioned(
+                    bottom: 4,
+                    left: 0,
+                    right: 0,
+                    child: Container(
+                      alignment: Alignment.center,
+                      child: CircleAvatar(
+                        backgroundColor: AppTheme.pinkColor,
+                        radius: 2,
+                      ),
                     ),
-                  ),
-                )
-              : Container()
-        ],
+                  )
+                : Container()
+          ],
+        ),
       ),
     );
   }
