@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
               // shadowColor: AppTheme.blueColor,
               floating: true,
               automaticallyImplyLeading: false,
-              expandedHeight: 120,
+              expandedHeight: 100,
               backgroundColor: Colors.white,
 
               flexibleSpace: FlexibleSpaceBar(
@@ -33,7 +33,7 @@ class HomePage extends StatelessWidget {
                 child: GridView.builder(
                   padding: EdgeInsets.only(
                     bottom: 70,
-                    top: 10,
+                    top: 5,
                     left: 10,
                     right: 10,
                   ),
@@ -48,10 +48,7 @@ class HomePage extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return Container(
                       alignment: Alignment.center,
-                      height: 100,
-                      width: 100,
                       decoration: BoxDecoration(
-                        // color: Colors.black38,
                         borderRadius: BorderRadius.circular(10),
                         border: Border.all(width: 0.2, color: Colors.black12),
                       ),
@@ -94,56 +91,53 @@ class HomePage extends StatelessWidget {
   Widget _buildTextField({BuildContext context}) {
     var screen = MediaQuery.of(context).size;
     return Padding(
-      padding: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(width: 0.1, color: AppTheme.blueColor),
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
-          child: Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Icon(Icons.search, color: AppTheme.blueColor),
-              ),
-              Container(
-                height: 50,
-                width: screen.width * .73,
-                alignment: Alignment.center,
-                // color: Colors.amber,
-                child: TextField(
-                  cursorColor: AppTheme.blueColor,
-                  style: TextStyle(
-                    fontSize: 17,
-                    color: AppTheme.blueColor,
+      padding: const EdgeInsets.only(bottom: 20, left: 10, right: 10),
+      child: Material(
+        elevation: 4,
+        shadowColor: Colors.black26,
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(20),
+        child: Container(
+          decoration: BoxDecoration(
+            // border: Border.all(width: 0.1),
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
+            child: Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Icon(
+                    Icons.search,
+                    color: Colors.grey.withOpacity(0.3),
                   ),
-                  decoration: InputDecoration.collapsed(
-                    hintText: "Rechercher ici !",
-                    hintStyle: TextStyle(
-                      fontSize: 15,
-                      color: Colors.grey.withOpacity(0.3),
+                ),
+                Container(
+                  height: 50,
+                  width: screen.width * .73,
+                  alignment: Alignment.center,
+                  // color: Colors.amber,
+                  child: TextField(
+                    cursorColor: AppTheme.blueColor,
+                    style: TextStyle(
+                      fontSize: 17,
+                      color: AppTheme.blueColor,
+                    ),
+                    decoration: InputDecoration.collapsed(
+                      hintText: "Rechercher ici !",
+                      hintStyle: TextStyle(
+                        fontSize: 15,
+                        color: Colors.grey.withOpacity(0.3),
+                      ),
                     ),
                   ),
                 ),
-              ),
-              SizedBox(width: 10)
-            ],
+                SizedBox(width: 10)
+              ],
+            ),
           ),
         ),
-      ),
-    );
-  }
-
-  // Building custom outline borders
-  OutlineInputBorder _outlineBorder({Color color}) {
-    return OutlineInputBorder(
-      borderRadius: BorderRadius.circular(20),
-      gapPadding: 0,
-      borderSide: BorderSide(
-        color: color,
-        width: 1,
       ),
     );
   }

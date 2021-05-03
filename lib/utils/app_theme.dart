@@ -10,6 +10,4 @@ class AppTheme {
 
   // Font
   static const String fontName = 'WorkSans';
-
-  
 }
