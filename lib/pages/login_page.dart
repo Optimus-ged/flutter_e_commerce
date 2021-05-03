@@ -145,15 +145,26 @@ class LoginPage extends StatelessWidget {
           ),
           decoration: InputDecoration(
             hintText: "$hint",
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
+            enabledBorder: _outlineBorder(color: AppTheme.lessWhiteColor),
+            focusedBorder: _outlineBorder(color: AppTheme.pinkColor),
             hintStyle: TextStyle(
               fontSize: 15,
               color: Colors.grey.withOpacity(0.3),
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  // Building custom outline borders
+  OutlineInputBorder _outlineBorder({Color color}) {
+    return OutlineInputBorder(
+      borderRadius: BorderRadius.circular(20),
+      gapPadding: 2,
+      borderSide: BorderSide(
+        color: color,
+        width: 1,
       ),
     );
   }
