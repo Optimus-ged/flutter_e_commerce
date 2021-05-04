@@ -126,18 +126,4 @@ class SearchPage extends StatelessWidget {
       ),
     );
   }
-
-  // Building botom navigation ba item
-  _buildNavigationItem(
-      {IconData icon, VoidCallback onTap, @required BuildContext context}) {
-    return ClickAnimation(
-      onTap: onTap,
-      child: Container(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-          child: Icon(icon, color: AppTheme.greyColor),
-        ),
-      ),
-    );
-  }
 }
