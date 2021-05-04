@@ -84,7 +84,6 @@ class SearchPage extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         child: Container(
           decoration: BoxDecoration(
-            // border: Border.all(width: 0.1),
             borderRadius: BorderRadius.circular(20),
           ),
           child: Padding(
@@ -102,7 +101,6 @@ class SearchPage extends StatelessWidget {
                   height: 50,
                   width: screen.width * .73,
                   alignment: Alignment.center,
-                  // color: Colors.amber,
                   child: TextField(
                     cursorColor: AppTheme.blueColor,
                     style: TextStyle(
