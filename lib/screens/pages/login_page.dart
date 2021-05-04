@@ -36,15 +36,9 @@ class LoginPage extends StatelessWidget {
                     _builTitle(
                       title: "S'inscrire",
                       isActive: false,
-                      onTap: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (_) => SignupPage(),
-                        //   ),
-                        // );
-                        Navigator.pushNamed(context, Routes.signup);
-                      },
+                      onTap: () => Navigator.of(context).pushNamed(
+                        Routes.signup,
+                      ),
                     ),
                     _buildDivider(),
                     _builTitle(title: "Se connecter", isActive: true),
@@ -63,14 +57,7 @@ class LoginPage extends StatelessWidget {
               ),
               SizedBox(height: screen.height * .05),
               ClickAnimation(
-                onTap: () {
-                  // Navigator.of(context).push(
-                  //   MaterialPageRoute(
-                  //     builder: (_) => HomePage(),
-                  //   ),
-                  // );
-                  Navigator.pushNamed(context, Routes.home);
-                },
+                onTap: () => Navigator.of(context).pushNamed(Routes.home),
                 child: Container(
                   decoration: BoxDecoration(
                     color: AppTheme.pinkColor,

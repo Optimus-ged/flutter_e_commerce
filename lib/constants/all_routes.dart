@@ -6,7 +6,7 @@ class Routes {
   static const String login = '/login_page';
   static const String home = '/home_page';
   static const String signup = '/sign_up_page';
-  static const String search = '/search_page';
+  static const String search = '/search_page';  
 
   static final routes = <String, WidgetBuilder>{
     login: (BuildContext context) => LoginPage(),

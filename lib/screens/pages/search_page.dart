@@ -3,9 +3,9 @@ import 'package:e_commerce/exports/all_exports.dart';
 class SearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final Map params = ModalRoute.of(context).settings.arguments;
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: AppTheme.whiteColor,
-      
     ));
     return SafeArea(
       top: false,
@@ -18,6 +18,13 @@ class SearchPage extends StatelessWidget {
               floating: true,
               automaticallyImplyLeading: false,
               expandedHeight: 100,
+              title: Text(
+                "${params["hint"]}",
+                style: TextStyle(
+                  color: Colors.amber,
+                  fontSize: 15,
+                ),
+              ),
               backgroundColor: Colors.white,
               flexibleSpace: FlexibleSpaceBar(
                 background: Container(
