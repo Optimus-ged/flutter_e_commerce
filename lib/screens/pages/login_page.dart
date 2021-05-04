@@ -109,7 +109,7 @@ class LoginPage extends StatelessWidget {
   }
 
   // Building text titles
-  Widget _builTitle({String title, bool isActive, VoidCallback onTap}) {
+  _builTitle({String title, bool isActive, VoidCallback onTap}) {
     return ClickAnimation(
       onTap: onTap,
       child: Container(
@@ -145,10 +145,8 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  
-
   // Build the divider between both textes
-  Widget _buildDivider() {
+  _buildDivider() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
       child: Container(

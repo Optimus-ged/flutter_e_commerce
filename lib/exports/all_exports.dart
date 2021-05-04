@@ -10,6 +10,7 @@ export 'dart:io';
 export 'package:e_commerce/screens/pages/login_page.dart';
 export 'package:e_commerce/screens/pages/sign_up_page.dart';
 export 'package:e_commerce/screens/pages/home_page.dart';
+export 'package:e_commerce/screens/pages/search_page.dart';
 
 // All widgets
 export 'package:e_commerce/screens/widgets/click_animation.dart';
