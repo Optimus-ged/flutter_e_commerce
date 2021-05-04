@@ -37,12 +37,13 @@ class LoginPage extends StatelessWidget {
                       title: "S'inscrire",
                       isActive: false,
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => SignupPage(),
-                          ),
-                        );
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (_) => SignupPage(),
+                        //   ),
+                        // );
+                        Navigator.pushNamed(context, Routes.signup);
                       },
                     ),
                     _buildDivider(),
@@ -63,11 +64,12 @@ class LoginPage extends StatelessWidget {
               SizedBox(height: screen.height * .05),
               ClickAnimation(
                 onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (_) => HomePage(),
-                    ),
-                  );
+                  // Navigator.of(context).push(
+                  //   MaterialPageRoute(
+                  //     builder: (_) => HomePage(),
+                  //   ),
+                  // );
+                  Navigator.pushNamed(context, Routes.home);
                 },
                 child: Container(
                   decoration: BoxDecoration(

@@ -65,11 +65,7 @@ class HomePage extends StatelessWidget {
                 _buildNavigationItem(
                   icon: Icons.search,
                   context: context,
-                  onTap: () => Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (_) => SearchPage(),
-                    ),
-                  ),
+                  onTap: () => Navigator.pushNamed(context, Routes.search),
                 ),
                 _buildNavigationItem(
                   icon: Icons.exit_to_app,

@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
         fontFamily: AppTheme.fontName,
         platform: TargetPlatform.iOS,
       ),
+      routes: Routes.routes,
       home: LoginPage(),
     );
   }
