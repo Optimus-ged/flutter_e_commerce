@@ -71,55 +71,14 @@ class HomePage extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Container(
-                  // color: Colors.amber,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 10, horizontal: 15),
-                    child: Icon(
-                      Icons.shopping_basket_outlined,
-                      color: AppTheme.greyColor,
-                    ),
-                  ),
-                ),
-                Container(
-                  // color: Colors.amber,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 10, horizontal: 15),
-                    child: Icon(
-                      Icons.shopping_basket_outlined,
-                      color: AppTheme.greyColor,
-                    ),
-                  ),
-                ),
-                Container(
-                  // color: Colors.amber,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 10, horizontal: 15),
-                    child: Icon(
-                      Icons.shopping_basket_outlined,
-                      color: AppTheme.greyColor,
-                    ),
-                  ),
-                )
+                _buildBotomItem(icon: Icons.shopping_basket_outlined),
+                _buildBotomItem(icon: Icons.shopping_basket_outlined),
+                _buildBotomItem(icon: Icons.shopping_basket_outlined),
               ],
             ),
           ),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-        // bottomNavigationBar: Material(
-        //   color: Colors.amber,
-        //   elevation: 20,
-        //   borderRadius: BorderRadius.vertical(
-        //     top: Radius.circular(35),
-        //   ),
-        //   child: Container(
-        //     height: 60,
-        //     color: Colors.transparent,
-        //   ),
-        // ),
       ),
     );
   }
@@ -175,6 +134,16 @@ class HomePage extends StatelessWidget {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  // Building botom navigation ba item
+  Widget _buildBotomItem({IconData icon}) {
+    return Container(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+        child: Icon(icon, color: AppTheme.greyColor),
       ),
     );
   }
