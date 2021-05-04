@@ -37,7 +37,8 @@ class LoginPage extends StatelessWidget {
                       title: "S'inscrire",
                       isActive: false,
                       onTap: () {
-                        Navigator.of(context).push(
+                        Navigator.push(
+                          context,
                           MaterialPageRoute(
                             builder: (_) => SignupPage(),
                           ),

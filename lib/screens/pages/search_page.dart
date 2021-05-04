@@ -5,6 +5,7 @@ class SearchPage extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: AppTheme.whiteColor,
+      
     ));
     return SafeArea(
       top: false,

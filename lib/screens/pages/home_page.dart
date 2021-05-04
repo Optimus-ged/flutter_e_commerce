@@ -5,6 +5,8 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: AppTheme.whiteColor,
+      systemNavigationBarColor: AppTheme.whiteColor,
+      statusBarIconBrightness: Brightness.dark,
     ));
     return SafeArea(
       top: false,
@@ -46,7 +48,7 @@ class HomePage extends StatelessWidget {
         ),
         floatingActionButton: Material(
           elevation: 20,
-          color: Colors.white,
+          color: AppTheme.whiteColor,
           borderRadius: BorderRadius.vertical(
             top: Radius.circular(35),
           ),
@@ -90,7 +92,7 @@ class HomePage extends StatelessWidget {
       child: Container(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-          child: Icon(icon, color: AppTheme.greyColor),
+          child: Icon(icon, color: AppTheme.lessWhiteColor),
         ),
       ),
     );
