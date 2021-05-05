@@ -12,7 +12,8 @@ class SignupPage extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                height: screen.height * .20,
+                // color: Colors.amber,
+                height: screen.height * .15,
                 width: double.infinity,
                 alignment: Alignment.bottomCenter,
                 child: Text(
@@ -27,7 +28,7 @@ class SignupPage extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: screen.height * .10),
+              SizedBox(height: screen.height * .07),
               Container(
                 // color: Colors.black38,
                 width: double.infinity,
@@ -50,11 +51,17 @@ class SignupPage extends StatelessWidget {
                   ],
                 ),
               ),
+              SizedBox(height: screen.height * .05),
+              CircleAvatar(
+                radius: 40,
+                backgroundColor: AppTheme.pinkColor,
+                child: Icon(Icons.face),
+              ),
               CustomTextField(
-                  hint: "Nom d'utilisateur ou email",
-                  isFirst: true,
-                  obscureText: false,
-                  top: screen.height * .05),
+                hint: "Nom d'utilisateur ou email",
+                isFirst: false,
+                obscureText: false,
+              ),
               CustomTextField(
                 hint: "Numero de telephone",
                 isFirst: false,
@@ -88,7 +95,7 @@ class SignupPage extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: screen.height * .08)
+              SizedBox(height: screen.height * .02)
             ],
           ),
         ),
