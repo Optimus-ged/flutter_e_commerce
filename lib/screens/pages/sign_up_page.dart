@@ -12,7 +12,6 @@ class SignupPage extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                // color: Colors.amber,
                 height: screen.height * .15,
                 width: double.infinity,
                 alignment: Alignment.bottomCenter,
@@ -30,7 +29,6 @@ class SignupPage extends StatelessWidget {
               ),
               SizedBox(height: screen.height * .07),
               Container(
-                // color: Colors.black38,
                 width: double.infinity,
                 alignment: Alignment.center,
                 child: Row(

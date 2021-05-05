@@ -15,6 +15,7 @@ export 'package:e_commerce/screens/pages/search_page.dart';
 // All widgets
 export 'package:e_commerce/screens/widgets/click_animation.dart';
 export 'package:e_commerce/screens/widgets/custon_textfield.dart';
+export 'package:e_commerce/screens/widgets/build_item_list.dart';
 
 // All utils and constants
 export 'package:e_commerce/utils/app_theme.dart';
