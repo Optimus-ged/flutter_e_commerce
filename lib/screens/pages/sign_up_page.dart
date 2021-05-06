@@ -42,9 +42,7 @@ class SignupPage extends StatelessWidget {
                     _builTitle(
                       title: "Se connecter",
                       isActive: false,
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
+                      onTap: () => Navigator.of(context).pop(),
                     ),
                   ],
                 ),
