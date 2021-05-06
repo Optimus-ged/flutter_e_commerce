@@ -40,7 +40,7 @@ class HomePage extends StatelessWidget {
                   context: context,
                   onTap: () => Navigator.of(context).pushNamed(
                     Routes.search,
-                    // arguments: {"hint": "Sa marche"},
+                    arguments: {"hint": "Sa marche"},
                   ),
                 ),
                 _buildNavigationItem(

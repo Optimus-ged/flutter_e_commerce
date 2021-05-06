@@ -6,31 +6,37 @@ class DetailPage extends StatelessWidget {
     var screen = MediaQuery.of(context).size;
     final Map args = ModalRoute.of(context).settings.arguments;
     return Scaffold(
-      body: Container(
-        child: Stack(
-          children: [
-            Positioned(
-              top: 0,
-              child: Container(
-                height: screen.height * .40,
-                color: Colors.grey,
-                child: Text("${args["title"]}"),
-              ),
-            ),
-            Positioned(
-              bottom: 0,
-              child: Container(
-                height: screen.height * .60,
-                decoration: BoxDecoration(
-                  color: AppTheme.blueColor,
-                  borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(30),
-                  ),
+      backgroundColor: AppTheme.lessPinkColor,
+      body: Stack(
+        children: [
+          Positioned(
+            top: 0,
+            child: Container(
+              height: screen.height * .45,
+              width: screen.width,
+              // color: Colors.grey,
+              child: Center(
+                child: Text(
+                  "${args["title"]}",
+                  style: TextStyle(fontSize: 20),
                 ),
               ),
-            )
-          ],
-        ),
+            ),
+          ),
+          Positioned(
+            bottom: 0,
+            child: Container(
+              height: screen.height * .55,
+              width: screen.width,
+              decoration: BoxDecoration(
+                color: AppTheme.blueColor,
+                borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(30),
+                ),
+              ),
+            ),
+          )
+        ],
       ),
     );
   }

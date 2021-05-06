@@ -7,7 +7,7 @@ class AppTheme {
   static const Color greyColor = Color(0xff929498);
   static const Color lessWhiteColor = Color(0xff233355);
   static const Color pinkColor = Color(0xffE41684);
-
+  static const Color lessPinkColor = Color(0xffE9E5DC);
   // Font
   static const String fontName = 'WorkSans';
 }
