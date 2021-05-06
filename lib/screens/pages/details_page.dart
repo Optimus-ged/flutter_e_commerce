@@ -14,7 +14,6 @@ class DetailPage extends StatelessWidget {
             child: Container(
               height: screen.height * .45,
               width: screen.width,
-              // color: Colors.grey,
               child: Center(
                 child: Text(
                   "${args["title"]}",
@@ -31,11 +30,27 @@ class DetailPage extends StatelessWidget {
               decoration: BoxDecoration(
                 color: AppTheme.blueColor,
                 borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(30),
+                  topRight: Radius.circular(60),
                 ),
               ),
             ),
-          )
+          ),
+          Positioned(
+            bottom: screen.height * .52,
+            right: 50,
+            child: Container(
+              height: 50,
+              width: 50,
+              decoration: BoxDecoration(
+                color: AppTheme.pinkColor,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Icon(
+                Icons.favorite,
+                color: Colors.white,
+              ),
+            ),
+          ),
         ],
       ),
     );
