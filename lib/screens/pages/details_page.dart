@@ -38,16 +38,19 @@ class DetailPage extends StatelessWidget {
           Positioned(
             bottom: screen.height * .52,
             right: 50,
-            child: Container(
-              height: 50,
-              width: 50,
-              decoration: BoxDecoration(
-                color: AppTheme.pinkColor,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Icon(
-                Icons.favorite,
-                color: Colors.white,
+            child: Material(
+              elevation: 10,
+              child: Container(
+                height: 50,
+                width: 50,
+                decoration: BoxDecoration(
+                  color: AppTheme.pinkColor,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Icon(
+                  Icons.favorite,
+                  color: Colors.white,
+                ),
               ),
             ),
           ),
