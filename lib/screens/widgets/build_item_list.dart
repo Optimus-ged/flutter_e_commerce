@@ -21,13 +21,19 @@ class BuildItemsList extends StatelessWidget {
         shrinkWrap: true,
         itemCount: 30,
         itemBuilder: (context, index) {
-          return Container(
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              border: Border.all(width: 0.2, color: Colors.black12),
+          return ClickAnimation(
+            onTap: () => Navigator.of(context).pushNamed(
+              Routes.details,
+              arguments: {"title": "$index"},
             ),
-            child: Text("$index"),
+            child: Container(
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                border: Border.all(width: 0.2, color: Colors.black12),
+              ),
+              child: Text("$index"),
+            ),
           );
         },
       ),
