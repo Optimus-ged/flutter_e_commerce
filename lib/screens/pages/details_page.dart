@@ -40,6 +40,8 @@ class DetailPage extends StatelessWidget {
             right: 50,
             child: Material(
               elevation: 10,
+              color: Colors.transparent,
+              borderRadius: BorderRadius.circular(10),
               child: Container(
                 height: 50,
                 width: 50,
