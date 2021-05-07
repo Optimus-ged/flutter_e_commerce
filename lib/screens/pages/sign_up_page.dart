@@ -15,16 +15,38 @@ class SignupPage extends StatelessWidget {
                 height: screen.height * .15,
                 width: double.infinity,
                 alignment: Alignment.bottomCenter,
-                child: Text(
-                  "UZISHA",
-                  style: GoogleFonts.lato(
-                    textStyle: TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                      color: AppTheme.lessWhiteColor,
-                      letterSpacing: 2,
+                child: Stack(
+                  children: [
+                    Positioned(
+                      top: 40,
+                      left: 40,
+                      child: ClickAnimation(
+                        onTap: () {},
+                        child: Container(
+                          child: Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Icon(Icons.arrow_back_ios),
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
+                    Positioned(
+                      bottom: 0,
+                      child: Container(
+                        child: Text(
+                          "UZISHA",
+                          style: GoogleFonts.lato(
+                            textStyle: TextStyle(
+                              fontSize: 28,
+                              fontWeight: FontWeight.bold,
+                              color: AppTheme.lessWhiteColor,
+                              letterSpacing: 2,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
               SizedBox(height: screen.height * .07),
