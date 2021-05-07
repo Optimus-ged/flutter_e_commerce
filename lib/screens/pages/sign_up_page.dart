@@ -18,14 +18,17 @@ class SignupPage extends StatelessWidget {
                 child: Stack(
                   children: [
                     Positioned(
-                      top: 40,
-                      left: 40,
+                      top: 30,
+                      left: 20,
                       child: ClickAnimation(
-                        onTap: () {},
+                        onTap: () => Navigator.of(context).pop(),
                         child: Container(
                           child: Padding(
                             padding: EdgeInsets.all(8.0),
-                            child: Icon(Icons.arrow_back_ios),
+                            child: Icon(
+                              Icons.arrow_back_ios,
+                              color: AppTheme.lessWhiteColor,
+                            ),
                           ),
                         ),
                       ),
@@ -33,6 +36,8 @@ class SignupPage extends StatelessWidget {
                     Positioned(
                       bottom: 0,
                       child: Container(
+                        width: screen.width,
+                        alignment: Alignment.center,
                         child: Text(
                           "UZISHA",
                           style: GoogleFonts.lato(
