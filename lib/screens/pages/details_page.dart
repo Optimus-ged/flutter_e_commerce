@@ -122,7 +122,7 @@ class _DetailPageState extends State<DetailPage> {
                   Spacer(),
                   Center(
                     child: ClickAnimation(
-                      onTap: () => Navigator.of(context).pushNamed(Routes.home),
+                      onTap: () {},
                       child: Container(
                         decoration: BoxDecoration(
                           color: AppTheme.pinkColor,
@@ -165,16 +165,19 @@ class _DetailPageState extends State<DetailPage> {
               elevation: 10,
               color: Colors.transparent,
               borderRadius: BorderRadius.circular(10),
-              child: Container(
-                height: 50,
-                width: 45,
-                decoration: BoxDecoration(
-                  color: AppTheme.pinkColor,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Icon(
-                  Icons.favorite,
-                  color: Colors.white,
+              child: ClickAnimation(
+                onTap: () {},
+                child: Container(
+                  height: 50,
+                  width: 45,
+                  decoration: BoxDecoration(
+                    color: AppTheme.pinkColor,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Icon(
+                    Icons.favorite,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),
