@@ -46,7 +46,7 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
               CustomTextField(
-                  hint: "Nom d'utilisateur ou email",
+                  hint: "Nom d'utilisateur ou telephone",
                   isFirst: true,
                   obscureText: false,
                   top: screen.height * .05),

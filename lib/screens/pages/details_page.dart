@@ -33,6 +33,22 @@ class DetailPage extends StatelessWidget {
                   topRight: Radius.circular(60),
                 ),
               ),
+              child: Column(
+                children: [
+                  SizedBox(height: 20),
+                  SizedBox(
+                    width: 100,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        _buildChoice(color: AppTheme.lessPinkColor),
+                        _buildChoice(color: AppTheme.yellowColor),
+                        _buildChoice(color: AppTheme.pinkColor)
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
           Positioned(
@@ -44,7 +60,7 @@ class DetailPage extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               child: Container(
                 height: 50,
-                width: 50,
+                width: 45,
                 decoration: BoxDecoration(
                   color: AppTheme.pinkColor,
                   borderRadius: BorderRadius.circular(10),
@@ -57,6 +73,18 @@ class DetailPage extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  // Building circle container
+  _buildChoice({Color color}) {
+    return CircleAvatar(
+      backgroundColor: AppTheme.lessPinkColor,
+      radius: 20,
+      child: CircleAvatar(
+        backgroundColor: color,
+        radius: 15,
       ),
     );
   }

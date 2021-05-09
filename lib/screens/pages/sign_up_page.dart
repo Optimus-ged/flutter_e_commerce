@@ -65,7 +65,14 @@ class SignupPage extends StatelessWidget {
                       title: "S'inscrire",
                       isActive: true,
                     ),
-                    _buildDivider(),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 15),
+                      child: Container(
+                        height: 25,
+                        width: 0.2,
+                        color: AppTheme.greyColor,
+                      ),
+                    ),
                     _builTitle(
                       title: "Se connecter",
                       isActive: false,
@@ -81,7 +88,7 @@ class SignupPage extends StatelessWidget {
                 child: Icon(Icons.face),
               ),
               CustomTextField(
-                hint: "Nom d'utilisateur ou email",
+                hint: "Nom d'utilisateur",
                 isFirst: false,
                 obscureText: false,
               ),
@@ -96,7 +103,7 @@ class SignupPage extends StatelessWidget {
                 obscureText: true,
               ),
               CustomTextField(
-                hint: "Repeter le mot de passe",
+                hint: "Confirmer le mot de passe",
                 isFirst: false,
                 obscureText: true,
               ),
@@ -159,18 +166,6 @@ class SignupPage extends StatelessWidget {
                 : Container()
           ],
         ),
-      ),
-    );
-  }
-
-  // Build the divider between both textes
-  Widget _buildDivider() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15),
-      child: Container(
-        height: 25,
-        width: 0.2,
-        color: AppTheme.greyColor,
       ),
     );
   }
