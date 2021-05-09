@@ -1,6 +1,21 @@
 import 'package:e_commerce/exports/all_exports.dart';
 
-class DetailPage extends StatelessWidget {
+class DetailPage extends StatefulWidget {
+  @override
+  _DetailPageState createState() => _DetailPageState();
+}
+
+class _DetailPageState extends State<DetailPage> {
+  bool choice1 = true;
+  bool choice2 = true;
+  bool choice3 = true;
+
+  _changeChoice(choice) {
+    setState(() {
+      choice = !choice;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     var screen = MediaQuery.of(context).size;
@@ -50,27 +65,48 @@ class DetailPage extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.only(left: 20),
                     child: SizedBox(
-                      width: 70,
+                      width: 72,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           _buildChoice(
                             color: AppTheme.lessPinkColor,
-                            isCliked: false,
+                            isCliked: choice1,
+                            onTap: () {
+                              setState(() {
+                                choice1 = !choice1;
+                                choice2 = false;
+                                choice3 = false;
+                              });
+                            },
                           ),
                           _buildChoice(
                             color: AppTheme.yellowColor,
-                            isCliked: true,
+                            isCliked: choice2,
+                            onTap: () {
+                              setState(() {
+                                choice2 = !choice2;
+                                choice1 = false;
+                                choice3 = false;
+                              });
+                            },
                           ),
                           _buildChoice(
                             color: AppTheme.pinkColor,
-                            isCliked: false,
+                            isCliked: choice3,
+                            onTap: () {
+                              setState(() {
+                                choice3 = !choice3;
+                                choice1 = false;
+                                choice2 = false;
+                              });
+                            },
                           )
                         ],
                       ),
                     ),
                   ),
-                  SizedBox(height: 10),
+                  SizedBox(height: 5),
                   Container(
                     padding: EdgeInsets.only(left: 20, right: 20),
                     height: screen.height * .33,
@@ -148,14 +184,23 @@ class DetailPage extends StatelessWidget {
     );
   }
 
-  // Building circle container
-  _buildChoice({Color color, bool isCliked}) {
-    return CircleAvatar(
-      backgroundColor: isCliked ? AppTheme.whiteColor : Colors.transparent,
-      radius: 8,
-      child: CircleAvatar(
-        backgroundColor: color,
-        radius: 7,
+  _buildChoice({Color color, bool isCliked, VoidCallback onTap}) {
+    return ClickAnimation(
+      onTap: onTap,
+      child: Container(
+        // color: isCliked ? Colors.amber : Colors.green,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 4),
+          child: CircleAvatar(
+            backgroundColor:
+                isCliked ? AppTheme.whiteColor : Colors.transparent,
+            radius: 8,
+            child: CircleAvatar(
+              backgroundColor: color,
+              radius: 7,
+            ),
+          ),
+        ),
       ),
     );
   }
