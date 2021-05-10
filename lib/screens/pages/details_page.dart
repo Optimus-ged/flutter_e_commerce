@@ -24,22 +24,7 @@ class _DetailPageState extends State<DetailPage> {
               width: screen.width,
               child: Stack(
                 children: [
-                  Positioned(
-                    top: 30,
-                    left: 20,
-                    child: ClickAnimation(
-                      onTap: () => Navigator.of(context).pop(),
-                      child: Container(
-                        child: Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Icon(
-                            Icons.arrow_back_ios,
-                            color: Colors.grey.shade400,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
+                  BackButton(color: Colors.grey.shade400),
                   Center(
                     child: Text(
                       "${args["title"]}",

@@ -17,22 +17,7 @@ class SignupPage extends StatelessWidget {
                 alignment: Alignment.bottomCenter,
                 child: Stack(
                   children: [
-                    Positioned(
-                      top: 30,
-                      left: 20,
-                      child: ClickAnimation(
-                        onTap: () => Navigator.of(context).pop(),
-                        child: Container(
-                          child: Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Icon(
-                              Icons.arrow_back_ios,
-                              color: AppTheme.lessWhiteColor,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
+                    BackButton(color: AppTheme.lessWhiteColor),
                     Positioned(
                       bottom: 0,
                       child: Container(
