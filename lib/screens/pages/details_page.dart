@@ -6,15 +6,9 @@ class DetailPage extends StatefulWidget {
 }
 
 class _DetailPageState extends State<DetailPage> {
-  bool choice1 = true;
-  bool choice2 = true;
+  bool choice1 = false;
+  bool choice2 = false;
   bool choice3 = true;
-
-  _changeChoice(choice) {
-    setState(() {
-      choice = !choice;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,11 +22,31 @@ class _DetailPageState extends State<DetailPage> {
             child: Container(
               height: screen.height * .45,
               width: screen.width,
-              child: Center(
-                child: Text(
-                  "${args["title"]}",
-                  style: TextStyle(fontSize: 20),
-                ),
+              child: Stack(
+                children: [
+                 Positioned(
+                    top: 30,
+                    left: 20,
+                    child: ClickAnimation(
+                      onTap: () => Navigator.of(context).pop(),
+                      child: Container(
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Icon(
+                            Icons.arrow_back_ios,
+                            color: AppTheme.lessWhiteColor,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Center(
+                    child: Text(
+                      "${args["title"]}",
+                      style: TextStyle(fontSize: 20),
+                    ),
+                  )
+                ],
               ),
             ),
           ),
