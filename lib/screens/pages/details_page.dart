@@ -24,7 +24,7 @@ class _DetailPageState extends State<DetailPage> {
               width: screen.width,
               child: Stack(
                 children: [
-                 Positioned(
+                  Positioned(
                     top: 30,
                     left: 20,
                     child: ClickAnimation(
@@ -34,7 +34,7 @@ class _DetailPageState extends State<DetailPage> {
                           padding: EdgeInsets.all(8.0),
                           child: Icon(
                             Icons.arrow_back_ios,
-                            color: AppTheme.lessWhiteColor,
+                            color: Colors.grey.shade400,
                           ),
                         ),
                       ),
