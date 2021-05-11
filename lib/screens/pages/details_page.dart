@@ -14,16 +14,6 @@ class _DetailPageState extends State<DetailPage> {
   Widget build(BuildContext context) {
     var screen = MediaQuery.of(context).size;
     final Map args = ModalRoute.of(context).settings.arguments;
-
-    // Making choice
-    _makeChoice({bool one, two, three}) {
-      setState(() {
-        one = !one;
-        two = false;
-        three = false;
-      });
-    }
-
     return Scaffold(
       body: Stack(
         children: [
@@ -34,7 +24,7 @@ class _DetailPageState extends State<DetailPage> {
               width: screen.width,
               child: Stack(
                 children: [
-                  BackButton(color: AppTheme.blueColor),
+                  BackwardButton(color: AppTheme.blueColor),
                   Center(
                     child: Text(
                       "${args["title"]}",
@@ -82,48 +72,33 @@ class _DetailPageState extends State<DetailPage> {
                             color: AppTheme.lessPinkColor,
                             isCliked: choice1,
                             onTap: () {
-                              _makeChoice(
-                                one: choice1,
-                                two: choice2,
-                                three: choice3,
-                              );
-                              // setState(() {
-                              //   choice1 = !choice1;
-                              //   choice2 = false;
-                              //   choice3 = false;
-                              // });
+                              setState(() {
+                                choice1 = !choice1;
+                                choice2 = false;
+                                choice3 = false;
+                              });
                             },
                           ),
                           _buildChoice(
                             color: AppTheme.yellowColor,
                             isCliked: choice2,
                             onTap: () {
-                               _makeChoice(
-                                one: choice2,
-                                two: choice3,
-                                three: choice1,
-                              );
-                              // setState(() {
-                              //   choice2 = !choice2;
-                              //   choice1 = false;
-                              //   choice3 = false;
-                              // });
+                              setState(() {
+                                choice2 = !choice2;
+                                choice1 = false;
+                                choice3 = false;
+                              });
                             },
                           ),
                           _buildChoice(
                             color: AppTheme.pinkColor,
                             isCliked: choice3,
                             onTap: () {
-                               _makeChoice(
-                                one: choice3,
-                                two: choice1,
-                                three: choice2,
-                              );
-                              // setState(() {
-                              //   choice3 = !choice3;
-                              //   choice1 = false;
-                              //   choice2 = false;
-                              // });
+                              setState(() {
+                                choice3 = !choice3;
+                                choice1 = false;
+                                choice2 = false;
+                              });
                             },
                           )
                         ],

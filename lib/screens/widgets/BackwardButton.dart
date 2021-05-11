@@ -2,7 +2,8 @@ import 'package:e_commerce/exports/all_exports.dart';
 
 class BackwardButton extends StatelessWidget {
   final Color color;
-  const BackwardButton({Key key, this.color}) : super(key: key);
+  const BackwardButton({Key key, this.color});
+
   @override
   Widget build(BuildContext context) {
     return Positioned(
