@@ -17,6 +17,7 @@ export 'package:e_commerce/screens/pages/details_page.dart';
 export 'package:e_commerce/screens/widgets/click_animation.dart';
 export 'package:e_commerce/screens/widgets/custon_textfield.dart';
 export 'package:e_commerce/screens/widgets/build_item_list.dart';
+export 'package:e_commerce/screens/widgets/BackwardButton.dart';
 
 // All utils and constants
 export 'package:e_commerce/utils/app_theme.dart';

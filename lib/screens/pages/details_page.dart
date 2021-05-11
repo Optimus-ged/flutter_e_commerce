@@ -14,6 +14,16 @@ class _DetailPageState extends State<DetailPage> {
   Widget build(BuildContext context) {
     var screen = MediaQuery.of(context).size;
     final Map args = ModalRoute.of(context).settings.arguments;
+
+    // Making choice
+    _makeChoice({bool one, two, three}) {
+      setState(() {
+        one = !one;
+        two = false;
+        three = false;
+      });
+    }
+
     return Scaffold(
       body: Stack(
         children: [
@@ -24,7 +34,7 @@ class _DetailPageState extends State<DetailPage> {
               width: screen.width,
               child: Stack(
                 children: [
-                  BackButton(color: Colors.grey.shade400),
+                  BackButton(color: AppTheme.blueColor),
                   Center(
                     child: Text(
                       "${args["title"]}",
@@ -62,7 +72,7 @@ class _DetailPageState extends State<DetailPage> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(left: 20),
+                    padding: EdgeInsets.only(left: 15),
                     child: SizedBox(
                       width: 72,
                       child: Row(
@@ -72,33 +82,48 @@ class _DetailPageState extends State<DetailPage> {
                             color: AppTheme.lessPinkColor,
                             isCliked: choice1,
                             onTap: () {
-                              setState(() {
-                                choice1 = !choice1;
-                                choice2 = false;
-                                choice3 = false;
-                              });
+                              _makeChoice(
+                                one: choice1,
+                                two: choice2,
+                                three: choice3,
+                              );
+                              // setState(() {
+                              //   choice1 = !choice1;
+                              //   choice2 = false;
+                              //   choice3 = false;
+                              // });
                             },
                           ),
                           _buildChoice(
                             color: AppTheme.yellowColor,
                             isCliked: choice2,
                             onTap: () {
-                              setState(() {
-                                choice2 = !choice2;
-                                choice1 = false;
-                                choice3 = false;
-                              });
+                               _makeChoice(
+                                one: choice2,
+                                two: choice3,
+                                three: choice1,
+                              );
+                              // setState(() {
+                              //   choice2 = !choice2;
+                              //   choice1 = false;
+                              //   choice3 = false;
+                              // });
                             },
                           ),
                           _buildChoice(
                             color: AppTheme.pinkColor,
                             isCliked: choice3,
                             onTap: () {
-                              setState(() {
-                                choice3 = !choice3;
-                                choice1 = false;
-                                choice2 = false;
-                              });
+                               _makeChoice(
+                                one: choice3,
+                                two: choice1,
+                                three: choice2,
+                              );
+                              // setState(() {
+                              //   choice3 = !choice3;
+                              //   choice1 = false;
+                              //   choice2 = false;
+                              // });
                             },
                           )
                         ],
@@ -190,7 +215,6 @@ class _DetailPageState extends State<DetailPage> {
     return ClickAnimation(
       onTap: onTap,
       child: Container(
-        // color: isCliked ? Colors.amber : Colors.green,
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 4),
           child: CircleAvatar(

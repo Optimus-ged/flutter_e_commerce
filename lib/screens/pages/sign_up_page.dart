@@ -17,7 +17,7 @@ class SignupPage extends StatelessWidget {
                 alignment: Alignment.bottomCenter,
                 child: Stack(
                   children: [
-                    BackButton(color: AppTheme.lessWhiteColor),
+                    BackwardButton(color: AppTheme.lessWhiteColor),
                     Positioned(
                       bottom: 0,
                       child: Container(
