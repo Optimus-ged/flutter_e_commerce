@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
         platform: TargetPlatform.iOS,
       ),
       routes: Routes.routes,
-      home: UserInterface(),
+      home: LoginPage(),
     );
   }
 }
@@ -54,13 +54,12 @@ class _UserInterfaceState extends State<UserInterface> {
     return StreamBuilder<UserResponse>(
       stream: userListBloc.subject.stream,
       builder: (context, snapshot) {
-        print("AAAAAAAAAAAAAAAAA");
         if (snapshot.hasData) {
           if (snapshot.error != null) {
             return Container(
               color: Colors.green.withOpacity(0.3),
               child: Text(
-                "ERRRRRRRRRRROOOOOOOOOOOOOR",
+                "Error",
                 style: TextStyle(fontSize: 30, color: Colors.amber),
               ),
             );
@@ -68,14 +67,14 @@ class _UserInterfaceState extends State<UserInterface> {
 
           return Scaffold(
             appBar: AppBar(
-              title: Text("${snapshot.data.user[0].nom}"),
+              title: Text("${snapshot.data.users[0].nom}"),
             ),
           );
         } else if (snapshot.hasError) {
           return Container(
             color: Colors.green.withOpacity(0.3),
             child: Text(
-              "ERRRRRRRRRRROOOOOOOOOOOOOR",
+              "Error",
               style: TextStyle(fontSize: 30, color: Colors.amber),
             ),
           );

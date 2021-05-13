@@ -6,7 +6,6 @@ class UserListBloc {
   BehaviorSubject<UserResponse> _subject = BehaviorSubject<UserResponse>();
 
   getUsers() async {
-    print("WWWWWWWWWWWWWWWWWWWWWWWW OO");
     UserResponse response = await _userRepository.getUsers();
     _subject.sink.add(response);
   }
