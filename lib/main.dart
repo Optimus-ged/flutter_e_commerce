@@ -1,3 +1,4 @@
+import 'package:e_commerce/bloc/user_bloc.dart';
 import 'package:e_commerce/exports/all_exports.dart';
 
 void main() async {
@@ -31,7 +32,68 @@ class MyApp extends StatelessWidget {
         platform: TargetPlatform.iOS,
       ),
       routes: Routes.routes,
-      home: LoginPage(),
+      home: UserInterface(),
+    );
+  }
+}
+
+class UserInterface extends StatefulWidget {
+  @override
+  _UserInterfaceState createState() => _UserInterfaceState();
+}
+
+class _UserInterfaceState extends State<UserInterface> {
+  @override
+  void initState() {
+    userListBloc..getUsers();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder<UserResponse>(
+      stream: userListBloc.subject.stream,
+      builder: (context, snapshot) {
+        print("AAAAAAAAAAAAAAAAA");
+        if (snapshot.hasData) {
+          if (snapshot.error != null) {
+            return Container(
+              color: Colors.green.withOpacity(0.3),
+              child: Text(
+                "ERRRRRRRRRRROOOOOOOOOOOOOR",
+                style: TextStyle(fontSize: 30, color: Colors.amber),
+              ),
+            );
+          }
+
+          return Scaffold(
+            appBar: AppBar(
+              title: Text("${snapshot.data.user[0].nom}"),
+            ),
+          );
+        } else if (snapshot.hasError) {
+          return Container(
+            color: Colors.green.withOpacity(0.3),
+            child: Text(
+              "ERRRRRRRRRRROOOOOOOOOOOOOR",
+              style: TextStyle(fontSize: 30, color: Colors.amber),
+            ),
+          );
+        } else {
+          return Material(
+            child: Container(
+              color: Colors.black54,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text("${snapshot.data}"),
+                  CircularProgressIndicator(),
+                ],
+              ),
+            ),
+          );
+        }
+      },
     );
   }
 }
