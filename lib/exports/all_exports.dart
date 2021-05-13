@@ -24,6 +24,7 @@ export 'package:e_commerce/model/user_mdl.dart';
 
 // FOR DATA
 export 'package:e_commerce/data/api/end_points.dart';
+export 'package:e_commerce/data/repository/user_repoitory.dart';
 
 // All utils and constants
 export 'package:e_commerce/utils/app_theme.dart';
