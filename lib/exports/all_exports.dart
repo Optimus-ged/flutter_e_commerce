@@ -19,6 +19,12 @@ export 'package:e_commerce/screens/widgets/custon_textfield.dart';
 export 'package:e_commerce/screens/widgets/build_item_list.dart';
 export 'package:e_commerce/screens/widgets/BackwardButton.dart';
 
+// All Models
+export 'package:e_commerce/model/user_mdl.dart';
+
+// FOR DATA
+export 'package:e_commerce/data/api/end_points.dart';
+
 // All utils and constants
 export 'package:e_commerce/utils/app_theme.dart';
 export 'package:e_commerce/utils/for_the_view.dart';

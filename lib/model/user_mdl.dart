@@ -1,17 +1,17 @@
-class UserList {
+class UserResponse {
   int status;
   int count;
-  List<Users> users;
+  List<User> user;
 
-  UserList({this.status, this.count, this.users});
+  UserResponse({this.status, this.count, this.user});
 
-  UserList.fromJson(Map<String, dynamic> json) {
+  UserResponse.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     count = json['count'];
-    if (json['users'] != null) {
-      users = <Users>[];
-      json['users'].forEach((v) {
-        users.add(new Users.fromJson(v));
+    if (json['user'] != null) {
+      user = <User>[];
+      json['user'].forEach((v) {
+        user.add(new User.fromJson(v));
       });
     }
   }
@@ -20,23 +20,23 @@ class UserList {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['status'] = this.status;
     data['count'] = this.count;
-    if (this.users != null) {
-      data['users'] = this.users.map((v) => v.toJson()).toList();
+    if (this.user != null) {
+      data['user'] = this.user.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
-class Users {
+class User {
   int id;
   String nom;
   String contact;
   String motDePasse;
   String photo;
 
-  Users({this.id, this.nom, this.contact, this.motDePasse, this.photo});
+  User({this.id, this.nom, this.contact, this.motDePasse, this.photo});
 
-  Users.fromJson(Map<String, dynamic> json) {
+  User.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     nom = json['nom'];
     contact = json['contact'];

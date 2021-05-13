@@ -10,4 +10,6 @@ class Endpoint {
   static const String allUsers = "$baseUrl/users/all";
   static const String oneUser = "$baseUrl/users/one";
   static const String allProducts = "$baseUrl/products/all";
+  static const String oneProduct = "$baseUrl/products/one";
+  static const String allPostes = "$baseUrl/postes";
 }
