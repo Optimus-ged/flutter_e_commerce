@@ -23,8 +23,11 @@ export 'package:e_commerce/screens/widgets/BackwardButton.dart';
 export 'package:e_commerce/model/user_mdl.dart';
 
 // FOR DATA
-export 'package:e_commerce/data/api/end_points.dart';
+export 'package:e_commerce/data/repository/api/end_points.dart';
 export 'package:e_commerce/data/repository/user_repoSitory.dart';
+
+// BLOC
+export 'package:e_commerce/bloc/user_bloc.dart';
 
 // All utils and constants
 export 'package:e_commerce/utils/app_theme.dart';

@@ -1,4 +1,3 @@
-import 'package:e_commerce/bloc/user_bloc.dart';
 import 'package:e_commerce/exports/all_exports.dart';
 
 void main() async {
@@ -55,6 +54,7 @@ class _UserInterfaceState extends State<UserInterface> {
       stream: userListBloc.subject.stream,
       builder: (context, snapshot) {
         if (snapshot.hasData) {
+          final data = snapshot.data;
           if (snapshot.error != null) {
             return Container(
               color: Colors.green.withOpacity(0.3),
@@ -67,7 +67,18 @@ class _UserInterfaceState extends State<UserInterface> {
 
           return Scaffold(
             appBar: AppBar(
-              title: Text("${snapshot.data.users[0].nom}"),
+              title: Text("${data.users[0].nom}"),
+            ),
+            body: ListView.builder(
+              itemBuilder: (context, index) => ListTile(
+                leading: Icon(Icons.face),
+                title: Text("${data.users[index].nom}"),
+                subtitle: Text("${data.users[index].contact}"),
+              ),
+              itemCount: snapshot.data.users.length,
+            ),
+            floatingActionButton: FloatingActionButton(
+              onPressed: () => userListBloc..getUsers(),
             ),
           );
         } else if (snapshot.hasError) {
@@ -85,7 +96,6 @@ class _UserInterfaceState extends State<UserInterface> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("${snapshot.data}"),
                   CircularProgressIndicator(),
                 ],
               ),

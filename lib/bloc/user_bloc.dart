@@ -2,12 +2,14 @@ import 'package:e_commerce/exports/all_exports.dart';
 import 'package:rxdart/rxdart.dart';
 
 class UserListBloc {
-  UserRepository _userRepository = UserRepository();
+  UserRepository _repository = UserRepository();
   BehaviorSubject<UserResponse> _subject = BehaviorSubject<UserResponse>();
-
+  
   getUsers() async {
-    UserResponse response = await _userRepository.getUsers();
-    _subject.sink.add(response);
+    UserResponse response = await _repository.getUsers();
+    Future.delayed(Duration(seconds: 5)).then(
+      (value) => _subject.sink.add(response),
+    );
   }
 
   dispose() {
