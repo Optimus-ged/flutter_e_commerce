@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         platform: TargetPlatform.iOS,
       ),
       routes: Routes.routes,
-      home: LoginPage(),
+      home: UserInterface(),
     );
   }
 }
@@ -78,7 +78,9 @@ class _UserInterfaceState extends State<UserInterface> {
               itemCount: snapshot.data.users.length,
             ),
             floatingActionButton: FloatingActionButton(
-              onPressed: () => userListBloc..getUsers(),
+              onPressed: () {
+                userListBloc..getUsers();
+              },
             ),
           );
         } else if (snapshot.hasError) {
