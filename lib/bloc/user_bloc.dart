@@ -6,8 +6,8 @@ class UserListBloc {
   BehaviorSubject<UserResponse> _subject = BehaviorSubject<UserResponse>();
 
   // Declaration of a method for access getUser repository
-  getUsers() async {
-    UserResponse response = await _userRepository.getUsers();
+  getUsers(String token) async {
+    UserResponse response = await _userRepository.getUsers(token);
     Future.delayed(Duration(seconds: 2)).then((value) {
       _subject.sink.add(response);
     });

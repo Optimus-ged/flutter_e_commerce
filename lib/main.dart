@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         platform: TargetPlatform.iOS,
       ),
       routes: Routes.routes,
-      home: LoginPage(),
+      home: UserInterface(),
     );
   }
 }
@@ -42,9 +42,34 @@ class UserInterface extends StatefulWidget {
 }
 
 class _UserInterfaceState extends State<UserInterface> {
+  Future<SharedPreferences> _sPrefs = SharedPreferences.instance();
+  String token;
+
+  Future<void> get saveAuthToken async {
+    final SharedPreferences pref = await _sPrefs;
+    return pref.setString("token",
+        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub20iOiJKb2huIEt1aGFuZGEiLCJpZCI6MywiaWF0IjoxNjIxMTAxMzk0LCJleHAiOjE2MjEzNjA1OTR9.l4t1tyBMgG7J1eQ4mK6rJPK-nHRJltQyt2oWi3RUmLw");
+  }
+
+  Future<String> get authToken async {
+    final SharedPreferences pref = await _sPrefs;
+    return pref.getString("token");
+  }
+
+  Future<void> get clearItems async {
+    final SharedPreferences prefs = await _sPrefs;
+    return prefs.clear();
+  }
+
+  Future<void> get removeAuth async {
+    final SharedPreferences pref = await _sPrefs;
+    return pref.remove("token");
+  }
+  
   @override
-  void initState() {
-    userListBloc..getUsers();
+  void initState() async {
+    token = await authToken;
+    userListBloc..getUsers(token);
     super.initState();
   }
 
@@ -78,8 +103,8 @@ class _UserInterfaceState extends State<UserInterface> {
               itemCount: snapshot.data.users.length,
             ),
             floatingActionButton: FloatingActionButton(
-              onPressed: () {
-                userListBloc..getUsers();
+              onPressed: (){
+               userListBloc..getUsers(token);
               },
             ),
           );
