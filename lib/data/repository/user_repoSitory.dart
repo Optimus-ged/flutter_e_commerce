@@ -21,4 +21,24 @@ class UserRepository {
       throw error;
     }
   }
+
+  Future<UserResponse> signUp(String token, Users user) async {
+    try {
+      Response response = await _dio.post(
+        "${Endpoint.oneUser}",
+        data: user.toJson(),
+        options: Options(
+          contentType: Headers.formUrlEncodedContentType,
+          headers: {
+            "Accept": "Application/json",
+            "Authorization": "$token",
+          },
+        ),
+      );
+      return UserResponse.fromJson(response.data);
+    } catch (error, stacktrace) {
+      print("An error occured : $error stacktrace : $stacktrace");
+      throw error;
+    }
+  }
 }

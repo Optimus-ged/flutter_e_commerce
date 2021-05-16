@@ -3,10 +3,9 @@ import 'package:e_commerce/exports/all_exports.dart';
 class UserResponse {
   int status;
   int count;
-  String error;
   List<Users> users;
 
-  UserResponse({this.status, this.count, this.users, this.error});
+  UserResponse({this.status, this.count, this.users});
 
   UserResponse.fromJson(Map<String, dynamic> json) {
     status = json['status'];

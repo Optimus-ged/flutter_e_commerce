@@ -162,4 +162,7 @@ class SignupPage extends StatelessWidget {
       ),
     );
   }
+
+  // Signup method
+  
 }
