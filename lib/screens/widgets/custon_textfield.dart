@@ -4,7 +4,8 @@ class CustomTextField extends StatelessWidget {
   final double top;
   final bool isFirst, obscureText;
   final String hint;
-  CustomTextField({this.top, this.isFirst, this.obscureText, this.hint});
+  final TextEditingController controller;
+  CustomTextField({this.top, this.isFirst, this.obscureText, this.hint, this.controller});
   @override
   Widget build(BuildContext context) {
     EdgeInsets edgeInsets1 = EdgeInsets.only(top: top, left: 10, right: 10);
@@ -13,6 +14,7 @@ class CustomTextField extends StatelessWidget {
       padding: isFirst ? edgeInsets1 : edgeInsets2,
       child: Container(
         child: TextField(
+          controller: controller,
           textAlign: TextAlign.center,
           cursorColor: AppTheme.greyColor,
           obscureText: obscureText,

@@ -1,6 +1,10 @@
 import 'package:e_commerce/exports/all_exports.dart';
 
 class SignupPage extends StatelessWidget {
+  final nameController = TextEditingController();
+  final numController = TextEditingController();
+  final pwdController = TextEditingController();
+  final confirmPwdController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     var screen = MediaQuery.of(context).size;
@@ -73,21 +77,25 @@ class SignupPage extends StatelessWidget {
                 child: Icon(Icons.face),
               ),
               CustomTextField(
+                controller: nameController,
                 hint: "Nom d'utilisateur",
                 isFirst: false,
                 obscureText: false,
               ),
               CustomTextField(
+                controller: numController,
                 hint: "Numero de telephone",
                 isFirst: false,
                 obscureText: false,
               ),
               CustomTextField(
+                controller: pwdController,
                 hint: "Mot de passe",
                 isFirst: false,
                 obscureText: true,
               ),
               CustomTextField(
+                controller: confirmPwdController,
                 hint: "Confirmer le mot de passe",
                 isFirst: false,
                 obscureText: true,
