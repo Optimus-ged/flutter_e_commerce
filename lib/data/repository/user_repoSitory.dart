@@ -3,6 +3,8 @@ import 'package:e_commerce/exports/all_exports.dart';
 
 class UserRepository {
   final Dio _dio = Dio();
+
+  // Handling get request for all users
   Future<UserResponse> getUsers(String token) async {
     try {
       Response response = await _dio.get(
@@ -22,6 +24,7 @@ class UserRepository {
     }
   }
 
+  // Handling post request for users
   Future<UserResponse> signUp(String token, Users user) async {
     try {
       Response response = await _dio.post(
