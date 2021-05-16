@@ -8,121 +8,126 @@ class SignupPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var screen = MediaQuery.of(context).size;
-    return Scaffold(
-      backgroundColor: AppTheme.blueColor,
-      body: ScrollConfiguration(
-        behavior: RemoveGlow(),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Container(
-                height: screen.height * .15,
-                width: double.infinity,
-                alignment: Alignment.bottomCenter,
-                child: Stack(
-                  children: [
-                    BackwardButton(color: AppTheme.lessWhiteColor),
-                    Positioned(
-                      bottom: 0,
-                      child: Container(
-                        width: screen.width,
-                        alignment: Alignment.center,
-                        child: Text(
-                          "UZISHA",
-                          style: GoogleFonts.lato(
-                            textStyle: TextStyle(
-                              fontSize: 28,
-                              fontWeight: FontWeight.bold,
-                              color: AppTheme.lessWhiteColor,
-                              letterSpacing: 2,
+    return StreamBuilder<UserResponse>(
+      builder: (context, snapshot) {
+        return Scaffold(
+          backgroundColor: AppTheme.blueColor,
+          body: ScrollConfiguration(
+            behavior: RemoveGlow(),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container(
+                    height: screen.height * .15,
+                    width: double.infinity,
+                    alignment: Alignment.bottomCenter,
+                    child: Stack(
+                      children: [
+                        BackwardButton(color: AppTheme.lessWhiteColor),
+                        Positioned(
+                          bottom: 0,
+                          child: Container(
+                            width: screen.width,
+                            alignment: Alignment.center,
+                            child: Text(
+                              "UZISHA",
+                              style: GoogleFonts.lato(
+                                textStyle: TextStyle(
+                                  fontSize: 28,
+                                  fontWeight: FontWeight.bold,
+                                  color: AppTheme.lessWhiteColor,
+                                  letterSpacing: 2,
+                                ),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: screen.height * .07),
-              Container(
-                width: double.infinity,
-                alignment: Alignment.center,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    _builTitle(
-                      title: "S'inscrire",
-                      isActive: true,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 15),
-                      child: Container(
-                        height: 25,
-                        width: 0.2,
-                        color: AppTheme.greyColor,
-                      ),
-                    ),
-                    _builTitle(
-                      title: "Se connecter",
-                      isActive: false,
-                      onTap: () => Navigator.of(context).pop(),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(height: screen.height * .05),
-              CircleAvatar(
-                radius: 40,
-                backgroundColor: AppTheme.pinkColor,
-                child: Icon(Icons.face),
-              ),
-              CustomTextField(
-                controller: nameController,
-                hint: "Nom d'utilisateur",
-                isFirst: false,
-                obscureText: false,
-              ),
-              CustomTextField(
-                controller: numController,
-                hint: "Numero de telephone",
-                isFirst: false,
-                obscureText: false,
-              ),
-              CustomTextField(
-                controller: pwdController,
-                hint: "Mot de passe",
-                isFirst: false,
-                obscureText: true,
-              ),
-              CustomTextField(
-                controller: confirmPwdController,
-                hint: "Confirmer le mot de passe",
-                isFirst: false,
-                obscureText: true,
-              ),
-              SizedBox(height: screen.height * .05),
-              ClickAnimation(
-                onTap: () {},
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: AppTheme.pinkColor,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 40),
-                  child: Text(
-                    "Créer un compte",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 17,
+                      ],
                     ),
                   ),
-                ),
+                  SizedBox(height: screen.height * .07),
+                  Container(
+                    width: double.infinity,
+                    alignment: Alignment.center,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        _builTitle(
+                          title: "S'inscrire",
+                          isActive: true,
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 15),
+                          child: Container(
+                            height: 25,
+                            width: 0.2,
+                            color: AppTheme.greyColor,
+                          ),
+                        ),
+                        _builTitle(
+                          title: "Se connecter",
+                          isActive: false,
+                          onTap: () => Navigator.of(context).pop(),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: screen.height * .05),
+                  CircleAvatar(
+                    radius: 40,
+                    backgroundColor: AppTheme.pinkColor,
+                    child: Icon(Icons.face),
+                  ),
+                  CustomTextField(
+                    controller: nameController,
+                    hint: "Nom d'utilisateur",
+                    isFirst: false,
+                    obscureText: false,
+                  ),
+                  CustomTextField(
+                    controller: numController,
+                    hint: "Numero de telephone",
+                    isFirst: false,
+                    obscureText: false,
+                  ),
+                  CustomTextField(
+                    controller: pwdController,
+                    hint: "Mot de passe",
+                    isFirst: false,
+                    obscureText: true,
+                  ),
+                  CustomTextField(
+                    controller: confirmPwdController,
+                    hint: "Confirmer le mot de passe",
+                    isFirst: false,
+                    obscureText: true,
+                  ),
+                  SizedBox(height: screen.height * .05),
+                  ClickAnimation(
+                    onTap: () {},
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: AppTheme.pinkColor,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      padding:
+                          EdgeInsets.symmetric(vertical: 10, horizontal: 40),
+                      child: Text(
+                        "Créer un compte",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 17,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: screen.height * .02)
+                ],
               ),
-              SizedBox(height: screen.height * .02)
-            ],
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 
@@ -164,5 +169,12 @@ class SignupPage extends StatelessWidget {
   }
 
   // Signup method
-  
+  signUp() {
+    var data = Users(
+      nom: nameController.text.trim(),
+      contact: numController.text.trim(),
+      motDePasse: pwdController.text.trim(),
+    );
+    signUpBloc..signUp("token", data);
+  }
 }
