@@ -2,8 +2,21 @@ import 'package:dio/dio.dart';
 import 'package:e_commerce/exports/all_exports.dart';
 
 class UserRepository {
-  final Dio _dio = Dio();
- 
+  Dio _dio;
+
+  // Initialisation of dio options
+  UserRepository() {
+    if (_dio == null) {
+      BaseOptions options = BaseOptions(
+        baseUrl: "${Endpoint.baseUrl}",
+        receiveDataWhenStatusError: true,
+        connectTimeout: 1000 * 30, // 30 seconds
+        receiveTimeout: 1000 * 30, // 30 seconds
+      );
+      _dio = Dio(options);
+    }
+  }
+
   // Handling get request for all users
   Future<UserResponse> getUsers(String token) async {
     try {
