@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         platform: TargetPlatform.iOS,
       ),
       routes: Routes.routes,
-      home: LoginPage(),
+      home: UserInterface(),
     );
   }
 }
@@ -69,7 +69,7 @@ class _UserInterfaceState extends State<UserInterface> {
   @override
   void initState() {
     token =
-        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub20iOiJKb2huIEt1aGFuZGEiLCJpZCI6MywiaWF0IjoxNjIxMTAxMzk0LCJleHAiOjE2MjEzNjA1OTR9.l4t1tyBMgG7J1eQ4mK6rJPK-nHRJltQyt2oWi3RUmL";
+        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub20iOiJKb2huIEt1aGFuZGEiLCJpZCI6MywiaWF0IjoxNjIxMTAxMzk0LCJleHAiOjE2MjEzNjA1OTR9.l4t1tyBMgG7J1eQ4mK6rJPK-nHRJltQyt2oWi3RUmLw";
     userListBloc..getUsers(token);
     super.initState();
   }
@@ -118,7 +118,6 @@ class _UserInterfaceState extends State<UserInterface> {
 
         //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         if (snapshot.hasData) {
-          final data = snapshot.data;
           if (snapshot.error != null) {
             return Container(
               color: Colors.green.withOpacity(0.3),
@@ -131,13 +130,13 @@ class _UserInterfaceState extends State<UserInterface> {
 
           return Scaffold(
             appBar: AppBar(
-              title: Text("${data.users[0].nom}"),
+              title: Text("${snapshot.data.users[0].nom}"),
             ),
             body: ListView.builder(
               itemBuilder: (context, index) => ListTile(
                 leading: Icon(Icons.face),
-                title: Text("${data.users[index].nom}"),
-                subtitle: Text("${data.users[index].contact}"),
+                title: Text("${snapshot.data.users[index].nom}"),
+                subtitle: Text("${snapshot.data.users[index].contact}"),
               ),
               itemCount: snapshot.data.users.length,
             ),

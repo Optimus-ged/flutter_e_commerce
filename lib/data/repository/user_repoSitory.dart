@@ -51,7 +51,6 @@ class UserRepository {
           },
         ),
       );
-      print("PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP $response");
       return UserResponse.fromJson(response.data);
     } catch (error, stacktrace) {
       print("An error occured : $error stacktrace : $stacktrace");
