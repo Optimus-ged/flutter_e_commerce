@@ -4,7 +4,7 @@ import 'package:rxdart/rxdart.dart';
 class SignUpBloc {
   UserRepository _repository = UserRepository();
   BehaviorSubject<UserResponse> _subject = BehaviorSubject<UserResponse>();
-  
+
   signUp(String token, Users user) async {
     UserResponse response = await _repository.signUp(token, user);
     _subject.sink.add(response);

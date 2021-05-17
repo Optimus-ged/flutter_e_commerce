@@ -3,7 +3,7 @@ import 'package:e_commerce/exports/all_exports.dart';
 
 class UserRepository {
   final Dio _dio = Dio();
-
+ 
   // Handling get request for all users
   Future<UserResponse> getUsers(String token) async {
     try {
@@ -38,6 +38,7 @@ class UserRepository {
           },
         ),
       );
+      print("PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP $response");
       return UserResponse.fromJson(response.data);
     } catch (error, stacktrace) {
       print("An error occured : $error stacktrace : $stacktrace");

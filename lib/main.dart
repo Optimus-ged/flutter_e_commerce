@@ -69,7 +69,7 @@ class _UserInterfaceState extends State<UserInterface> {
   @override
   void initState() {
     token =
-        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub20iOiJKb2huIEt1aGFuZGEiLCJpZCI6MywiaWF0IjoxNjIxMTAxMzk0LCJleHAiOjE2MjEzNjA1OTR9.l4t1tyBMgG7J1eQ4mK6rJPK-nHRJltQyt2oWi3RUmLw";
+        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub20iOiJKb2huIEt1aGFuZGEiLCJpZCI6MywiaWF0IjoxNjIxMTAxMzk0LCJleHAiOjE2MjEzNjA1OTR9.l4t1tyBMgG7J1eQ4mK6rJPK-nHRJltQyt2oWi3RUmL";
     userListBloc..getUsers(token);
     super.initState();
   }
@@ -92,73 +92,10 @@ class _UserInterfaceState extends State<UserInterface> {
         // }
         // return null; // unreachable
 
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Material(
-            child: Container(
-              color: Colors.black,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CircularProgressIndicator(),
-                ],
-              ),
-            ),
-          );
-        }
-
-        if (snapshot.connectionState == ConnectionState.active) {
-          return Center(
-            child: Text("${snapshot.data.status}"),
-          );
-        }
-
-        return Center(
-          child: Text("Error"),
-        );
-
-        //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-        // if (snapshot.hasData) {
-        //   final data = snapshot.data;
-        //   if (snapshot.error != null) {
-        //     return Container(
-        //       color: Colors.green.withOpacity(0.3),
-        //       child: Text(
-        //         "Error",
-        //         style: TextStyle(fontSize: 30, color: Colors.amber),
-        //       ),
-        //     );
-        //   }
-
-        //   return Scaffold(
-        //     appBar: AppBar(
-        //       title: Text("${data.users[0].nom}"),
-        //     ),
-        //     body: ListView.builder(
-        //       itemBuilder: (context, index) => ListTile(
-        //         leading: Icon(Icons.face),
-        //         title: Text("${data.users[index].nom}"),
-        //         subtitle: Text("${data.users[index].contact}"),
-        //       ),
-        //       itemCount: snapshot.data.users.length,
-        //     ),
-        //     floatingActionButton: FloatingActionButton(
-        //       onPressed: () {
-        //         userListBloc..getUsers(token);
-        //       },
-        //     ),
-        //   );
-        // } else if (snapshot.hasError) {
-        //   return Container(
-        //     color: Colors.green.withOpacity(0.3),
-        //     child: Text(
-        //       "Error",
-        //       style: TextStyle(fontSize: 30, color: Colors.amber),
-        //     ),
-        //   );
-        // } else {
+        // if (snapshot.connectionState == ConnectionState.waiting) {
         //   return Material(
         //     child: Container(
-        //       color: Colors.black54,
+        //       color: Colors.black,
         //       child: Column(
         //         mainAxisAlignment: MainAxisAlignment.center,
         //         children: [
@@ -168,6 +105,69 @@ class _UserInterfaceState extends State<UserInterface> {
         //     ),
         //   );
         // }
+
+        // if (snapshot.connectionState == ConnectionState.active) {
+        //   return Center(
+        //     child: Text("${snapshot.data.status}"),
+        //   );
+        // }
+
+        // return Center(
+        //   child: Text("Error"),
+        // );
+
+        //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        if (snapshot.hasData) {
+          final data = snapshot.data;
+          if (snapshot.error != null) {
+            return Container(
+              color: Colors.green.withOpacity(0.3),
+              child: Text(
+                "Error",
+                style: TextStyle(fontSize: 30, color: Colors.amber),
+              ),
+            );
+          }
+
+          return Scaffold(
+            appBar: AppBar(
+              title: Text("${data.users[0].nom}"),
+            ),
+            body: ListView.builder(
+              itemBuilder: (context, index) => ListTile(
+                leading: Icon(Icons.face),
+                title: Text("${data.users[index].nom}"),
+                subtitle: Text("${data.users[index].contact}"),
+              ),
+              itemCount: snapshot.data.users.length,
+            ),
+            floatingActionButton: FloatingActionButton(
+              onPressed: () {
+                userListBloc..getUsers(token);
+              },
+            ),
+          );
+        } else if (snapshot.hasError) {
+          return Container(
+            color: Colors.green.withOpacity(0.3),
+            child: Text(
+              "Error",
+              style: TextStyle(fontSize: 30, color: Colors.amber),
+            ),
+          );
+        } else {
+          return Material(
+            child: Container(
+              color: Colors.black54,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircularProgressIndicator(),
+                ],
+              ),
+            ),
+          );
+        }
       },
     );
   }
