@@ -25,7 +25,7 @@ export 'package:e_commerce/model/user_model.dart/user.dart';
 export 'package:e_commerce/model/user_model.dart/user_response.dart';
 
 // FOR DATA
-export 'package:e_commerce/data/repository/api/end_points.dart';
+export 'package:e_commerce/data/repository/end_points/end_points.dart';
 export 'package:e_commerce/data/repository/user_repoSitory.dart';
 
 // BLOC

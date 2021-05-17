@@ -157,7 +157,7 @@ class _UserInterfaceState extends State<UserInterface> {
         } else {
           return Material(
             child: Container(
-              color: Colors.black54,
+              color: Colors.black,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
