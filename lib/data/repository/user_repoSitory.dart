@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:e_commerce/data/dio/network_exceptions.dart';
 import 'package:e_commerce/exports/all_exports.dart';
 
 class UserRepository {
@@ -32,13 +31,6 @@ class UserRepository {
         ),
       );
 
-      if (response.statusCode < 200 || response.statusCode > 400) {
-        print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA ${response.data}");
-        throw NetworkException(
-          message: "Erreur du serveur",
-          statusCode: response.statusCode,
-        );
-      }
       print("${response.statusCode} BBBBBBBBBBBBBBBBBBBBBBB ${response.data}");
       return UserResponse.fromJson(response.data);
     } catch (error, stacktrace) {
