@@ -1,6 +1,5 @@
 import 'package:e_commerce/exports/all_exports.dart';
 
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations(
@@ -43,33 +42,34 @@ class UserInterface extends StatefulWidget {
 }
 
 class _UserInterfaceState extends State<UserInterface> {
-  Future<SharedPreferences> _sPrefs = SharedPreferences.instance();
+  // Future<SharedPreferences> _sPrefs = SharedPreferences.getInstance();
   String token;
 
-  Future<void> get saveAuthToken async {
-    final SharedPreferences pref = await _sPrefs;
-    return pref.setString("token",
-        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub20iOiJKb2huIEt1aGFuZGEiLCJpZCI6MywiaWF0IjoxNjIxMTAxMzk0LCJleHAiOjE2MjEzNjA1OTR9.l4t1tyBMgG7J1eQ4mK6rJPK-nHRJltQyt2oWi3RUmLw");
-  }
+  // Future<void> get saveAuthToken async {
+  //   final SharedPreferences pref = await _sPrefs;
+  //   return pref.setString("token",
+  //       "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub20iOiJKb2huIEt1aGFuZGEiLCJpZCI6MywiaWF0IjoxNjIxMTAxMzk0LCJleHAiOjE2MjEzNjA1OTR9.l4t1tyBMgG7J1eQ4mK6rJPK-nHRJltQyt2oWi3RUmLw");
+  // }
 
-  Future<String> get authToken async {
-    final SharedPreferences pref = await _sPrefs;
-    return pref.getString("token");
-  }
+  // Future<String> get authToken async {
+  //   final SharedPreferences pref = await _sPrefs;
+  //   return pref.getString("token");
+  // }
 
-  Future<void> get clearItems async {
-    final SharedPreferences prefs = await _sPrefs;
-    return prefs.clear();
-  }
+  // Future<void> get clearItems async {
+  //   final SharedPreferences prefs = await _sPrefs;
+  //   return prefs.clear();
+  // }
 
-  Future<void> get removeAuth async {
-    final SharedPreferences pref = await _sPrefs;
-    return pref.remove("token");
-  }
-  
+  // Future<void> get removeAuth async {
+  //   final SharedPreferences pref = await _sPrefs;
+  //   return pref.remove("token");
+  // }
+
   @override
-  void initState() async {
-    token = await authToken;
+  void initState() {
+    token =
+        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub20iOiJKb2huIEt1aGFuZGEiLCJpZCI6MywiaWF0IjoxNjIxMTAxMzk0LCJleHAiOjE2MjEzNjA1OTR9.l4t1tyBMgG7J1eQ4mK6rJPK-nHRJltQyt2oWi3RUmLw";
     userListBloc..getUsers(token);
     super.initState();
   }
@@ -79,48 +79,23 @@ class _UserInterfaceState extends State<UserInterface> {
     return StreamBuilder<UserResponse>(
       stream: userListBloc.subject.stream,
       builder: (context, snapshot) {
-        if (snapshot.hasData) {
-          final data = snapshot.data;
-          if (snapshot.error != null) {
-            return Container(
-              color: Colors.green.withOpacity(0.3),
-              child: Text(
-                "Error",
-                style: TextStyle(fontSize: 30, color: Colors.amber),
-              ),
-            );
-          }
+        // if (snapshot.hasError) return Text('Error: ${snapshot.error}');
+        // switch (snapshot.connectionState) {
+        //   case ConnectionState.none:
+        //     return Text('Select lot');
+        //   case ConnectionState.waiting:
+        //     return Text('Awaiting bids...');
+        //   case ConnectionState.active:
+        //     return Text('\$${snapshot.data} ppppppppp');
+        //   case ConnectionState.done:
+        //     return Text('\$${snapshot.data} (closed) dddddddd');
+        // }
+        // return null; // unreachable
 
-          return Scaffold(
-            appBar: AppBar(
-              title: Text("${data.users[0].nom}"),
-            ),
-            body: ListView.builder(
-              itemBuilder: (context, index) => ListTile(
-                leading: Icon(Icons.face),
-                title: Text("${data.users[index].nom}"),
-                subtitle: Text("${data.users[index].contact}"),
-              ),
-              itemCount: snapshot.data.users.length,
-            ),
-            floatingActionButton: FloatingActionButton(
-              onPressed: (){
-               userListBloc..getUsers(token);
-              },
-            ),
-          );
-        } else if (snapshot.hasError) {
-          return Container(
-            color: Colors.green.withOpacity(0.3),
-            child: Text(
-              "Error",
-              style: TextStyle(fontSize: 30, color: Colors.amber),
-            ),
-          );
-        } else {
+        if (snapshot.connectionState == ConnectionState.waiting) {
           return Material(
             child: Container(
-              color: Colors.black54,
+              color: Colors.black,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -130,6 +105,69 @@ class _UserInterfaceState extends State<UserInterface> {
             ),
           );
         }
+
+        if (snapshot.connectionState == ConnectionState.active) {
+          return Center(
+            child: Text("${snapshot.data.status}"),
+          );
+        }
+
+        return Center(
+          child: Text("Error"),
+        );
+
+        //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+        // if (snapshot.hasData) {
+        //   final data = snapshot.data;
+        //   if (snapshot.error != null) {
+        //     return Container(
+        //       color: Colors.green.withOpacity(0.3),
+        //       child: Text(
+        //         "Error",
+        //         style: TextStyle(fontSize: 30, color: Colors.amber),
+        //       ),
+        //     );
+        //   }
+
+        //   return Scaffold(
+        //     appBar: AppBar(
+        //       title: Text("${data.users[0].nom}"),
+        //     ),
+        //     body: ListView.builder(
+        //       itemBuilder: (context, index) => ListTile(
+        //         leading: Icon(Icons.face),
+        //         title: Text("${data.users[index].nom}"),
+        //         subtitle: Text("${data.users[index].contact}"),
+        //       ),
+        //       itemCount: snapshot.data.users.length,
+        //     ),
+        //     floatingActionButton: FloatingActionButton(
+        //       onPressed: () {
+        //         userListBloc..getUsers(token);
+        //       },
+        //     ),
+        //   );
+        // } else if (snapshot.hasError) {
+        //   return Container(
+        //     color: Colors.green.withOpacity(0.3),
+        //     child: Text(
+        //       "Error",
+        //       style: TextStyle(fontSize: 30, color: Colors.amber),
+        //     ),
+        //   );
+        // } else {
+        //   return Material(
+        //     child: Container(
+        //       color: Colors.black54,
+        //       child: Column(
+        //         mainAxisAlignment: MainAxisAlignment.center,
+        //         children: [
+        //           CircularProgressIndicator(),
+        //         ],
+        //       ),
+        //     ),
+        //   );
+        // }
       },
     );
   }
@@ -145,5 +183,3 @@ class _UserInterfaceState extends State<UserInterface> {
 //   },
 //   home: new RemoveGlow(),
 // );
-
-

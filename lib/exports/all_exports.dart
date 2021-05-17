@@ -1,6 +1,7 @@
 // All flutter depedancies
 export 'package:flutter/material.dart';
 export 'package:google_fonts/google_fonts.dart';
+// export 'package:shared_preferences/shared_preferences.dart';
 
 // All flutter services
 export 'package:flutter/services.dart';
@@ -28,7 +29,7 @@ export 'package:e_commerce/data/repository/api/end_points.dart';
 export 'package:e_commerce/data/repository/user_repoSitory.dart';
 
 // BLOC
-export 'package:e_commerce/bloc/user_bloc/user_bloc.dart';
+export 'package:e_commerce/bloc/user_bloc/user_list_bloc.dart';
 export 'package:e_commerce/bloc/user_bloc/signup_bloc.dart';
 
 // All utils and constants
