@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:e_commerce/data/dio/interceptors.dart';
 import 'package:e_commerce/exports/all_exports.dart';
 
 class UserRepository {
@@ -14,6 +15,7 @@ class UserRepository {
         receiveTimeout: 1000 * 30, // 30 seconds
       );
       _dio = Dio(options);
+      _dio.interceptors.add(AppInterceptors());
     }
   }
 
