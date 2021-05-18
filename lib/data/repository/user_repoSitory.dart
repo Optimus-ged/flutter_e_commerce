@@ -1,10 +1,9 @@
 import 'package:dio/dio.dart';
-import 'package:e_commerce/data/dio/interceptors.dart';
 import 'package:e_commerce/exports/all_exports.dart';
 
 class UserRepository {
   Dio _dio;
-  
+
   // Initialisation of dio options
   UserRepository() {
     if (_dio == null) {

@@ -79,44 +79,6 @@ class _UserInterfaceState extends State<UserInterface> {
     return StreamBuilder<UserResponse>(
         stream: userListBloc.subject.stream,
         builder: (context, snapshot) {
-          // if (snapshot.hasError) return Text('Error: ${snapshot.error}');
-          // switch (snapshot.connectionState) {
-          //   case ConnectionState.none:
-          //     return Text('Select lot');
-          //   case ConnectionState.waiting:
-          //     return Text('Awaiting bids...');
-          //   case ConnectionState.active:
-          //     return Text('\$${snapshot.data} ppppppppp');
-          //   case ConnectionState.done:
-          //     return Text('\$${snapshot.data} (closed) dddddddd');
-          // }
-          // return null; // unreachable
-
-          // if (snapshot.connectionState == ConnectionState.waiting) {
-          //   return Material(
-          //     child: Container(
-          //       color: Colors.black,
-          //       child: Column(
-          //         mainAxisAlignment: MainAxisAlignment.center,
-          //         children: [
-          //           CircularProgressIndicator(),
-          //         ],
-          //       ),
-          //     ),
-          //   );
-          // }
-
-          // if (snapshot.connectionState == ConnectionState.active) {
-          //   return Center(
-          //     child: Text("${snapshot.data.status}"),
-          //   );
-          // }
-
-          // return Center(
-          //   child: Text("Error"),
-          // );
-
-          //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
           if (snapshot.hasData) {
             if (snapshot.error != null) {
               return Container(

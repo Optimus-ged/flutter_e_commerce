@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:e_commerce/exports/all_exports.dart';
 import 'package:rxdart/rxdart.dart';
 
