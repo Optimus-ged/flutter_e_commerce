@@ -34,7 +34,7 @@ class AppInterceptors extends Interceptor {
   }
 
   @override
-  void onError(DioError dioError, ErrorInterceptorHandler handler) {
+  Future onError(DioError dioError, ErrorInterceptorHandler handler) async {
     print(
         "<-- ${dioError.message} ${(dioError.response?.requestOptions != null ? (dioError.response.requestOptions.baseUrl + dioError.response.requestOptions.path) : 'URL')}");
     print(
