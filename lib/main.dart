@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         platform: TargetPlatform.iOS,
       ),
       routes: Routes.routes,
-      home: LoginPage(),
+      home: UserInterface(),
     );
   }
 }
@@ -77,84 +77,76 @@ class _UserInterfaceState extends State<UserInterface> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<UserResponse>(
-      stream: userListBloc.subject.stream,
-      builder: (context, snapshot) {
-        // if (snapshot.hasError) return Text('Error: ${snapshot.error}');
-        // switch (snapshot.connectionState) {
-        //   case ConnectionState.none:
-        //     return Text('Select lot');
-        //   case ConnectionState.waiting:
-        //     return Text('Awaiting bids...');
-        //   case ConnectionState.active:
-        //     return Text('\$${snapshot.data} ppppppppp');
-        //   case ConnectionState.done:
-        //     return Text('\$${snapshot.data} (closed) dddddddd');
-        // }
-        // return null; // unreachable
+        stream: userListBloc.subject.stream,
+        builder: (context, snapshot) {
+          // if (snapshot.hasError) return Text('Error: ${snapshot.error}');
+          // switch (snapshot.connectionState) {
+          //   case ConnectionState.none:
+          //     return Text('Select lot');
+          //   case ConnectionState.waiting:
+          //     return Text('Awaiting bids...');
+          //   case ConnectionState.active:
+          //     return Text('\$${snapshot.data} ppppppppp');
+          //   case ConnectionState.done:
+          //     return Text('\$${snapshot.data} (closed) dddddddd');
+          // }
+          // return null; // unreachable
 
-        // if (snapshot.connectionState == ConnectionState.waiting) {
-        //   return Material(
-        //     child: Container(
-        //       color: Colors.black,
-        //       child: Column(
-        //         mainAxisAlignment: MainAxisAlignment.center,
-        //         children: [
-        //           CircularProgressIndicator(),
-        //         ],
-        //       ),
-        //     ),
-        //   );
-        // }
+          // if (snapshot.connectionState == ConnectionState.waiting) {
+          //   return Material(
+          //     child: Container(
+          //       color: Colors.black,
+          //       child: Column(
+          //         mainAxisAlignment: MainAxisAlignment.center,
+          //         children: [
+          //           CircularProgressIndicator(),
+          //         ],
+          //       ),
+          //     ),
+          //   );
+          // }
 
-        // if (snapshot.connectionState == ConnectionState.active) {
-        //   return Center(
-        //     child: Text("${snapshot.data.status}"),
-        //   );
-        // }
+          // if (snapshot.connectionState == ConnectionState.active) {
+          //   return Center(
+          //     child: Text("${snapshot.data.status}"),
+          //   );
+          // }
 
-        // return Center(
-        //   child: Text("Error"),
-        // );
+          // return Center(
+          //   child: Text("Error"),
+          // );
 
-        //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-        if (snapshot.hasData) {
-          if (snapshot.error != null) {
-            return Container(
-              color: Colors.green.withOpacity(0.3),
-              child: Text(
-                "Error",
-                style: TextStyle(fontSize: 30, color: Colors.amber),
+          //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+          if (snapshot.hasData) {
+            if (snapshot.error != null) {
+              return Container(
+                color: Colors.green.withOpacity(0.3),
+                child: Text(
+                  "Error",
+                  style: TextStyle(fontSize: 30, color: Colors.amber),
+                ),
+              );
+            }
+
+            return Scaffold(
+              appBar: AppBar(
+                title: Text("${snapshot.data.users[0].nom}"),
+              ),
+              body: ListView.builder(
+                itemBuilder: (context, index) => ListTile(
+                  leading: Icon(Icons.face),
+                  title: Text("${snapshot.data.users[index].nom}"),
+                  subtitle: Text("${snapshot.data.users[index].contact}"),
+                ),
+                itemCount: snapshot.data.users.length,
+              ),
+              floatingActionButton: FloatingActionButton(
+                onPressed: () {
+                  userListBloc..getUsers(token);
+                },
               ),
             );
-          }
-
-          return Scaffold(
-            appBar: AppBar(
-              title: Text("${snapshot.data.users[0].nom}"),
-            ),
-            body: ListView.builder(
-              itemBuilder: (context, index) => ListTile(
-                leading: Icon(Icons.face),
-                title: Text("${snapshot.data.users[index].nom}"),
-                subtitle: Text("${snapshot.data.users[index].contact}"),
-              ),
-              itemCount: snapshot.data.users.length,
-            ),
-            floatingActionButton: FloatingActionButton(
-              onPressed: () {
-                userListBloc..getUsers(token);
-              },
-            ),
-          );
-        } else if (snapshot.hasError) {
-          return Container(
-            color: Colors.green.withOpacity(0.3),
-            child: Text(
-              "Error",
-              style: TextStyle(fontSize: 30, color: Colors.amber),
-            ),
-          );
-        } else {
+          } 
           return Material(
             child: Container(
               color: Colors.black,
@@ -166,9 +158,7 @@ class _UserInterfaceState extends State<UserInterface> {
               ),
             ),
           );
-        }
-      },
-    );
+        });
   }
 }
 

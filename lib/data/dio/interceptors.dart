@@ -1,9 +1,6 @@
 import 'package:dio/dio.dart';
 
 class AppInterceptors extends Interceptor {
-  // final Dio dio;
-  // AppInterceptors(this.dio);
-
   @override
   Future onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
