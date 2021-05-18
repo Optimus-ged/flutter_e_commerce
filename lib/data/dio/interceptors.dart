@@ -1,6 +1,9 @@
 import 'package:dio/dio.dart';
 
-class AppInterceptors extends InterceptorsWrapper {
+class AppInterceptors extends Interceptor {
+  // final Dio dio;
+  // AppInterceptors(this.dio);
+
   @override
   Future onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
@@ -17,7 +20,7 @@ class AppInterceptors extends InterceptorsWrapper {
     }
     print(
         "--> END ${options.method != null ? options.method.toUpperCase() : 'METHOD'}");
-    return options;
+    return super.onRequest(options, handler);
   }
 
   @override
@@ -30,7 +33,6 @@ class AppInterceptors extends InterceptorsWrapper {
     response.headers?.forEach((k, v) => print('$k: $v'));
     print("Response: ${response.data}");
     print("<-- END HTTP");
-    // return response;
     return super.onResponse(response, handler);
   }
 
@@ -41,7 +43,6 @@ class AppInterceptors extends InterceptorsWrapper {
     print(
         "${dioError.response != null ? dioError.response.data : 'Unknown Error'}");
     print("<-- End error");
-    // return dioError;
-    super.onError(dioError, handler);
+    return super.onError(dioError, handler);
   }
 }

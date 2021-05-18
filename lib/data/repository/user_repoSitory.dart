@@ -4,6 +4,7 @@ import 'package:e_commerce/exports/all_exports.dart';
 
 class UserRepository {
   Dio _dio;
+  // Dio _dio = Dio();
 
   // Initialisation of dio options
   UserRepository() {
