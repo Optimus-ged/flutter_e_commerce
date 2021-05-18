@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 
-class AppInterceptors extends Interceptor {
+class AppInterceptors extends InterceptorsWrapper {
   @override
   Future onRequest(
       RequestOptions options, RequestInterceptorHandler handler) async {
@@ -30,6 +30,7 @@ class AppInterceptors extends Interceptor {
     response.headers?.forEach((k, v) => print('$k: $v'));
     print("Response: ${response.data}");
     print("<-- END HTTP");
+    // return response;
     return super.onResponse(response, handler);
   }
 
@@ -40,6 +41,7 @@ class AppInterceptors extends Interceptor {
     print(
         "${dioError.response != null ? dioError.response.data : 'Unknown Error'}");
     print("<-- End error");
+    // return dioError;
     super.onError(dioError, handler);
   }
 }
