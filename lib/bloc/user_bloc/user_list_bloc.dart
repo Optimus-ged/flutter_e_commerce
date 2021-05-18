@@ -9,7 +9,7 @@ class UserListBloc {
   // Get all users
   getUsers(String token) async {
     UserResponse response = await _repository.getUsers(token);
-    Future.delayed(Duration(seconds: 15)).then((value) {
+    Future.delayed(Duration(seconds: 2)).then((value) {
       _subject.sink.add(response);
     });
   }
