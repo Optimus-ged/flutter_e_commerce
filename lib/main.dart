@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         platform: TargetPlatform.iOS,
       ),
       routes: Routes.routes,
-      home: UserInterface(),
+      home: IntroPage(),
     );
   }
 }
@@ -108,7 +108,7 @@ class _UserInterfaceState extends State<UserInterface> {
                 },
               ),
             );
-          } 
+          }
           return Material(
             child: Container(
               color: Colors.black,
@@ -122,6 +122,8 @@ class _UserInterfaceState extends State<UserInterface> {
           );
         });
   }
+
+  
 }
 
 // To remove the glow on the whole application, you can add it right under MaterialApp :
