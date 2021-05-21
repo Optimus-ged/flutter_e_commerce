@@ -12,7 +12,7 @@ class _IntroPageState extends State<IntroPage> {
   PageController pageViewController;
 
   @override
-  void initState() async{
+  void initState() {
     curentIndex = 0;
     pageViewController = PageController(
       initialPage: 0,
@@ -49,7 +49,7 @@ class _IntroPageState extends State<IntroPage> {
                       ),
                     ),
                   ),
-                  itemCount: 4,
+                  itemCount: 3,
                   onPageChanged: (value) {
                     curentIndex = value;
                     setState(() {});
@@ -66,7 +66,7 @@ class _IntroPageState extends State<IntroPage> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: List.generate(
-                    4,
+                    3,
                     (index) => _getIndicator(index),
                   ),
                 ),
@@ -79,15 +79,18 @@ class _IntroPageState extends State<IntroPage> {
   }
 
   _getIndicator(int pageNumerotation) {
-    return new AnimatedContainer(
-        duration: Duration(milliseconds: 300),
-        height: 7,
-        width: (curentIndex == pageNumerotation) ? 20 : 10,
-        margin: EdgeInsets.symmetric(horizontal: 5),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(5.0),
-            color: (curentIndex == pageNumerotation)
-                ? Color(0xfff1c422)
-                : Colors.grey));
+    return AnimatedContainer(
+      duration: Duration(milliseconds: 300),
+      height: (curentIndex == pageNumerotation) ? 10 : 5,
+      width: (curentIndex == pageNumerotation) ? 10 : 5,
+      margin: EdgeInsets.symmetric(horizontal: 5),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(5.0),
+          color: (curentIndex == pageNumerotation)
+              ? Color(0xfff1c422)
+              : Colors.grey),
+      foregroundDecoration:
+          BoxDecoration(borderRadius: BorderRadius.circular(5)),
+    );
   }
 }

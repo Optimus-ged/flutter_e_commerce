@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       statusBarIconBrightness: Brightness.light,
       statusBarBrightness:
           Platform.isAndroid ? Brightness.dark : Brightness.light,
-      systemNavigationBarColor: AppTheme.blueColor,
+      systemNavigationBarColor: AppTheme.whiteColor,
       systemNavigationBarDividerColor: Colors.transparent,
       systemNavigationBarIconBrightness: Brightness.dark,
     ));
@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         platform: TargetPlatform.iOS,
       ),
       routes: Routes.routes,
-      home: LoginPage(),
+      home: IntroPage(),
     );
   }
 }
@@ -122,8 +122,6 @@ class _UserInterfaceState extends State<UserInterface> {
           );
         });
   }
-
-  
 }
 
 // To remove the glow on the whole application, you can add it right under MaterialApp :
