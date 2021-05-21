@@ -12,7 +12,7 @@ class _IntroPageState extends State<IntroPage> {
   PageController pageViewController;
 
   @override
-  void initState() {
+  void initState() async{
     curentIndex = 0;
     pageViewController = PageController(
       initialPage: 0,
@@ -22,40 +22,56 @@ class _IntroPageState extends State<IntroPage> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      top: false,
+    var screen = MediaQuery.of(context).size;
+    return Material(
       child: Container(
+        width: screen.width,
+        height: screen.height,
         color: AppTheme.blueColor,
         child: Stack(
           children: [
-            Container(
-              color: AppTheme.lessPinkColor,
-              padding: EdgeInsets.only(left: 20, right: 20, top: 5),
-              child: PageView.builder(
-                controller: pageViewController,
-                itemBuilder: (context, index) => Container(
-                  child: Text(
-                    "$index",
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.amber,
+            Positioned(
+              top: 0,
+              child: Container(
+                height: screen.height,
+                width: screen.width,
+                color: AppTheme.blueColor,
+                padding: EdgeInsets.only(left: 20, right: 20, top: 5),
+                child: PageView.builder(
+                  controller: pageViewController,
+                  itemBuilder: (context, index) => Container(
+                    alignment: Alignment.center,
+                    child: Text(
+                      "$index",
+                      style: TextStyle(
+                        fontSize: 100,
+                        color: Colors.amber,
+                      ),
                     ),
                   ),
+                  itemCount: 4,
+                  onPageChanged: (value) {
+                    curentIndex = value;
+                    setState(() {});
+                  },
                 ),
-                itemCount: 4,
-                onPageChanged: (value) {
-                  curentIndex = value;
-                  setState(() {});
-                },
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(
-                4,
-                (index) => _getIndicator(index),
+            Positioned(
+              bottom: 0,
+              child: Container(
+                height: 30,
+                width: screen.width,
+                // color: Colors.amber,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: List.generate(
+                    4,
+                    (index) => _getIndicator(index),
+                  ),
+                ),
               ),
-            ),
+            )
           ],
         ),
       ),
