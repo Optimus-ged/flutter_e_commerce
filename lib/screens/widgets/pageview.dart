@@ -1,23 +1,10 @@
 import 'package:e_commerce/exports/all_exports.dart';
 
-class PageViewWidget extends StatefulWidget {
-  @override
-  _PageViewState createState() => _PageViewState();
-}
-
-class _PageViewState extends State<PageView> {
-  int curentIndex;
-  PageController pageViewController;
-
-  @override
-  void initState() {
-    curentIndex = 0;
-    pageViewController = PageController(
-      initialPage: 0,
-    );
-    super.initState();
-  }
-
+class PageViewWidget extends StatelessWidget {
+  final int curentIndex;
+  final PageController pageViewController;
+  final void Function(int) onPageChanged;
+  PageViewWidget(this.curentIndex, this.pageViewController, {this.onPageChanged});
   @override
   Widget build(BuildContext context) {
     var screen = MediaQuery.of(context).size;
@@ -47,10 +34,11 @@ class _PageViewState extends State<PageView> {
         ),
       ),
       itemCount: 3,
-      onPageChanged: (value) {
-        curentIndex = value;
-        setState(() {});
-      },
+      onPageChanged: onPageChanged,
+      // onPageChanged: (value) {
+      //   curentIndex = value;
+      //   setState(() {});
+      // },
     );
   }
 }

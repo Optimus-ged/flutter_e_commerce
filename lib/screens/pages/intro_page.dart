@@ -7,8 +7,6 @@ class IntroPage extends StatefulWidget {
 
 class _IntroPageState extends State<IntroPage> {
   int curentIndex;
-  AnimationController rippleController;
-  Animation<double> rippleAnimation;
   PageController pageViewController;
 
   @override
@@ -30,32 +28,13 @@ class _IntroPageState extends State<IntroPage> {
         color: AppTheme.blueColor,
         child: Stack(
           children: [
-            Positioned(
-              top: 0,
-              child: Container(
-                height: screen.height,
-                width: screen.width,
-                color: AppTheme.blueColor,
-                padding: EdgeInsets.only(left: 20, right: 20, top: 5),
-                child: PageView.builder(
-                  controller: pageViewController,
-                  itemBuilder: (context, index) => Container(
-                    alignment: Alignment.center,
-                    child: Text(
-                      "$index",
-                      style: TextStyle(
-                        fontSize: 100,
-                        color: Colors.amber,
-                      ),
-                    ),
-                  ),
-                  itemCount: 3,
-                  onPageChanged: (value) {
-                    curentIndex = value;
-                    setState(() {});
-                  },
-                ),
-              ),
+            PageViewWidget(
+              curentIndex,
+              pageViewController,
+              onPageChanged: (value) {
+                curentIndex = value;
+                setState(() {});
+              },
             ),
             PageviewIndicator(curentIndex),
           ],
