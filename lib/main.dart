@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         platform: TargetPlatform.iOS,
       ),
       routes: Routes.routes,
-      home: IntroPage(),
+      home: UserInterface(),
     );
   }
 }
@@ -69,7 +69,7 @@ class _UserInterfaceState extends State<UserInterface> {
   @override
   void initState() {
     token =
-        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub20iOiJPcHRpbXVzIHlhbGEiLCJpZCI6NCwiaWF0IjoxNjIxMzYxOTU3LCJleHAiOjE2MjE2MjExNTd9.DvddR2qoGYVP1ZGXAicA0FjLUdBQ6MnwYoJVQ3QEK5Q";
+        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub20iOiJPcHRpbXVzIHlhbGEiLCJpZCI6NCwiaWF0IjoxNjIxNzA1NDY2LCJleHAiOjE2MjE5NjQ2NjZ9.lzJ5ogGXEkLbkZVZIyUqfSwZbuePqJLy0a-JMq8Xk2k";
     userListBloc..getUsers(token);
     super.initState();
   }
@@ -95,8 +95,10 @@ class _UserInterfaceState extends State<UserInterface> {
                 title: Text("${snapshot.data.users[0].nom}"),
               ),
               body: ListView.builder(
+                physics: ClampingScrollPhysics(),
                 itemBuilder: (context, index) => ListTile(
-                  leading: Icon(Icons.face),
+                  leading: Image.network(
+                      "http://192.168.137.1:3000/images/1621260842069_Capturejj.PNG"),
                   title: Text("${snapshot.data.users[index].nom}"),
                   subtitle: Text("${snapshot.data.users[index].contact}"),
                 ),
@@ -122,6 +124,36 @@ class _UserInterfaceState extends State<UserInterface> {
           );
         });
   }
+
+//   Widget cachedNetWorkImage(
+//     {@required String imageUrl, @required BoxShape shape}) {
+//   return CachedNetworkImage(
+//     imageUrl: imageUrl,
+//     placeholder: (context, url) => Center(
+//       child: Icon(Icons.face),
+//     ),
+//     errorWidget: (context, url, error) => Center(
+//       child: Icon(Icons.error),
+//     ),
+//     imageBuilder: (
+//       context,
+//       imageProvider,
+//     ) =>
+//         Container(
+//       decoration: BoxDecoration(
+//         shape: shape,
+//         image: DecorationImage(
+//           image: imageProvider,
+//           fit: BoxFit.cover,
+//         ),
+//       ),
+//     ),
+//     fadeInCurve: Curves.easeIn,
+//     fadeInDuration: Duration(
+//       seconds: 2,
+//     ),
+//   );
+// }
 }
 
 // To remove the glow on the whole application, you can add it right under MaterialApp :
