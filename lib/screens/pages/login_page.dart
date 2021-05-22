@@ -27,7 +27,6 @@ class LoginPage extends StatelessWidget {
               ),
               SizedBox(height: screen.height * .12),
               Container(
-                // color: Colors.black38,
                 width: double.infinity,
                 alignment: Alignment.center,
                 child: Row(

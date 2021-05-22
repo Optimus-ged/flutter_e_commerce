@@ -1,6 +1,16 @@
 import 'package:e_commerce/exports/all_exports.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+    void initState() {
+      // TODO: implement initState
+      super.initState();
+    }
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
@@ -56,7 +66,6 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  // Building botom navigation ba item
   _buildNavigationItem(
       {IconData icon, VoidCallback onTap, @required BuildContext context}) {
     return ClickAnimation(

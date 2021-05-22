@@ -22,8 +22,8 @@ export 'package:e_commerce/screens/widgets/build_item_list.dart';
 export 'package:e_commerce/screens/widgets/BackwardButton.dart';
 
 // All Models
-export 'package:e_commerce/model/user_model.dart/user.dart';
-export 'package:e_commerce/model/user_model.dart/user_response.dart';
+export 'package:e_commerce/model/user_model/user.dart';
+export 'package:e_commerce/model/user_model/user_response.dart';
 
 // FOR DATA
 export 'package:e_commerce/data/repository/end_points/end_points.dart';
