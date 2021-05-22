@@ -35,6 +35,15 @@ class _IntroPageState extends State<IntroPage> {
                 curentIndex = value;
                 setState(() {});
               },
+              child: Center(
+                child: Text(
+                  "$curentIndex",
+                  style: TextStyle(
+                    fontSize: 100,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
             ),
             PageviewIndicator(curentIndex),
           ],

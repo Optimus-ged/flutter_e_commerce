@@ -6,9 +6,23 @@ class DetailPage extends StatefulWidget {
 }
 
 class _DetailPageState extends State<DetailPage> {
+  int curentIndex;
+  PageController pageViewController;
   bool choice1 = false;
   bool choice2 = false;
   bool choice3 = true;
+
+  @override
+  void initState() {
+    curentIndex = 0;
+    choice1 = false;
+    choice2 = false;
+    choice3 = true;
+    pageViewController = PageController(
+      initialPage: 0,
+    );
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,26 +31,41 @@ class _DetailPageState extends State<DetailPage> {
     return Scaffold(
       body: Stack(
         children: [
-          // Positioned(
-          //   top: 0,
-          //   child: Container(
-          //     height: screen.height * .45,
-          //     width: screen.width,
-          //     child: Stack(
-          //       children: [
-          //         BackwardButton(color: AppTheme.blueColor),
-                  // Center(
-                  //   child: Text(
-                  //     "${args["title"]}",
-                  //     style: TextStyle(fontSize: 20),
-                  //   ),
-                  // )
-                  // PageViewWidget(),
-                  
-          //       ],
-          //     ),
-          //   ),
-          // ),
+          Positioned(
+            top: 0,
+            child: Container(
+              height: screen.height * .45,
+              width: screen.width,
+              color: AppTheme.whiteColor,
+              child: Stack(
+                children: [
+                  PageViewWidget(
+                    curentIndex,
+                    pageViewController,
+                    onPageChanged: (value) {
+                      curentIndex = value;
+                      setState(() {});
+                    },
+                    color: AppTheme.whiteColor,
+                    height: screen.height * .45,
+                    child: Container(
+                      color: Colors.white,
+                      alignment: Alignment.center,
+                      child: Text(
+                        "$curentIndex jjj",
+                        style: TextStyle(
+                          fontSize: 100,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ),
+                  ),
+                  PageviewIndicator(curentIndex),
+                  BackwardButton(color: AppTheme.blueColor),
+                ],
+              ),
+            ),
+          ),
           Positioned(
             bottom: 0,
             child: Container(
@@ -205,6 +234,27 @@ class _DetailPageState extends State<DetailPage> {
           ),
         ),
       ),
+    );
+  }
+
+  _buildPageView() {
+    return PageView.builder(
+      controller: pageViewController,
+      itemBuilder: (context, index) => Container(
+        alignment: Alignment.center,
+        child: Text(
+          "$index",
+          style: TextStyle(
+            fontSize: 100,
+            color: Colors.amber,
+          ),
+        ),
+      ),
+      itemCount: 3,
+      onPageChanged: (value) {
+        curentIndex = value;
+        setState(() {});
+      },
     );
   }
 }
