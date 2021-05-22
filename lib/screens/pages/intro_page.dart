@@ -57,40 +57,10 @@ class _IntroPageState extends State<IntroPage> {
                 ),
               ),
             ),
-            Positioned(
-              bottom: 0,
-              child: Container(
-                height: 30,
-                width: screen.width,
-                // color: Colors.amber,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: List.generate(
-                    3,
-                    (index) => _indicator(index),
-                  ),
-                ),
-              ),
-            )
+            PageviewIndicator(curentIndex),
           ],
         ),
       ),
-    );
-  }
-
-  _indicator(int index) {
-    return AnimatedContainer(
-      duration: Duration(milliseconds: 300),
-      height: (curentIndex == index) ? 10 : 5,
-      width: (curentIndex == index) ? 10 : 5,
-      margin: EdgeInsets.symmetric(horizontal: 5),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5.0),
-          color: (curentIndex == index)
-              ? Color(0xfff1c422)
-              : AppTheme.whiteColor),
-      foregroundDecoration:
-          BoxDecoration(borderRadius: BorderRadius.circular(5)),
     );
   }
 }

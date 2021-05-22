@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         platform: TargetPlatform.iOS,
       ),
       routes: Routes.routes,
-      home: LoginPage(),
+      home: IntroPage(),
     );
   }
 }

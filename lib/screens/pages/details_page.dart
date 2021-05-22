@@ -17,30 +17,26 @@ class _DetailPageState extends State<DetailPage> {
     return Scaffold(
       body: Stack(
         children: [
-          Positioned(
-            top: 0,
-            child: Container(
-              height: screen.height * .45,
-              width: screen.width,
-              child: Stack(
-                children: [
-                  BackwardButton(color: AppTheme.blueColor),
+          // Positioned(
+          //   top: 0,
+          //   child: Container(
+          //     height: screen.height * .45,
+          //     width: screen.width,
+          //     child: Stack(
+          //       children: [
+          //         BackwardButton(color: AppTheme.blueColor),
                   // Center(
                   //   child: Text(
                   //     "${args["title"]}",
                   //     style: TextStyle(fontSize: 20),
                   //   ),
                   // )
-                  Container(
-                    height: screen.height,
-                    width: screen.width,
-                    color: Colors.green,
-                  ),
+                  // PageViewWidget(),
                   
-                ],
-              ),
-            ),
-          ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
           Positioned(
             bottom: 0,
             child: Container(
