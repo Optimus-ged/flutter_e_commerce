@@ -8,7 +8,7 @@ class BackwardButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Positioned(
       top: 30,
-      left: 20,
+      left: 10,
       child: ClickAnimation(
         onTap: () => Navigator.of(context).pop(),
         child: Container(

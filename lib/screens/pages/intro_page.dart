@@ -67,7 +67,7 @@ class _IntroPageState extends State<IntroPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: List.generate(
                     3,
-                    (index) => _getIndicator(index),
+                    (index) => _indicator(index),
                   ),
                 ),
               ),
@@ -78,17 +78,17 @@ class _IntroPageState extends State<IntroPage> {
     );
   }
 
-  _getIndicator(int pageNumerotation) {
+  _indicator(int index) {
     return AnimatedContainer(
       duration: Duration(milliseconds: 300),
-      height: (curentIndex == pageNumerotation) ? 10 : 5,
-      width: (curentIndex == pageNumerotation) ? 10 : 5,
+      height: (curentIndex == index) ? 10 : 5,
+      width: (curentIndex == index) ? 10 : 5,
       margin: EdgeInsets.symmetric(horizontal: 5),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5.0),
-          color: (curentIndex == pageNumerotation)
+          color: (curentIndex == index)
               ? Color(0xfff1c422)
-              : Colors.grey),
+              : AppTheme.whiteColor),
       foregroundDecoration:
           BoxDecoration(borderRadius: BorderRadius.circular(5)),
     );

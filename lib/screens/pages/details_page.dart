@@ -25,12 +25,18 @@ class _DetailPageState extends State<DetailPage> {
               child: Stack(
                 children: [
                   BackwardButton(color: AppTheme.blueColor),
-                  Center(
-                    child: Text(
-                      "${args["title"]}",
-                      style: TextStyle(fontSize: 20),
-                    ),
-                  )
+                  // Center(
+                  //   child: Text(
+                  //     "${args["title"]}",
+                  //     style: TextStyle(fontSize: 20),
+                  //   ),
+                  // )
+                  Container(
+                    height: screen.height,
+                    width: screen.width,
+                    color: Colors.green,
+                  ),
+                  
                 ],
               ),
             ),
