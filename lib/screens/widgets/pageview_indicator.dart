@@ -21,10 +21,11 @@ class PageviewIndicator extends StatelessWidget {
               width: (curentIndex == index) ? 10 : 5,
               margin: EdgeInsets.symmetric(horizontal: 5),
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5.0),
-                  color: (curentIndex == index)
-                      ? AppTheme.pinkColor
-                      : Colors.grey[200]),
+                borderRadius: BorderRadius.circular(5.0),
+                color: (curentIndex == index)
+                    ? AppTheme.pinkColor
+                    : Colors.grey[200],
+              ),
               foregroundDecoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5),
               ),

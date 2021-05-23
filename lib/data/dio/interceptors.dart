@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:e_commerce/exports/all_exports.dart';
 
 class AppInterceptors extends Interceptor {
   @override
@@ -40,6 +41,15 @@ class AppInterceptors extends Interceptor {
     print(
         "${dioError.response != null ? dioError.response.data : 'Unknown Error'}");
     print("<-- End error");
+    if(_shouldRetry(dioError)){
+      // TODO: implement onError
+    }
     return super.onError(dioError, handler);
+  }
+
+  bool _shouldRetry(DioError dioError) {
+    return dioError.type == DioErrorType.other &&
+        dioError.error != null &&
+        dioError is SocketException;
   }
 }

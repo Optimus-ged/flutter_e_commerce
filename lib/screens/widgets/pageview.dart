@@ -18,7 +18,6 @@ class PageViewWidget extends StatelessWidget {
         height: height == null ? screen.height : height,
         width: screen.width,
         color: color == null ? AppTheme.blueColor : Colors.transparent,
-        // padding: EdgeInsets.only(left: 20, right: 20, top: 5),
         child: _buildPageView(),
       ),
     );
