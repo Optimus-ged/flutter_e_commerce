@@ -19,7 +19,7 @@ export 'package:e_commerce/screens/pages/intro_page.dart';
 export 'package:e_commerce/screens/widgets/click_animation.dart';
 export 'package:e_commerce/screens/widgets/custon_textfield.dart';
 export 'package:e_commerce/screens/widgets/build_item_list.dart';
-export 'package:e_commerce/screens/widgets/BackwardButton.dart';
+export 'package:e_commerce/screens/widgets/backwardButton.dart';
 export 'package:e_commerce/screens/widgets/pageview.dart';
 export 'package:e_commerce/screens/widgets/pageview_indicator.dart';
 
