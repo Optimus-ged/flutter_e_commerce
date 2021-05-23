@@ -1,7 +1,8 @@
 // All flutter depedancies
 export 'package:flutter/material.dart';
 export 'package:google_fonts/google_fonts.dart';
-// export 'package:shared_preferences/shared_preferences.dart';
+export 'package:shared_preferences/shared_preferences.dart';
+export 'package:connectivity/connectivity.dart';
 
 // All flutter services
 export 'package:flutter/services.dart';

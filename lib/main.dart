@@ -77,52 +77,53 @@ class _UserInterfaceState extends State<UserInterface> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<UserResponse>(
-        stream: userListBloc.subject.stream,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            if (snapshot.error != null) {
-              return Container(
-                color: Colors.green.withOpacity(0.3),
-                child: Text(
-                  "Error",
-                  style: TextStyle(fontSize: 30, color: Colors.amber),
-                ),
-              );
-            }
-
-            return Scaffold(
-              appBar: AppBar(
-                title: Text("${snapshot.data.users[0].nom}"),
-              ),
-              body: ListView.builder(
-                physics: ClampingScrollPhysics(),
-                itemBuilder: (context, index) => ListTile(
-                  leading: Image.network(
-                      "http://192.168.137.1:3000/images/1621260842069_Capturejj.PNG"),
-                  title: Text("${snapshot.data.users[index].nom}"),
-                  subtitle: Text("${snapshot.data.users[index].contact}"),
-                ),
-                itemCount: snapshot.data.users.length,
-              ),
-              floatingActionButton: FloatingActionButton(
-                onPressed: () {
-                  userListBloc..getUsers(token);
-                },
+      stream: userListBloc.subject.stream,
+      builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          if (snapshot.error != null) {
+            return Container(
+              color: Colors.green.withOpacity(0.3),
+              child: Text(
+                "Error",
+                style: TextStyle(fontSize: 30, color: Colors.amber),
               ),
             );
           }
-          return Material(
-            child: Container(
-              color: Colors.black,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CircularProgressIndicator(),
-                ],
+
+          return Scaffold(
+            appBar: AppBar(
+              title: Text("${snapshot.data.users[0].nom}"),
+            ),
+            body: ListView.builder(
+              physics: ClampingScrollPhysics(),
+              itemBuilder: (context, index) => ListTile(
+                leading: Image.network(
+                    "http://192.168.137.1:3000/images/1621260842069_Capturejj.PNG"),
+                title: Text("${snapshot.data.users[index].nom}"),
+                subtitle: Text("${snapshot.data.users[index].contact}"),
               ),
+              itemCount: snapshot.data.users.length,
+            ),
+            floatingActionButton: FloatingActionButton(
+              onPressed: () {
+                userListBloc..getUsers(token);
+              },
             ),
           );
-        });
+        }
+        return Material(
+          child: Container(
+            color: Colors.black,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircularProgressIndicator(),
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
 }
 

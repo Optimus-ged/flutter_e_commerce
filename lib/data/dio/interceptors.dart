@@ -41,15 +41,18 @@ class AppInterceptors extends Interceptor {
     print(
         "${dioError.response != null ? dioError.response.data : 'Unknown Error'}");
     print("<-- End error");
+
     if(_shouldRetry(dioError)){
-      // TODO: implement onError
+      // TODO implement
     }
+
     return super.onError(dioError, handler);
   }
 
+  // Handling should retry when connection changed
   bool _shouldRetry(DioError dioError) {
     return dioError.type == DioErrorType.other &&
         dioError.error != null &&
-        dioError is SocketException;
+        dioError.error is SocketException;
   }
 }
