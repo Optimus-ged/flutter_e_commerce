@@ -124,36 +124,6 @@ class _UserInterfaceState extends State<UserInterface> {
           );
         });
   }
-
-//   Widget cachedNetWorkImage(
-//     {@required String imageUrl, @required BoxShape shape}) {
-//   return CachedNetworkImage(
-//     imageUrl: imageUrl,
-//     placeholder: (context, url) => Center(
-//       child: Icon(Icons.face),
-//     ),
-//     errorWidget: (context, url, error) => Center(
-//       child: Icon(Icons.error),
-//     ),
-//     imageBuilder: (
-//       context,
-//       imageProvider,
-//     ) =>
-//         Container(
-//       decoration: BoxDecoration(
-//         shape: shape,
-//         image: DecorationImage(
-//           image: imageProvider,
-//           fit: BoxFit.cover,
-//         ),
-//       ),
-//     ),
-//     fadeInCurve: Curves.easeIn,
-//     fadeInDuration: Duration(
-//       seconds: 2,
-//     ),
-//   );
-// }
 }
 
 // To remove the glow on the whole application, you can add it right under MaterialApp :
