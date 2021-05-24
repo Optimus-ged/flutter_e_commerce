@@ -33,7 +33,7 @@ export 'package:e_commerce/model/article_model/article_response.dart';
 
 // FOR DATA
 export 'package:e_commerce/data/repository/end_points/end_points.dart';
-export 'package:e_commerce/data/repository/repoSitory.dart';
+export 'package:e_commerce/data/repository/repository.dart';
 export 'package:e_commerce/data/dio/interceptors.dart';
 export 'package:e_commerce/data/repository/end_points/end_points.dart';
 
