@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:e_commerce/exports/all_exports.dart';
 import 'package:dio/dio.dart';
 
@@ -9,10 +7,16 @@ class ConnectivityRequestRetry {
   ConnectivityRequestRetry({@override this.dio, this.connectivity});
 
   Future<Response> scheduleRequestRetry(RequestOptions requestOptions) async {
+    // Defining valiables
     final responseCompleter = Completer<Response>();
-    connectivity.onConnectivityChanged.listen(
+    StreamSubscription streamSubscription;
+
+    // Use of streamsubscription to avoid the connectivity to listen
+    // every time, so it will only listen when the connectivity result changes
+    streamSubscription = connectivity.onConnectivityChanged.listen(
       (connectivityResult) {
         if (connectivityResult != ConnectivityResult.none) {
+          streamSubscription.cancel();
           responseCompleter.complete(dio.request(
             requestOptions.path,
             onSendProgress: requestOptions.onReceiveProgress,
@@ -25,6 +29,7 @@ class ConnectivityRequestRetry {
         }
       },
     );
+
     return responseCompleter.future;
   }
 }
