@@ -28,20 +28,28 @@ class _IntroPageState extends State<IntroPage> {
         color: AppTheme.blueColor,
         child: Stack(
           children: [
-            PageViewWidget(
-              curentIndex,
-              pageViewController,
-              onPageChanged: (value) {
-                curentIndex = value;
-                setState(() {});
-              },
-              child: Center(
-                child: Text(
-                  "$curentIndex",
-                  style: TextStyle(
-                    fontSize: 100,
-                    color: Colors.white,
+            Positioned(
+              top: 0,
+              child: Container(
+                width: screen.width,
+                height: screen.height,
+                color: AppTheme.blueColor,
+                child: PageView.builder(
+                  controller: pageViewController,
+                  itemBuilder: (context, index) => Center(
+                    child: Text(
+                      "$curentIndex",
+                      style: TextStyle(
+                        fontSize: 100,
+                        color: Colors.white,
+                      ),
+                    ),
                   ),
+                  itemCount: 3,
+                  onPageChanged: (value) {
+                    curentIndex = value;
+                    setState(() {});
+                  },
                 ),
               ),
             ),
