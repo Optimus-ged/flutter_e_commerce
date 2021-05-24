@@ -56,8 +56,9 @@ class _HomePageState extends State<HomePage> {
                             // onTap: () => Navigator.of(context).pushNamed(
                             //   Routes.details,
                             //   arguments: {
-                            //     "data":
-                            //         "${snapshot.data.response[index].photoArticles}"
+                            //     snapshot.data.response[index]
+                            //     // "data":
+                            //     //     "${snapshot.data.response[index].photoArticles}"
                             //   },
                             // ),
                             onTap: () => Navigator.push(
@@ -75,7 +76,6 @@ class _HomePageState extends State<HomePage> {
                                 border: Border.all(
                                     width: 0.2, color: Colors.black12),
                               ),
-                              // child: Text("${snapshot.data.response}"),
                               child: Image.network(
                                   "${Endpoint.uplaod}${snapshot.data.response[index].photoArticles[0].photoArticle}"),
                             ),

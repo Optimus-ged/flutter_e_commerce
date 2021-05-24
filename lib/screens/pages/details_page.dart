@@ -29,7 +29,8 @@ class _DetailPageState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
     var screen = MediaQuery.of(context).size;
-    final Map args = ModalRoute.of(context).settings.arguments;
+    // final Map args = ModalRoute.of(context).settings.arguments;
+    // final Article data2 = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       body: Stack(
         children: [
@@ -67,6 +68,7 @@ class _DetailPageState extends State<DetailPage> {
                     padding: EdgeInsets.only(left: 20, bottom: 10),
                     child: Text(
                       "${widget.data.designation}",
+                      // "${data2.id}",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.white54,

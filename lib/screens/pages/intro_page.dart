@@ -20,7 +20,7 @@ class _IntroPageState extends State<IntroPage> {
 
   @override
   Widget build(BuildContext context) {
-    var screen = MediaQuery.of(context).size;
+    Size screen = MediaQuery.of(context).size;
     return Material(
       child: Container(
         width: screen.width,
