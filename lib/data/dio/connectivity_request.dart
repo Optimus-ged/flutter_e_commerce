@@ -17,15 +17,17 @@ class ConnectivityRequestRetry {
       (connectivityResult) {
         if (connectivityResult != ConnectivityResult.none) {
           streamSubscription.cancel();
-          responseCompleter.complete(dio.request(
-            requestOptions.path,
-            onSendProgress: requestOptions.onReceiveProgress,
-            onReceiveProgress: requestOptions.onReceiveProgress,
-            data: requestOptions.data,
-            cancelToken: requestOptions.cancelToken,
-            queryParameters: requestOptions.queryParameters,
-            // options: requestOptions,
-          ));
+          responseCompleter.complete(
+            dio.request(
+              requestOptions.path,
+              onSendProgress: requestOptions.onReceiveProgress,
+              onReceiveProgress: requestOptions.onReceiveProgress,
+              data: requestOptions.data,
+              cancelToken: requestOptions.cancelToken,
+              queryParameters: requestOptions.queryParameters,
+              // options:
+            ),
+          );
         }
       },
     );
