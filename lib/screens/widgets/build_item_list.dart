@@ -1,6 +1,8 @@
 import 'package:e_commerce/exports/all_exports.dart';
 
 class BuildItemsList extends StatelessWidget {
+  final ListeArticles data;
+  BuildItemsList({@override this.data});
   @override
   Widget build(BuildContext context) {
     return Container(

@@ -1,6 +1,8 @@
 import 'package:e_commerce/exports/all_exports.dart';
 
 class DetailPage extends StatefulWidget {
+  final List<PhotoArticles> data;
+  DetailPage({this.data});
   @override
   _DetailPageState createState() => _DetailPageState();
 }
@@ -39,27 +41,7 @@ class _DetailPageState extends State<DetailPage> {
               color: AppTheme.whiteColor,
               child: Stack(
                 children: [
-                  PageViewWidget(
-                    curentIndex,
-                    pageViewController,
-                    onPageChanged: (value) {
-                      curentIndex = value;
-                      setState(() {});
-                    },
-                    color: AppTheme.whiteColor,
-                    height: screen.height * .45,
-                    child: Container(
-                      color: Colors.white,
-                      alignment: Alignment.center,
-                      child: Text(
-                        "$curentIndex jjj",
-                        style: TextStyle(
-                          fontSize: 100,
-                          color: Colors.black,
-                        ),
-                      ),
-                    ),
-                  ),
+                  _buildPageView(screen, data: widget.data),
                   PageviewIndicator(curentIndex),
                   BackwardButton(color: AppTheme.blueColor),
                 ],
@@ -237,24 +219,27 @@ class _DetailPageState extends State<DetailPage> {
     );
   }
 
-  _buildPageView() {
-    return PageView.builder(
-      controller: pageViewController,
-      itemBuilder: (context, index) => Container(
-        alignment: Alignment.center,
-        child: Text(
-          "$index",
-          style: TextStyle(
-            fontSize: 100,
-            color: Colors.amber,
+  _buildPageView(Size screen, {List<PhotoArticles> data}) {
+    return Positioned(
+      top: 0,
+      child: Container(
+        height: screen.height * .45,
+        width: screen.width,
+        color: AppTheme.whiteColor,
+        child: PageView.builder(
+          controller: pageViewController,
+          itemBuilder: (context, index) => Container(
+            alignment: Alignment.center,
+            child:
+                Image.network("${Endpoint.uplaod}${data[index].photoArticle}"),
           ),
+          itemCount: 3,
+          onPageChanged: (value) {
+            curentIndex = value;
+            setState(() {});
+          },
         ),
       ),
-      itemCount: 3,
-      onPageChanged: (value) {
-        curentIndex = value;
-        setState(() {});
-      },
     );
   }
 }

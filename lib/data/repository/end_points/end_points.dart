@@ -5,7 +5,7 @@ class Endpoint {
 
   // Initialization of base URLs
   static const String baseUrl = "http://192.168.137.1:3000/api";
-  static const String uplaod = "http://192.168.137.1:3000";
+  static const String uplaod = "http://192.168.137.1:3000/";
 
   // Initialisation of all other endpoints
   static const String allUsers = "/users/all";

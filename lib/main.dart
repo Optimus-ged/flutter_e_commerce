@@ -13,6 +13,7 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    bool ok = true;
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: AppTheme.blueColor,
       statusBarIconBrightness: Brightness.light,
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
         platform: TargetPlatform.iOS,
       ),
       routes: Routes.routes,
-      home: LoginPage(),
+      home: ok ? LoginPage() : IntroPage(),
     );
   }
 }
@@ -98,7 +99,7 @@ class _UserInterfaceState extends State<UserInterface> {
               physics: ClampingScrollPhysics(),
               itemBuilder: (context, index) => ListTile(
                 leading: Image.network(
-                    "http://192.168.137.1:3000/images/1621260842069_Capturejj.PNG"),
+                    "http://192.168.137.1:3000/images/1621711633487_femme03.png"),
                 title: Text("${snapshot.data.users[index].nom}"),
                 subtitle: Text("${snapshot.data.users[index].contact}"),
               ),
