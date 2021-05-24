@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:e_commerce/exports/all_exports.dart';
 
-class UserRepository {
+class Repository {
   Dio _dio;
 
   // Initialisation of dio options
-  UserRepository() {
+  Repository() {
     if (_dio == null) {
       BaseOptions options = BaseOptions(
         baseUrl: "${Endpoint.baseUrl}",
@@ -33,13 +33,13 @@ class UserRepository {
       );
       return UserResponse.fromJson(response.data);
     } catch (error, stacktrace) {
-      print("Error occured when getUsers : $error, stacktrace : $stacktrace");
+      print("GetUsers error : $error, stacktrace : $stacktrace");
       throw error;
     }
   }
 
   // Handling get request for all articles
-  Future<UserResponse> getArticles(String token) async {
+  Future<ListeArticles> getArticles(String token) async {
     try {
       Response response = await _dio.get(
         "${Endpoint.allArticles}",
@@ -51,14 +51,12 @@ class UserRepository {
           },
         ),
       );
-      return UserResponse.fromJson(response.data);
+      return ListeArticles.fromJson(response.data);
     } catch (error, stacktrace) {
-      print("Error occured when getArticles : $error, stacktrace : $stacktrace");
+      print("GetArticles error : $error, stacktrace : $stacktrace");
       throw error;
     }
   }
-
-  
 
   // Handling post request for users
   Future<UserResponse> signUp(String token, Users user) async {
@@ -76,7 +74,7 @@ class UserRepository {
       );
       return UserResponse.fromJson(response.data);
     } catch (error, stacktrace) {
-      print("An error occured when signUp : $error stacktrace : $stacktrace");
+      print("SignUp Error : $error stacktrace : $stacktrace");
       throw error;
     }
   }

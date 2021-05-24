@@ -2,7 +2,7 @@ import 'package:e_commerce/exports/all_exports.dart';
 import 'package:rxdart/rxdart.dart';
 
 class UserListBloc {
-  UserRepository _repository = UserRepository();
+  Repository _repository = Repository();
   BehaviorSubject<UserResponse> _subject = BehaviorSubject<UserResponse>();
 
   // Get all users
