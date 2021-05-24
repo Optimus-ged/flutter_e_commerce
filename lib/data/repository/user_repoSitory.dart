@@ -33,7 +33,27 @@ class UserRepository {
       );
       return UserResponse.fromJson(response.data);
     } catch (error, stacktrace) {
-      print("Error occured : $error, stacktrace : $stacktrace");
+      print("Error occured when getUsers : $error, stacktrace : $stacktrace");
+      throw error;
+    }
+  }
+
+  // Handling get request for all articles
+  Future<UserResponse> getArticles(String token) async {
+    try {
+      Response response = await _dio.get(
+        "${Endpoint.allArticles}",
+        options: Options(
+          contentType: Headers.formUrlEncodedContentType,
+          headers: {
+            "Accept": "application/json",
+            "Authorization": "$token",
+          },
+        ),
+      );
+      return UserResponse.fromJson(response.data);
+    } catch (error, stacktrace) {
+      print("Error occured when getArticles : $error, stacktrace : $stacktrace");
       throw error;
     }
   }
@@ -56,7 +76,7 @@ class UserRepository {
       );
       return UserResponse.fromJson(response.data);
     } catch (error, stacktrace) {
-      print("An error occured : $error stacktrace : $stacktrace");
+      print("An error occured when signUp : $error stacktrace : $stacktrace");
       throw error;
     }
   }
