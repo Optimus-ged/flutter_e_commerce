@@ -1,7 +1,7 @@
 import 'package:e_commerce/exports/all_exports.dart';
 
 class DetailPage extends StatefulWidget {
-  final List<PhotoArticles> data;
+  final Article data;
   DetailPage({this.data});
   @override
   _DetailPageState createState() => _DetailPageState();
@@ -41,7 +41,7 @@ class _DetailPageState extends State<DetailPage> {
               color: AppTheme.whiteColor,
               child: Stack(
                 children: [
-                  _buildPageView(screen, data: widget.data),
+                  _buildPageView(screen, data: widget.data.photoArticles),
                   PageviewIndicator(curentIndex),
                   BackwardButton(color: AppTheme.blueColor),
                 ],
@@ -66,7 +66,7 @@ class _DetailPageState extends State<DetailPage> {
                   Padding(
                     padding: EdgeInsets.only(left: 20, bottom: 10),
                     child: Text(
-                      "Robe Coat",
+                      "${widget.data.designation}",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.white54,
@@ -123,7 +123,7 @@ class _DetailPageState extends State<DetailPage> {
                     padding: EdgeInsets.only(left: 20, right: 20),
                     height: screen.height * .33,
                     child: Text(
-                      "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis, reiciendis saepe ad perspiciatis cum iste illum molestiae minima voluptatem eos sint cupiditate eligendi accusamus perferendis velit eaque et! Provident, aut Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis, reiciendis saepe ad perspiciatis cum iste illum molestiae minima voluptatem eos sint cupiditate eligendi accusamus perferendis velit eaque et! Provident, aut",
+                      "${widget.data.aPropos}",
                       style: TextStyle(
                         color: Colors.white54,
                         fontSize: 15,

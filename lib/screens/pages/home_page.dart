@@ -64,8 +64,7 @@ class _HomePageState extends State<HomePage> {
                               context,
                               MaterialPageRoute(
                                 builder: (builder) => DetailPage(
-                                  data: snapshot
-                                      .data.response[index].photoArticles,
+                                  data: snapshot.data.response[index],
                                 ),
                               ),
                             ),
