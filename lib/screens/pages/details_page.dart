@@ -88,7 +88,7 @@ class _DetailPageState extends State<DetailPage> {
                             isCliked: choice1,
                             onTap: () {
                               setState(() {
-                                choice1 = !choice1;
+                                choice1 = true;
                                 choice2 = false;
                                 choice3 = false;
                               });
@@ -99,7 +99,7 @@ class _DetailPageState extends State<DetailPage> {
                             isCliked: choice2,
                             onTap: () {
                               setState(() {
-                                choice2 = !choice2;
+                                choice2 = true;
                                 choice1 = false;
                                 choice3 = false;
                               });
@@ -110,7 +110,7 @@ class _DetailPageState extends State<DetailPage> {
                             isCliked: choice3,
                             onTap: () {
                               setState(() {
-                                choice3 = !choice3;
+                                choice3 = true;
                                 choice1 = false;
                                 choice2 = false;
                               });
@@ -123,17 +123,36 @@ class _DetailPageState extends State<DetailPage> {
                   SizedBox(height: 5),
                   Container(
                     padding: EdgeInsets.only(left: 20, right: 20),
-                    height: screen.height * .33,
-                    child: Text(
-                      "${widget.data.aPropos}",
-                      style: TextStyle(
-                        color: Colors.white54,
-                        fontSize: 15,
-                        height: 1.3,
+                    height: screen.height * .27,
+                    // color: Colors.black,
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          Text(
+                            "${widget.data.aPropos}",
+                            style: TextStyle(
+                              color: Colors.white54,
+                              fontSize: 15,
+                              height: 1.5,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
                   Spacer(),
+                  Center(
+                    child: Text(
+                      "Prix : ${widget.data.pu}\$",
+                      style: TextStyle(
+                        color: Colors.white54,
+                        fontSize: 17,
+                        height: 1.5,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 10),
                   Center(
                     child: ClickAnimation(
                       onTap: () {},

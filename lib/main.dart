@@ -1,4 +1,5 @@
 import 'package:e_commerce/exports/all_exports.dart';
+import 'package:e_commerce/routes/routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
         fontFamily: AppTheme.fontName,
         platform: TargetPlatform.iOS,
       ),
-      routes: Routes.routes,
+      onGenerateRoute: Routes.materialRoutes,
       home: LoginPage(),
     );
   }

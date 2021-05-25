@@ -43,4 +43,5 @@ export 'package:e_commerce/bloc/user_bloc/signup_bloc.dart';
 // All utils and constants
 export 'package:e_commerce/utils/app_theme.dart';
 export 'package:e_commerce/utils/for_the_view.dart';
-export 'package:e_commerce/constants/all_routes.dart';
+export 'package:e_commerce/routes/routes.dart';
+export 'package:e_commerce/routes/routes_constants.dart';

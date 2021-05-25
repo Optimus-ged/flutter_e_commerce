@@ -25,7 +25,7 @@ class BuildItemsList extends StatelessWidget {
         itemBuilder: (context, index) {
           return ClickAnimation(
             onTap: () => Navigator.of(context).pushNamed(
-              Routes.details,
+              Details,
               arguments: {"title": "$index"},
             ),
             child: Container(

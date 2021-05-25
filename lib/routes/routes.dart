@@ -1,31 +1,25 @@
 import 'package:e_commerce/exports/all_exports.dart';
+import 'package:e_commerce/routes/routes_constants.dart';
 
 abstract class Routes {
-  static const String intro = '/';
-  static const String login = '/login_page';
-  static const String home = '/home_page';
-  static const String signup = '/sign_up_page';
-  static const String search = '/search_page';
-  static const String details = '/details_page';
-
   static MaterialPageRoute materialRoutes(RouteSettings settings) {
     switch (settings.name) {
-      case intro:
+      case Intro:
         return MaterialPageRoute(builder: (context) => IntroPage());
         break;
-      case login:
+      case Login:
         return MaterialPageRoute(builder: (context) => LoginPage());
         break;
-      case home:
+      case Home:
         return MaterialPageRoute(builder: (context) => HomePage());
         break;
-      case signup:
+      case Signup:
         return MaterialPageRoute(builder: (context) => SignupPage());
         break;
-      case search:
+      case Search:
         return MaterialPageRoute(builder: (context) => SearchPage());
         break;
-      case details:
+      case Details:
         return MaterialPageRoute(builder: (context) => DetailPage());
         break;
       default:

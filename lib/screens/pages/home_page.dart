@@ -1,5 +1,6 @@
 import 'package:e_commerce/bloc/user_bloc/article_bloc.dart';
 import 'package:e_commerce/exports/all_exports.dart';
+import 'package:e_commerce/routes/routes_constants.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -112,7 +113,7 @@ class _HomePageState extends State<HomePage> {
                   icon: Icons.search,
                   context: context,
                   onTap: () => Navigator.of(context).pushNamed(
-                    Routes.search,
+                    Search,
                     arguments: {"hint": "Sa marche"},
                   ),
                 ),
