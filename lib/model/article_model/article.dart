@@ -1,7 +1,7 @@
 class Article {
   int id;
   String designation;
-  double pu;
+  dynamic pu;
   String aPropos;
   List<PhotoArticles> photoArticles;
 
@@ -16,7 +16,7 @@ class Article {
     if (json['photo_articles'] != null) {
       photoArticles = <PhotoArticles>[];
       json['photo_articles'].forEach((v) {
-        photoArticles.add(new PhotoArticles.fromJson(v));
+        photoArticles.add(PhotoArticles.fromJson(v));
       });
     }
   }
