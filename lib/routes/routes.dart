@@ -20,7 +20,11 @@ abstract class Routes {
         return MaterialPageRoute(builder: (context) => SearchPage());
         break;
       case Details:
-        return MaterialPageRoute(builder: (context) => DetailPage());
+        return MaterialPageRoute(
+          builder: (context) => DetailPage(
+            data: settings.arguments,
+          ),
+        );
         break;
       default:
         return MaterialPageRoute(builder: (context) => LoginPage());

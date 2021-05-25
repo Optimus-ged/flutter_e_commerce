@@ -54,22 +54,18 @@ class _HomePageState extends State<HomePage> {
                         itemCount: snapshot.data.length,
                         itemBuilder: (context, index) {
                           return ClickAnimation(
-                            // onTap: () => Navigator.of(context).pushNamed(
-                            //   Routes.details,
-                            //   arguments: {
-                            //     snapshot.data.response[index]
-                            //     // "data":
-                            //     //     "${snapshot.data.response[index].photoArticles}"
-                            //   },
-                            // ),
-                            onTap: () => Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (builder) => DetailPage(
-                                  data: snapshot.data.articles[index],
-                                ),
-                              ),
+                            onTap: () => Navigator.of(context).pushNamed(
+                              Details,
+                              arguments: snapshot.data.articles[index],
                             ),
+                            // onTap: () => Navigator.push(
+                            //   context,
+                            //   MaterialPageRoute(
+                            //     builder: (builder) => DetailPage(
+                            //       data: snapshot.data.articles[index],
+                            //     ),
+                            //   ),
+                            // ),
                             child: Container(
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
