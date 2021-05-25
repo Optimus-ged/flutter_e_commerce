@@ -4,20 +4,19 @@ class ListeArticles {
   int status;
   String message;
   int length;
-  List<Article> response;
+  List<Article> articles;
 
-  ListeArticles({this.status, this.message, this.length, this.response});
+  ListeArticles({this.status, this.message, this.length, this.articles});
 
   ListeArticles.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     message = json['message'];
     length = json['length'];
     if (json['response'] != null) {
-      response = <Article>[];
+      articles = <Article>[];
       json['response'].forEach((v) {
-        response.add(new Article.fromJson(v));
+        articles.add(new Article.fromJson(v));
       });
     }
   }
 }
-
