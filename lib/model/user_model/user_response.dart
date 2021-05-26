@@ -21,9 +21,8 @@ class UserResponse {
     data['status'] = this.status;
     data['count'] = this.count;
     if (this.users != null) {
-      data['users'] = this.users.map((v) => v.toString()).toList();
+      data['users'] = this.users.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
-
