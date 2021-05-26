@@ -58,14 +58,6 @@ class _HomePageState extends State<HomePage> {
                               Details,
                               arguments: snapshot.data.articles[index],
                             ),
-                            // onTap: () => Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (builder) => DetailPage(
-                            //       data: snapshot.data.articles[index],
-                            //     ),
-                            //   ),
-                            // ),
                             child: Container(
                               alignment: Alignment.center,
                               decoration: BoxDecoration(

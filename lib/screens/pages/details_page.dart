@@ -29,8 +29,6 @@ class _DetailPageState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
     var screen = MediaQuery.of(context).size;
-    // final Map args = ModalRoute.of(context).settings.arguments;
-    // final Article data2 = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       body: Stack(
         children: [
@@ -39,8 +37,6 @@ class _DetailPageState extends State<DetailPage> {
             child: Container(
               height: screen.height * .45,
               width: screen.width,
-              // color: AppTheme.whiteColor,
-
               child: Stack(
                 children: [
                   _buildPageView(screen, data: widget.data.photoArticles),
