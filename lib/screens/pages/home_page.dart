@@ -74,7 +74,8 @@ class _HomePageState extends State<HomePage> {
                                     width: 0.2, color: Colors.black12),
                               ),
                               child: Image.network(
-                                  "${Endpoint.uplaod}${snapshot.data.articles[index].photoArticles[0].photoArticle}"),
+                                "${Endpoint.uplaod}${snapshot.data.articles[index].photoArticles[0].photoArticle}",
+                              ),
                             ),
                           );
                         },

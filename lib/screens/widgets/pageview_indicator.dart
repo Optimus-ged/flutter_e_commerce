@@ -17,8 +17,8 @@ class PageviewIndicator extends StatelessWidget {
             3,
             (index) => AnimatedContainer(
               duration: Duration(milliseconds: 300),
-              height: (curentIndex == index) ? 10 : 5,
-              width: (curentIndex == index) ? 10 : 5,
+              height: (curentIndex == index) ? 10 : 8,
+              width: (curentIndex == index) ? 10 : 8,
               margin: EdgeInsets.symmetric(horizontal: 5),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(5.0),

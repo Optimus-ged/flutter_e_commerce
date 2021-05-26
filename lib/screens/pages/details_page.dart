@@ -39,7 +39,8 @@ class _DetailPageState extends State<DetailPage> {
             child: Container(
               height: screen.height * .45,
               width: screen.width,
-              color: AppTheme.whiteColor,
+              // color: AppTheme.whiteColor,
+
               child: Stack(
                 children: [
                   _buildPageView(screen, data: widget.data.photoArticles),
@@ -68,7 +69,6 @@ class _DetailPageState extends State<DetailPage> {
                     padding: EdgeInsets.only(left: 20, bottom: 10),
                     child: Text(
                       "${widget.data.designation}",
-                      // "${data2.id}",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.white54,
@@ -77,7 +77,7 @@ class _DetailPageState extends State<DetailPage> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(left: 15),
+                    padding: EdgeInsets.only(left: 16),
                     child: SizedBox(
                       width: 72,
                       child: Row(
@@ -124,7 +124,6 @@ class _DetailPageState extends State<DetailPage> {
                   Container(
                     padding: EdgeInsets.only(left: 20, right: 20),
                     height: screen.height * .27,
-                    // color: Colors.black,
                     child: SingleChildScrollView(
                       child: Column(
                         children: [
