@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
     var screen = MediaQuery.of(context).size;
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: AppTheme.whiteColor,
-      systemNavigationBarColor: Colors.white.withOpacity(0.96),
+      systemNavigationBarColor: Colors.white.withOpacity(0.93),
       statusBarIconBrightness: Brightness.dark,
     ));
     return SafeArea(
@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> {
                           crossAxisSpacing: 10,
                           mainAxisSpacing: 20,
                           crossAxisCount: 2,
-                          childAspectRatio: 0.64,
+                          childAspectRatio: 0.60,
                         ),
                         primary: false,
                         shrinkWrap: true,
@@ -80,7 +80,7 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                   child: Image.network(
                                     "${Endpoint.uplaod}${snapshot.data.articles[index].photoArticles[0].photoArticle}",
-                                    height: screen.height * .30,
+                                    height: screen.height * .32,
                                     alignment: Alignment.bottomCenter,
                                   ),
                                 ),
