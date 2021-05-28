@@ -58,16 +58,47 @@ class _HomePageState extends State<HomePage> {
                               Details,
                               arguments: snapshot.data.articles[index],
                             ),
-                            child: Container(
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border.all(
-                                    width: 0.2, color: Colors.black12),
-                              ),
-                              child: Image.network(
-                                "${Endpoint.uplaod}${snapshot.data.articles[index].photoArticles[0].photoArticle}",
-                              ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topCenter,
+                                      end: Alignment.bottomCenter,
+                                      colors: [
+                                        AppTheme.radiantTopRight,
+                                        AppTheme.radiantTop,
+                                        AppTheme.radiantBotom
+                                      ],
+                                    ),
+                                    borderRadius: BorderRadius.circular(10),
+                                    border: Border.all(
+                                        width: 0.2, color: Colors.black12),
+                                  ),
+                                  child: Image.network(
+                                    "${Endpoint.uplaod}${snapshot.data.articles[index].photoArticles[0].photoArticle}",
+                                    fit: BoxFit.fitHeight,
+                                  ),
+                                ),
+                                SizedBox(height: 4),
+                                Text(
+                                  "${snapshot.data.articles[index].designation}",
+                                  style: TextStyle(
+                                      color: AppTheme.designationColor,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                SizedBox(height: 2),
+                                Text(
+                                  "${snapshot.data.articles[index].pu}\$",
+                                  style: TextStyle(
+                                      color: AppTheme.puColor,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w500),
+                                )
+                              ],
                             ),
                           );
                         },
