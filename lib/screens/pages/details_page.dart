@@ -237,17 +237,21 @@ class _DetailPageState extends State<DetailPage> {
 
   _buildPageView(Size screen, {List<PhotoArticles> data}) {
     return Positioned(
-      top: 0,
+      bottom: 0,
       child: Container(
         height: screen.height * .45,
         width: screen.width,
+        alignment: Alignment.bottomCenter,
         color: AppTheme.whiteColor,
         child: PageView.builder(
           controller: pageViewController,
           itemBuilder: (context, index) => Container(
-            alignment: Alignment.center,
-            child:
-                Image.network("${Endpoint.uplaod}${data[index].photoArticle}"),
+            alignment: Alignment.bottomCenter,
+            child: Image.network(
+              "${Endpoint.uplaod}${data[index].photoArticle}",
+              height: screen.height * .40,
+              alignment: Alignment.bottomCenter,
+            ),
           ),
           itemCount: 3,
           onPageChanged: (value) {

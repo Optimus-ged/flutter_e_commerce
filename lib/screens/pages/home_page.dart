@@ -19,6 +19,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    var screen = MediaQuery.of(context).size;
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: AppTheme.whiteColor,
       systemNavigationBarColor: Colors.white.withOpacity(0.96),
@@ -45,7 +46,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisSpacing: 10,
-                          mainAxisSpacing: 10,
+                          mainAxisSpacing: 20,
                           crossAxisCount: 2,
                           childAspectRatio: 0.64,
                         ),
@@ -53,57 +54,54 @@ class _HomePageState extends State<HomePage> {
                         shrinkWrap: true,
                         itemCount: snapshot.data.length,
                         itemBuilder: (context, index) {
-                          return Container(
-                            // color: Colors.amber,
-                            child: ClickAnimation(
-                              onTap: () => Navigator.of(context).pushNamed(
-                                Details,
-                                arguments: snapshot.data.articles[index],
-                              ),
-                              child: Column(
-                                crossAxisAlignment: index == 3 || index == 1
-                                    ? CrossAxisAlignment.end
-                                    : CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    alignment: Alignment.center,
-                                    decoration: BoxDecoration(
-                                      gradient: LinearGradient(
-                                        begin: Alignment.topCenter,
-                                        end: Alignment.bottomCenter,
-                                        colors: [
-                                          AppTheme.radiantTopRight,
-                                          AppTheme.radiantTop,
-                                          AppTheme.radiantBotom
-                                        ],
-                                      ),
-                                      borderRadius: BorderRadius.circular(10),
+                          return ClickAnimation(
+                            onTap: () => Navigator.of(context).pushNamed(
+                              Details,
+                              arguments: snapshot.data.articles[index],
+                            ),
+                            child: Column(
+                              crossAxisAlignment: index == 3 || index == 1
+                                  ? CrossAxisAlignment.end
+                                  : CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                    gradient: LinearGradient(
+                                      begin: Alignment.topCenter,
+                                      end: Alignment.bottomCenter,
+                                      colors: [
+                                        AppTheme.radiantTopRight,
+                                        AppTheme.radiantTop,
+                                        AppTheme.radiantBotom
+                                      ],
                                     ),
-                                    child: Image.network(
-                                      "${Endpoint.uplaod}${snapshot.data.articles[index].photoArticles[0].photoArticle}",
-                                      height: 215,
-                                      alignment: Alignment.bottomCenter,
-                                    ),
+                                    borderRadius: BorderRadius.circular(10),
                                   ),
-                                  SizedBox(height: 4),
-                                  Text(
-                                    "${snapshot.data.articles[index].designation}",
-                                    style: TextStyle(
-                                        color: AppTheme.designationColor,
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w500),
+                                  child: Image.network(
+                                    "${Endpoint.uplaod}${snapshot.data.articles[index].photoArticles[0].photoArticle}",
+                                    height: screen.height * .30,
+                                    alignment: Alignment.bottomCenter,
                                   ),
-                                  SizedBox(height: 2),
-                                  Text(
-                                    "${snapshot.data.articles[index].pu}\$",
-                                    style: TextStyle(
-                                      color: AppTheme.puColor,
+                                ),
+                                SizedBox(height: 4),
+                                Text(
+                                  "${snapshot.data.articles[index].designation}",
+                                  style: TextStyle(
+                                      color: AppTheme.designationColor,
                                       fontSize: 16,
-                                      fontWeight: FontWeight.w500,
-                                    ),
-                                  )
-                                ],
-                              ),
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                SizedBox(height: 2),
+                                Text(
+                                  "${snapshot.data.articles[index].pu}\$",
+                                  style: TextStyle(
+                                    color: AppTheme.puColor,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                )
+                              ],
                             ),
                           );
                         },
