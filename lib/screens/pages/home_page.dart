@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: AppTheme.whiteColor,
-      systemNavigationBarColor: AppTheme.whiteColor,
+      systemNavigationBarColor: Colors.white.withOpacity(0.96),
       statusBarIconBrightness: Brightness.dark,
     ));
     return SafeArea(
@@ -47,58 +47,63 @@ class _HomePageState extends State<HomePage> {
                           crossAxisSpacing: 10,
                           mainAxisSpacing: 10,
                           crossAxisCount: 2,
-                          childAspectRatio: 0.7,
+                          childAspectRatio: 0.64,
                         ),
                         primary: false,
                         shrinkWrap: true,
                         itemCount: snapshot.data.length,
                         itemBuilder: (context, index) {
-                          return ClickAnimation(
-                            onTap: () => Navigator.of(context).pushNamed(
-                              Details,
-                              arguments: snapshot.data.articles[index],
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Container(
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                    gradient: LinearGradient(
-                                      begin: Alignment.topCenter,
-                                      end: Alignment.bottomCenter,
-                                      colors: [
-                                        AppTheme.radiantTopRight,
-                                        AppTheme.radiantTop,
-                                        AppTheme.radiantBotom
-                                      ],
+                          return Container(
+                            // color: Colors.amber,
+                            child: ClickAnimation(
+                              onTap: () => Navigator.of(context).pushNamed(
+                                Details,
+                                arguments: snapshot.data.articles[index],
+                              ),
+                              child: Column(
+                                crossAxisAlignment: index == 3 || index == 1
+                                    ? CrossAxisAlignment.end
+                                    : CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                      gradient: LinearGradient(
+                                        begin: Alignment.topCenter,
+                                        end: Alignment.bottomCenter,
+                                        colors: [
+                                          AppTheme.radiantTopRight,
+                                          AppTheme.radiantTop,
+                                          AppTheme.radiantBotom
+                                        ],
+                                      ),
+                                      borderRadius: BorderRadius.circular(10),
                                     ),
-                                    borderRadius: BorderRadius.circular(10),
-                                    border: Border.all(
-                                        width: 0.2, color: Colors.black12),
+                                    child: Image.network(
+                                      "${Endpoint.uplaod}${snapshot.data.articles[index].photoArticles[0].photoArticle}",
+                                      height: 215,
+                                      alignment: Alignment.bottomCenter,
+                                    ),
                                   ),
-                                  child: Image.network(
-                                    "${Endpoint.uplaod}${snapshot.data.articles[index].photoArticles[0].photoArticle}",
-                                    fit: BoxFit.fitHeight,
+                                  SizedBox(height: 4),
+                                  Text(
+                                    "${snapshot.data.articles[index].designation}",
+                                    style: TextStyle(
+                                        color: AppTheme.designationColor,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500),
                                   ),
-                                ),
-                                SizedBox(height: 4),
-                                Text(
-                                  "${snapshot.data.articles[index].designation}",
-                                  style: TextStyle(
-                                      color: AppTheme.designationColor,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                SizedBox(height: 2),
-                                Text(
-                                  "${snapshot.data.articles[index].pu}\$",
-                                  style: TextStyle(
+                                  SizedBox(height: 2),
+                                  Text(
+                                    "${snapshot.data.articles[index].pu}\$",
+                                    style: TextStyle(
                                       color: AppTheme.puColor,
                                       fontSize: 16,
-                                      fontWeight: FontWeight.w500),
-                                )
-                              ],
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
                           );
                         },
