@@ -60,7 +60,7 @@ class _HomePageState extends State<HomePage> {
                               arguments: snapshot.data.articles[index],
                             ),
                             child: Column(
-                              crossAxisAlignment: index == 3 || index == 1
+                              crossAxisAlignment: (index % 2 == 0)
                                   ? CrossAxisAlignment.end
                                   : CrossAxisAlignment.start,
                               children: [

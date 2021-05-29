@@ -25,3 +25,29 @@ class Users {
     return data;
   }
 }
+
+class OneUser {
+  int status;
+  String message;
+  Users users;
+
+  OneUser({this.status, this.message, this.users});
+
+  OneUser.fromJson(Map<String, dynamic> json) {
+    status = json['status'];
+    message = json['message'];
+    if (json['users'] != null) {
+      users = Users.fromJson(json['users']);
+    }
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['status'] = this.status;
+    data['message'] = this.message;
+    if (this.users != null) {
+      data['users'] = this.users.toJson();
+    }
+    return data;
+  }
+}
