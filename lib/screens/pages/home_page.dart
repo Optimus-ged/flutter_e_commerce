@@ -78,10 +78,13 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                     borderRadius: BorderRadius.circular(10),
                                   ),
-                                  child: Image.network(
-                                    "${Endpoint.uplaod}${snapshot.data.articles[index].photoArticles[0].photoArticle}",
-                                    height: screen.height * .32,
-                                    alignment: Alignment.bottomCenter,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                    child: Image.network(
+                                      "${Endpoint.uplaod}${snapshot.data.articles[index].photoArticles[0].photoArticle}",
+                                      height: screen.height * .32,
+                                      alignment: Alignment.bottomCenter,
+                                    ),
                                   ),
                                 ),
                                 SizedBox(height: 4),
