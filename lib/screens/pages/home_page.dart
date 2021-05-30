@@ -1,6 +1,7 @@
 import 'package:e_commerce/bloc/user_bloc/article_bloc.dart';
 import 'package:e_commerce/exports/all_exports.dart';
 import 'package:flutter/rendering.dart';
+import 'package:shimmer/shimmer.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -22,10 +23,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     var screen = MediaQuery.of(context).size;
-    // print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAA" +
-    //     (_scrollController.position.userScrollDirection ==
-    //             ScrollDirection.reverse)
-    //         .toString());
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: AppTheme.whiteColor,
       systemNavigationBarColor: Colors.white.withOpacity(0.93),
@@ -121,8 +118,26 @@ class _HomePageState extends State<HomePage> {
                 ],
               );
             }
-            return Center(
-              child: CircularProgressIndicator(strokeWidth: 1),
+            return GridView.builder(
+              padding: EdgeInsets.only(
+                bottom: 70,
+                top: 30,
+                left: 10,
+                right: 10,
+              ),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 20,
+                crossAxisCount: 2,
+                childAspectRatio: 0.60,
+              ),
+              // primary: false,
+              // shrinkWrap: true,
+              controller: _scrollController,
+              itemCount: 5,
+              itemBuilder: (context, index) {
+                return _buildLoadingWidget(index: index, screen: screen);
+              },
             );
           },
         ),
@@ -154,7 +169,6 @@ class _HomePageState extends State<HomePage> {
         height: 55,
         decoration: BoxDecoration(
           color: Colors.white,
-          // color: AppTheme.radiantBotom,
           borderRadius: BorderRadius.circular(35),
           boxShadow: [
             // Top Shadow
@@ -205,6 +219,49 @@ class _HomePageState extends State<HomePage> {
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
           child: Icon(icon, color: AppTheme.lessWhiteColor),
         ),
+      ),
+    );
+  }
+
+  Widget _buildLoadingWidget({int index, Size screen}) {
+    return Shimmer.fromColors(
+      baseColor: AppTheme.radiantBotom,
+      highlightColor: AppTheme.radiantTop,
+      period: Duration(seconds: 3),
+      child: Column(
+        crossAxisAlignment: (index % 2 == 0)
+            ? CrossAxisAlignment.start
+            : CrossAxisAlignment.end,
+        children: [
+          Container(
+            height: screen.height * .32,
+            width: 200,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  AppTheme.radiantTopRight,
+                  AppTheme.radiantTop,
+                  AppTheme.radiantBotom
+                ],
+              ),
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+          SizedBox(height: 4),
+          Container(
+            color: AppTheme.greyColor,
+            height: 12,
+            width: screen.width * .35,
+          ),
+          SizedBox(height: 2),
+          Container(
+            color: AppTheme.greyColor,
+            height: 15,
+            width: screen.width * .10,
+          ),
+        ],
       ),
     );
   }

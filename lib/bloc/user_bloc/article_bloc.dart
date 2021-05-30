@@ -7,7 +7,8 @@ class ListeArticleBloc {
 
   getArticles(String token) async {
     ListeArticles _response = await _repository.getArticles(token);
-    _subject.sink.add(_response);
+    Future.delayed(Duration(seconds: 15))
+        .then((value) => _subject.sink.add(_response));
   }
 
   dispose() {
