@@ -1,7 +1,4 @@
-import 'package:e_commerce/bloc/user_bloc/article_bloc.dart';
 import 'package:e_commerce/exports/all_exports.dart';
-import 'package:flutter/rendering.dart';
-import 'package:shimmer/shimmer.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -39,80 +36,78 @@ class _HomePageState extends State<HomePage> {
               return CustomScrollView(
                 slivers: [
                   SliverToBoxAdapter(
-                    child: Container(
-                      child: GridView.builder(
-                        padding: EdgeInsets.only(
-                          bottom: 70,
-                          top: 30,
-                          left: 10,
-                          right: 10,
-                        ),
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisSpacing: 10,
-                          mainAxisSpacing: 20,
-                          crossAxisCount: 2,
-                          childAspectRatio: 0.60,
-                        ),
-                        primary: false,
-                        shrinkWrap: true,
-                        controller: _scrollController,
-                        itemCount: snapshot.data.length,
-                        itemBuilder: (context, index) {
-                          return ClickAnimation(
-                            onTap: () => Navigator.of(context).pushNamed(
-                              Details,
-                              arguments: snapshot.data.articles[index],
-                            ),
-                            child: Column(
-                              crossAxisAlignment: (index % 2 == 0)
-                                  ? CrossAxisAlignment.start
-                                  : CrossAxisAlignment.end,
-                              children: [
-                                Container(
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                    gradient: LinearGradient(
-                                      begin: Alignment.topCenter,
-                                      end: Alignment.bottomCenter,
-                                      colors: [
-                                        AppTheme.radiantTopRight,
-                                        AppTheme.radiantTop,
-                                        AppTheme.radiantBotom
-                                      ],
-                                    ),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(10),
-                                    child: Image.network(
-                                      "${Endpoint.uplaod}${snapshot.data.articles[index].photoArticles[0].photoArticle}",
-                                      height: screen.height * .32,
-                                      alignment: Alignment.bottomCenter,
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(height: 4),
-                                Text(
-                                  "${snapshot.data.articles[index].designation}",
-                                  style: TextStyle(
-                                      color: AppTheme.designationColor,
-                                      fontSize: 13,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                SizedBox(height: 2),
-                                Text(
-                                  "${snapshot.data.articles[index].pu}\$",
-                                  style: TextStyle(
-                                    color: AppTheme.puColor,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                )
-                              ],
-                            ),
-                          );
-                        },
+                    child: GridView.builder(
+                      padding: EdgeInsets.only(
+                        bottom: 70,
+                        top: 30,
+                        left: 10,
+                        right: 10,
                       ),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisSpacing: 10,
+                        mainAxisSpacing: 20,
+                        crossAxisCount: 2,
+                        childAspectRatio: 0.60,
+                      ),
+                      primary: false,
+                      shrinkWrap: true,
+                      controller: _scrollController,
+                      itemCount: snapshot.data.length,
+                      itemBuilder: (context, index) {
+                        return ClickAnimation(
+                          onTap: () => Navigator.of(context).pushNamed(
+                            Details,
+                            arguments: snapshot.data.articles[index],
+                          ),
+                          child: Column(
+                            crossAxisAlignment: (index % 2 == 0)
+                                ? CrossAxisAlignment.start
+                                : CrossAxisAlignment.end,
+                            children: [
+                              Container(
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                    colors: [
+                                      AppTheme.radiantTopRight,
+                                      AppTheme.radiantTop,
+                                      AppTheme.radiantBotom
+                                    ],
+                                  ),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Image.network(
+                                    "${Endpoint.uplaod}${snapshot.data.articles[index].photoArticles[0].photoArticle}",
+                                    height: screen.height * .32,
+                                    alignment: Alignment.bottomCenter,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 4),
+                              Text(
+                                "${snapshot.data.articles[index].designation}",
+                                style: TextStyle(
+                                    color: AppTheme.designationColor,
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                              SizedBox(height: 2),
+                              Text(
+                                "${snapshot.data.articles[index].pu}\$",
+                                style: TextStyle(
+                                  color: AppTheme.puColor,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              )
+                            ],
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ],
@@ -131,8 +126,6 @@ class _HomePageState extends State<HomePage> {
                 crossAxisCount: 2,
                 childAspectRatio: 0.60,
               ),
-              // primary: false,
-              // shrinkWrap: true,
               controller: _scrollController,
               itemCount: 5,
               itemBuilder: (context, index) {

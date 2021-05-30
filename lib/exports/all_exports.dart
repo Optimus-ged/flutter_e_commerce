@@ -8,6 +8,7 @@ export 'dart:async';
 // All flutter services
 export 'package:flutter/services.dart';
 export 'dart:io';
+export 'package:flutter/rendering.dart';
 
 // All pages
 export 'package:e_commerce/screens/pages/login_page.dart';
@@ -16,6 +17,7 @@ export 'package:e_commerce/screens/pages/home_page.dart';
 export 'package:e_commerce/screens/pages/search_page.dart';
 export 'package:e_commerce/screens/pages/details_page.dart';
 export 'package:e_commerce/screens/pages/intro_page.dart';
+export 'package:shimmer/shimmer.dart';
 
 // All widgets
 export 'package:e_commerce/screens/widgets/click_animation.dart';
@@ -39,6 +41,7 @@ export 'package:e_commerce/data/repository/end_points/end_points.dart';
 // BLOC
 export 'package:e_commerce/bloc/user_bloc/user_list_bloc.dart';
 export 'package:e_commerce/bloc/user_bloc/signup_bloc.dart';
+export 'package:e_commerce/bloc/user_bloc/article_bloc.dart';
 
 // All utils and constants
 export 'package:e_commerce/utils/app_theme.dart';
