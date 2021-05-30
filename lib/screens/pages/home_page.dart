@@ -1,5 +1,6 @@
 import 'package:e_commerce/bloc/user_bloc/article_bloc.dart';
 import 'package:e_commerce/exports/all_exports.dart';
+import 'package:flutter/rendering.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -8,10 +9,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String token;
+  ScrollController _scrollController;
   @override
   void initState() {
     token =
         "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub20iOiJPcHRpbXVzIHlhbGEiLCJpZCI6NCwiaWF0IjoxNjIxNzA1NDY2LCJleHAiOjE2MjE5NjQ2NjZ9.lzJ5ogGXEkLbkZVZIyUqfSwZbuePqJLy0a-JMq8Xk2k";
+    _scrollController = ScrollController();
     listArticleBloc..getArticles(token);
     super.initState();
   }
@@ -49,8 +52,9 @@ class _HomePageState extends State<HomePage> {
                           crossAxisCount: 2,
                           childAspectRatio: 0.60,
                         ),
-                        primary: false,
-                        shrinkWrap: true,
+                        // primary: false,
+                        // shrinkWrap: true,
+                        controller: _scrollController,
                         itemCount: snapshot.data.length,
                         itemBuilder: (context, index) {
                           return ClickAnimation(
@@ -91,7 +95,7 @@ class _HomePageState extends State<HomePage> {
                                   "${snapshot.data.articles[index].designation}",
                                   style: TextStyle(
                                       color: AppTheme.designationColor,
-                                      fontSize: 16,
+                                      fontSize: 13,
                                       fontWeight: FontWeight.w500),
                                 ),
                                 SizedBox(height: 2),
@@ -118,39 +122,57 @@ class _HomePageState extends State<HomePage> {
             );
           },
         ),
-        floatingActionButton: Material(
-          elevation: 20,
-          color: AppTheme.whiteColor,
-          borderRadius: BorderRadius.vertical(
-            top: Radius.circular(35),
-          ),
-          child: Container(
-            height: 60,
-            color: Colors.transparent,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                _buildNavigationItem(
-                  icon: Icons.shopping_basket_outlined,
-                  context: context,
-                ),
-                _buildNavigationItem(
-                  icon: Icons.search,
-                  context: context,
-                  onTap: () => Navigator.of(context).pushNamed(
-                    Search,
-                    arguments: {"hint": "Sa marche"},
-                  ),
-                ),
-                _buildNavigationItem(
-                  icon: Icons.exit_to_app,
-                  context: context,
-                ),
-              ],
-            ),
-          ),
+        floatingActionButton: AnimatedBuilder(
+          animation: _scrollController,
+          builder: (context, child) {
+            return AnimatedContainer(
+              height: _scrollController.position.userScrollDirection ==
+                      ScrollDirection.reverse
+                  ? 0
+                  : 100,
+              child: child,
+              duration: Duration(microseconds: 300),
+            );
+          },
+          child: _buildNavigation(),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      ),
+    );
+  }
+
+  _buildNavigation() {
+    return Material(
+      elevation: 20,
+      color: AppTheme.whiteColor,
+      borderRadius: BorderRadius.vertical(
+        top: Radius.circular(35),
+      ),
+      child: Container(
+        height: 60,
+        color: Colors.transparent,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            _buildNavigationItem(
+              icon: Icons.shopping_basket_outlined,
+              context: context,
+            ),
+            _buildNavigationItem(
+              icon: Icons.search,
+              context: context,
+              // onTap: () => Navigator.of(context).pushNamed(
+              //   Search,
+              //   arguments: {"hint": "Sa marche"},
+              // ),
+              onTap: () {},
+            ),
+            _buildNavigationItem(
+              icon: Icons.exit_to_app,
+              context: context,
+            ),
+          ],
+        ),
       ),
     );
   }
