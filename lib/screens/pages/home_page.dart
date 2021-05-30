@@ -22,6 +22,10 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     var screen = MediaQuery.of(context).size;
+    // print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAA" +
+    //     (_scrollController.position.userScrollDirection ==
+    //             ScrollDirection.reverse)
+    //         .toString());
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: AppTheme.whiteColor,
       systemNavigationBarColor: Colors.white.withOpacity(0.93),
@@ -52,8 +56,8 @@ class _HomePageState extends State<HomePage> {
                           crossAxisCount: 2,
                           childAspectRatio: 0.60,
                         ),
-                        // primary: false,
-                        // shrinkWrap: true,
+                        primary: false,
+                        shrinkWrap: true,
                         controller: _scrollController,
                         itemCount: snapshot.data.length,
                         itemBuilder: (context, index) {
@@ -122,35 +126,51 @@ class _HomePageState extends State<HomePage> {
             );
           },
         ),
-        floatingActionButton: AnimatedBuilder(
-          animation: _scrollController,
-          builder: (context, child) {
-            return AnimatedContainer(
-              height: _scrollController.position.userScrollDirection ==
-                      ScrollDirection.reverse
-                  ? 0
-                  : 100,
-              child: child,
-              duration: Duration(microseconds: 300),
-            );
-          },
-          child: _buildNavigation(),
-        ),
+
+        // floatingActionButton: AnimatedBuilder(
+        //   animation: _scrollController,
+        //   builder: (context, child) {
+        //     return AnimatedContainer(
+        //       height: _scrollController.position.userScrollDirection ==
+        //               ScrollDirection.reverse
+        //           ? 0
+        //           : 100,
+        //       child: child,
+        //       duration: Duration(milliseconds: 300),
+        //     );
+        //   },
+        //   child: _buildNavigation(),
+        // ),
+        floatingActionButton: _buildNavigation(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       ),
     );
   }
 
-  _buildNavigation() {
-    return Material(
-      elevation: 20,
-      color: AppTheme.whiteColor,
-      borderRadius: BorderRadius.vertical(
-        top: Radius.circular(35),
-      ),
+  Widget _buildNavigation() {
+    return Padding(
+      padding: EdgeInsets.only(bottom: 10, left: 10, right: 10),
       child: Container(
-        height: 60,
-        color: Colors.transparent,
+        height: 55,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          // color: AppTheme.radiantBotom,
+          borderRadius: BorderRadius.circular(35),
+          boxShadow: [
+            // Top Shadow
+            BoxShadow(
+              color: Colors.black.withOpacity(0.01),
+              blurRadius: 5,
+              offset: Offset(0, -5),
+            ),
+            // Botom shadoow
+            BoxShadow(
+              color: Colors.black12.withOpacity(0.05),
+              blurRadius: 5,
+              offset: Offset(0, 5),
+            ),
+          ],
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
@@ -161,11 +181,10 @@ class _HomePageState extends State<HomePage> {
             _buildNavigationItem(
               icon: Icons.search,
               context: context,
-              // onTap: () => Navigator.of(context).pushNamed(
-              //   Search,
-              //   arguments: {"hint": "Sa marche"},
-              // ),
-              onTap: () {},
+              onTap: () => Navigator.of(context).pushNamed(
+                Search,
+                arguments: {"hint": "Sa marche"},
+              ),
             ),
             _buildNavigationItem(
               icon: Icons.exit_to_app,
@@ -177,7 +196,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  _buildNavigationItem(
+  Widget _buildNavigationItem(
       {IconData icon, VoidCallback onTap, @required BuildContext context}) {
     return ClickAnimation(
       onTap: onTap,
