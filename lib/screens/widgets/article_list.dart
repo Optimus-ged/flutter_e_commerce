@@ -14,6 +14,7 @@ class BuildArticleList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
+      controller: scrollController,
       slivers: [
         SliverToBoxAdapter(
           child: GridView.builder(
@@ -31,7 +32,7 @@ class BuildArticleList extends StatelessWidget {
             ),
             primary: false,
             shrinkWrap: true,
-            controller: scrollController,
+            // controller: scrollController,
             /*
               If data variable is null we give 5 as the length of the list
               otherwise we take the real length of the wich comes from the
@@ -43,6 +44,7 @@ class BuildArticleList extends StatelessWidget {
                 data otherwise we retreive the shimmer list to specify
                 to the user that data are loading
               */
+              print("AAAAAAAAAAAAAAAAAA -- >> " + scrollController.toString());
               return data != null
                   ? ClickAnimation(
                       onTap: () => Navigator.of(context).pushNamed(
@@ -97,6 +99,9 @@ class BuildArticleList extends StatelessWidget {
                         ],
                       ),
                     )
+
+                  // when the application realise that snapshot data is null
+                  // it displays this shimmer loading animation
                   : Shimmer.fromColors(
                       baseColor: AppTheme.radiantBotom,
                       highlightColor: AppTheme.radiantTop,

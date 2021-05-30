@@ -8,12 +8,22 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String token;
+  // String test = "test";
   ScrollController _scrollController;
+
+  _scrollListner() {
+    if (_scrollController.offset >=
+            _scrollController.position.maxScrollExtent &&
+        !_scrollController.position.outOfRange) {}
+    print("SSSSSSSSS >> " + _scrollController.offset.toString());
+  }
+
   @override
   void initState() {
     token =
         "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub20iOiJPcHRpbXVzIHlhbGEiLCJpZCI6NCwiaWF0IjoxNjIxNzA1NDY2LCJleHAiOjE2MjE5NjQ2NjZ9.lzJ5ogGXEkLbkZVZIyUqfSwZbuePqJLy0a-JMq8Xk2k";
     _scrollController = ScrollController();
+    _scrollController.addListener(_scrollListner);
     listArticleBloc..getArticles(token);
     super.initState();
   }
@@ -21,6 +31,8 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     var screen = MediaQuery.of(context).size;
+    print(
+        "AAAAAAAAAAAAAAAAAA 33333333333 -- >> " + _scrollController.toString());
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: AppTheme.whiteColor,
       systemNavigationBarColor: Colors.white.withOpacity(0.93),
@@ -46,22 +58,22 @@ class _HomePageState extends State<HomePage> {
             );
           },
         ),
-
-        // floatingActionButton: AnimatedBuilder(
-        //   animation: _scrollController,
-        //   builder: (context, child) {
-        //     return AnimatedContainer(
-        //       height: _scrollController.position.userScrollDirection ==
-        //               ScrollDirection.reverse
-        //           ? 0
-        //           : 100,
-        //       child: child,
-        //       duration: Duration(milliseconds: 300),
-        //     );
-        //   },
-        //   child: _buildNavigation(),
-        // ),
-        floatingActionButton: _buildNavigation(),
+        floatingActionButton: AnimatedBuilder(
+          animation: _scrollController,
+          builder: (context, child) {
+            return AnimatedContainer(
+              height: _scrollController.position.userScrollDirection ==
+                      ScrollDirection.reverse
+                  ? 0
+                  : 65,
+              child: child,
+              duration: Duration(milliseconds: 300),
+              curve: Curves.ease,
+            );
+          },
+          child: _buildNavigation(),
+        ),
+        // floatingActionButton: _buildNavigation(),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       ),
     );
