@@ -1,6 +1,5 @@
 import 'package:e_commerce/bloc/user_bloc/article_bloc.dart';
 import 'package:e_commerce/exports/all_exports.dart';
-import 'package:e_commerce/routes/routes_constants.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -61,8 +60,8 @@ class _HomePageState extends State<HomePage> {
                             ),
                             child: Column(
                               crossAxisAlignment: (index % 2 == 0)
-                                  ? CrossAxisAlignment.end
-                                  : CrossAxisAlignment.start,
+                                  ? CrossAxisAlignment.start
+                                  : CrossAxisAlignment.end,
                               children: [
                                 Container(
                                   alignment: Alignment.center,
