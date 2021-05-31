@@ -43,7 +43,7 @@ export 'package:e_commerce/data/repository/end_points/end_points.dart';
 // BLOC
 export 'package:e_commerce/bloc/user_bloc/user_list_bloc.dart';
 export 'package:e_commerce/bloc/user_bloc/signup_bloc.dart';
-export 'package:e_commerce/bloc/user_bloc/article_bloc.dart';
+export 'package:e_commerce/bloc/article_bloc/article_bloc.dart';
 
 // All utils and constants
 export 'package:e_commerce/utils/app_theme.dart';

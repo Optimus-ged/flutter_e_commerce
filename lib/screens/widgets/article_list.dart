@@ -32,7 +32,6 @@ class BuildArticleList extends StatelessWidget {
             ),
             primary: false,
             shrinkWrap: true,
-            // controller: scrollController,
             /*
               If data variable is null we give 5 as the length of the list
               otherwise we take the real length of the wich comes from the

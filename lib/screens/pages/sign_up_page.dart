@@ -73,10 +73,13 @@ class SignupPage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: screen.height * .05),
-                  CircleAvatar(
-                    radius: 40,
-                    backgroundColor: AppTheme.pinkColor,
-                    child: Icon(Icons.face),
+                  ClickAnimation(
+                    onTap: () {},
+                    child: CircleAvatar(
+                      radius: 40,
+                      backgroundColor: AppTheme.pinkColor,
+                      child: Icon(Icons.face),
+                    ),
                   ),
                   CustomTextField(
                     controller: nameController,

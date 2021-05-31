@@ -9,7 +9,7 @@ class Endpoint {
 
   // Initialisation of all other endpoints
   static const String allUsers = "/users/all";
-  static const String oneUser = "/users/one";
+  static const String signUp = "/users/one";
   static const String allArticles = "/article";
   static const String oneProduct = "/products/one";
   static const String allPostes = "/postes";
