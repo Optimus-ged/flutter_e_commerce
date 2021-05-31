@@ -10,12 +10,6 @@ class CustomCashedImage extends StatelessWidget {
   Widget build(BuildContext context) {
     return CachedNetworkImage(
       imageUrl: imageUrl,
-      // placeholder: (context, url) => Center(
-      //   child: Container(
-      //     child: Icon(Icons.face),
-      //     height: screen.height * .32,
-      //   ),
-      // ),
       progressIndicatorBuilder: (context, url, progress) => Container(
         child: Icon(Icons.camera),
         height: screen.height * .32,
