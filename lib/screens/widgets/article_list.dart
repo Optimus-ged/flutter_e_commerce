@@ -45,110 +45,115 @@ class BuildArticleList extends StatelessWidget {
                 to the user that data are loading
               */
               return data != null
-                  ? ClickAnimation(
-                      onTap: () => Navigator.of(context).pushNamed(
-                        Details,
-                        arguments: data.articles[index],
-                      ),
-                      child: Column(
-                        crossAxisAlignment: (index % 2 == 0)
-                            ? CrossAxisAlignment.start
-                            : CrossAxisAlignment.end,
-                        children: [
-                          Container(
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                                colors: [
-                                  AppTheme.radiantTopRight,
-                                  AppTheme.radiantTop,
-                                  AppTheme.radiantBotom
-                                ],
-                              ),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              // child: Image.network(
-                              //   "${Endpoint.uplaod}${data.articles[index].photoArticles[0].photoArticle}",
-                              //   height: screen.height * .32,
-                              //   alignment: Alignment.bottomCenter,
-                              // ),
-                              child: CustomCashedImage(imageUrl: "${Endpoint.uplaod}${data.articles[index].photoArticles[0].photoArticle}",
-                              screen: screen,
-                              isHomePage: true,
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: 4),
-                          Text(
-                            "${data.articles[index].designation}",
-                            style: TextStyle(
-                                color: AppTheme.designationColor,
-                                fontSize: 13,
-                                fontWeight: FontWeight.w500),
-                          ),
-                          SizedBox(height: 2),
-                          Text(
-                            "${data.articles[index].pu}\$",
-                            style: TextStyle(
-                              color: AppTheme.puColor,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          )
-                        ],
-                      ),
-                    )
+                  ? _buildListData(index, context)
 
                   // when the application realise that snapshot data is null
                   // it displays this shimmer loading animation
-                  : Shimmer.fromColors(
-                      baseColor: AppTheme.radiantBotom,
-                      highlightColor: AppTheme.radiantTop,
-                      period: Duration(seconds: 3),
-                      child: Column(
-                        crossAxisAlignment: (index % 2 == 0)
-                            ? CrossAxisAlignment.start
-                            : CrossAxisAlignment.end,
-                        children: [
-                          Container(
-                            height: screen.height * .32,
-                            width: 200,
-                            decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                                colors: [
-                                  AppTheme.radiantTopRight,
-                                  AppTheme.radiantTop,
-                                  AppTheme.radiantBotom
-                                ],
-                              ),
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                          ),
-                          SizedBox(height: 4),
-                          Container(
-                            color: AppTheme.greyColor,
-                            height: 12,
-                            width: screen.width * .35,
-                          ),
-                          SizedBox(height: 2),
-                          Container(
-                            color: AppTheme.greyColor,
-                            height: 15,
-                            width: screen.width * .10,
-                          ),
-                        ],
-                      ),
-                    );
+                  : _buildLaodingData(index);
             },
           ),
         ),
       ],
+    );
+  }
+
+  Widget _buildListData(int index, BuildContext context) {
+    return ClickAnimation(
+      onTap: () => Navigator.of(context).pushNamed(
+        Details,
+        arguments: data.articles[index],
+      ),
+      child: Column(
+        crossAxisAlignment: (index % 2 == 0)
+            ? CrossAxisAlignment.start
+            : CrossAxisAlignment.end,
+        children: [
+          Container(
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  AppTheme.radiantTopRight,
+                  AppTheme.radiantTop,
+                  AppTheme.radiantBotom
+                ],
+              ),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: CustomCashedImage(
+                imageUrl:
+                    "${Endpoint.uplaod}${data.articles[index].photoArticles[0].photoArticle}",
+                screen: screen,
+                isHomePage: true,
+              ),
+            ),
+          ),
+          SizedBox(height: 4),
+          Text(
+            "${data.articles[index].designation}",
+            style: TextStyle(
+                color: AppTheme.designationColor,
+                fontSize: 13,
+                fontWeight: FontWeight.w500),
+          ),
+          SizedBox(height: 2),
+          Text(
+            "${data.articles[index].pu}\$",
+            style: TextStyle(
+              color: AppTheme.puColor,
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _buildLaodingData(int index) {
+    return Shimmer.fromColors(
+      baseColor: AppTheme.radiantBotom,
+      highlightColor: AppTheme.radiantTop,
+      period: Duration(seconds: 3),
+      child: Column(
+        crossAxisAlignment: (index % 2 == 0)
+            ? CrossAxisAlignment.start
+            : CrossAxisAlignment.end,
+        children: [
+          Container(
+            height: screen.height * .32,
+            width: 200,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  AppTheme.radiantTopRight,
+                  AppTheme.radiantTop,
+                  AppTheme.radiantBotom
+                ],
+              ),
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+          SizedBox(height: 4),
+          Container(
+            color: AppTheme.greyColor,
+            height: 12,
+            width: screen.width * .35,
+          ),
+          SizedBox(height: 2),
+          Container(
+            color: AppTheme.greyColor,
+            height: 15,
+            width: screen.width * .10,
+          ),
+        ],
+      ),
     );
   }
 }

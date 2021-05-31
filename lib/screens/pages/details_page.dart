@@ -247,11 +247,6 @@ class _DetailPageState extends State<DetailPage> {
           controller: pageViewController,
           itemBuilder: (context, index) => Container(
             alignment: Alignment.bottomCenter,
-            // child: Image.network(
-            //   "${Endpoint.uplaod}${data[index].photoArticle}",
-            //   height: screen.height * .40,
-            //   alignment: Alignment.bottomCenter,
-            // ),
             child: CustomCashedImage(
               imageUrl: "${Endpoint.uplaod}${data[index].photoArticle}",
               screen: screen,
