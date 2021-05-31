@@ -4,6 +4,7 @@ export 'package:google_fonts/google_fonts.dart';
 export 'package:shared_preferences/shared_preferences.dart';
 export 'package:connectivity/connectivity.dart';
 export 'dart:async';
+export 'package:cached_network_image/cached_network_image.dart';
 
 // All flutter services
 export 'package:flutter/services.dart';
@@ -25,6 +26,7 @@ export 'package:e_commerce/screens/widgets/custon_textfield.dart';
 export 'package:e_commerce/screens/widgets/build_item_list.dart';
 export 'package:e_commerce/screens/widgets/backwardButton.dart';
 export 'package:e_commerce/screens/widgets/pageview_indicator.dart';
+export 'package:e_commerce/screens/widgets/custom_cached_img.dart';
 
 // All Models
 export 'package:e_commerce/model/user_model/user.dart';

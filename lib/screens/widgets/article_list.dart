@@ -44,7 +44,6 @@ class BuildArticleList extends StatelessWidget {
                 data otherwise we retreive the shimmer list to specify
                 to the user that data are loading
               */
-              print("AAAAAAAAAAAAAAAAAA -- >> " + scrollController.toString());
               return data != null
                   ? ClickAnimation(
                       onTap: () => Navigator.of(context).pushNamed(
@@ -72,10 +71,14 @@ class BuildArticleList extends StatelessWidget {
                             ),
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(10),
-                              child: Image.network(
-                                "${Endpoint.uplaod}${data.articles[index].photoArticles[0].photoArticle}",
-                                height: screen.height * .32,
-                                alignment: Alignment.bottomCenter,
+                              // child: Image.network(
+                              //   "${Endpoint.uplaod}${data.articles[index].photoArticles[0].photoArticle}",
+                              //   height: screen.height * .32,
+                              //   alignment: Alignment.bottomCenter,
+                              // ),
+                              child: CustomCashedImage(imageUrl: "${Endpoint.uplaod}${data.articles[index].photoArticles[0].photoArticle}",
+                              screen: screen,
+                              isHomePage: true,
                               ),
                             ),
                           ),
