@@ -12,10 +12,11 @@ class CustomCashedImage extends StatelessWidget {
       imageUrl: imageUrl,
       progressIndicatorBuilder: (context, url, progress) => Container(
         child: Icon(Icons.camera),
-        height: screen.height * .32,
+        height: isHomePage != null ? screen.height * .32 : screen.height * .40,
       ),
-      errorWidget: (context, url, error) => Center(
-        child: Icon(Icons.error),
+      errorWidget: (context, url, error) => Container(
+        child: Icon(Icons.camera),
+        height: isHomePage != null ? screen.height * .32 : screen.height * .40,
       ),
       imageBuilder: (
         context,
