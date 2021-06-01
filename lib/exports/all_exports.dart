@@ -51,3 +51,5 @@ export 'package:e_commerce/utils/for_the_view.dart';
 export 'package:e_commerce/routes/routes.dart';
 export 'package:e_commerce/routes/routes_constants.dart';
 export 'package:e_commerce/routes/routes_constants.dart';
+export 'package:e_commerce/routes/routes.dart';
+

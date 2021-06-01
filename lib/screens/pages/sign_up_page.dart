@@ -107,7 +107,7 @@ class SignupPage extends StatelessWidget {
                   ),
                   SizedBox(height: screen.height * .05),
                   ClickAnimation(
-                    onTap: () {},
+                    onTap: signUpMethod(),
                     child: Container(
                       decoration: BoxDecoration(
                         color: AppTheme.pinkColor,
@@ -172,7 +172,7 @@ class SignupPage extends StatelessWidget {
   }
 
   // Signup method
-  signUp() {
+  signUpMethod() {
     var data = Users(
       nom: nameController.text.trim(),
       contact: numController.text.trim(),

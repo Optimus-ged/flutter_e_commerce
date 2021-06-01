@@ -1,5 +1,4 @@
 import 'package:e_commerce/exports/all_exports.dart';
-import 'package:e_commerce/routes/routes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
