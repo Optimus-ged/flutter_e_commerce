@@ -1,8 +1,7 @@
 import 'package:e_commerce/exports/all_exports.dart';
 import 'package:rxdart/rxdart.dart';
 
-// Regular expression for the email
-final RegExp regExpEmail = RegExp("regular expression goes here");
+final RegExp regExpEmail = RegExp("source");
 
 class AuthBloc {
   final _email = BehaviorSubject<String>();
@@ -19,24 +18,25 @@ class AuthBloc {
   Function(String) get changePwd => _password.sink.add;
 
   // Stream transformers for validations
-  final validatePwd = StreamTransformer<String, String>.fromHandlers(
-    handleData: (password, sink) {
-      if (password.length >= 8) {
-        sink.add(password.trim());
+  final validateEmail = StreamTransformer<String, String>.fromHandlers(
+    handleData: (data, sink) {
+      if (regExpEmail.hasMatch(data.trim())) {
+        sink.add(data.trim());
       } else {
-        sink.addError("Le mot de passe doit avoir 8 carateres au minimum");
+        sink.addError("Addresse email invalide");
       }
     },
   );
 
-  final validateEmail =
-      StreamTransformer<String, String>.fromHandlers(handleData: (email, sink) {
-    if (regExpEmail.hasMatch(email.trim())) {
-      sink.add(email.trim());
-    } else {
-      sink.add("L'addresse email est invalide");
-    }
-  });
+  final validatePwd = StreamTransformer<String, String>.fromHandlers(
+    handleData: (data, sink) {
+      if (data.length >= 6) {
+        sink.add(data.trim());
+      } else {
+        sink.addError("Le mot de passe doit avoir au moins 6 caracteres");
+      }
+    },
+  );
 
   dispose() {
     _email.close();
