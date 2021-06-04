@@ -8,6 +8,7 @@ class DetailPage extends StatefulWidget {
 }
 
 class _DetailPageState extends State<DetailPage> {
+  List<ArticleLocal> localData;
   int curentIndex;
   PageController pageViewController;
   bool choice1 = false;
@@ -16,6 +17,7 @@ class _DetailPageState extends State<DetailPage> {
 
   @override
   void initState() {
+    localData = <ArticleLocal>[];
     curentIndex = 0;
     choice1 = false;
     choice2 = false;
@@ -215,7 +217,7 @@ class _DetailPageState extends State<DetailPage> {
     );
   }
 
-  _buildChoice({Color color, bool isCliked, VoidCallback onTap}) {
+  Widget _buildChoice({Color color, bool isCliked, VoidCallback onTap}) {
     return ClickAnimation(
       onTap: onTap,
       child: Container(
@@ -235,7 +237,7 @@ class _DetailPageState extends State<DetailPage> {
     );
   }
 
-  _buildPageView(Size screen, {List<PhotoArticles> data}) {
+  Widget _buildPageView(Size screen, {List<PhotoArticles> data}) {
     return Positioned(
       bottom: 0,
       child: Container(
@@ -260,5 +262,15 @@ class _DetailPageState extends State<DetailPage> {
         ),
       ),
     );
+  }
+
+  _addToChart(Article data) {
+    localData.add(ArticleLocal(
+      id: data.id,
+      photo: data.photoArticles[0].photoArticle,
+      designation: data.designation,
+      pu: data.pu ,
+      qte: 1,
+    ));
   }
 }
