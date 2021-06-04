@@ -4,6 +4,7 @@ import 'package:rxdart/rxdart.dart';
 class ListeArticleBloc {
   Repository _repository = Repository();
   BehaviorSubject<ListeArticles> _subject = BehaviorSubject<ListeArticles>();
+  BehaviorSubject<ListeArticles> get subject => _subject;
 
   getArticles(String token) async {
     ListeArticles _response = await _repository.getArticles(token);
@@ -15,7 +16,6 @@ class ListeArticleBloc {
     _subject.close();
   }
 
-  BehaviorSubject<ListeArticles> get subject => _subject;
 }
 
 final listArticleBloc = ListeArticleBloc();

@@ -8,7 +8,6 @@ class DetailPage extends StatefulWidget {
 }
 
 class _DetailPageState extends State<DetailPage> {
-  List<ArticleLocal> localData;
   int curentIndex;
   PageController pageViewController;
   bool choice1 = false;
@@ -17,7 +16,6 @@ class _DetailPageState extends State<DetailPage> {
 
   @override
   void initState() {
-    localData = <ArticleLocal>[];
     curentIndex = 0;
     choice1 = false;
     choice2 = false;
@@ -86,7 +84,6 @@ class _DetailPageState extends State<DetailPage> {
                             isCliked: choice1,
                             onTap: () {
                               setState(() {
-                                print("${localData[0].designation}");
                                 choice1 = true;
                                 choice2 = false;
                                 choice3 = false;
@@ -97,7 +94,6 @@ class _DetailPageState extends State<DetailPage> {
                             color: AppTheme.yellowColor,
                             isCliked: choice2,
                             onTap: () {
-                              print("${localData[0].designation}");
                               setState(() {
                                 choice2 = true;
                                 choice1 = false;
@@ -109,7 +105,6 @@ class _DetailPageState extends State<DetailPage> {
                             color: AppTheme.pinkColor,
                             isCliked: choice3,
                             onTap: () {
-                              print("${localData[0].designation}");
                               setState(() {
                                 choice3 = true;
                                 choice1 = false;
@@ -268,12 +263,14 @@ class _DetailPageState extends State<DetailPage> {
   }
 
   _addToChart(Article data) {
-    localData.add(ArticleLocal(
+    final _article = LocalArticle(
       id: data.id,
       photo: data.photoArticles[0].photoArticle,
       designation: data.designation,
       pu: data.pu,
       qte: 1,
-    ));
+    );
+
+    
   }
 }
