@@ -86,6 +86,7 @@ class _DetailPageState extends State<DetailPage> {
                             isCliked: choice1,
                             onTap: () {
                               setState(() {
+                                print("${localData[0].designation}");
                                 choice1 = true;
                                 choice2 = false;
                                 choice3 = false;
@@ -96,6 +97,7 @@ class _DetailPageState extends State<DetailPage> {
                             color: AppTheme.yellowColor,
                             isCliked: choice2,
                             onTap: () {
+                              print("${localData[0].designation}");
                               setState(() {
                                 choice2 = true;
                                 choice1 = false;
@@ -107,6 +109,7 @@ class _DetailPageState extends State<DetailPage> {
                             color: AppTheme.pinkColor,
                             isCliked: choice3,
                             onTap: () {
+                              print("${localData[0].designation}");
                               setState(() {
                                 choice3 = true;
                                 choice1 = false;
@@ -152,7 +155,7 @@ class _DetailPageState extends State<DetailPage> {
                   SizedBox(height: 10),
                   Center(
                     child: ClickAnimation(
-                      onTap: () {},
+                      onTap: _addToChart(widget.data),
                       child: Container(
                         decoration: BoxDecoration(
                           color: AppTheme.pinkColor,
@@ -269,7 +272,7 @@ class _DetailPageState extends State<DetailPage> {
       id: data.id,
       photo: data.photoArticles[0].photoArticle,
       designation: data.designation,
-      pu: data.pu ,
+      pu: data.pu,
       qte: 1,
     ));
   }

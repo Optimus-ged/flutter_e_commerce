@@ -4,6 +4,7 @@ import 'package:rxdart/rxdart.dart';
 class UserListBloc {
   Repository _repository = Repository();
   BehaviorSubject<UserResponse> _subject = BehaviorSubject<UserResponse>();
+  BehaviorSubject<UserResponse> get subject => _subject;
 
   // Get all users
   getUsers(String token) async {
@@ -17,7 +18,7 @@ class UserListBloc {
     _subject.close();
   }
 
-  BehaviorSubject<UserResponse> get subject => _subject;
+  
 }
 
 final userListBloc = UserListBloc();
