@@ -9,13 +9,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   String token;
   ScrollController _scrollController;
-
-  // _scrollListner() {
-  //   if (_scrollController.offset >=
-  //           _scrollController.position.maxScrollExtent &&
-  //       !_scrollController.position.outOfRange) {}
-  // }
-
+  
   @override
   void initState() {
     token =
