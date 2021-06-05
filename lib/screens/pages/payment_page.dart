@@ -4,9 +4,6 @@ class PaymentPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Payment page"),
-      ),
       body: StreamBuilder<List<LocalArticle>>(
         stream: localArticleBloc.subject,
         builder: (context, snapshot) {
