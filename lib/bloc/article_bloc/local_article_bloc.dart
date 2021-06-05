@@ -23,11 +23,7 @@ class LocalArticleBloc {
   // Adding a method to add new article in the local list
   addLocalArticle({LocalArticle data}) {
     _localListArticle.add(data);
-    Future.delayed(Duration(milliseconds: 500)).then(
-      (value) => _subject.sink.add(
-        _localListArticle,
-      ),
-    );
+    _subject.sink.add(_localListArticle);
   }
 
   // Adding a method to delete data from the local list
