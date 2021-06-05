@@ -1,5 +1,4 @@
 import 'package:e_commerce/exports/all_exports.dart';
-import 'package:e_commerce/screens/widgets/article_list.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -9,7 +8,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   String token;
   ScrollController _scrollController;
-  
+
   @override
   void initState() {
     token =
