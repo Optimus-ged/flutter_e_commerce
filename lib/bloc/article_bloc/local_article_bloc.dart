@@ -13,7 +13,6 @@ class LocalArticleBloc {
   getLocalData() {
     subject.listen((data) {
       _localListArticle = data;
-      print("FROM FUNCTION $data");
     });
     Future.delayed(Duration(milliseconds: 500)).then(
       (value) => _subject.sink.add([]),
