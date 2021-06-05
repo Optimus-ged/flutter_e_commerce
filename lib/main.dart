@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
         platform: TargetPlatform.iOS,
       ),
       onGenerateRoute: Routes.materialRoutes,
-      home: PaymentPage(),
+      home: LoginPage(),
     );
   }
 }
