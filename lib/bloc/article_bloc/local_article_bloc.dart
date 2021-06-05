@@ -21,7 +21,15 @@ class LocalArticleBloc {
     _subject.sink.add(_localListArticle);
   }
 
+  // Adding a method to delete data from the local list
+  deleteLocalArticle(int id) {
+    _localListArticle.removeWhere((art) => art.id == id);
+    _subject.add(_localListArticle);
+  }
+
   dispose() {
     _subject.close();
   }
 }
+
+final localArticleBloc = LocalArticleBloc();
