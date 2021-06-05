@@ -36,13 +36,13 @@ class LocalArticleBloc {
   }
 
   // Adding a method to add new article in the local list
-  addLocalArticle(LocalArticle data) {
+  addLocalArticle({LocalArticle data}) {
     _localListArticle.add(data);
     _subject.sink.add(_localListArticle);
   }
 
   // Adding a method to delete data from the local list
-  deleteLocalArticle(int id) {
+  deleteLocalArticle({int id}) {
     _localListArticle.removeWhere((art) => art.id == id);
     _subject.add(_localListArticle);
   }

@@ -46,6 +46,6 @@ class PaymentPage extends StatelessWidget {
       pu: 11.3,
       qte: 1,
     );
-    localArticleBloc.addLocalArticle(_article);
+    localArticleBloc.addLocalArticle( data:_article);
   }
 }
