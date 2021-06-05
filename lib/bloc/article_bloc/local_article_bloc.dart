@@ -13,6 +13,20 @@ class LocalArticleBloc {
     subject.listen((data) {
       _localListArticle = data;
     });
+    Future.delayed(Duration(seconds: 3)).then(
+      (value) => _subject.sink.add(
+        [
+           LocalArticle(
+            id: 1,
+            photo: "test photo",
+            designation: "designation 1",
+            pu: 11.3,
+            qte: 1,
+          )
+          
+        ],
+      ),
+    );
   }
 
   // Adding a method to add new article in the local list
