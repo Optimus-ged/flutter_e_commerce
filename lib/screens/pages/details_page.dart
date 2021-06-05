@@ -272,7 +272,6 @@ class _DetailPageState extends State<DetailPage> {
       pu: data.pu,
       qte: 1,
     );
-    // print(_article);
     localArticleBloc..addLocalArticle(data: _article);
   }
 }
