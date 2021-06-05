@@ -8,44 +8,29 @@ class PaymentPage extends StatelessWidget {
         title: Text("Payment page"),
       ),
       body: StreamBuilder<List<LocalArticle>>(
-          stream: localArticleBloc.subject,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return ListView.builder(
-                itemCount: snapshot.data.length,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    leading: Text("${snapshot.data[index].id}"),
-                    title: Text(
-                      "${snapshot.data[index].designation}",
-                    ),
-                    subtitle: Text(
-                      "${snapshot.data[index].photo}",
-                    ),
-                  );
-                },
-              );
-            }
-            return Center(
-              child: CircularProgressIndicator(),
+        stream: localArticleBloc.subject,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return ListView.builder(
+              itemCount: snapshot.data.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  leading: Text("${snapshot.data[index].id}"),
+                  title: Text(
+                    "${snapshot.data[index].designation}",
+                  ),
+                  subtitle: Text(
+                    "${snapshot.data[index].photo}",
+                  ),
+                );
+              },
             );
-          }),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          _addToChart();
+          }
+          return Center(
+            child: CircularProgressIndicator(),
+          );
         },
       ),
     );
-  }
-
-  _addToChart() {
-    final _article = LocalArticle(
-      id: 2,
-      photo: "test photo 66",
-      designation: "designation 18",
-      pu: 11.3,
-      qte: 1,
-    );
-    localArticleBloc.addLocalArticle( data:_article);
   }
 }
