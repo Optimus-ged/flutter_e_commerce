@@ -1,5 +1,4 @@
 import 'package:e_commerce/exports/all_exports.dart';
-import 'package:e_commerce/routes/routes_constants.dart';
 
 abstract class Routes {
   static MaterialPageRoute materialRoutes(RouteSettings settings) {
@@ -18,6 +17,9 @@ abstract class Routes {
         break;
       case Search:
         return MaterialPageRoute(builder: (context) => SearchPage());
+        break;
+        case Payment:
+        return MaterialPageRoute(builder: (context) => PaymentPage());
         break;
       case Details:
         return MaterialPageRoute(

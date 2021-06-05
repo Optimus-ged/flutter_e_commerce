@@ -101,6 +101,7 @@ class _HomePageState extends State<HomePage> {
               _buildNavigationItem(
                 icon: Icons.shopping_basket_outlined,
                 context: context,
+                onTap:()=> Navigator.of(context).pushNamed(Payment)
               ),
               _buildNavigationItem(
                 icon: Icons.search,
