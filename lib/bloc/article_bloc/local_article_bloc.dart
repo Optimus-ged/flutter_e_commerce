@@ -9,12 +9,24 @@ class LocalArticleBloc {
   // Declaring a variable from witch we'll read and wright
   List<LocalArticle> _localListArticle;
 
-  LocalArticleBloc() {
+  // LocalArticleBloc()  {
+  //   subject.listen((data) {
+  //     _localListArticle = data;
+  //   });
+
+    
+
+  //   Future.delayed(Duration(seconds: 0)).then(
+  //     (value) => _subject.sink.add([]),
+  //   );
+  // }
+
+  // Get local data
+  getLocalArticle() async {
     subject.listen((data) {
       _localListArticle = data;
     });
-
-    Future.delayed(Duration(seconds: 3)).then(
+    Future.delayed(Duration(seconds: 0)).then(
       (value) => _subject.sink.add([]),
     );
   }
