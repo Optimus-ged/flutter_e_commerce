@@ -9,22 +9,8 @@ class LocalArticleBloc {
   // Declaring a variable from witch we'll read and wright
   List<LocalArticle> _localListArticle;
 
-  /* We put the read data logic in the constructor because we want it
-  to execute directly when we call our bloc 
-  if we dont make this we'll be constraint to use a statefull widget, which is
-  not recommanded */
-  LocalArticleBloc() {
-    subject.listen((data) {
-      _localListArticle = data;
-      print("FROM CONSTRUCTOR $data");
-    });
-    Future.delayed(Duration(milliseconds: 500)).then(
-      (value) => _subject.sink.add([]),
-    );
-  }
-
   // Get Data
-  getData() {
+  getLocalData() {
     subject.listen((data) {
       _localListArticle = data;
       print("FROM FUNCTION $data");
