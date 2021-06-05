@@ -16,14 +16,20 @@ class LocalArticleBloc {
     Future.delayed(Duration(seconds: 3)).then(
       (value) => _subject.sink.add(
         [
-           LocalArticle(
+          LocalArticle(
             id: 1,
             photo: "test photo",
             designation: "designation 1",
             pu: 11.3,
             qte: 1,
+          ),
+           LocalArticle(
+            id: 2,
+            photo: "test photo 33",
+            designation: "designation 1553",
+            pu: 11.3,
+            qte: 1,
           )
-          
         ],
       ),
     );

@@ -31,18 +31,22 @@ class PaymentPage extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           }),
-      // floatingActionButton: FloatingActionButton(onPressed: _addToChart()),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          _addToChart();
+        },
+      ),
     );
   }
 
-  // _addToChart() {
-  //   final _article = LocalArticle(
-  //     id: 1,
-  //     photo: "test photo",
-  //     designation: "designation 1",
-  //     pu: 11.3,
-  //     qte: 1,
-  //   );
-  //   localArticleBloc.addLocalArticle(_article);
-  // }
+  _addToChart() {
+    final _article = LocalArticle(
+      id: 2,
+      photo: "test photo 66",
+      designation: "designation 18",
+      pu: 11.3,
+      qte: 1,
+    );
+    localArticleBloc.addLocalArticle(_article);
+  }
 }
