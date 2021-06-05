@@ -1,4 +1,3 @@
-import 'package:e_commerce/bloc/article_bloc/local_article_bloc.dart';
 import 'package:e_commerce/exports/all_exports.dart';
 
 class PaymentPage extends StatelessWidget {
