@@ -15,10 +15,10 @@ class LocalArticleBloc {
     });
   }
 
-  getLocalArticle() {
-    subject.listen((data) {
-      print("$data");
-    });
+  // Adding a method to add new article in the local list
+  addLocalArticle(LocalArticle data) {
+    _localListArticle.add(data);
+    _subject.sink.add(_localListArticle);
   }
 
   dispose() {
