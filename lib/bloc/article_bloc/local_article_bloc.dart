@@ -10,13 +10,12 @@ class LocalArticleBloc {
   List<LocalArticle> _localListArticle;
 
   // Get Data
-  getLocalData() {
+  getLocalData() async {
     subject.listen((data) {
       _localListArticle = data;
     });
-    Future.delayed(Duration(milliseconds: 500)).then(
-      (value) => _subject.sink.add([]),
-    );
+    await Future.delayed(Duration(milliseconds: 500));
+    _subject.sink.add([]);
   }
 
   // Adding a method to add new article in the local list
@@ -35,4 +34,3 @@ class LocalArticleBloc {
     _subject.close();
   }
 }
-
