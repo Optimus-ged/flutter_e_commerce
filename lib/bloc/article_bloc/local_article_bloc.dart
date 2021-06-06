@@ -30,6 +30,16 @@ class LocalArticleBloc {
     _subject.add(_localListArticle);
   }
 
+  // Updating existing data
+  updateLocalArticle({LocalArticle data}) {
+    final index = _localListArticle.indexOf(
+      _localListArticle.where((art) => art.id == data.id).first,
+    );
+
+    _localListArticle[index] = data;
+    _subject.sink.add(_localListArticle);
+  }
+
   dispose() {
     _subject.close();
   }
