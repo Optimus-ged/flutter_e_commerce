@@ -22,6 +22,7 @@ export 'package:e_commerce/screens/pages/details_page.dart';
 export 'package:e_commerce/screens/pages/intro_page.dart';
 export 'package:shimmer/shimmer.dart';
 export 'package:e_commerce/screens/pages/payment_page.dart';
+export 'package:e_commerce/app.dart';
 
 // All widgets
 export 'package:e_commerce/screens/widgets/click_animation.dart';
