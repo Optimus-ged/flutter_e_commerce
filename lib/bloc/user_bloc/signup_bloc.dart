@@ -2,7 +2,6 @@ import 'package:e_commerce/exports/all_exports.dart';
 import 'package:rxdart/rxdart.dart';
 
 class SignUpBloc {
-  // Repository get _repository => locator.get<Repository>();
   BehaviorSubject<UserResponse> _subject = BehaviorSubject<UserResponse>();
 
   signUp(Users user) async {
