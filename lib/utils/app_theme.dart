@@ -14,6 +14,7 @@ class AppTheme {
   static const Color radiantTop = Color(0xffE1DAD0);
   static const Color radiantBotom = Color(0xffEEE9E3);
   static const Color radiantTopRight = Color(0xffDDD6CC);
+  
   // Font
   static const String fontName = 'WorkSans';
 }
