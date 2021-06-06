@@ -178,6 +178,6 @@ class SignupPage extends StatelessWidget {
       contact: numController.text.trim(),
       motDePasse: pwdController.text.trim(),
     );
-    signUpBloc..signUp("token", data);
+    locator.get<SignUpBloc>().signUp(data);
   }
 }
