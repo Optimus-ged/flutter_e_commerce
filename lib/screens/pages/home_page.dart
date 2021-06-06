@@ -6,17 +6,17 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String token;
+  // String token;
   ScrollController _scrollController;
   ListeArticleBloc get _listArticleBloc => locator.get<ListeArticleBloc>();
   LocalArticleBloc get _localArticleBloc => locator.get<LocalArticleBloc>();
 
   @override
   void initState() {
-    token =
-        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub20iOiJPcHRpbXVzIHlhbGEiLCJpZCI6NCwiaWF0IjoxNjIxNzA1NDY2LCJleHAiOjE2MjE5NjQ2NjZ9.lzJ5ogGXEkLbkZVZIyUqfSwZbuePqJLy0a-JMq8Xk2k";
+    // token =
+    //     "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub20iOiJPcHRpbXVzIHlhbGEiLCJpZCI6NCwiaWF0IjoxNjIxNzA1NDY2LCJleHAiOjE2MjE5NjQ2NjZ9.lzJ5ogGXEkLbkZVZIyUqfSwZbuePqJLy0a-JMq8Xk2k";
     _scrollController = ScrollController();
-    listArticleBloc..getArticles(token);
+    listArticleBloc..getArticles();
     _localArticleBloc..getLocalData();
     super.initState();
   }
