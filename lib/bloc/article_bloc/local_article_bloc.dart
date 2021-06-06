@@ -14,14 +14,20 @@ class LocalArticleBloc {
     subject.listen((data) {
       _localListArticle = data;
     });
-    await Future.delayed(Duration(milliseconds: 500));
-    _subject.sink.add([]);
+    Future.delayed(Duration(milliseconds: 500)).then(
+      (value) => _subject.sink.add([]),
+    );
   }
 
   // Adding a method to add new article in the local list
   addLocalArticle({LocalArticle data}) {
-    _localListArticle.add(data);
-    _subject.sink.add(_localListArticle);
+    final value = _localListArticle.indexOf(
+      _localListArticle.where((art) => art == data).first,
+    );
+
+    print("GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG $value");
+    // _localListArticle.add(data);
+    // _subject.sink.add(_localListArticle);
   }
 
   // Adding a method to delete data from the local list

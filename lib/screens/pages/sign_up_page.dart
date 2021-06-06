@@ -107,7 +107,7 @@ class SignupPage extends StatelessWidget {
                   ),
                   SizedBox(height: screen.height * .05),
                   ClickAnimation(
-                    onTap: signUpMethod(),
+                    onTap: ()=> signUpMethod(),
                     child: Container(
                       decoration: BoxDecoration(
                         color: AppTheme.pinkColor,

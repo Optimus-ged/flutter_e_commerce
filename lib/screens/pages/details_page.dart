@@ -74,8 +74,8 @@ class _DetailPageState extends State<DetailPage> {
                         Padding(
                           padding: EdgeInsets.only(left: 20, bottom: 10),
                           child: Text(
-                            // "${widget.data.designation}",
-                            "${snapshot.data.length}",
+                            "${widget.data.designation}",
+                            // "${snapshot.data.length}",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white54,
