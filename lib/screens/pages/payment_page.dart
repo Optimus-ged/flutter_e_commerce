@@ -5,7 +5,7 @@ class PaymentPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: StreamBuilder<List<LocalArticle>>(
-        stream: localArticleBloc.subject,
+        stream: locator.get<LocalArticleBloc>().subject,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             return ListView.builder(

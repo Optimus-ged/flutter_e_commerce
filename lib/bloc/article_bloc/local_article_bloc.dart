@@ -36,4 +36,3 @@ class LocalArticleBloc {
   }
 }
 
-final localArticleBloc = LocalArticleBloc();
