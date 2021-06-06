@@ -8,17 +8,23 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   String token;
   ScrollController _scrollController;
+  ListeArticleBloc get _listArticleBloc => locator.get<ListeArticleBloc>();
+  LocalArticleBloc get _localArticleBloc => locator.get<LocalArticleBloc>();
 
   @override
   void initState() {
     token =
         "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub20iOiJPcHRpbXVzIHlhbGEiLCJpZCI6NCwiaWF0IjoxNjIxNzA1NDY2LCJleHAiOjE2MjE5NjQ2NjZ9.lzJ5ogGXEkLbkZVZIyUqfSwZbuePqJLy0a-JMq8Xk2k";
     _scrollController = ScrollController();
-    // listArticleBloc..getArticles(token);
-    locator.get<ListeArticleBloc>()..getArticles(token);
-    // localArticleBloc..getLocalData();
-    locator.get<LocalArticleBloc>()..getLocalData();
+    listArticleBloc..getArticles(token);
+    _localArticleBloc..getLocalData();
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
   }
 
   @override
@@ -34,7 +40,7 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
         backgroundColor: AppTheme.whiteColor,
         body: StreamBuilder<ListeArticles>(
-          stream: listArticleBloc.subject.stream,
+          stream: _listArticleBloc.subject.stream,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return BuildArticleList(
