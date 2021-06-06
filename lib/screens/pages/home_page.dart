@@ -14,8 +14,10 @@ class _HomePageState extends State<HomePage> {
     token =
         "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub20iOiJPcHRpbXVzIHlhbGEiLCJpZCI6NCwiaWF0IjoxNjIxNzA1NDY2LCJleHAiOjE2MjE5NjQ2NjZ9.lzJ5ogGXEkLbkZVZIyUqfSwZbuePqJLy0a-JMq8Xk2k";
     _scrollController = ScrollController();
-    listArticleBloc..getArticles(token);
-    localArticleBloc..getLocalData();
+    // listArticleBloc..getArticles(token);
+    locator.get<ListeArticleBloc>()..getArticles(token);
+    // localArticleBloc..getLocalData();
+    locator.get<LocalArticleBloc>()..getLocalData();
     super.initState();
   }
 
@@ -93,10 +95,9 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               _buildNavigationItem(
-                icon: Icons.shopping_basket_outlined,
-                context: context,
-                onTap:()=> Navigator.of(context).pushNamed(Payment)
-              ),
+                  icon: Icons.shopping_basket_outlined,
+                  context: context,
+                  onTap: () => Navigator.of(context).pushNamed(Payment)),
               _buildNavigationItem(
                 icon: Icons.search,
                 context: context,

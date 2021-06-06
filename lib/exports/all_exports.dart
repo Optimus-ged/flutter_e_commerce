@@ -11,6 +11,7 @@ export 'package:get_it/get_it.dart';
 export 'package:flutter/services.dart';
 export 'dart:io';
 export 'package:flutter/rendering.dart';
+export 'package:e_commerce/utils/locator.dart';
 
 // All pages
 export 'package:e_commerce/screens/pages/login_page.dart';
