@@ -59,3 +59,6 @@ export 'package:e_commerce/routes/routes_constants.dart';
 export 'package:e_commerce/routes/routes_constants.dart';
 export 'package:e_commerce/routes/routes.dart';
 
+// Utils
+export 'package:e_commerce/utils/preferences_helper.dart';
+

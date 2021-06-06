@@ -15,9 +15,8 @@ class SharedPreferencesHelper {
     return _insance;
   }
 
-  Future<void> get saveAuthToken async {
-    return _sPrefs.setString("token",
-        "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub20iOiJKb2huIEt1aGFuZGEiLCJpZCI6MywiaWF0IjoxNjIxMTAxMzk0LCJleHAiOjE2MjEzNjA1OTR9.l4t1tyBMgG7J1eQ4mK6rJPK-nHRJltQyt2oWi3RUmLw");
+  Future<void> saveAuthToken(String authToken) async {
+    return _sPrefs.setString("token", "$authToken");
   }
 
   Future<String> get authToken async {

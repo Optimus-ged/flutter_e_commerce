@@ -7,4 +7,6 @@ void setup() {
   locator.registerLazySingleton<LocalArticleBloc>(() => LocalArticleBloc());
   locator.registerLazySingleton<SignUpBloc>(() => SignUpBloc());
   locator.registerLazySingleton<UserListBloc>(() => UserListBloc());
+  locator.registerLazySingleton<SharedPreferencesHelper>(
+      () => SharedPreferencesHelper());
 }
