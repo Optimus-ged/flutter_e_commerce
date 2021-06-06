@@ -9,10 +9,11 @@ class DetailPage extends StatefulWidget {
 
 class _DetailPageState extends State<DetailPage> {
   int curentIndex;
-  PageController pageViewController;
+  PageController _pageviewController;
   bool choice1 = false;
   bool choice2 = false;
   bool choice3 = true;
+  LocalArticleBloc get _localArticleBloc => locator.get<LocalArticleBloc>();
 
   @override
   void initState() {
@@ -20,10 +21,16 @@ class _DetailPageState extends State<DetailPage> {
     choice1 = false;
     choice2 = false;
     choice3 = true;
-    pageViewController = PageController(
+    _pageviewController = PageController(
       initialPage: 0,
     );
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    _pageviewController.dispose();
+    super.dispose();
   }
 
   @override
@@ -246,7 +253,7 @@ class _DetailPageState extends State<DetailPage> {
         alignment: Alignment.bottomCenter,
         color: AppTheme.whiteColor,
         child: PageView.builder(
-          controller: pageViewController,
+          controller: _pageviewController,
           itemBuilder: (context, index) => Container(
             alignment: Alignment.bottomCenter,
             child: CustomCashedImage(
@@ -272,6 +279,6 @@ class _DetailPageState extends State<DetailPage> {
       pu: data.pu,
       qte: 1,
     );
-    localArticleBloc..addLocalArticle(data: _article);
+    _localArticleBloc..addLocalArticle(data: _article);
   }
 }
