@@ -5,6 +5,7 @@ export 'package:shared_preferences/shared_preferences.dart';
 export 'package:connectivity/connectivity.dart';
 export 'dart:async';
 export 'package:cached_network_image/cached_network_image.dart';
+export 'package:get_it/get_it.dart';
 
 // All flutter services
 export 'package:flutter/services.dart';
