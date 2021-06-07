@@ -3,6 +3,7 @@ import 'package:e_commerce/exports/all_exports.dart';
 class PaymentPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    dynamic totalQte = 0;
     return Scaffold(
       body: StreamBuilder<List<LocalArticle>>(
         stream: locator.get<LocalArticleBloc>().subject,
@@ -11,6 +12,7 @@ class PaymentPage extends StatelessWidget {
             return ListView.builder(
               itemCount: snapshot.data.length,
               itemBuilder: (context, index) {
+                totalQte = totalQte + snapshot.data[index].qte;
                 return ListTile(
                   minVerticalPadding: 0,
                   horizontalTitleGap: 5,
