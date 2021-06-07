@@ -285,9 +285,9 @@ class _DetailPageState extends State<DetailPage> {
     );
     final result = _localArticleBloc.addLocalArticle(data: _article);
     if (result == 200) {
-      print("SUCEEEEEEEEEES");
+      print("$result");
     } else {
-      print("ECHECCCCCCCCCC");
+      print("$result");
     }
   }
 }
