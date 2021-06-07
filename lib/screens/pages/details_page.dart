@@ -287,7 +287,7 @@ class _DetailPageState extends State<DetailPage> {
     if (x.addLocalArticle() == 100) {
       print("SUCEEEEEEEEEES");
     } else {
-      print("ECHECCCCCCCCCC ${test.length}");
+      print("ECHECCCCCCCCCC");
     }
   }
 }

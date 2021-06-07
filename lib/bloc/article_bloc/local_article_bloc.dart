@@ -28,9 +28,11 @@ class LocalArticleBloc {
   }
 
   // Adding a method to delete data from the local list
-  deleteLocalArticle({int id}) {
+  int deleteLocalArticle({int id}) {
+    int status = 200;
     _localListArticle.removeWhere((art) => art.id == id);
     _subject.add(_localListArticle);
+    return status;
   }
 
   // Updating existing data
