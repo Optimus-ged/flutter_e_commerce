@@ -22,12 +22,13 @@ class LocalArticleBloc {
   // Adding a method to add new article in the local list
   int addLocalArticle({LocalArticle data}) {
     int status = 400;
-    if (!_localListArticle.contains(data)) {
+    if (_localListArticle.every((v) => v.id != data.id)) {
       status = 200;
       _localListArticle.add(data);
       _subject.sink.add(_localListArticle);
+    } else {
+      status = status;
     }
-
     return status;
   }
 
