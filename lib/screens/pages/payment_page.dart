@@ -12,9 +12,11 @@ class PaymentPage extends StatelessWidget {
               itemCount: snapshot.data.length,
               itemBuilder: (context, index) {
                 return ListTile(
+                  minVerticalPadding: 0,
+                  horizontalTitleGap: 5,
+                  contentPadding:
+                      EdgeInsets.symmetric(vertical: 3, horizontal: 10),
                   leading: Container(
-                    // width: 50,
-                    // height: 100,
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         begin: Alignment.topCenter,
@@ -25,23 +27,28 @@ class PaymentPage extends StatelessWidget {
                           AppTheme.radiantBotom
                         ],
                       ),
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(6),
                     ),
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
+                      borderRadius: BorderRadius.circular(6),
                       child: CustomCashedImage(
                         imageUrl:
                             "${Endpoint.uplaod}${snapshot.data[index].photo}",
-                        isHomePage: false,
-                        // screen: ,
+                        isPayPage: true,
                       ),
                     ),
                   ),
-                  title: Text(
-                    "${snapshot.data[index].designation}",
-                  ),
-                  subtitle: Text(
-                    "${Endpoint.uplaod}${snapshot.data[index].photo}",
+                  title: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        "${snapshot.data[index].designation}",
+                      ),
+                      Text(
+                        "Pu : ${snapshot.data[index].pu}\$",
+                        style: TextStyle(fontSize: 13, color: Colors.black54),
+                      ),
+                    ],
                   ),
                 );
               },
