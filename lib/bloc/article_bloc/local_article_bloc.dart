@@ -20,14 +20,11 @@ class LocalArticleBloc {
   }
 
   // Adding a method to add new article in the local list
-  addLocalArticle({LocalArticle data}) {
-    final value = _localListArticle.indexOf(
-      _localListArticle.where((art) => art == data).first,
-    );
-
-    print("GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG $value");
-    // _localListArticle.add(data);
-    // _subject.sink.add(_localListArticle);
+  int addLocalArticle({LocalArticle data}) {
+    int status = 200;
+    _localListArticle.add(data);
+    _subject.sink.add(_localListArticle);
+    return status;
   }
 
   // Adding a method to delete data from the local list

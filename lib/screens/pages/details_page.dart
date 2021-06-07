@@ -75,7 +75,6 @@ class _DetailPageState extends State<DetailPage> {
                           padding: EdgeInsets.only(left: 20, bottom: 10),
                           child: Text(
                             "${widget.data.designation}",
-                            // "${snapshot.data.length}",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white54,
@@ -162,7 +161,7 @@ class _DetailPageState extends State<DetailPage> {
                         Center(
                           child: ClickAnimation(
                             onTap: () {
-                              _addToChart(widget.data);
+                              _addToChart(widget.data, snapshot.data);
                             },
                             child: Container(
                               decoration: BoxDecoration(
@@ -276,7 +275,7 @@ class _DetailPageState extends State<DetailPage> {
     );
   }
 
-  _addToChart(Article data) {
+  _addToChart(Article data, List<LocalArticle> test) {
     final _article = LocalArticle(
       id: data.id,
       photo: data.photoArticles[0].photoArticle,
@@ -284,6 +283,11 @@ class _DetailPageState extends State<DetailPage> {
       pu: data.pu,
       qte: 1,
     );
-    _localArticleBloc..addLocalArticle(data: _article);
+    LocalArticleBloc x =_localArticleBloc..addLocalArticle(data: _article);
+    if (x.addLocalArticle() == 100) {
+      print("SUCEEEEEEEEEES");
+    } else {
+      print("ECHECCCCCCCCCC ${test.length}");
+    }
   }
 }
