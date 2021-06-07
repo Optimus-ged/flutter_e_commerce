@@ -161,7 +161,7 @@ class _DetailPageState extends State<DetailPage> {
                         Center(
                           child: ClickAnimation(
                             onTap: () {
-                              _addToChart(widget.data, snapshot.data);
+                              _addToChart(widget.data);
                             },
                             child: Container(
                               decoration: BoxDecoration(
@@ -275,7 +275,7 @@ class _DetailPageState extends State<DetailPage> {
     );
   }
 
-  _addToChart(Article data, List<LocalArticle> test) {
+  _addToChart(Article data) {
     final _article = LocalArticle(
       id: data.id,
       photo: data.photoArticles[0].photoArticle,
@@ -283,8 +283,8 @@ class _DetailPageState extends State<DetailPage> {
       pu: data.pu,
       qte: 1,
     );
-    LocalArticleBloc x =_localArticleBloc..addLocalArticle(data: _article);
-    if (x.addLocalArticle() == 100) {
+    final result = _localArticleBloc.addLocalArticle(data: _article);
+    if (result == 200) {
       print("SUCEEEEEEEEEES");
     } else {
       print("ECHECCCCCCCCCC");

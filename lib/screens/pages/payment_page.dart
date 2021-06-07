@@ -3,6 +3,7 @@ import 'package:e_commerce/exports/all_exports.dart';
 class PaymentPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Size screen = MediaQuery.of(context).size;
     return Scaffold(
       body: StreamBuilder<List<LocalArticle>>(
         stream: locator.get<LocalArticleBloc>().subject,
@@ -12,12 +13,23 @@ class PaymentPage extends StatelessWidget {
               itemCount: snapshot.data.length,
               itemBuilder: (context, index) {
                 return ListTile(
-                  leading: Text("${snapshot.data[index].id}"),
+                  // leading: Text("${snapshot.data[index].id}"),
+                  // leading: CustomCashedImage(
+                  //   imageUrl: "${Endpoint.uplaod}${snapshot.data[index].photo}",
+                  //   screen: screen,
+                  // ),
+                  leading: Container(
+                    width: 50,
+                    // color: Colors.green,
+                    child: Image.network(
+                      "${Endpoint.uplaod}${snapshot.data[index].photo}",
+                    ),
+                  ),
                   title: Text(
                     "${snapshot.data[index].designation}",
                   ),
                   subtitle: Text(
-                    "${snapshot.data[index].photo}",
+                    "${Endpoint.uplaod}${snapshot.data[index].photo}",
                   ),
                 );
               },
