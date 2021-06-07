@@ -6,7 +6,7 @@ class PaymentPage extends StatefulWidget {
 }
 
 class _PaymentPageState extends State<PaymentPage> {
-  dynamic totalPayment;
+  double totalPayment;
 
   @override
   void initState() {
@@ -33,8 +33,8 @@ class _PaymentPageState extends State<PaymentPage> {
                 Expanded(
                   child: ListView.builder(
                     itemCount: snapshot.data.length,
+                    // This make the list scrollinng only when data are many
                     primary: false,
-                    shrinkWrap: true,
                     itemBuilder: (context, index) {
                       return ListTile(
                         minVerticalPadding: 0,
