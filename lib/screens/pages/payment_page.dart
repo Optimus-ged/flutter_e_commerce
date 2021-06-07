@@ -13,14 +13,20 @@ class PaymentPage extends StatelessWidget {
               itemCount: snapshot.data.length,
               itemBuilder: (context, index) {
                 return ListTile(
-                  // leading: Text("${snapshot.data[index].id}"),
-                  // leading: CustomCashedImage(
-                  //   imageUrl: "${Endpoint.uplaod}${snapshot.data[index].photo}",
-                  //   screen: screen,
-                  // ),
                   leading: Container(
                     width: 50,
-                    // color: Colors.green,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          AppTheme.radiantTopRight,
+                          AppTheme.radiantTop,
+                          AppTheme.radiantBotom
+                        ],
+                      ),
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                     child: Image.network(
                       "${Endpoint.uplaod}${snapshot.data[index].photo}",
                     ),
