@@ -34,14 +34,14 @@ class BuildArticleList extends StatelessWidget {
             shrinkWrap: true,
             /*
               If data variable is null we give 5 as the length of the list
-              otherwise we take the real length of the wich comes from the
+              otherwise we take the real length of the list wich comes from the
               snapshot
             */
             itemCount: (data != null) ? data.length : 5,
             itemBuilder: (context, index) {
-              /* If data variable is not null, we retreive the list wich 
-                data otherwise we retreive the shimmer list to specify
-                to the user that data are loading
+              /* If data variable is not null, we retreive the list from 
+                the snapshot, otherwise we retreive the shimmer list to specify
+                to the user that data are in loading process
               */
               return data != null
                   ? _buildListData(index, context)

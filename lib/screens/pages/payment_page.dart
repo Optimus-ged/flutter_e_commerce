@@ -33,7 +33,8 @@ class _PaymentPageState extends State<PaymentPage> {
                 Expanded(
                   child: ListView.builder(
                     itemCount: snapshot.data.length,
-                    // This make the list scrollinng only when data are many
+                    // This make the list scrollinng only 
+                    // when data are so many
                     primary: false,
                     itemBuilder: (context, index) {
                       return ListTile(
@@ -72,7 +73,9 @@ class _PaymentPageState extends State<PaymentPage> {
                             Text(
                               "Pu : ${snapshot.data[index].pu}\$",
                               style: TextStyle(
-                                  fontSize: 13, color: Colors.black54),
+                                fontSize: 13,
+                                color: Colors.black54,
+                              ),
                             ),
                           ],
                         ),
