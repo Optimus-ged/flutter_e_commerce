@@ -3,7 +3,6 @@ import 'package:e_commerce/exports/all_exports.dart';
 class PaymentPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Size screen = MediaQuery.of(context).size;
     return Scaffold(
       body: StreamBuilder<List<LocalArticle>>(
         stream: locator.get<LocalArticleBloc>().subject,
@@ -14,7 +13,8 @@ class PaymentPage extends StatelessWidget {
               itemBuilder: (context, index) {
                 return ListTile(
                   leading: Container(
-                    width: 50,
+                    // width: 50,
+                    // height: 100,
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         begin: Alignment.topCenter,
@@ -25,10 +25,16 @@ class PaymentPage extends StatelessWidget {
                           AppTheme.radiantBotom
                         ],
                       ),
-                      borderRadius: BorderRadius.circular(10),
+                      borderRadius: BorderRadius.circular(8),
                     ),
-                    child: Image.network(
-                      "${Endpoint.uplaod}${snapshot.data[index].photo}",
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: CustomCashedImage(
+                        imageUrl:
+                            "${Endpoint.uplaod}${snapshot.data[index].photo}",
+                        isHomePage: false,
+                        // screen: ,
+                      ),
                     ),
                   ),
                   title: Text(

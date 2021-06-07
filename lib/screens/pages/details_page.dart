@@ -263,6 +263,7 @@ class _DetailPageState extends State<DetailPage> {
             child: CustomCashedImage(
               imageUrl: "${Endpoint.uplaod}${data[index].photoArticle}",
               screen: screen,
+              isHomePage: false,
             ),
           ),
           itemCount: 3,
