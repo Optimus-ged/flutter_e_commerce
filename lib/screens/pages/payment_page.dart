@@ -1,14 +1,33 @@
 import 'package:e_commerce/exports/all_exports.dart';
 
-class PaymentPage extends StatelessWidget {
+class PaymentPage extends StatefulWidget {
+  @override
+  _PaymentPageState createState() => _PaymentPageState();
+}
+
+class _PaymentPageState extends State<PaymentPage> {
+  dynamic totalPayment;
+
+  @override
+  void initState() {
+    totalPayment = 0;
+    super.initState();
+  }
+
+  void browseList({List<LocalArticle> data}) {
+    data.forEach((v) {
+      totalPayment = totalPayment + (v.qte * v.pu);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    dynamic totalPayment = 0;
     return Scaffold(
       body: StreamBuilder<List<LocalArticle>>(
         stream: locator.get<LocalArticleBloc>().subject,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
+            browseList(data: snapshot.data);
             return Column(
               children: [
                 Expanded(
@@ -17,8 +36,6 @@ class PaymentPage extends StatelessWidget {
                     primary: false,
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
-                      totalPayment = totalPayment +
-                          (snapshot.data[index].qte * snapshot.data[index].pu);
                       return ListTile(
                         minVerticalPadding: 0,
                         horizontalTitleGap: 5,
