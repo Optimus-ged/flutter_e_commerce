@@ -6,7 +6,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // String token;
   ScrollController _scrollController;
   ListeArticleBloc get _listArticleBloc => locator.get<ListeArticleBloc>();
   LocalArticleBloc get _localArticleBloc => locator.get<LocalArticleBloc>();
@@ -30,7 +29,6 @@ class _HomePageState extends State<HomePage> {
     var screen = MediaQuery.of(context).size;
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: AppTheme.whiteColor,
-      systemNavigationBarColor: Colors.white.withOpacity(0.93),
       statusBarIconBrightness: Brightness.dark,
     ));
     return SafeArea(
