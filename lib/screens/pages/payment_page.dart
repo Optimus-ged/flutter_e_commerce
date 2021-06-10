@@ -33,7 +33,7 @@ class _PaymentPageState extends State<PaymentPage> {
                 Expanded(
                   child: ListView.builder(
                     itemCount: snapshot.data.length,
-                    // This make the list scrollinng only 
+                    // This make the list scrollinng only
                     // when data are so many
                     primary: false,
                     itemBuilder: (context, index) {
@@ -64,20 +64,43 @@ class _PaymentPageState extends State<PaymentPage> {
                             ),
                           ),
                         ),
-                        title: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "${snapshot.data[index].designation}",
-                            ),
-                            Text(
-                              "Pu : ${snapshot.data[index].pu}\$",
-                              style: TextStyle(
-                                fontSize: 13,
-                                color: Colors.black54,
+                        title: Container(
+                          alignment: Alignment.topLeft,
+                          height: 55,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "${snapshot.data[index].designation}",
                               ),
-                            ),
-                          ],
+                              Text(
+                                "Pu : ${snapshot.data[index].pu}\$",
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  color: Colors.black54,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        trailing: Container(
+                          alignment: Alignment.bottomCenter,
+                          padding: EdgeInsets.only(top: 30),
+                          height: 55,
+                          width: 100,
+                          child: Row(
+                            children: [
+                              _buildOptionItem(title: "+"),
+                              _buildOptionItem(
+                                title: "${snapshot.data[index].qte}",
+                                flex: 1,
+                                margin: 5,
+                                color: Colors.transparent,
+                              ),
+                              _buildOptionItem(title: "-"),
+                            ],
+                          ),
                         ),
                       );
                     },
@@ -95,6 +118,43 @@ class _PaymentPageState extends State<PaymentPage> {
             child: CircularProgressIndicator(),
           );
         },
+      ),
+    );
+  }
+
+  // Building the item of making options
+  Widget _buildOptionItem({
+    int flex = 2,
+    double margin = 0,
+    String title,
+    double fontSize = 20,
+    Color color = Colors.white,
+  }) {
+    return Expanded(
+      flex: flex,
+      child: Container(
+        margin: EdgeInsets.symmetric(horizontal: margin),
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: color,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey[100],
+              blurRadius: 2,
+              offset: Offset(0, 1),
+            )
+          ],
+          borderRadius: BorderRadius.circular(5),
+        ),
+        child: Center(
+          child: Text(
+            "$title",
+            style: TextStyle(
+              color: Colors.amber,
+              fontSize: fontSize,
+            ),
+          ),
+        ),
       ),
     );
   }
