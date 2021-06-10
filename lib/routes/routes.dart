@@ -18,8 +18,12 @@ abstract class Routes {
       case Search:
         return MaterialPageRoute(builder: (context) => SearchPage());
         break;
-        case Payment:
-        return MaterialPageRoute(builder: (context) => PaymentPage());
+      case Payment:
+        return MaterialPageRoute(
+          builder: (context) => PaymentPage(
+            
+          ),
+        );
         break;
       case Details:
         return MaterialPageRoute(

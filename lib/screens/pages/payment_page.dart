@@ -177,16 +177,25 @@ class _PaymentPageState extends State<PaymentPage> {
   }
 
   // Option to add quantity or to make the oposite
-  void _addOrDropData(
-      {LocalArticle data, int index, bool isAdding = true}) {
+  void _addOrDropData({LocalArticle data, int index, bool isAdding = true}) {
     final _article = LocalArticle(
       id: data.id,
       photo: data.photo,
       designation: data.designation,
       pu: data.pu,
-      qte: isAdding ? data.qte + 1 : data.qte - 1,      
+      qte: (data.qte >= 1)
+          ? isAdding
+              ? data.qte + 1
+              : (data.qte > 1)
+                  ? data.qte - 1
+                  : data.qte
+          : data.qte,
     );
 
     _localArticleBloc.updateLocalArticle(data: _article);
+
+    setState(() {
+      totalPayment = 0.0;
+    });
   }
 }

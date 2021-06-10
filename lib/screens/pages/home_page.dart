@@ -96,10 +96,17 @@ class _HomePageState extends State<HomePage> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              _buildNavigationItem(
-                  icon: Icons.shopping_basket_outlined,
-                  context: context,
-                  onTap: () => Navigator.of(context).pushNamed(Payment)),
+              StreamBuilder<List<LocalArticle>>(
+                  stream: _localArticleBloc.subject,
+                  builder: (context, snapshot) {
+                    return _buildNavigationItem(
+                        icon: Icons.shopping_basket_outlined,
+                        context: context,
+                        onTap: () => Navigator.of(context).pushNamed(
+                              Payment,
+                              arguments: snapshot.data,
+                            ));
+                  }),
               _buildNavigationItem(
                 icon: Icons.search,
                 context: context,
