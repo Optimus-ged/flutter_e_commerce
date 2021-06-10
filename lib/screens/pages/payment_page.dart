@@ -27,8 +27,8 @@ class _PaymentPageState extends State<PaymentPage> {
       body: StreamBuilder<List<LocalArticle>>(
         stream: locator.get<LocalArticleBloc>().subject,
         builder: (context, snapshot) {
-          browseList(data: snapshot.data);
           if (snapshot.hasData) {
+            browseList(data: snapshot.data);
             return Column(
               children: [
                 Expanded(
