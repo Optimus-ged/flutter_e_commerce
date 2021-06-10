@@ -7,7 +7,6 @@ class PaymentPage extends StatefulWidget {
 
 class _PaymentPageState extends State<PaymentPage> {
   double totalPayment;
-  LocalArticleBloc get _localArticleBloc => locator.get<LocalArticleBloc>();
 
   @override
   void initState() {
@@ -76,7 +75,7 @@ class _PaymentPageState extends State<PaymentPage> {
                                 "${snapshot.data[index].designation}",
                               ),
                               Text(
-                                "Pu : ${snapshot.data[index].pu}\$",
+                                "Pu : ${snapshot.data[index].pu}\$\nPt : ${snapshot.data[index].pu * snapshot.data[index].qte}\$",
                                 style: TextStyle(
                                   fontSize: 13,
                                   color: Colors.black54,
@@ -100,11 +99,13 @@ class _PaymentPageState extends State<PaymentPage> {
                                 ),
                               ),
                               _buildOptionItem(
-                                  title: "${snapshot.data[index].qte}",
-                                  flex: 1,
-                                  margin: 5,
-                                  color: Colors.transparent,
-                                  fontSize: 12),
+                                title: "${snapshot.data[index].qte}",
+                                flex: 1,
+                                margin: 5,
+                                color: Colors.transparent,
+                                fontSize: 12,
+                                isQte: true,
+                              ),
                               _buildOptionItem(
                                 title: "-",
                                 ontap: () => _addOrDropData(
@@ -143,6 +144,7 @@ class _PaymentPageState extends State<PaymentPage> {
       String title,
       double fontSize = 20,
       Color color = Colors.white,
+      bool isQte = false,
       VoidCallback ontap}) {
     return Expanded(
       flex: flex,
@@ -151,17 +153,22 @@ class _PaymentPageState extends State<PaymentPage> {
         child: Container(
           margin: EdgeInsets.symmetric(horizontal: margin),
           alignment: Alignment.center,
-          decoration: BoxDecoration(
-            color: color,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey[100],
-                blurRadius: 2,
-                offset: Offset(0, 1),
-              )
-            ],
-            borderRadius: BorderRadius.circular(5),
-          ),
+          decoration: isQte
+              ? BoxDecoration(
+                  color: color,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey[100],
+                      blurRadius: 2,
+                      offset: Offset(0, 1),
+                    )
+                  ],
+                  borderRadius: BorderRadius.circular(5),
+                )
+              : BoxDecoration(
+                  color: color,
+                  borderRadius: BorderRadius.circular(5),
+                ),
           child: Center(
             child: Text(
               "$title",
@@ -192,7 +199,7 @@ class _PaymentPageState extends State<PaymentPage> {
           : data.qte,
     );
 
-    _localArticleBloc.updateLocalArticle(data: _article);
+    locator.get<LocalArticleBloc>().updateLocalArticle(data: _article);
 
     setState(() {
       totalPayment = 0.0;
