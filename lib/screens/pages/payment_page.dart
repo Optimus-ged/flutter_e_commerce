@@ -7,6 +7,7 @@ class PaymentPage extends StatefulWidget {
 
 class _PaymentPageState extends State<PaymentPage> {
   double totalPayment;
+  LocalArticleBloc get _localArticleBloc => locator.get<LocalArticleBloc>();
 
   @override
   void initState() {
@@ -26,8 +27,8 @@ class _PaymentPageState extends State<PaymentPage> {
       body: StreamBuilder<List<LocalArticle>>(
         stream: locator.get<LocalArticleBloc>().subject,
         builder: (context, snapshot) {
+          browseList(data: snapshot.data);
           if (snapshot.hasData) {
-            browseList(data: snapshot.data);
             return Column(
               children: [
                 Expanded(
@@ -85,20 +86,33 @@ class _PaymentPageState extends State<PaymentPage> {
                           ),
                         ),
                         trailing: Container(
-                          alignment: Alignment.bottomCenter,
-                          padding: EdgeInsets.only(top: 30),
+                          alignment: Alignment.center,
+                          padding: EdgeInsets.symmetric(vertical: 15),
                           height: 55,
                           width: 100,
                           child: Row(
                             children: [
-                              _buildOptionItem(title: "+"),
                               _buildOptionItem(
-                                title: "${snapshot.data[index].qte}",
-                                flex: 1,
-                                margin: 5,
-                                color: Colors.transparent,
+                                title: "+",
+                                ontap: () => _addOrDropData(
+                                  data: snapshot.data[index],
+                                  index: index,
+                                ),
                               ),
-                              _buildOptionItem(title: "-"),
+                              _buildOptionItem(
+                                  title: "${snapshot.data[index].qte}",
+                                  flex: 1,
+                                  margin: 5,
+                                  color: Colors.transparent,
+                                  fontSize: 12),
+                              _buildOptionItem(
+                                title: "-",
+                                ontap: () => _addOrDropData(
+                                  data: snapshot.data[index],
+                                  index: index,
+                                  isAdding: false,
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -123,39 +137,56 @@ class _PaymentPageState extends State<PaymentPage> {
   }
 
   // Building the item of making options
-  Widget _buildOptionItem({
-    int flex = 2,
-    double margin = 0,
-    String title,
-    double fontSize = 20,
-    Color color = Colors.white,
-  }) {
+  Widget _buildOptionItem(
+      {int flex = 2,
+      double margin = 0,
+      String title,
+      double fontSize = 20,
+      Color color = Colors.white,
+      VoidCallback ontap}) {
     return Expanded(
       flex: flex,
-      child: Container(
-        margin: EdgeInsets.symmetric(horizontal: margin),
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          color: color,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey[100],
-              blurRadius: 2,
-              offset: Offset(0, 1),
-            )
-          ],
-          borderRadius: BorderRadius.circular(5),
-        ),
-        child: Center(
-          child: Text(
-            "$title",
-            style: TextStyle(
-              color: Colors.amber,
-              fontSize: fontSize,
+      child: InkWell(
+        onTap: ontap,
+        child: Container(
+          margin: EdgeInsets.symmetric(horizontal: margin),
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: color,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey[100],
+                blurRadius: 2,
+                offset: Offset(0, 1),
+              )
+            ],
+            borderRadius: BorderRadius.circular(5),
+          ),
+          child: Center(
+            child: Text(
+              "$title",
+              style: TextStyle(
+                color: Colors.amber,
+                fontSize: fontSize,
+              ),
             ),
           ),
         ),
       ),
     );
+  }
+
+  // Option to add quantity or to make the oposite
+  void _addOrDropData(
+      {LocalArticle data, int index, bool isAdding = true}) {
+    final _article = LocalArticle(
+      id: data.id,
+      photo: data.photo,
+      designation: data.designation,
+      pu: data.pu,
+      qte: isAdding ? data.qte + 1 : data.qte - 1,      
+    );
+
+    _localArticleBloc.updateLocalArticle(data: _article);
   }
 }
