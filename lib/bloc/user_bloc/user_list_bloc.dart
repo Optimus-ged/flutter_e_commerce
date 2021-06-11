@@ -3,7 +3,7 @@ import 'package:rxdart/rxdart.dart';
 
 class UserListBloc {
   BehaviorSubject<UserResponse> _subject = BehaviorSubject<UserResponse>();
-  BehaviorSubject<UserResponse> get subject => _subject;
+  BehaviorSubject<UserResponse> get stream => _subject.stream;
 
   // Get all users
   getUsers() async {
