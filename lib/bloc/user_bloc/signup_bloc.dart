@@ -3,6 +3,7 @@ import 'package:rxdart/rxdart.dart';
 
 class SignUpBloc {
   BehaviorSubject<UserResponse> _subject = BehaviorSubject<UserResponse>();
+  BehaviorSubject<UserResponse> get stream => _subject.stream;
 
   signUp(Users user) async {
     String _token = await locator.get<SharedPreferencesHelper>().authToken;
@@ -15,5 +16,4 @@ class SignUpBloc {
     _subject.close();
   }
 
-  BehaviorSubject<UserResponse> get subject => _subject;
 }
