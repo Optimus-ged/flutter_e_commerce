@@ -3,7 +3,7 @@ import 'package:rxdart/rxdart.dart';
 
 class ListeArticleBloc {
   BehaviorSubject<ListeArticles> _subject = BehaviorSubject<ListeArticles>();
-  BehaviorSubject<ListeArticles> get subject => _subject;
+  BehaviorSubject<ListeArticles> get stream => _subject.stream;
 
   // Get data function
   getArticles() async {

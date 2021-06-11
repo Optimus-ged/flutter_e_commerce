@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
         backgroundColor: AppTheme.whiteColor,
         body: StreamBuilder<ListeArticles>(
-          stream: _listArticleBloc.subject.stream,
+          stream: _listArticleBloc.stream,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return BuildArticleList(
