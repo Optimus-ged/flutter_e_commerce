@@ -27,10 +27,12 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     var screen = MediaQuery.of(context).size;
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: AppTheme.whiteColor,
-      statusBarIconBrightness: Brightness.dark,
-    ));
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarColor: AppTheme.whiteColor,
+        statusBarIconBrightness: Brightness.dark,
+      ),
+    );
     return SafeArea(
       top: false,
       child: Scaffold(
@@ -85,6 +87,7 @@ class _HomePageState extends State<HomePage> {
                 blurRadius: 5,
                 offset: Offset(0, -5),
               ),
+
               // Botom shadoow
               BoxShadow(
                 color: Colors.black12.withOpacity(0.05),
@@ -97,23 +100,22 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               StreamBuilder<List<LocalArticle>>(
-                  stream: _localArticleBloc.subject,
-                  builder: (context, snapshot) {
-                    return _buildNavigationItem(
-                        icon: Icons.shopping_basket_outlined,
-                        context: context,
-                        onTap: () => Navigator.of(context).pushNamed(
-                              Payment,
-                              arguments: snapshot.data,
-                            ));
-                  }),
+                stream: _localArticleBloc.subject,
+                builder: (context, snapshot) {
+                  return _buildNavigationItem(
+                    icon: Icons.shopping_basket_outlined,
+                    context: context,
+                    onTap: () => Navigator.of(context).pushNamed(
+                      Payment,
+                      arguments: snapshot.data,
+                    ),
+                  );
+                },
+              ),
               _buildNavigationItem(
                 icon: Icons.search,
                 context: context,
-                onTap: () => Navigator.of(context).pushNamed(
-                  Search,
-                  arguments: {"hint": "Sa marche"},
-                ),
+                onTap: () {},
               ),
               _buildNavigationItem(
                 icon: Icons.exit_to_app,
