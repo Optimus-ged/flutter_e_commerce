@@ -139,6 +139,7 @@ class _PaymentPageState extends State<PaymentPage> {
                     Icons.payments,
                     color: AppTheme.whiteColor,
                   ),
+                  onTap: () {},
                 ),
                 SizedBox(height: 20)
               ],
