@@ -156,38 +156,36 @@ class _DetailPageState extends State<DetailPage> {
                         ),
                       ),
                       SizedBox(height: 10),
-                      Center(
-                        child: ClickAnimation(
-                          onTap: () {
-                            _addToChart(widget.data);
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: AppTheme.pinkColor,
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            padding: EdgeInsets.symmetric(
-                              vertical: 10,
-                              horizontal: 40,
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Icon(
-                                  Icons.shopping_cart_outlined,
-                                  color: AppTheme.whiteColor,
+                      ClickAnimation(
+                        onTap: () {
+                          _addToChart(widget.data);
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: AppTheme.pinkColor,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          padding: EdgeInsets.symmetric(
+                            vertical: 10,
+                            horizontal: 40,
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                Icons.shopping_cart_outlined,
+                                color: AppTheme.whiteColor,
+                              ),
+                              SizedBox(width: 5),
+                              Text(
+                                "Ajouter au pannier",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 17,
                                 ),
-                                SizedBox(width: 5),
-                                Text(
-                                  "Ajouter au pannier",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 17,
-                                  ),
-                                ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
                         ),
                       ),
