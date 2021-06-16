@@ -157,13 +157,15 @@ class _DetailPageState extends State<DetailPage> {
                         ),
                       ),
                       SizedBox(height: 10),
-                      CustomButton(
-                        onTap: () {
-                          _addToChart(widget.data);
-                        },
-                        icon: Icon(
-                          Icons.shopping_cart_outlined,
-                          color: AppTheme.whiteColor,
+                      Center(
+                        child: CustomButton(
+                          onTap: () {
+                            _addToChart(widget.data);
+                          },
+                          icon: Icon(
+                            Icons.shopping_cart_outlined,
+                            color: AppTheme.whiteColor,
+                          ),
                         ),
                       ),
                       SizedBox(height: 20)

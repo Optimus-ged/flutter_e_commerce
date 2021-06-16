@@ -122,10 +122,14 @@ class _PaymentPageState extends State<PaymentPage> {
                     },
                   ),
                 ),
-                Container(
-                  color: AppTheme.pinkColor,
-                  padding: EdgeInsets.all(10),
-                  child: Text("$totalPayment"),
+                Text(
+                  "$totalPayment",
+                  style: TextStyle(
+                    color: Colors.grey[500],
+                    fontSize: 17,
+                    height: 1.5,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
                 SizedBox(height: 10),
                 CustomButton(
@@ -134,7 +138,8 @@ class _PaymentPageState extends State<PaymentPage> {
                     Icons.payments,
                     color: AppTheme.whiteColor,
                   ),
-                )
+                ),
+                SizedBox(height: 20)
               ],
             );
           }
