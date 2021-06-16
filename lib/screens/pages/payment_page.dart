@@ -1,4 +1,5 @@
 import 'package:e_commerce/exports/all_exports.dart';
+import 'package:e_commerce/screens/widgets/custom_btn.dart';
 
 class PaymentPage extends StatefulWidget {
   @override
@@ -126,7 +127,10 @@ class _PaymentPageState extends State<PaymentPage> {
                   padding: EdgeInsets.all(10),
                   child: Text("$totalPayment"),
                 ),
-                
+                SizedBox(height: 10),
+                CustomButton(
+                  title: "Effectuer payement",
+                )
               ],
             );
           }
