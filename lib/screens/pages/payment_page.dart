@@ -125,7 +125,8 @@ class _PaymentPageState extends State<PaymentPage> {
                   color: AppTheme.pinkColor,
                   padding: EdgeInsets.all(10),
                   child: Text("$totalPayment"),
-                )
+                ),
+                
               ],
             );
           }
