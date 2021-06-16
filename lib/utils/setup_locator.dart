@@ -5,7 +5,7 @@ final locator = GetIt.I;
 void setup() async {
   // Initializing shared preferences helper class
   SharedPreferencesHelper sharedPreferencesHelper =
-      await SharedPreferencesHelper().getInstance();
+      await SharedPreferencesHelper.getInstance();
 
   // All module instances
   locator.registerLazySingleton<ListeArticleBloc>(() => ListeArticleBloc());

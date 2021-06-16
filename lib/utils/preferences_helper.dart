@@ -1,10 +1,10 @@
 import 'package:e_commerce/exports/all_exports.dart';
 
 class SharedPreferencesHelper {
-  SharedPreferences _sPrefs;
-  SharedPreferencesHelper _insance;
+  static SharedPreferences _sPrefs;
+  static SharedPreferencesHelper _insance;
 
-   Future<SharedPreferencesHelper> getInstance() async {
+  static Future<SharedPreferencesHelper> getInstance() async {
     if (_insance == null) {
       _insance = SharedPreferencesHelper();
     }
