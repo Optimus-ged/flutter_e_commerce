@@ -1,5 +1,4 @@
 import 'package:e_commerce/exports/all_exports.dart';
-import 'package:e_commerce/screens/widgets/custom_btn.dart';
 
 class DetailPage extends StatefulWidget {
   final Article data;

@@ -32,6 +32,7 @@ export 'package:e_commerce/screens/widgets/backwardButton.dart';
 export 'package:e_commerce/screens/widgets/pageview_indicator.dart';
 export 'package:e_commerce/screens/widgets/custom_cached_img.dart';
 export 'package:e_commerce/screens/widgets/article_list.dart';
+export 'package:e_commerce/screens/widgets/custom_btn.dart';
 
 // All Models
 export 'package:e_commerce/model/user_model/user.dart';
