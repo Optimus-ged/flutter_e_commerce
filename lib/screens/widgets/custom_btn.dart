@@ -3,17 +3,16 @@ import 'package:e_commerce/exports/all_exports.dart';
 class CustomButton extends StatelessWidget {
   final VoidCallback onTap;
   final String title;
+  final Icon icon;
   const CustomButton({
     Key key,
     this.onTap,
     this.title = "Ajouter au pannier",
+    this.icon,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return ClickAnimation(
-      // onTap: () {
-      //   _addToChart(widget.data);
-      // },
       onTap: onTap,
       child: Container(
         decoration: BoxDecoration(
@@ -28,10 +27,7 @@ class CustomButton extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(
-              Icons.shopping_cart_outlined,
-              color: AppTheme.whiteColor,
-            ),
+            icon,
             SizedBox(width: 5),
             Text(
               "$title",

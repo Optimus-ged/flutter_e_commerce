@@ -1,4 +1,5 @@
 import 'package:e_commerce/exports/all_exports.dart';
+import 'package:e_commerce/screens/widgets/custom_btn.dart';
 
 class DetailPage extends StatefulWidget {
   final Article data;
@@ -156,37 +157,13 @@ class _DetailPageState extends State<DetailPage> {
                         ),
                       ),
                       SizedBox(height: 10),
-                      ClickAnimation(
+                      CustomButton(
                         onTap: () {
                           _addToChart(widget.data);
                         },
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: AppTheme.pinkColor,
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          padding: EdgeInsets.symmetric(
-                            vertical: 10,
-                            horizontal: 40,
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Icon(
-                                Icons.shopping_cart_outlined,
-                                color: AppTheme.whiteColor,
-                              ),
-                              SizedBox(width: 5),
-                              Text(
-                                "Ajouter au pannier",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 17,
-                                ),
-                              ),
-                            ],
-                          ),
+                        icon: Icon(
+                          Icons.shopping_cart_outlined,
+                          color: AppTheme.whiteColor,
                         ),
                       ),
                       SizedBox(height: 20)
