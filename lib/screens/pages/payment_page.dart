@@ -24,6 +24,7 @@ class _PaymentPageState extends State<PaymentPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: StreamBuilder<List<LocalArticle>>(
         stream: locator.get<LocalArticleBloc>().subject,
         builder: (context, snapshot) {
@@ -123,7 +124,7 @@ class _PaymentPageState extends State<PaymentPage> {
                   ),
                 ),
                 Text(
-                  "$totalPayment",
+                  "A payer : $totalPayment\$",
                   style: TextStyle(
                     color: Colors.grey[500],
                     fontSize: 17,
