@@ -38,87 +38,7 @@ class _PaymentPageState extends State<PaymentPage> {
                     // when data are so many
                     primary: false,
                     itemBuilder: (context, index) {
-                      return ListTile(
-                        minVerticalPadding: 0,
-                        horizontalTitleGap: 5,
-                        contentPadding:
-                            EdgeInsets.symmetric(vertical: 3, horizontal: 10),
-                        leading: Container(
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: [
-                                AppTheme.radiantTopRight,
-                                AppTheme.radiantTop,
-                                AppTheme.radiantBotom
-                              ],
-                            ),
-                            borderRadius: BorderRadius.circular(6),
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(6),
-                            child: CustomCashedImage(
-                              imageUrl:
-                                  "${Endpoint.uplaod}${snapshot.data[index].photo}",
-                              isPayPage: true,
-                            ),
-                          ),
-                        ),
-                        title: Container(
-                          alignment: Alignment.topLeft,
-                          height: 55,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "${snapshot.data[index].designation}",
-                              ),
-                              Text(
-                                "Pu : ${snapshot.data[index].pu}\$\nPt : ${snapshot.data[index].pu * snapshot.data[index].qte}\$",
-                                style: TextStyle(
-                                  fontSize: 13,
-                                  color: Colors.black54,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        trailing: Container(
-                          alignment: Alignment.center,
-                          padding: EdgeInsets.symmetric(vertical: 15),
-                          height: 55,
-                          width: 100,
-                          child: Row(
-                            children: [
-                              _buildOptionItem(
-                                title: "+",
-                                ontap: () => _addOrDropData(
-                                  data: snapshot.data[index],
-                                  index: index,
-                                ),
-                              ),
-                              _buildOptionItem(
-                                title: "${snapshot.data[index].qte}",
-                                flex: 1,
-                                margin: 5,
-                                color: Colors.transparent,
-                                fontSize: 12,
-                                isQte: true,
-                              ),
-                              _buildOptionItem(
-                                title: "-",
-                                ontap: () => _addOrDropData(
-                                  data: snapshot.data[index],
-                                  index: index,
-                                  isAdding: false,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
+                      return _buildListItem(data: snapshot.data, index: index);
                     },
                   ),
                 ),
@@ -148,6 +68,89 @@ class _PaymentPageState extends State<PaymentPage> {
             child: CircularProgressIndicator(),
           );
         },
+      ),
+    );
+  }
+
+  // Building list view item
+  Widget _buildListItem({List<LocalArticle> data, int index}) {
+    return ListTile(
+      minVerticalPadding: 0,
+      horizontalTitleGap: 5,
+      contentPadding: EdgeInsets.symmetric(vertical: 3, horizontal: 10),
+      leading: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              AppTheme.radiantTopRight,
+              AppTheme.radiantTop,
+              AppTheme.radiantBotom
+            ],
+          ),
+          borderRadius: BorderRadius.circular(6),
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(6),
+          child: CustomCashedImage(
+            imageUrl: "${Endpoint.uplaod}${data[index].photo}",
+            isPayPage: true,
+          ),
+        ),
+      ),
+      title: Container(
+        alignment: Alignment.topLeft,
+        height: 55,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              "${data[index].designation}",
+            ),
+            Text(
+              "Pu : ${data[index].pu}\$\nPt : ${data[index].pu * data[index].qte}\$",
+              style: TextStyle(
+                fontSize: 13,
+                color: Colors.black54,
+              ),
+            ),
+          ],
+        ),
+      ),
+      trailing: Container(
+        alignment: Alignment.center,
+        padding: EdgeInsets.symmetric(vertical: 15),
+        height: 55,
+        width: 100,
+        child: Row(
+          children: [
+            _buildOptionItem(
+              title: "+",
+              ontap: () => _addOrDropData(
+                data: data[index],
+                index: index,
+              ),
+            ),
+            _buildOptionItem(
+              title: "${data[index].qte}",
+              flex: 1,
+              margin: 5,
+              color: Colors.transparent,
+              fontSize: 12,
+              isQte: true,
+            ),
+            _buildOptionItem(
+              title: "-",
+              ontap: () => _addOrDropData(
+                data: data[index],
+                index: index,
+                isAdding: false,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
