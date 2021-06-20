@@ -112,7 +112,7 @@ class _PaymentPageState extends State<PaymentPage> {
                             ),
                             SizedBox(height: 10),
                             CustomButton(
-                              title: "Effectuer payement",
+                              title: "Effectuer paiement",
                               icon: Icon(
                                 Icons.payments,
                                 color: AppTheme.whiteColor,
