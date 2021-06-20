@@ -65,21 +65,42 @@ class _PaymentPageState extends State<PaymentPage> {
                         ),
                         child: Column(
                           children: [
-                            Expanded(
-                              child: ListView.builder(
-                                itemCount: snapshot.data.length,
-                                padding: EdgeInsets.only(top: 5),
-                                // This make the list scrollinng only
-                                // when data are so many
-                                primary: false,
-                                itemBuilder: (context, index) {
-                                  return _buildListItem(
-                                    data: snapshot.data,
-                                    index: index,
-                                  );
-                                },
-                              ),
-                            ),
+                            snapshot.data.length != 0
+                                ? Expanded(
+                                    child: ListView.builder(
+                                      itemCount: snapshot.data.length,
+                                      padding: EdgeInsets.only(top: 5),
+                                      // This make the list scrollinng only
+                                      // when data are so many
+                                      primary: false,
+                                      itemBuilder: (context, index) {
+                                        return _buildListItem(
+                                          data: snapshot.data,
+                                          index: index,
+                                        );
+                                      },
+                                    ),
+                                  )
+                                : Expanded(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.remove_shopping_cart_outlined,
+                                          color: Colors.grey[50],
+                                          size: 100,
+                                        ),
+                                        Text(
+                                          "vide",
+                                          style: TextStyle(
+                                            color: Colors.grey[300],
+                                            fontSize: 15,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                             Text(
                               "A payer : $totalPayment\$",
                               style: TextStyle(
