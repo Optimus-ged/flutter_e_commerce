@@ -22,6 +22,7 @@ class _PaymentPageState extends State<PaymentPage> {
 
   @override
   Widget build(BuildContext context) {
+    var screen = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.white,
       body: StreamBuilder<List<LocalArticle>>(
@@ -29,40 +30,94 @@ class _PaymentPageState extends State<PaymentPage> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             browseList(data: snapshot.data);
-            return Column(
+            return Stack(
               children: [
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: snapshot.data.length,
-                    // This make the list scrollinng only
-                    // when data are so many
-                    primary: false,
-                    itemBuilder: (context, index) {
-                      return _buildListItem(data: snapshot.data, index: index);
-                    },
+                Container(
+                  height: screen.height,
+                  width: screen.width,
+                  color: AppTheme.blueColor,
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 50,
+                        width: double.infinity,
+                        child: Text("PANIER"),
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(30)
+                          )
+                        ),
+                        child: ListView.builder(
+                          itemCount: snapshot.data.length,
+                          // This make the list scrollinng only
+                          // when data are so many
+                          primary: false,
+                          itemBuilder: (context, index) {
+                            return _buildListItem(
+                                data: snapshot.data, index: index);
+                          },
+                        ),
+                      ),
+                      Text(
+                        "A payer : $totalPayment\$",
+                        style: TextStyle(
+                          color: Colors.grey[500],
+                          fontSize: 17,
+                          height: 1.5,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      CustomButton(
+                        title: "Effectuer payement",
+                        icon: Icon(
+                          Icons.payments,
+                          color: AppTheme.whiteColor,
+                        ),
+                        onTap: () {},
+                      ),
+                    ],
                   ),
-                ),
-                Text(
-                  "A payer : $totalPayment\$",
-                  style: TextStyle(
-                    color: Colors.grey[500],
-                    fontSize: 17,
-                    height: 1.5,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                SizedBox(height: 10),
-                CustomButton(
-                  title: "Effectuer payement",
-                  icon: Icon(
-                    Icons.payments,
-                    color: AppTheme.whiteColor,
-                  ),
-                  onTap: () {},
-                ),
-                SizedBox(height: 20)
+                )
               ],
             );
+            // return Column(
+            //   children: [
+                // Expanded(
+                //   child: ListView.builder(
+                //     itemCount: snapshot.data.length,
+                //     // This make the list scrollinng only
+                //     // when data are so many
+                //     primary: false,
+                //     itemBuilder: (context, index) {
+                //       return _buildListItem(data: snapshot.data, index: index);
+                //     },
+                //   ),
+                // ),
+                // Text(
+                //   "A payer : $totalPayment\$",
+                //   style: TextStyle(
+                //     color: Colors.grey[500],
+                //     fontSize: 17,
+                //     height: 1.5,
+                //     fontWeight: FontWeight.w600,
+                //   ),
+                // ),
+                // SizedBox(height: 10),
+                // CustomButton(
+                //   title: "Effectuer payement",
+                //   icon: Icon(
+                //     Icons.payments,
+                //     color: AppTheme.whiteColor,
+                //   ),
+                //   onTap: () {},
+                // ),
+            //     SizedBox(height: 20)
+            //   ],
+            // );
           }
           return Center(
             child: CircularProgressIndicator(),
