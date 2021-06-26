@@ -11,6 +11,7 @@ class _PaymentPageState extends State<PaymentPage> {
   @override
   void initState() {
     totalPayment = 0;
+
     super.initState();
   }
 
@@ -120,7 +121,7 @@ class _PaymentPageState extends State<PaymentPage> {
                               onTap: () {
                                 return showDialog(
                                   context: context,
-                                  builder: (context) => _paymentSuccess(),
+                                  builder: (context) => _paymentDialog(),
                                 );
                               },
                             ),
@@ -352,6 +353,9 @@ class _PaymentPageState extends State<PaymentPage> {
                       Spacer(),
                       CustomButton(
                         title: "Confirmer",
+                        onTap: () {
+                          Navigator.of(context).pop();
+                        },
                       ),
                       SizedBox(height: 20)
                     ],
@@ -367,67 +371,72 @@ class _PaymentPageState extends State<PaymentPage> {
 
   // Building payment with success widget
   Widget _paymentSuccess() {
-    return Padding(
-      padding: EdgeInsets.only(
-        top: 100,
-        bottom: 200,
-        left: 20,
-        right: 20,
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(5),
-        child: Container(
-          height: 200,
-          width: 200,
-          decoration: BoxDecoration(
-            color: Colors.grey[50],
-            borderRadius: BorderRadiusDirectional.circular(5),
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: Text(
-                  'Voulez vous vraiment effectuer ce\npaiement ?',
-                  style: TextStyle(
-                    color: Colors.grey[500],
-                    fontWeight: FontWeight.w500,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(
-                        20,
-                      ),
+    return Material(
+      child: Padding(
+        padding: EdgeInsets.only(
+          top: 100,
+          bottom: 200,
+          left: 20,
+          right: 20,
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(5),
+          child: Container(
+            height: 200,
+            width: 200,
+            decoration: BoxDecoration(
+              color: Colors.grey[50],
+              borderRadius: BorderRadiusDirectional.circular(5),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: Text(
+                    'Voulez vous vraiment effectuer ce\npaiement ?',
+                    style: TextStyle(
+                      color: Colors.grey[500],
+                      fontWeight: FontWeight.w500,
                     ),
+                    textAlign: TextAlign.center,
                   ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Spacer(),
-                      Container(
-                        alignment: Alignment.center,
-                        width: double.infinity,
-                        child: Text(
-                          'Total a Payer : $totalPayment\$',
+                ),
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(
+                          20,
                         ),
                       ),
-                      Spacer(),
-                      CustomButton(
-                        title: "Confirmer",
-                      ),
-                      SizedBox(height: 20)
-                    ],
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Spacer(),
+                        Container(
+                          alignment: Alignment.center,
+                          width: double.infinity,
+                          child: Icon(
+                            Icons.verified,
+                            size: 60,
+                            color: AppTheme.pinkColor,
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          "Paimement effectue\navec succes",
+                          textAlign: TextAlign.center,
+                        ),
+                        Spacer(),
+                      ],
+                    ),
                   ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
         ),
       ),
