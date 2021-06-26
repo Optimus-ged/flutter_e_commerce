@@ -117,7 +117,40 @@ class _PaymentPageState extends State<PaymentPage> {
                                 Icons.payments,
                                 color: AppTheme.whiteColor,
                               ),
-                              onTap: () {},
+                              onTap: () {
+                                return showDialog(
+                                  context: context,
+                                  builder: (context) => Padding(
+                                    padding: EdgeInsets.only(
+                                      top: 100,
+                                      bottom: 200,
+                                      left: 20,
+                                      right: 20,
+                                    ),
+                                    child: Container(
+                                      height: 200,
+                                      width: 200,
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius:
+                                            BorderRadiusDirectional.circular(5),
+                                      ),
+                                      child: Column(
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(top: 20),
+                                            child: Text(
+                                              'Voulez vous effectuer ce\npaiement ?',
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
                             ),
                             SizedBox(height: 20)
                           ],
