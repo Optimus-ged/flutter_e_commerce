@@ -27,7 +27,7 @@ class CustomButton extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
-            icon,
+            icon != null ? icon : Container(),
             SizedBox(width: 5),
             Text(
               "$title",

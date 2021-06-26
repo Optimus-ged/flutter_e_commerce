@@ -351,10 +351,10 @@ class _PaymentPageState extends State<PaymentPage> {
                       ),
                       Spacer(),
                       CustomButton(
-                        icon: Icon(
-                          Icons.verified,
-                          color: Colors.white,
-                        ),
+                        // icon: Icon(
+                        //   Icons.verified,
+                        //   color: Colors.white,
+                        // ),
                         title: "Confirmer",
                       ),
                       SizedBox(height: 20)
