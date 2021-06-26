@@ -144,7 +144,22 @@ class _PaymentPageState extends State<PaymentPage> {
                                               'Voulez vous effectuer ce\npaiement ?',
                                               textAlign: TextAlign.center,
                                             ),
-                                          )
+                                          ),
+                                          Spacer(),
+                                          Center(
+                                            child: Text(
+                                              'Total a Payer : $totalPayment\$',
+                                            ),
+                                          ),
+                                          Spacer(),
+                                          CustomButton(
+                                            icon: Icon(
+                                              Icons.verified,
+                                              color: Colors.white,
+                                            ),
+                                            title: "Confirmer",
+                                          ),
+                                          SizedBox(height: 20)
                                         ],
                                       ),
                                     ),
