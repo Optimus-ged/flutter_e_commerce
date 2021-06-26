@@ -127,40 +127,72 @@ class _PaymentPageState extends State<PaymentPage> {
                                       left: 20,
                                       right: 20,
                                     ),
-                                    child: Container(
-                                      height: 200,
-                                      width: 200,
-                                      decoration: BoxDecoration(
-                                        color: Colors.white,
-                                        borderRadius:
-                                            BorderRadiusDirectional.circular(5),
-                                      ),
-                                      child: Column(
-                                        children: [
-                                          Padding(
-                                            padding:
-                                                const EdgeInsets.only(top: 20),
-                                            child: Text(
-                                              'Voulez vous effectuer ce\npaiement ?',
-                                              textAlign: TextAlign.center,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(5),
+                                      child: Container(
+                                        height: 200,
+                                        width: 200,
+                                        decoration: BoxDecoration(
+                                          color: Colors.grey[50],
+                                          borderRadius:
+                                              BorderRadiusDirectional.circular(
+                                                  5),
+                                        ),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.max,
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 10),
+                                              child: Text(
+                                                'Voulez vous vraiment effectuer ce\npaiement ?',
+                                                style: TextStyle(
+                                                  color: Colors.grey[500],
+                                                  fontWeight: FontWeight.w700,
+                                                ),
+                                                textAlign: TextAlign.center,
+                                              ),
                                             ),
-                                          ),
-                                          Spacer(),
-                                          Center(
-                                            child: Text(
-                                              'Total a Payer : $totalPayment\$',
-                                            ),
-                                          ),
-                                          Spacer(),
-                                          CustomButton(
-                                            icon: Icon(
-                                              Icons.verified,
-                                              color: Colors.white,
-                                            ),
-                                            title: "Confirmer",
-                                          ),
-                                          SizedBox(height: 20)
-                                        ],
+                                            Expanded(
+                                              child: Container(
+                                                decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  borderRadius:
+                                                      BorderRadius.vertical(
+                                                    top: Radius.circular(
+                                                      20,
+                                                    ),
+                                                  ),
+                                                ),
+                                                child: Column(
+                                                  mainAxisSize:
+                                                      MainAxisSize.max,
+                                                  children: [
+                                                    Spacer(),
+                                                    Container(
+                                                      alignment:
+                                                          Alignment.center,
+                                                      width: double.infinity,
+                                                      child: Text(
+                                                        'Total a Payer : $totalPayment\$',
+                                                      ),
+                                                    ),
+                                                    Spacer(),
+                                                    CustomButton(
+                                                      icon: Icon(
+                                                        Icons.verified,
+                                                        color: Colors.white,
+                                                      ),
+                                                      title: "Confirmer",
+                                                    ),
+                                                    SizedBox(height: 20)
+                                                  ],
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
                                       ),
                                     ),
                                   ),
