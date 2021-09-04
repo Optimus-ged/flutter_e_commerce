@@ -1,101 +1,159 @@
+import 'package:e_commerce/bloc/login_bloc/login_bloc.dart';
+import 'package:e_commerce/bloc/login_bloc/login_event.dart';
+import 'package:e_commerce/bloc/login_bloc/login_state.dart';
 import 'package:e_commerce/exports/all_exports.dart';
+import 'package:e_commerce/routes/routes_constants.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  var _controllerNom = TextEditingController();
+  var _controllerPassword = TextEditingController();
+  LoginBloc _loginBloc;
+
+  @override
+  void initState() {
+    _loginBloc = BlocProvider.of<LoginBloc>(context);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     var screen = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: AppTheme.blueColor,
-      body: ScrollConfiguration(
-        behavior: RemoveGlow(),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Container(
-                height: screen.height * .28,
-                width: double.infinity,
-                alignment: Alignment.bottomCenter,
-                child: Text(
-                  "UZISHA",
-                  style: TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold,
-                    color: AppTheme.lessWhiteColor,
-                    letterSpacing: 2,
-                  ),
-                ),
-              ),
-              SizedBox(height: screen.height * .12),
-              Container(
-                width: double.infinity,
-                alignment: Alignment.center,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    _builTitle(
-                      title: "S'inscrire",
-                      isActive: false,
-                      onTap: () => Navigator.of(context).pushNamed(Signup),
-                    ),
-                    _buildDivider(),
-                    _builTitle(title: "Se connecter", isActive: true),
-                  ],
-                ),
-              ),
-              CustomTextField(
-                  hint: "Nom d'utilisateur ou telephone",
-                  isFirst: true,
-                  obscureText: false,
-                  top: screen.height * .05),
-              CustomTextField(
-                hint: "Mot de passe",
-                isFirst: false,
-                obscureText: true,
-              ),
-              SizedBox(height: screen.height * .05),
-              ClickAnimation(
-                onTap: () => Navigator.of(context).pushNamed(Home),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: AppTheme.pinkColor,
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 40),
-                  child: Text(
-                    "Connexion",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 17,
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 2),
-              ClickAnimation(
-                onTap: () {},
-                child: Container(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 2, horizontal: 5),
+      body: BlocListener<LoginBloc, LoginState>(
+        bloc: _loginBloc,
+        listener: (context, state) {
+          if (state is LoginInProgress) {
+            // setState(() {
+            //   _isCliked = true;
+            // });
+          }
+          if (state is LoginFailure) {
+            // FlashHelper.bottomBar(context,
+            //     message: '${state.message}',
+            //     leftBarColor: Colors.red[300],
+            //     icon: Icon(Icons.info_outline, color: Colors.red[300]));
+            // setState(() {
+            //   _isCliked = false;
+            // });
+          }
+          if (state is LoginSuccess) {
+            // Navigator.pushReplacement(
+            //   context,
+            //   PageTransition(
+            //     duration: Duration(milliseconds: 500),
+            //     type: PageTransitionType.rightToLeft,
+            //     child: AgentPage(),
+            //   ),
+            // );
+          }
+        },
+        child: BlocBuilder<LoginBloc, LoginState>(
+          bloc: _loginBloc,
+          builder: (context, state) => ScrollConfiguration(
+            behavior: RemoveGlow(),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container(
+                    height: screen.height * .28,
+                    width: double.infinity,
+                    alignment: Alignment.bottomCenter,
                     child: Text(
-                      "Mot de passe oublié",
+                      "UZISHA",
                       style: TextStyle(
-                        color: AppTheme.greyColor,
-                        fontSize: 14,
-                        decoration: TextDecoration.underline,
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
+                        color: AppTheme.lessWhiteColor,
+                        letterSpacing: 2,
                       ),
                     ),
                   ),
-                ),
+                  SizedBox(height: screen.height * .12),
+                  Container(
+                    width: double.infinity,
+                    alignment: Alignment.center,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        _builTitle(
+                          title: "S'inscrire",
+                          isActive: false,
+                          onTap: () => Navigator.of(context).pushNamed(Signup),
+                        ),
+                        _buildDivider(),
+                        _builTitle(title: "Se connecter", isActive: true),
+                      ],
+                    ),
+                  ),
+                  CustomTextField(
+                    hint: "Nom d'utilisateur ou telephone",
+                    isFirst: true,
+                    obscureText: false,
+                    top: screen.height * .05,
+                    controller: _controllerNom,
+                  ),
+                  CustomTextField(
+                    hint: "Mot de passe",
+                    isFirst: false,
+                    obscureText: true,
+                    controller: _controllerPassword,
+                  ),
+                  SizedBox(height: screen.height * .05),
+                  ClickAnimation(
+                    onTap: () {
+                      _onLoginButtonPressed();
+                    },
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: AppTheme.pinkColor,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      padding:
+                          EdgeInsets.symmetric(vertical: 10, horizontal: 40),
+                      child: Text(
+                        "Connexion",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 17,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 2),
+                  ClickAnimation(
+                    onTap: () {},
+                    child: Container(
+                      child: Padding(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 2, horizontal: 5),
+                        child: Text(
+                          "Mot de passe oublié",
+                          style: TextStyle(
+                            color: AppTheme.greyColor,
+                            fontSize: 14,
+                            decoration: TextDecoration.underline,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: screen.height * .15)
+                ],
               ),
-              SizedBox(height: screen.height * .15)
-            ],
+            ),
           ),
         ),
       ),
     );
   }
 
-  // Building text titles
   _builTitle({String title, bool isActive, VoidCallback onTap}) {
     return ClickAnimation(
       onTap: onTap,
@@ -132,7 +190,6 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  // Build the divider between both textes
   _buildDivider() {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -142,5 +199,23 @@ class LoginPage extends StatelessWidget {
         color: AppTheme.greyColor,
       ),
     );
+  }
+
+  Future<void> _onLoginButtonPressed() async {
+    String email = _controllerNom.text.trim();
+    String password = _controllerPassword.text.trim();
+
+    if (email.trim().isEmpty || password.trim().isEmpty) {
+      print("Veuillez remplir tous les Champs svp !!!");
+      // FlashHelper.bottomBar(context,
+      //     message: 'Veuillez remplir tous les Champs svp !!!',
+      //     leftBarColor: Colors.red[300],
+      //     icon: Icon(Icons.warning, color: Colors.red[300]));
+    } else {
+      _loginBloc.add(LoginButtonPressed(
+        email: email,
+        password: password,
+      ));
+    }
   }
 }

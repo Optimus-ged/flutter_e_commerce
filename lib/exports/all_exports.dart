@@ -40,10 +40,11 @@ export 'package:e_commerce/model/user_model/user_response.dart';
 export 'package:e_commerce/model/article_model/article.dart';
 export 'package:e_commerce/model/article_model/article_response.dart';
 export 'package:e_commerce/model/article_model/article_local.dart';
+export 'package:e_commerce/model/user_model/login.dart';
 
 // FOR DATA
 export 'package:e_commerce/data/repository/end_points/end_points.dart';
-export 'package:e_commerce/data/repository/repository.dart';
+export 'package:e_commerce/data/repository/provider.dart';
 export 'package:e_commerce/data/dio/interceptors.dart';
 export 'package:e_commerce/data/repository/end_points/end_points.dart';
 
@@ -57,8 +58,6 @@ export 'package:e_commerce/bloc/article_bloc/local_article_bloc.dart';
 export 'package:e_commerce/utils/app_theme.dart';
 export 'package:e_commerce/utils/for_the_view.dart';
 export 'package:e_commerce/routes/routes.dart';
-export 'package:e_commerce/routes/routes_constants.dart';
-export 'package:e_commerce/routes/routes_constants.dart';
 export 'package:e_commerce/routes/routes.dart';
 
 // Utils

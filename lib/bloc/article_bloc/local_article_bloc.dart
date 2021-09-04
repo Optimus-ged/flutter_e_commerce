@@ -2,15 +2,15 @@ import 'package:e_commerce/exports/all_exports.dart';
 import 'package:rxdart/rxdart.dart';
 
 class LocalArticleBloc {
-  BehaviorSubject<List<LocalArticle>> _subject =
-      BehaviorSubject<List<LocalArticle>>();
-  BehaviorSubject<List<LocalArticle>> get subject => _subject.stream;
+  var _subject = BehaviorSubject<List<LocalArticle>>();
+  get subject => _subject.stream;
 
   // Declaring a variable from witch we'll read and wright
   List<LocalArticle> _localListArticle;
 
   // Get Data
   getLocalData() async {
+    print('AAAAAAAAAAAAAAAAAAAAAAAAAAAA XXXXXXXXXXXXXXX DDDDDDDDDDDDDDDD');
     subject.listen((data) {
       _localListArticle = data;
     });
@@ -21,13 +21,14 @@ class LocalArticleBloc {
 
   // Adding a method to add new article in the local list
   int addLocalArticle({LocalArticle data}) {
-    int status = 400;
+    // int status = 400;
+    int status;
     if (_localListArticle.every((v) => v.id != data.id)) {
       status = 200;
       _localListArticle.add(data);
       _subject.sink.add(_localListArticle);
     } else {
-      status = status;
+      status = 400;
     }
     return status;
   }

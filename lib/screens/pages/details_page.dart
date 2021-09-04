@@ -180,7 +180,9 @@ class _DetailPageState extends State<DetailPage> {
                   color: Colors.transparent,
                   borderRadius: BorderRadius.circular(10),
                   child: ClickAnimation(
-                    onTap: () {},
+                    onTap: () {
+                      
+                    },
                     child: Container(
                       height: 50,
                       width: 45,

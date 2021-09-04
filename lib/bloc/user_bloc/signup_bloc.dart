@@ -8,7 +8,7 @@ class SignUpBloc {
   signUp(Users user) async {
     String _token = await locator.get<SharedPreferencesHelper>().authToken;
     UserResponse response =
-        await locator.get<Repository>().signUp(_token, user);
+        await locator.get<Provider>().signUp(_token, user);
     _subject.sink.add(response);
   }
 

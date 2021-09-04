@@ -1,11 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:e_commerce/exports/all_exports.dart';
 
-class Repository {
+class Provider {
   Dio _dio;
 
   // Initialisation of dio options
-  Repository() {
+  provider() {
     if (_dio == null) {
       BaseOptions options = BaseOptions(
         baseUrl: "${Endpoint.baseUrl}",
@@ -15,6 +15,28 @@ class Repository {
       );
       _dio = Dio(options);
       _dio.interceptors.add(AppInterceptors());
+    }
+  }
+
+  // Login
+  Future<LoginResponse> loginUser(String nom, String password) async {
+    try {
+      final result = await _dio.post(
+        "${Endpoint.allUsers}",
+        data: {"nom": nom, "mot_de_passe": password},
+        options: Options(
+          contentType: Headers.formUrlEncodedContentType,
+          headers: {
+            "Accept": "application/json",
+            "App": "Admin",
+            "key": Endpoint.key
+          },
+        ),
+      );
+      return LoginResponse.fromJson(result.data);
+    } catch (e) {
+      print("ERROR loginUser : ${e.toString()}");
+      throw e;
     }
   }
 

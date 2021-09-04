@@ -12,7 +12,7 @@ class ListeArticleBloc {
     String _token = await locator.get<SharedPreferencesHelper>().authToken;
     // print("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb " + _token);
     ListeArticles _response =
-        await locator.get<Repository>().getArticles(_token);
+        await locator.get<Provider>().getArticles(_token);
     _subject.sink.add(_response);
   }
 

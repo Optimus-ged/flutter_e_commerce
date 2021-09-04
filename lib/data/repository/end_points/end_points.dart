@@ -4,8 +4,8 @@ class Endpoint {
   static const String key = "<<My key will be here>>";
 
   // Initialization of base URLs
-  static const String baseUrl = "http://192.168.137.1:3000/api";
-  static const String uplaod = "http://192.168.137.1:3000/";
+  static const String baseUrl = "http://192.168.137.1:3030/api";
+  static const String uplaod = "http://192.168.137.1:3030/";
 
   // Initialisation of all other endpoints
   static const String allUsers = "/users/all";
@@ -13,4 +13,5 @@ class Endpoint {
   static const String allArticles = "/article";
   static const String oneProduct = "/products/one";
   static const String allPostes = "/postes";
+  static const String loginUser = "/postes";
 }

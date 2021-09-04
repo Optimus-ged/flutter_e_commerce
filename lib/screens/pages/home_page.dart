@@ -1,4 +1,7 @@
+import 'package:e_commerce/bloc/article_bloc/favorite_article_bloc.dart';
 import 'package:e_commerce/exports/all_exports.dart';
+import 'package:e_commerce/routes/routes_constants.dart';
+import 'package:e_commerce/screens/pages/favorite_page.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -9,12 +12,14 @@ class _HomePageState extends State<HomePage> {
   ScrollController _scrollController;
   ListeArticleBloc get _listArticleBloc => locator.get<ListeArticleBloc>();
   LocalArticleBloc get _localArticleBloc => locator.get<LocalArticleBloc>();
+  FavoriteArticleBloc get _favoriteArticleBloc => locator.get<FavoriteArticleBloc>();
 
   @override
   void initState() {
     _scrollController = ScrollController();
     _listArticleBloc.getArticles();
     _localArticleBloc.getLocalData();
+    _favoriteArticleBloc.getFavoriteArticle();
     super.initState();
   }
 
@@ -116,6 +121,17 @@ class _HomePageState extends State<HomePage> {
                 icon: Icons.search,
                 context: context,
                 onTap: () {},
+              ),
+              _buildNavigationItem(
+                icon: Icons.favorite,
+                context: context,
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => FavoritePage(),
+                    ),
+                  );
+                },
               ),
               _buildNavigationItem(
                 icon: Icons.exit_to_app,

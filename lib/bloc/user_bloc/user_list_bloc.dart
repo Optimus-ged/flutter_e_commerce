@@ -8,7 +8,7 @@ class UserListBloc {
   // Get all users
   getUsers() async {
     String _token = await locator.get<SharedPreferencesHelper>().authToken;
-    UserResponse response = await locator.get<Repository>().getUsers(_token);
+    UserResponse response = await locator.get<Provider>().getUsers(_token);
     _subject.sink.add(response);
   }
 

@@ -96,7 +96,7 @@ class _PaymentPageState extends State<PaymentPage> {
                                           "vide",
                                           style: TextStyle(
                                             color: Colors.grey[300],
-                                            fontSize: 15,
+                                            fontSize: 13,
                                           ),
                                         ),
                                       ],
