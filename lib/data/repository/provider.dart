@@ -21,7 +21,6 @@ class Provider {
   // Login
   Future<LoginResponse> loginUser(String nom, String password) async {
     try {
-      print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAMMMMMMMMMMMMMM XXXXXXXX");
       final result = await _dio.post(
         "${Endpoint.loginUser}",
         data: {"nom": nom, "mot_de_passe": password},
