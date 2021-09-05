@@ -13,5 +13,5 @@ class Endpoint {
   static const String allArticles = "/article";
   static const String oneProduct = "/products/one";
   static const String allPostes = "/postes";
-  static const String loginUser = "/postes";
+  static const String loginUser = "/users/signin";
 }

@@ -1,6 +1,7 @@
 import 'package:e_commerce/bloc/login_bloc/login_bloc.dart';
 import 'package:e_commerce/bloc/login_bloc/login_event.dart';
 import 'package:e_commerce/bloc/login_bloc/login_state.dart';
+import 'package:e_commerce/dialogs/flashes.dart';
 import 'package:e_commerce/exports/all_exports.dart';
 import 'package:e_commerce/routes/routes_constants.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,6 +19,8 @@ class _LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     _loginBloc = BlocProvider.of<LoginBloc>(context);
+    _controllerNom = TextEditingController(text: 'Optimus yala');
+    _controllerPassword = TextEditingController(text: 'optimus');
     super.initState();
   }
 
@@ -109,6 +112,7 @@ class _LoginPageState extends State<LoginPage> {
                   ClickAnimation(
                     onTap: () {
                       _onLoginButtonPressed();
+                      // Navigator.of(context).pushNamed(Home);
                     },
                     child: Container(
                       decoration: BoxDecoration(

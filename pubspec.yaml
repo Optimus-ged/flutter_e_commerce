@@ -39,9 +39,7 @@ dependencies:
   cached_network_image: ^3.0.0
   flutter_bloc: ^7.1.0
   equatable: ^2.0.3
-  # image_picker: ^0.7.5+3
-  # flutter_native_image: ^0.0.6
-  # image_cropper: ^1.4.0
+  flash: ^2.0.1
 
 dev_dependencies:
   flutter_test:

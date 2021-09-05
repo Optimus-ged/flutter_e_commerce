@@ -6,5 +6,5 @@ class ApiRepository {
   final Provider _apiProvider = Provider();
 
   Future<LoginResponse> loginUser(String nom, String password) =>
-      _apiProvider.loginUser(nom, password); 
+      _apiProvider.loginUser(nom, password);
 }

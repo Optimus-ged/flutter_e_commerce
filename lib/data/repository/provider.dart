@@ -5,7 +5,7 @@ class Provider {
   Dio _dio;
 
   // Initialisation of dio options
-  provider() {
+  Provider() {
     if (_dio == null) {
       BaseOptions options = BaseOptions(
         baseUrl: "${Endpoint.baseUrl}",
@@ -21,15 +21,16 @@ class Provider {
   // Login
   Future<LoginResponse> loginUser(String nom, String password) async {
     try {
+      print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAMMMMMMMMMMMMMM XXXXXXXX");
       final result = await _dio.post(
-        "${Endpoint.allUsers}",
+        "${Endpoint.loginUser}",
         data: {"nom": nom, "mot_de_passe": password},
         options: Options(
           contentType: Headers.formUrlEncodedContentType,
           headers: {
             "Accept": "application/json",
-            "App": "Admin",
-            "key": Endpoint.key
+            // "App": "Admin",
+            // "key": Endpoint.key
           },
         ),
       );
