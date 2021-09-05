@@ -16,7 +16,7 @@ class SharedPreferencesHelper {
   }
 
   Future<void> saveAuthToken(String authToken) async {
-    return _sPrefs.setString("token", authToken);
+    return _sPrefs.setString("token", 'Bearer $authToken');
   }
 
   Future<String> get authToken async {

@@ -14,10 +14,12 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   var _controllerNom = TextEditingController();
   var _controllerPassword = TextEditingController();
+  bool isLoading;
   LoginBloc _loginBloc;
 
   @override
   void initState() {
+    isLoading = false;
     _loginBloc = BlocProvider.of<LoginBloc>(context);
     _controllerNom = TextEditingController(text: 'Optimus yala');
     _controllerPassword = TextEditingController(text: 'optimus');
@@ -33,28 +35,17 @@ class _LoginPageState extends State<LoginPage> {
         bloc: _loginBloc,
         listener: (context, state) {
           if (state is LoginInProgress) {
-            // setState(() {
-            //   _isCliked = true;
-            // });
+            setState(() {
+              isLoading = true;
+            });
           }
           if (state is LoginFailure) {
-            // FlashHelper.bottomBar(context,
-            //     message: '${state.message}',
-            //     leftBarColor: Colors.red[300],
-            //     icon: Icon(Icons.info_outline, color: Colors.red[300]));
-            // setState(() {
-            //   _isCliked = false;
-            // });
+            setState(() {
+              isLoading = false;
+            });
           }
           if (state is LoginSuccess) {
-            // Navigator.pushReplacement(
-            //   context,
-            //   PageTransition(
-            //     duration: Duration(milliseconds: 500),
-            //     type: PageTransitionType.rightToLeft,
-            //     child: AgentPage(),
-            //   ),
-            // );
+            Navigator.of(context).pushReplacementNamed(Home);
           }
         },
         child: BlocBuilder<LoginBloc, LoginState>(
@@ -115,19 +106,30 @@ class _LoginPageState extends State<LoginPage> {
                       // Navigator.of(context).pushNamed(Home);
                     },
                     child: Container(
+                      height: 38,
+                      width: 180,
+                      alignment: Alignment.center,
                       decoration: BoxDecoration(
                         color: AppTheme.pinkColor,
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      padding:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 40),
-                      child: Text(
-                        "Connexion",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 17,
-                        ),
-                      ),
+                      // padding:
+                      //     EdgeInsets.symmetric(vertical: 10, horizontal: 40),
+                      child: isLoading
+                          ? Container(
+                              height: 28,
+                              width: 28,
+                              child: CircularProgressIndicator(
+                                strokeWidth: 1,
+                              ),
+                            )
+                          : Text(
+                              "Connexion",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 17,
+                              ),
+                            ),
                     ),
                   ),
                   SizedBox(height: 2),
@@ -211,10 +213,10 @@ class _LoginPageState extends State<LoginPage> {
 
     if (email.trim().isEmpty || password.trim().isEmpty) {
       print("Veuillez remplir tous les Champs svp !!!");
-      // FlashHelper.bottomBar(context,
-      //     message: 'Veuillez remplir tous les Champs svp !!!',
-      //     leftBarColor: Colors.red[300],
-      //     icon: Icon(Icons.warning, color: Colors.red[300]));
+      FlashHelper.bottomBar(context,
+          message: 'Veuillez remplir tous les Champs svp !!!',
+          leftBarColor: Colors.red[300],
+          icon: Icon(Icons.warning, color: Colors.red[300]));
     } else {
       _loginBloc.add(LoginButtonPressed(
         email: email,

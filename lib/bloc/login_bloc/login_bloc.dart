@@ -20,20 +20,17 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     try {
       yield LoginInProgress();
       final login = await _api.loginUser(event.email, event.password);
-      print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>> $login");
+      print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ${login.status}");
       if (login.status == 200) {
         yield LoginSuccess(login: login);
-        await locator
-            .get<SharedPreferencesHelper>()
-            .saveAuthToken("Bearer ${login.token}");
+        await locator.get<SharedPreferencesHelper>().saveAuthToken(login.token);
       } else {
-        yield LoginFailure(message: '${login.message}');
+        yield LoginFailure(login: login);
         return;
       }
     } catch (error, stackTrace) {
       print(
           'LoginBloc.MapEventToState ::: ERROR: $error, STACKTRACE: $stackTrace');
-      yield LoginFailure(message: error.message.toString());
       return;
     }
   }

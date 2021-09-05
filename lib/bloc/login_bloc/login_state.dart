@@ -1,4 +1,3 @@
-
 import 'package:e_commerce/exports/all_exports.dart';
 import 'package:equatable/equatable.dart';
 
@@ -15,12 +14,12 @@ class LoginInitial extends LoginState {}
 class LoginInProgress extends LoginState {}
 
 class LoginFailure extends LoginState {
-  final String message;
+  final LoginResponse login;
 
-  const LoginFailure({@required this.message});
+  const LoginFailure({@required this.login});
 
   @override
-  List<Object> get props => [message];
+  List<Object> get props => [login];
 }
 
 class LoginSuccess extends LoginState {
