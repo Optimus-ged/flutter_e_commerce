@@ -14,7 +14,7 @@ void setup() async {
   locator.registerLazySingleton<LocalArticleBloc>(() => LocalArticleBloc());
   locator
       .registerLazySingleton<FavoriteArticleBloc>(() => FavoriteArticleBloc());
-  locator.registerLazySingleton<SignUpBloc>(() => SignUpBloc());
+  // locator.registerLazySingleton<SignUpBloc>(() => SignUpBloc());
   locator.registerLazySingleton<UserListBloc>(() => UserListBloc());
   locator.registerLazySingleton<Provider>(() => Provider());
   locator.registerLazySingleton<SharedPreferencesHelper>(

@@ -5,7 +5,6 @@ import 'package:e_commerce/data/repository/provider.dart';
 import 'package:e_commerce/model/user_model/signup_response.dart';
 import 'package:e_commerce/utils/setup_locator.dart';
 
-
 class SignupBloc extends Bloc<SignUpEvent, SignupState> {
   get _api => locator.get<Provider>();
   SignupBloc() : super(SignupInitial());
@@ -20,11 +19,12 @@ class SignupBloc extends Bloc<SignUpEvent, SignupState> {
       SignUpButtonPressed event) async* {
     try {
       yield SignupInProgress();
-      SignUpResponse signUp = await _api.signUp(event.image, event.data);
+      SignUpResponse signUp =
+          await _api.signUp(file: event.image, userData: event.data);
       if (signUp.status == 200) {
         yield SignupSuccess(data: signUp);
       } else {
-        yield SignupFailure(data : signUp);
+        yield SignupFailure(data: signUp);
         return;
       }
     } catch (error, stackTrace) {

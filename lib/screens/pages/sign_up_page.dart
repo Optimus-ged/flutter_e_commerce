@@ -120,13 +120,12 @@ class _SignupPageState extends State<SignupPage> {
                                 color: AppTheme.pinkColor,
                                 shape: BoxShape.circle,
                               ),
+                              child: Icon(
+                                Icons.add_a_photo,
+                                color: Colors.white,
+                              ),
                             ),
                           )
-                        // CircleAvatar(
-                        //     radius: 40,
-                        //     backgroundColor: AppTheme.pinkColor,
-                        //     child: Icon(Icons.face),
-                        //   )
                         : ClipRRect(
                             borderRadius: BorderRadius.circular(40),
                             child: Container(

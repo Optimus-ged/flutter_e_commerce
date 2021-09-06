@@ -45,6 +45,7 @@ class Provider {
   Future<SignUpResponse> signUp(
       {@override File file, @override Users userData}) async {
     String fileName = file.path.split('/').last;
+    print("??????????????????");
     try {
       FormData formData = FormData.fromMap({
         "photo": await MultipartFile.fromFile(file.path, filename: fileName),

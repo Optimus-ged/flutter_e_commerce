@@ -103,7 +103,6 @@ class _LoginPageState extends State<LoginPage> {
                   ClickAnimation(
                     onTap: () {
                       _onLoginButtonPressed();
-                      // Navigator.of(context).pushNamed(Home);
                     },
                     child: Container(
                       height: 38,
