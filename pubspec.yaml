@@ -40,6 +40,8 @@ dependencies:
   flutter_bloc: ^7.1.0
   equatable: ^2.0.3
   flash: ^2.0.1
+  fluttertoast: ^8.0.8
+  image_picker: ^0.8.4
 
 dev_dependencies:
   flutter_test:

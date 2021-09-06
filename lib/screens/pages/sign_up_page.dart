@@ -1,10 +1,32 @@
 import 'package:e_commerce/exports/all_exports.dart';
+import 'dart:io' as Io;
 
-class SignupPage extends StatelessWidget {
+import 'package:image_picker/image_picker.dart';
+
+class SignupPage extends StatefulWidget {
+  @override
+  _SignupPageState createState() => _SignupPageState();
+}
+
+class _SignupPageState extends State<SignupPage> {
   final nameController = TextEditingController();
+
   final numController = TextEditingController();
+
   final pwdController = TextEditingController();
+
   final confirmPwdController = TextEditingController();
+
+  Io.File _image;
+
+  Future getImage() async {
+    final pickedFile =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+    setState(() {
+      _image = Io.File(pickedFile.path);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     var screen = MediaQuery.of(context).size;
@@ -74,12 +96,37 @@ class SignupPage extends StatelessWidget {
                   ),
                   SizedBox(height: screen.height * .05),
                   ClickAnimation(
-                    onTap: () {},
-                    child: CircleAvatar(
-                      radius: 40,
-                      backgroundColor: AppTheme.pinkColor,
-                      child: Icon(Icons.face),
-                    ),
+                    onTap: () {
+                      getImage();
+                    },
+                    child: _image == null
+                        ? CircleAvatar(
+                            radius: 40,
+                            backgroundColor: AppTheme.pinkColor,
+                            child: Icon(Icons.face),
+                          )
+                        // : CircleAvatar(
+                        //     radius: 40,
+                        //     backgroundColor: AppTheme.pinkColor,
+
+                        //     child: Image.file(
+                        //       _image,
+                        //       // fit: BoxFit.cover,
+
+                        //     ),
+                        //   ),
+                        : ClipRRect(
+                            borderRadius: BorderRadius.circular(40),
+                            child: Container(
+                              height: 80,
+                              width: 80,
+                              decoration: BoxDecoration(
+                                color: AppTheme.pinkColor,
+                                shape: BoxShape.circle,
+                              ),
+                              child: Image.file(_image, fit: BoxFit.cover),
+                            ),
+                          ),
                   ),
                   CustomTextField(
                     controller: nameController,
@@ -107,7 +154,7 @@ class SignupPage extends StatelessWidget {
                   ),
                   SizedBox(height: screen.height * .05),
                   ClickAnimation(
-                    onTap: ()=> signUpMethod(),
+                    onTap: () => signUpMethod(),
                     child: Container(
                       decoration: BoxDecoration(
                         color: AppTheme.pinkColor,
@@ -134,7 +181,6 @@ class SignupPage extends StatelessWidget {
     );
   }
 
-  // Building text titles
   Widget _builTitle({String title, bool isActive, VoidCallback onTap}) {
     return ClickAnimation(
       onTap: onTap,
@@ -171,7 +217,6 @@ class SignupPage extends StatelessWidget {
     );
   }
 
-  // Signup method
   signUpMethod() {
     var data = Users(
       nom: nameController.text.trim(),

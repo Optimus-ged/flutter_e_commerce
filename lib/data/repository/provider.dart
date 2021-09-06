@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:e_commerce/exports/all_exports.dart';
+import 'package:e_commerce/model/user_model/signup_response.dart';
 
 class Provider {
   Dio _dio;
@@ -39,6 +40,55 @@ class Provider {
       throw e;
     }
   }
+
+  // Signup
+  Future<dynamic> uploadImage({File file, Users userData}) async {
+    String fileName = file.path.split('/').last;
+    try {
+      FormData formData = FormData.fromMap({
+        "photo": await MultipartFile.fromFile(file.path, filename: fileName),
+        "nom": userData.nom,
+        "contact": userData.contact,
+        "mot_de_passe": userData.motDePasse
+      });
+      var response = await _dio.post(
+        "${Endpoint.signUpUser}",
+        data: formData,
+        options: Options(
+          contentType: Headers.formUrlEncodedContentType,
+          headers: {
+            "Accept": "application/json",
+            "Content-Type": "multipart/form-data"
+          },
+        ),
+      );
+      print(response.data);
+    } catch (error, stacktrace) {
+      print("uploadImage error : $error, stacktrace : $stacktrace");
+      throw error;
+    }
+  }
+
+  // Future<SignUpResponse> signUpUser(SignUpResponse userData) async {
+  //   try {
+  //     final result = await _dio.post(
+  //       "${Endpoint.loginUser}",
+  //       data: userData,
+  //       options: Options(
+  //         contentType: Headers.formUrlEncodedContentType,
+  //         headers: {
+  //           "Accept": "application/json",
+  //           // "App": "Admin",
+  //           // "key": Endpoint.key
+  //         },
+  //       ),
+  //     );
+  //     return SignUpResponse.fromJson(result.data);
+  //   } catch (e) {
+  //     print("ERROR loginUser : ${e.toString()}");
+  //     throw e;
+  //   }
+  // }
 
   // Handling get request for all users
   Future<UserResponse> getUsers(String token) async {
