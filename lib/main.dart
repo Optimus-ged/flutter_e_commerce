@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:e_commerce/bloc/sign_bloc/signup_bloc.dart';
 import 'package:e_commerce/exports/all_exports.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -54,6 +55,9 @@ void main() async {
           providers: [
             BlocProvider<LoginBloc>(
               create: (context) => LoginBloc(),
+            ),
+            BlocProvider<SignupBloc>(
+              create: (context) => SignupBloc(),
             ),
           ],
           child: MyApp(),

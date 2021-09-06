@@ -1,4 +1,8 @@
+import 'package:e_commerce/bloc/login_bloc/login_bloc.dart';
+import 'package:e_commerce/bloc/sign_bloc/signup_bloc.dart';
+import 'package:e_commerce/bloc/sign_bloc/signup_event.dart';
 import 'package:e_commerce/exports/all_exports.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'dart:io' as Io;
 
 import 'package:image_picker/image_picker.dart';
@@ -18,6 +22,7 @@ class _SignupPageState extends State<SignupPage> {
   final confirmPwdController = TextEditingController();
 
   Io.File _image;
+  SignupBloc _signupBloc;
 
   Future getImage() async {
     final pickedFile =
@@ -25,6 +30,12 @@ class _SignupPageState extends State<SignupPage> {
     setState(() {
       _image = Io.File(pickedFile.path);
     });
+  }
+
+  @override
+  void initState() {
+    _signupBloc = BlocProvider.of<SignupBloc>(context);
+    super.initState();
   }
 
   @override
@@ -158,7 +169,9 @@ class _SignupPageState extends State<SignupPage> {
                   ),
                   SizedBox(height: screen.height * .05),
                   ClickAnimation(
-                    onTap: () => signUpMethod(),
+                    onTap: () {
+                      _onSignupButtonPressed();
+                    },
                     child: Container(
                       decoration: BoxDecoration(
                         color: AppTheme.pinkColor,
@@ -221,12 +234,23 @@ class _SignupPageState extends State<SignupPage> {
     );
   }
 
-  signUpMethod() {
-    var data = Users(
-      nom: nameController.text.trim(),
-      contact: numController.text.trim(),
-      motDePasse: pwdController.text.trim(),
-    );
-    locator.get<SignUpBloc>().signUp(data);
+  // signUpMethod() {
+  //   var data = Users(
+  //     nom: nameController.text.trim(),
+  //     contact: numController.text.trim(),
+  //     motDePasse: pwdController.text.trim(),
+  //   );
+  //   locator.get<SignUpBloc>().signUp(data);
+  // }
+
+  Future<void> _onSignupButtonPressed() async {
+    if (numController.text.trim() == confirmPwdController.text.trim()) {
+      Users _data = Users(
+          nom: nameController.text.trim(),
+          contact: numController.text.trim(),
+          motDePasse: pwdController.text.trim());
+
+      _signupBloc.add(SignUpButtonPressed(image: _image, data: _data));
+    }
   }
 }
