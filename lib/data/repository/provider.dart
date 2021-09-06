@@ -42,7 +42,8 @@ class Provider {
   }
 
   // Signup
-  Future<dynamic> uploadImage({File file, Users userData}) async {
+  Future<SignUpResponse> signUp(
+      {@override File file, @override Users userData}) async {
     String fileName = file.path.split('/').last;
     try {
       FormData formData = FormData.fromMap({
@@ -63,6 +64,7 @@ class Provider {
         ),
       );
       print(response.data);
+      return SignUpResponse.fromJson(response.data);
     } catch (error, stacktrace) {
       print("uploadImage error : $error, stacktrace : $stacktrace");
       throw error;
@@ -131,23 +133,23 @@ class Provider {
   }
 
   // Handling post request for users
-  Future<UserResponse> signUp(String token, Users user) async {
-    try {
-      Response response = await _dio.post(
-        "${Endpoint.signUp}",
-        data: user.toJson(),
-        options: Options(
-          contentType: Headers.formUrlEncodedContentType,
-          headers: {
-            "Accept": "Application/json",
-            "Authorization": "$token",
-          },
-        ),
-      );
-      return UserResponse.fromJson(response.data);
-    } catch (error, stacktrace) {
-      print("SignUp Error : $error stacktrace : $stacktrace");
-      throw error;
-    }
-  }
+  // Future<UserResponse> signUp(String token, Users user) async {
+  //   try {
+  //     Response response = await _dio.post(
+  //       "${Endpoint.signUp}",
+  //       data: user.toJson(),
+  //       options: Options(
+  //         contentType: Headers.formUrlEncodedContentType,
+  //         headers: {
+  //           "Accept": "Application/json",
+  //           "Authorization": "$token",
+  //         },
+  //       ),
+  //     );
+  //     return UserResponse.fromJson(response.data);
+  //   } catch (error, stacktrace) {
+  //     print("SignUp Error : $error stacktrace : $stacktrace");
+  //     throw error;
+  //   }
+  // }
 }
