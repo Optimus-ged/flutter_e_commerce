@@ -100,21 +100,22 @@ class _SignupPageState extends State<SignupPage> {
                       getImage();
                     },
                     child: _image == null
-                        ? CircleAvatar(
-                            radius: 40,
-                            backgroundColor: AppTheme.pinkColor,
-                            child: Icon(Icons.face),
+                        ? ClipRRect(
+                            borderRadius: BorderRadius.circular(40),
+                            child: Container(
+                              height: 80,
+                              width: 80,
+                              decoration: BoxDecoration(
+                                color: AppTheme.pinkColor,
+                                shape: BoxShape.circle,
+                              ),
+                            ),
                           )
-                        // : CircleAvatar(
+                        // CircleAvatar(
                         //     radius: 40,
                         //     backgroundColor: AppTheme.pinkColor,
-
-                        //     child: Image.file(
-                        //       _image,
-                        //       // fit: BoxFit.cover,
-
-                        //     ),
-                        //   ),
+                        //     child: Icon(Icons.face),
+                        //   )
                         : ClipRRect(
                             borderRadius: BorderRadius.circular(40),
                             child: Container(
@@ -124,7 +125,10 @@ class _SignupPageState extends State<SignupPage> {
                                 color: AppTheme.pinkColor,
                                 shape: BoxShape.circle,
                               ),
-                              child: Image.file(_image, fit: BoxFit.cover),
+                              child: Image.file(
+                                _image,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                   ),
