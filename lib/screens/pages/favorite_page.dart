@@ -30,14 +30,21 @@ class _FavoritePageState extends State<FavoritePage> {
                   SizedBox(height: 24),
                   Container(
                     child: Container(
-                      padding: EdgeInsets.symmetric(vertical: 15),
-                      child: Text(
-                        "ARTICLES FAVORITS",
-                        style: TextStyle(
-                          color: Colors.grey[300],
-                          fontWeight: FontWeight.w700,
-                          fontSize: 20,
-                        ),
+                      width: screen.width,
+                      padding: EdgeInsets.only(top: 15, bottom: 15, left: 20),
+                      child: Stack(
+                        children: [
+                          Center(
+                            child: Text(
+                              "ARTICLES FAVORITS",
+                              style: TextStyle(
+                                color: Colors.grey[300],
+                                fontWeight: FontWeight.w700,
+                                fontSize: 20,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
@@ -49,7 +56,7 @@ class _FavoritePageState extends State<FavoritePage> {
                       child: Container(
                         width: screen.width,
                         decoration: BoxDecoration(
-                          color: Colors.white,
+                          // color: AppTheme.blueColor,
                           borderRadius: BorderRadius.vertical(
                             top: Radius.circular(20),
                           ),
@@ -59,11 +66,11 @@ class _FavoritePageState extends State<FavoritePage> {
                             children: [
                               snapshot.data.length != 0
                                   ? Container(
-                                      color: Colors.amber,
+                                      // color: AppTheme.blueColor,
                                       child: GridView.builder(
                                         padding: EdgeInsets.only(
-                                          bottom: 70,
-                                          top: 30,
+                                          bottom: 20,
+                                          top: 20,
                                           left: 10,
                                           right: 10,
                                         ),
@@ -79,37 +86,29 @@ class _FavoritePageState extends State<FavoritePage> {
                                         itemCount: snapshot.data.length,
                                         itemBuilder: (context, index) =>
                                             Container(
-                                          color: Colors.red,
+                                          // color: Colors.red,
                                           child: Column(
                                             children: [
                                               CustomCashedImage(
                                                 imageUrl:
                                                     "${Endpoint.uplaod}${snapshot.data[index].photo}",
                                                 screen: screen,
+                                                isHomePage: true,
                                               ),
+                                              SizedBox(height: 5),
                                               Text(
                                                 "${snapshot.data[index].designation}",
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.w600,
+                                                  color: Colors.black45,
+                                                  fontSize: 15,
+                                                ),
                                               ),
                                             ],
                                           ),
                                         ),
                                       ),
                                     )
-                                  //  Expanded(
-                                  //     child: ListView.builder(
-                                  //       itemCount: snapshot.data.length,
-                                  //       padding: EdgeInsets.only(top: 5),
-                                  //       // This make the list scrollinng only
-                                  //       // when data are so many
-                                  //       primary: false,
-                                  //       itemBuilder: (context, index) {
-                                  //         return _buildListItem(
-                                  //           data: snapshot.data,
-                                  //           index: index,
-                                  //         );
-                                  //       },
-                                  //     ),
-                                  //   )
                                   : Expanded(
                                       child: Column(
                                         mainAxisAlignment:
@@ -131,16 +130,6 @@ class _FavoritePageState extends State<FavoritePage> {
                                         ],
                                       ),
                                     ),
-                              // SizedBox(height: 10),
-                              // CustomButton(
-                              //   title: "Supprimer les favorits",
-                              //   icon: Icon(
-                              //     Icons.delete,
-                              //     color: AppTheme.whiteColor,
-                              //   ),
-                              //   onTap: () {},
-                              // ),
-                              // SizedBox(height: 20)
                             ],
                           ),
                         ),
@@ -165,196 +154,4 @@ class _FavoritePageState extends State<FavoritePage> {
       child: Text('test'),
     );
   }
-
-  // Building the item of making options
-  // Widget _buildOptionItem(
-  //     {int flex = 2,
-  //     double margin = 0,
-  //     String title,
-  //     double fontSize = 20,
-  //     Color color = Colors.white,
-  //     bool isQte = false,
-  //     VoidCallback ontap}) {
-  //   return Expanded(
-  //     flex: flex,
-  //     child: InkWell(
-  //       onTap: ontap,
-  //       child: Container(
-  //         margin: EdgeInsets.symmetric(horizontal: margin),
-  //         alignment: Alignment.center,
-  //         decoration: !isQte
-  //             ? BoxDecoration(
-  //                 color: color,
-  //                 boxShadow: [
-  //                   BoxShadow(
-  //                     color: Colors.grey[100],
-  //                     blurRadius: 2,
-  //                     offset: Offset(0, 1),
-  //                   )
-  //                 ],
-  //                 borderRadius: BorderRadius.circular(5),
-  //               )
-  //             : BoxDecoration(
-  //                 color: color,
-  //                 borderRadius: BorderRadius.circular(5),
-  //               ),
-  //         child: Center(
-  //           child: Text(
-  //             "$title",
-  //             style: TextStyle(
-  //               color: Colors.amber,
-  //               fontSize: fontSize,
-  //             ),
-  //           ),
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
-
-  // Building Payment showdialog
-  // Widget _paymentDialog() {
-  //   return Padding(
-  //     padding: EdgeInsets.only(
-  //       top: 100,
-  //       bottom: 200,
-  //       left: 20,
-  //       right: 20,
-  //     ),
-  //     child: ClipRRect(
-  //       borderRadius: BorderRadius.circular(5),
-  //       child: Container(
-  //         height: 200,
-  //         width: 200,
-  //         decoration: BoxDecoration(
-  //           color: Colors.grey[50],
-  //           borderRadius: BorderRadiusDirectional.circular(5),
-  //         ),
-  //         child: Column(
-  //           mainAxisSize: MainAxisSize.max,
-  //           children: [
-  //             Padding(
-  //               padding: const EdgeInsets.symmetric(vertical: 10),
-  //               child: Text(
-  //                 'Voulez vous vraiment effectuer ce\npaiement ?',
-  //                 style: TextStyle(
-  //                   color: Colors.grey[500],
-  //                   fontWeight: FontWeight.w500,
-  //                 ),
-  //                 textAlign: TextAlign.center,
-  //               ),
-  //             ),
-  //             Expanded(
-  //               child: Container(
-  //                 decoration: BoxDecoration(
-  //                   color: Colors.white,
-  //                   borderRadius: BorderRadius.vertical(
-  //                     top: Radius.circular(
-  //                       20,
-  //                     ),
-  //                   ),
-  //                 ),
-  //                 child: Column(
-  //                   mainAxisSize: MainAxisSize.max,
-  //                   children: [
-  //                     Spacer(),
-  //                     Container(
-  //                       alignment: Alignment.center,
-  //                       width: double.infinity,
-  //                       child: Text(
-  //                         'Total a Payer : $totalPayment\$',
-  //                       ),
-  //                     ),
-  //                     Spacer(),
-  //                     CustomButton(
-  //                       title: "Confirmer",
-  //                       onTap: () {
-  //                         Navigator.of(context).pop();
-  //                       },
-  //                     ),
-  //                     SizedBox(height: 20)
-  //                   ],
-  //                 ),
-  //               ),
-  //             )
-  //           ],
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
-
-  // Building payment with success widget
-  // Widget _paymentSuccess() {
-  //   return Material(
-  //     child: Padding(
-  //       padding: EdgeInsets.only(
-  //         top: 100,
-  //         bottom: 200,
-  //         left: 20,
-  //         right: 20,
-  //       ),
-  //       child: ClipRRect(
-  //         borderRadius: BorderRadius.circular(5),
-  //         child: Container(
-  //           height: 200,
-  //           width: 200,
-  //           decoration: BoxDecoration(
-  //             color: Colors.grey[50],
-  //             borderRadius: BorderRadiusDirectional.circular(5),
-  //           ),
-  //           child: Column(
-  //             mainAxisSize: MainAxisSize.max,
-  //             children: [
-  //               Padding(
-  //                 padding: const EdgeInsets.symmetric(vertical: 10),
-  //                 child: Text(
-  //                   'Voulez vous vraiment effectuer ce\npaiement ?',
-  //                   style: TextStyle(
-  //                     color: Colors.grey[500],
-  //                     fontWeight: FontWeight.w500,
-  //                   ),
-  //                   textAlign: TextAlign.center,
-  //                 ),
-  //               ),
-  //               Expanded(
-  //                 child: Container(
-  //                   decoration: BoxDecoration(
-  //                     color: Colors.white,
-  //                     borderRadius: BorderRadius.vertical(
-  //                       top: Radius.circular(
-  //                         20,
-  //                       ),
-  //                     ),
-  //                   ),
-  //                   child: Column(
-  //                     mainAxisSize: MainAxisSize.max,
-  //                     children: [
-  //                       Spacer(),
-  //                       Container(
-  //                         alignment: Alignment.center,
-  //                         width: double.infinity,
-  //                         child: Icon(
-  //                           Icons.verified,
-  //                           size: 60,
-  //                           color: AppTheme.pinkColor,
-  //                         ),
-  //                       ),
-  //                       SizedBox(height: 10),
-  //                       Text(
-  //                         "Paimement effectue\navec succes",
-  //                         textAlign: TextAlign.center,
-  //                       ),
-  //                       Spacer(),
-  //                     ],
-  //                   ),
-  //                 ),
-  //               )
-  //             ],
-  //           ),
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
 }
