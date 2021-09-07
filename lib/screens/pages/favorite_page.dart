@@ -34,6 +34,16 @@ class _FavoritePageState extends State<FavoritePage> {
                       padding: EdgeInsets.only(top: 15, bottom: 15, left: 20),
                       child: Stack(
                         children: [
+                          Positioned(
+                            left: 0,
+                            child: ClickAnimation(
+                              onTap: () => Navigator.pop(context),
+                              child: Icon(
+                                Icons.arrow_back_ios,
+                                color: Colors.black45,
+                              ),
+                            ),
+                          ),
                           Center(
                             child: Text(
                               "ARTICLES FAVORITS",
