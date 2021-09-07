@@ -14,7 +14,7 @@ class _DetailPageState extends State<DetailPage> {
   bool choice1 = false;
   bool choice2 = false;
   bool choice3 = true;
-  LocalArticleBloc get _localArticleBloc => locator.get<LocalArticleBloc>();
+  get _localArticleBloc => locator.get<LocalArticleBloc>();
 
   @override
   void initState() {

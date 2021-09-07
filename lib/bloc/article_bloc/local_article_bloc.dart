@@ -10,7 +10,6 @@ class LocalArticleBloc {
 
   // Get Data
   getLocalData() async {
-    print('AAAAAAAAAAAAAAAAAAAAAAAAAAAA XXXXXXXXXXXXXXX DDDDDDDDDDDDDDDD');
     subject.listen((data) {
       _localListArticle = data;
     });

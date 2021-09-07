@@ -1,5 +1,6 @@
 import 'package:e_commerce/bloc/article_bloc/favorite_article_bloc.dart';
 import 'package:e_commerce/exports/all_exports.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class FavoritePage extends StatefulWidget {
   @override
@@ -7,7 +8,7 @@ class FavoritePage extends StatefulWidget {
 }
 
 class _FavoritePageState extends State<FavoritePage> {
-  // FavoriteArticleBloc get _FavoriteArticleBloc => locator.get<FavoriteArticleBloc>();
+  get _favoriteArticleBloc => locator.get<FavoriteArticleBloc>();
   @override
   void initState() {
     super.initState();
@@ -120,6 +121,29 @@ class _FavoritePageState extends State<FavoritePage> {
     );
   }
 
+  _addFavorite(Article data) {
+    final _article = LocalArticle(
+      photo: data.photoArticles[0].photoArticle,
+      designation: data.designation,
+    );
+    // final result = _favoriteArticleBloc.addFavoriteArticle();
+    final result = locator.get<FavoriteArticleBloc>().addFavoriteArticle(data: _article);
+    if (result == 200) {
+      Fluttertoast.showToast(
+        msg: "${_article.designation} ajoute au pannier avec succes",
+        gravity: ToastGravity.TOP,
+        backgroundColor: Colors.black.withOpacity(0.6),
+      );
+    } else {
+      Fluttertoast.showToast(
+        msg:
+            "${_article.designation} existe deja dans le pannier, pour modifier la quantite et autre choses, vous pouvez vous rendre au pannier",
+        gravity: ToastGravity.TOP,
+        backgroundColor: Colors.black.withOpacity(0.6),
+      );
+    }
+  }
+
   // Building list view item
   Widget _buildListItem({List<LocalArticle> data, int index}) {
     return Container(
@@ -172,29 +196,6 @@ class _FavoritePageState extends State<FavoritePage> {
   //     ),
   //   );
   // }
-
-  // Option to add quantity or to make the oposite
-  void _addOrDropData({LocalArticle data, int index, bool isAdding = true}) {
-    final _article = LocalArticle(
-      id: data.id,
-      photo: data.photo,
-      designation: data.designation,
-      pu: data.pu,
-      qte: (data.qte >= 1)
-          ? isAdding
-              ? data.qte + 1
-              : (data.qte > 1)
-                  ? data.qte - 1
-                  : data.qte
-          : data.qte,
-    );
-
-    // locator.get<FavoriteArticleBloc>().updateFavoriteArticle()(data: _article);
-
-    // setState(() {
-    //   totalPayment = 0.0;
-    // });
-  }
 
   // Building Payment showdialog
   // Widget _paymentDialog() {
