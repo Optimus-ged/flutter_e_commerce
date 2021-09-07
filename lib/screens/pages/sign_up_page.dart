@@ -1,4 +1,3 @@
-import 'package:e_commerce/bloc/login_bloc/login_bloc.dart';
 import 'package:e_commerce/bloc/sign_bloc/signup_bloc.dart';
 import 'package:e_commerce/bloc/sign_bloc/signup_event.dart';
 import 'package:e_commerce/exports/all_exports.dart';
