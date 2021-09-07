@@ -67,12 +67,12 @@ class _HomePageState extends State<HomePage> {
                 );
               },
             ),
-            Positioned(
-              top: 40,
-              left: 10,
-              right: 10,
-              child: _searchBar(screen),
-            )
+            // Positioned(
+            //   top: 40,
+            //   left: 10,
+            //   right: 10,
+            //   child: _searchBar(screen),
+            // )
           ],
         ),
         floatingActionButton: _buildNavigation(),
@@ -117,44 +117,6 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            StreamBuilder<List<LocalArticle>>(
-              stream: _localArticleBloc.subject,
-              builder: (context, snapshot) {
-                return _buildNavigationItem(
-                  icon: Icons.shopping_basket_outlined,
-                  context: context,
-                  onTap: () => Navigator.of(context).pushNamed(
-                    Payment,
-                    arguments: snapshot.data,
-                  ),
-                );
-              },
-            ),
-            _buildNavigationItem(
-              icon: Icons.search,
-              context: context,
-              onTap: () {},
-            ),
-            _buildNavigationItem(
-              icon: Icons.favorite,
-              context: context,
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => FavoritePage(),
-                  ),
-                );
-              },
-            ),
-            _buildNavigationItem(
-              icon: Icons.exit_to_app,
-              context: context,
-            ),
-          ],
-        ),
       ),
     );
   }
@@ -178,7 +140,7 @@ class _HomePageState extends State<HomePage> {
         child: Container(
           height: 55,
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: AppTheme.blueColor,
             borderRadius: BorderRadius.circular(35),
             boxShadow: [
               // Top Shadow
@@ -246,7 +208,7 @@ class _HomePageState extends State<HomePage> {
       child: Container(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-          child: Icon(icon, color: AppTheme.lessWhiteColor),
+          child: Icon(icon, color: AppTheme.whiteColor),
         ),
       ),
     );
