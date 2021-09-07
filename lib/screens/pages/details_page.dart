@@ -1,3 +1,4 @@
+import 'package:e_commerce/bloc/article_bloc/favorite_article_bloc.dart';
 import 'package:e_commerce/exports/all_exports.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -15,6 +16,7 @@ class _DetailPageState extends State<DetailPage> {
   bool choice2 = false;
   bool choice3 = true;
   get _localArticleBloc => locator.get<LocalArticleBloc>();
+  get _favoriteArticleBloc => locator.get<FavoriteArticleBloc>();
 
   @override
   void initState() {
@@ -181,7 +183,9 @@ class _DetailPageState extends State<DetailPage> {
                   color: Colors.transparent,
                   borderRadius: BorderRadius.circular(10),
                   child: ClickAnimation(
-                    onTap: () {},
+                    onTap: () {
+                      _addFavorite(widget.data);
+                    },
                     child: Container(
                       height: 50,
                       width: 45,
@@ -270,6 +274,32 @@ class _DetailPageState extends State<DetailPage> {
       Fluttertoast.showToast(
         msg:
             "${_article.designation} existe deja dans le pannier, pour modifier la quantite et autre choses, vous pouvez vous rendre au pannier",
+        gravity: ToastGravity.TOP,
+        backgroundColor: Colors.black.withOpacity(0.6),
+      );
+    }
+  }
+
+  _addFavorite(Article data) {
+    final _article = LocalArticle(
+      id: data.id,
+      photo: data.photoArticles[0].photoArticle,
+      designation: data.designation,
+      pu: data.pu,
+      qte: 1,
+    );
+
+    final result = _favoriteArticleBloc.addFavoriteArticle(data: _article);
+    if (result == 200) {
+      Fluttertoast.showToast(
+        msg: "${_article.designation} ajoute au favoris avec succes",
+        gravity: ToastGravity.TOP,
+        backgroundColor: Colors.black.withOpacity(0.6),
+      );
+    } else {
+      Fluttertoast.showToast(
+        msg:
+            "${_article.designation} existe deja parmis les favoris, pour modifier la quantite et autre choses, vous pouvez vous rendre au pannier",
         gravity: ToastGravity.TOP,
         backgroundColor: Colors.black.withOpacity(0.6),
       );
