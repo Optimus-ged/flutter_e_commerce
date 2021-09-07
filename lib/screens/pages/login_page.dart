@@ -5,6 +5,7 @@ import 'package:e_commerce/dialogs/flashes.dart';
 import 'package:e_commerce/exports/all_exports.dart';
 import 'package:e_commerce/routes/routes_constants.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -43,8 +44,18 @@ class _LoginPageState extends State<LoginPage> {
             setState(() {
               isLoading = false;
             });
+            Fluttertoast.showToast(
+              msg: "${state.login.message}",
+              gravity: ToastGravity.TOP,
+              backgroundColor: Colors.black.withOpacity(0.6),
+            );
           }
           if (state is LoginSuccess) {
+            Fluttertoast.showToast(
+              msg: "${state.login.message}",
+              gravity: ToastGravity.TOP,
+              backgroundColor: Colors.black.withOpacity(0.6),
+            );
             Navigator.of(context).pushReplacementNamed(Home);
           }
         },
@@ -209,11 +220,12 @@ class _LoginPageState extends State<LoginPage> {
     String password = _controllerPassword.text.trim();
 
     if (email.trim().isEmpty || password.trim().isEmpty) {
-      print("Veuillez remplir tous les Champs svp !!!");
-      FlashHelper.bottomBar(context,
-          message: 'Veuillez remplir tous les Champs svp !!!',
-          leftBarColor: Colors.red[300],
-          icon: Icon(Icons.warning, color: Colors.red[300]));
+      Fluttertoast.showToast(
+        msg:
+            "Certains champs sont encore vide, veuillez les rempir tous SVP !!!",
+        gravity: ToastGravity.TOP,
+        backgroundColor: Colors.black.withOpacity(0.6),
+      );
     } else {
       _loginBloc.add(LoginButtonPressed(
         email: email,
