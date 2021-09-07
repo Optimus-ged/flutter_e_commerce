@@ -106,12 +106,16 @@ class _FavoritePageState extends State<FavoritePage> {
                                                 isHomePage: true,
                                               ),
                                               SizedBox(height: 5),
-                                              Text(
-                                                "${snapshot.data[index].designation}",
-                                                style: TextStyle(
-                                                  fontWeight: FontWeight.w600,
-                                                  color: Colors.black45,
-                                                  fontSize: 15,
+                                              SizedBox(
+                                                width: 80,
+                                                child: Text(
+                                                  "${snapshot.data[index].designation}",
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                    fontWeight: FontWeight.w600,
+                                                    color: Colors.black45,
+                                                    fontSize: 15,
+                                                  ),
                                                 ),
                                               ),
                                             ],
