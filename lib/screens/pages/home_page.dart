@@ -191,6 +191,11 @@ class _HomePageState extends State<HomePage> {
                 },
               ),
               _buildNavigationItem(
+                icon: Icons.account_circle,
+                context: context,
+                onTap: () {},
+              ),
+              _buildNavigationItem(
                 icon: Icons.exit_to_app,
                 context: context,
               ),
