@@ -208,7 +208,7 @@ class _DetailPageState extends State<DetailPage> {
     );
   }
 
-  Widget _buildChoice({Color color, bool isCliked, VoidCallback onTap}) {
+  _buildChoice({Color color, bool isCliked, VoidCallback onTap}) {
     return ClickAnimation(
       onTap: onTap,
       child: Container(
@@ -228,7 +228,7 @@ class _DetailPageState extends State<DetailPage> {
     );
   }
 
-  Widget _buildPageView(Size screen, {List<PhotoArticles> data}) {
+  _buildPageView(Size screen, {List<PhotoArticles> data}) {
     return Positioned(
       bottom: 0,
       child: Container(

@@ -7,7 +7,6 @@ class FavoritePage extends StatefulWidget {
 }
 
 class _FavoritePageState extends State<FavoritePage> {
-  
   @override
   void initState() {
     super.initState();
@@ -55,55 +54,95 @@ class _FavoritePageState extends State<FavoritePage> {
                             top: Radius.circular(20),
                           ),
                         ),
-                        child: Column(
-                          children: [
-                            snapshot.data.length != 0
-                                ? Expanded(
-                                    child: ListView.builder(
-                                      itemCount: snapshot.data.length,
-                                      padding: EdgeInsets.only(top: 5),
-                                      // This make the list scrollinng only
-                                      // when data are so many
-                                      primary: false,
-                                      itemBuilder: (context, index) {
-                                        return _buildListItem(
-                                          data: snapshot.data,
-                                          index: index,
-                                        );
-                                      },
-                                    ),
-                                  )
-                                : Expanded(
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Icon(
-                                          Icons.remove_shopping_cart_outlined,
-                                          color: Colors.grey[50],
-                                          size: 100,
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              snapshot.data.length != 0
+                                  ? Container(
+                                      color: Colors.amber,
+                                      child: GridView.builder(
+                                        padding: EdgeInsets.only(
+                                          bottom: 70,
+                                          top: 30,
+                                          left: 10,
+                                          right: 10,
                                         ),
-                                        Text(
-                                          "aucune favorie\ndiponible",
-                                          style: TextStyle(
-                                            color: Colors.grey[300],
-                                            fontSize: 13,
+                                        gridDelegate:
+                                            SliverGridDelegateWithFixedCrossAxisCount(
+                                          crossAxisSpacing: 10,
+                                          mainAxisSpacing: 20,
+                                          crossAxisCount: 2,
+                                          childAspectRatio: 0.60,
+                                        ),
+                                        primary: false,
+                                        shrinkWrap: true,
+                                        itemCount: snapshot.data.length,
+                                        itemBuilder: (context, index) =>
+                                            Container(
+                                          color: Colors.red,
+                                          child: Column(
+                                            children: [
+                                              CustomCashedImage(
+                                                imageUrl:
+                                                    "${Endpoint.uplaod}${snapshot.data[index].photo}",
+                                                screen: screen,
+                                              ),
+                                              Text(
+                                                "${snapshot.data[index].designation}",
+                                              ),
+                                            ],
                                           ),
                                         ),
-                                      ],
+                                      ),
+                                    )
+                                  //  Expanded(
+                                  //     child: ListView.builder(
+                                  //       itemCount: snapshot.data.length,
+                                  //       padding: EdgeInsets.only(top: 5),
+                                  //       // This make the list scrollinng only
+                                  //       // when data are so many
+                                  //       primary: false,
+                                  //       itemBuilder: (context, index) {
+                                  //         return _buildListItem(
+                                  //           data: snapshot.data,
+                                  //           index: index,
+                                  //         );
+                                  //       },
+                                  //     ),
+                                  //   )
+                                  : Expanded(
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Icon(
+                                            Icons.remove_shopping_cart_outlined,
+                                            color: Colors.grey[50],
+                                            size: 100,
+                                          ),
+                                          Text(
+                                            "aucune favorie\ndiponible",
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                              color: Colors.grey[300],
+                                              fontSize: 13,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                            SizedBox(height: 10),
-                            CustomButton(
-                              title: "Supprimer les favorits",
-                              icon: Icon(
-                                Icons.delete,
-                                color: AppTheme.whiteColor,
-                              ),
-                              onTap: () {},
-                            ),
-                            SizedBox(height: 20)
-                          ],
+                              // SizedBox(height: 10),
+                              // CustomButton(
+                              //   title: "Supprimer les favorits",
+                              //   icon: Icon(
+                              //     Icons.delete,
+                              //     color: AppTheme.whiteColor,
+                              //   ),
+                              //   onTap: () {},
+                              // ),
+                              // SizedBox(height: 20)
+                            ],
+                          ),
                         ),
                       ),
                     ),
