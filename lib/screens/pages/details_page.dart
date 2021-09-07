@@ -1,4 +1,5 @@
 import 'package:e_commerce/exports/all_exports.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class DetailPage extends StatefulWidget {
   final Article data;
@@ -180,9 +181,7 @@ class _DetailPageState extends State<DetailPage> {
                   color: Colors.transparent,
                   borderRadius: BorderRadius.circular(10),
                   child: ClickAnimation(
-                    onTap: () {
-                      
-                    },
+                    onTap: () {},
                     child: Container(
                       height: 50,
                       width: 45,
@@ -262,9 +261,18 @@ class _DetailPageState extends State<DetailPage> {
     );
     final result = _localArticleBloc.addLocalArticle(data: _article);
     if (result == 200) {
-      print("$result");
+      Fluttertoast.showToast(
+        msg: "${_article.designation} ajoute au pannier avec succes",
+        gravity: ToastGravity.TOP,
+        backgroundColor: Colors.black.withOpacity(0.6),
+      );
     } else {
-      print("$result");
+      Fluttertoast.showToast(
+        msg:
+            "${_article.designation} existe deja dans le pannier, pour modifier la quantite et autre choses, vous pouvez vous rendre au pannier",
+        gravity: ToastGravity.TOP,
+        backgroundColor: Colors.black.withOpacity(0.6),
+      );
     }
   }
 }
