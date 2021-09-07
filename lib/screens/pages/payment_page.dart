@@ -41,13 +41,29 @@ class _PaymentPageState extends State<PaymentPage> {
                   Container(
                     child: Container(
                       padding: EdgeInsets.symmetric(vertical: 15),
-                      child: Text(
-                        "PANIER",
-                        style: TextStyle(
-                          color: Colors.grey[300],
-                          fontWeight: FontWeight.w700,
-                          fontSize: 20,
-                        ),
+                      child: Stack(
+                        children: [
+                          Positioned(
+                            left: 20,
+                            child: ClickAnimation(
+                              onTap: () => Navigator.pop(context),
+                              child: Icon(
+                                Icons.arrow_back_ios,
+                                color: Colors.black45,
+                              ),
+                            ),
+                          ),
+                          Center(
+                            child: Text(
+                              "PANNIER",
+                              style: TextStyle(
+                                color: Colors.grey[300],
+                                fontWeight: FontWeight.w700,
+                                fontSize: 20,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ),
