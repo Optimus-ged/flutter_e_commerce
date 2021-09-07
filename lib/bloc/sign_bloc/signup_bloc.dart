@@ -21,7 +21,7 @@ class SignupBloc extends Bloc<SignUpEvent, SignupState> {
       yield SignupInProgress();
       SignUpResponse signUp =
           await _api.signUp(file: event.image, userData: event.data);
-      if (signUp.status == 200) {
+      if (signUp.status == 201) {
         yield SignupSuccess(data: signUp);
       } else {
         yield SignupFailure(data: signUp);

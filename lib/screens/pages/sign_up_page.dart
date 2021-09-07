@@ -60,11 +60,21 @@ class _SignupPageState extends State<SignupPage> {
                 setState(() {
                   isLoading = false;
                 });
+                Fluttertoast.showToast(
+                  msg: "${state.data.message}",
+                  gravity: ToastGravity.TOP,
+                  backgroundColor: Colors.black.withOpacity(0.6),
+                );
               }
               if (state is SignupSuccess) {
                 setState(() {
                   isLoading = false;
                 });
+                Fluttertoast.showToast(
+                  msg: "${state.data.message}",
+                  gravity: ToastGravity.TOP,
+                  backgroundColor: Colors.black.withOpacity(0.6),
+                );
               }
             },
             child: ScrollConfiguration(
@@ -266,7 +276,7 @@ class _SignupPageState extends State<SignupPage> {
   }
 
   Future<void> _onSignupButtonPressed() async {
-    if (numController.text.trim() == confirmPwdController.text.trim()) {
+    if (pwdController.text.trim() == confirmPwdController.text.trim()) {
       Users _data = Users(
         nom: nameController.text.trim(),
         contact: numController.text.trim(),
@@ -277,6 +287,7 @@ class _SignupPageState extends State<SignupPage> {
     } else {
       Fluttertoast.showToast(
         msg: "Le mot de passe n'a pas ete confirme",
+        gravity: ToastGravity.TOP,
         backgroundColor: Colors.black.withOpacity(0.6),
       );
     }

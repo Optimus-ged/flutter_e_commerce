@@ -112,8 +112,6 @@ class _LoginPageState extends State<LoginPage> {
                         color: AppTheme.pinkColor,
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      // padding:
-                      //     EdgeInsets.symmetric(vertical: 10, horizontal: 40),
                       child: isLoading
                           ? Container(
                               height: 28,
