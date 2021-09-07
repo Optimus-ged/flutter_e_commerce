@@ -1,5 +1,6 @@
 import 'package:e_commerce/bloc/article_bloc/favorite_article_bloc.dart';
 import 'package:e_commerce/exports/all_exports.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class FavoritePage extends StatefulWidget {
   @override
@@ -7,6 +8,7 @@ class FavoritePage extends StatefulWidget {
 }
 
 class _FavoritePageState extends State<FavoritePage> {
+  get _favoriteArticleBloc => locator.get<FavoriteArticleBloc>();
   @override
   void initState() {
     super.initState();
@@ -95,30 +97,35 @@ class _FavoritePageState extends State<FavoritePage> {
                                         shrinkWrap: true,
                                         itemCount: snapshot.data.length,
                                         itemBuilder: (context, index) =>
-                                            Container(
-                                          // color: Colors.red,
-                                          child: Column(
-                                            children: [
-                                              CustomCashedImage(
-                                                imageUrl:
-                                                    "${Endpoint.uplaod}${snapshot.data[index].photo}",
-                                                screen: screen,
-                                                isHomePage: true,
-                                              ),
-                                              SizedBox(height: 5),
-                                              SizedBox(
-                                                width: 80,
-                                                child: Text(
-                                                  "${snapshot.data[index].designation}",
-                                                  textAlign: TextAlign.center,
-                                                  style: TextStyle(
-                                                    fontWeight: FontWeight.w600,
-                                                    color: Colors.black45,
-                                                    fontSize: 15,
+                                            InkWell(
+                                          onTap: () => _removeFromFavorite(
+                                            snapshot.data[index],
+                                          ),
+                                          child: Container(
+                                            child: Column(
+                                              children: [
+                                                CustomCashedImage(
+                                                  imageUrl:
+                                                      "${Endpoint.uplaod}${snapshot.data[index].photo}",
+                                                  screen: screen,
+                                                  isHomePage: true,
+                                                ),
+                                                SizedBox(height: 5),
+                                                SizedBox(
+                                                  width: 80,
+                                                  child: Text(
+                                                    "${snapshot.data[index].designation}",
+                                                    textAlign: TextAlign.center,
+                                                    style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      color: Colors.black45,
+                                                      fontSize: 15,
+                                                    ),
                                                   ),
                                                 ),
-                                              ),
-                                            ],
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -160,6 +167,18 @@ class _FavoritePageState extends State<FavoritePage> {
         },
       ),
     );
+  }
+
+  // Deleting an item from list of favorites
+  _removeFromFavorite(LocalArticle data) {
+    final result = _favoriteArticleBloc.deleteFavoriteArticle(id: data.id);
+    if (result == 200) {
+      Fluttertoast.showToast(
+        msg: "${data.designation} supprime des favoris avec succes",
+        gravity: ToastGravity.TOP,
+        backgroundColor: Colors.black.withOpacity(0.6),
+      );
+    }
   }
 
   // Building list view item
