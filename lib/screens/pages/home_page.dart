@@ -172,15 +172,6 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              // CircleAvatar(
-              //   backgroundColor: Colors.black,
-              //   radius: 18,
-              //   child: Image.network(
-              //     "${Endpoint.uplaod}${widget.user.photo}",
-
-              //     fit: BoxFit.cover,
-              //   ),
-              // )
               ClickAnimation(
                 onTap: () => Navigator.of(context).pushNamed(
                   Profile,
@@ -193,7 +184,7 @@ class _HomePageState extends State<HomePage> {
                     width: 35,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Colors.amber,
+                      color: Colors.transparent,
                     ),
                     child: Image.network(
                       "${Endpoint.uplaod}${widget.user.photo}",
