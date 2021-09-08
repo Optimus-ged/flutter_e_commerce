@@ -24,10 +24,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         yield LoginSuccess(login: login);
         await locator.get<SharedPreferencesHelper>().saveAuthToken(login.token);
       } else {
-        yield LoginFailure(login: login);
+        yield LoginFailure(login: login.message);
         return;
       }
     } catch (error, stackTrace) {
+      yield LoginFailure(login: "$error");
       print(
           'LoginBloc.MapEventToState ::: ERROR: $error, STACKTRACE: $stackTrace');
       return;

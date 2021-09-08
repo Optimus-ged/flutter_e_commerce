@@ -10,6 +10,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   ScrollController _scrollController;
+  bool showSearchbar;
   ListeArticleBloc get _listArticleBloc => locator.get<ListeArticleBloc>();
   LocalArticleBloc get _localArticleBloc => locator.get<LocalArticleBloc>();
   FavoriteArticleBloc get _favoriteArticleBloc =>
@@ -21,6 +22,7 @@ class _HomePageState extends State<HomePage> {
     _listArticleBloc.getArticles();
     _localArticleBloc.getLocalData();
     _favoriteArticleBloc.getFavoriteArticle();
+    showSearchbar = false;
     super.initState();
   }
 
@@ -67,81 +69,39 @@ class _HomePageState extends State<HomePage> {
                 );
               },
             ),
-            // Positioned(
-            //   top: 40,
-            //   left: 10,
-            //   right: 10,
-            //   child: _searchBar(screen),
-            // )
+            showSearchbar ? _searchBar(screen) : Container(),
+            _buildNavigation(),
           ],
         ),
-        floatingActionButton: _buildNavigation(),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+        // floatingActionButton: _buildNavigation(),
+        // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       ),
     );
   }
 
   Widget _searchBar(screen) {
-    return AnimatedBuilder(
-      animation: _scrollController,
-      builder: (context, child) {
-        return AnimatedContainer(
-          height: (_scrollController.position.userScrollDirection ==
-                  ScrollDirection.reverse)
-              ? 0
-              : 55,
-          child: child,
-          duration: Duration(milliseconds: 300),
-          curve: Curves.ease,
-        );
-      },
-      child: Container(
-        height: 55,
-        width: screen.width,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(35),
-          boxShadow: [
-            // Top Shadow
-            BoxShadow(
-              color: Colors.black.withOpacity(0.01),
-              blurRadius: 5,
-              offset: Offset(0, -5),
-            ),
-
-            // Botom shadoow
-            BoxShadow(
-              color: Colors.black12.withOpacity(0.05),
-              blurRadius: 5,
-              offset: Offset(0, 5),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildNavigation() {
-    return AnimatedBuilder(
-      animation: _scrollController,
-      builder: (context, child) {
-        return AnimatedContainer(
-          height: (_scrollController.position.userScrollDirection ==
-                  ScrollDirection.reverse)
-              ? 0
-              : 65,
-          child: child,
-          duration: Duration(milliseconds: 300),
-          curve: Curves.ease,
-        );
-      },
-      child: Padding(
-        padding: EdgeInsets.only(bottom: 10, left: 10, right: 10),
+    return Positioned(
+      top: 40,
+      left: 10,
+      right: 10,
+      child: AnimatedBuilder(
+        animation: _scrollController,
+        builder: (context, child) {
+          return AnimatedContainer(
+            height: 55,
+            child: child,
+            duration: Duration(milliseconds: 300),
+            curve: Curves.ease,
+          );
+        },
         child: Container(
-          height: 55,
+          height: 50,
+          padding: EdgeInsets.symmetric(horizontal: 10),
+          width: screen.width,
           decoration: BoxDecoration(
-            color: AppTheme.blueColor,
-            borderRadius: BorderRadius.circular(35),
+            color: Colors.white.withOpacity(0.4),
+            border: Border.all(width: 1, color: Colors.white),
+            borderRadius: BorderRadius.circular(10),
             boxShadow: [
               // Top Shadow
               BoxShadow(
@@ -159,47 +119,113 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              StreamBuilder<List<LocalArticle>>(
-                stream: _localArticleBloc.subject,
-                builder: (context, snapshot) {
-                  return _buildNavigationItem(
-                    icon: Icons.shopping_basket_outlined,
-                    context: context,
-                    onTap: () => Navigator.of(context).pushNamed(
-                      Payment,
-                      arguments: snapshot.data,
-                    ),
-                  );
-                },
-              ),
-              _buildNavigationItem(
-                icon: Icons.search,
-                context: context,
-                onTap: () {},
-              ),
-              _buildNavigationItem(
-                icon: Icons.favorite,
-                context: context,
-                onTap: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => FavoritePage(),
-                    ),
-                  );
-                },
-              ),
-              _buildNavigationItem(
-                icon: Icons.account_circle,
-                context: context,
-                onTap: () {},
-              ),
-              _buildNavigationItem(
-                icon: Icons.exit_to_app,
-                context: context,
-              ),
+              Icon(Icons.search, color: Colors.white),
+              Expanded(
+                  child: TextField(
+                cursorColor: Colors.black,
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+                decoration:
+                    InputDecoration.collapsed(hintText: 'Rechercher ici !!!'),
+              ))
             ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildNavigation() {
+    return Positioned(
+      bottom: 10,
+      left: 0,
+      right: 0,
+      child: AnimatedBuilder(
+        animation: _scrollController,
+        builder: (context, child) {
+          return AnimatedContainer(
+            height: (_scrollController.position.userScrollDirection ==
+                    ScrollDirection.reverse)
+                ? 0
+                : 65,
+            child: child,
+            duration: Duration(milliseconds: 300),
+            curve: Curves.ease,
+          );
+        },
+        child: Padding(
+          padding: EdgeInsets.only(bottom: 10, left: 10, right: 10),
+          child: Container(
+            height: 55,
+            decoration: BoxDecoration(
+              color: AppTheme.blueColor,
+              borderRadius: BorderRadius.circular(35),
+              boxShadow: [
+                // Top Shadow
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.01),
+                  blurRadius: 5,
+                  offset: Offset(0, -5),
+                ),
+
+                // Botom shadoow
+                BoxShadow(
+                  color: Colors.black12.withOpacity(0.05),
+                  blurRadius: 5,
+                  offset: Offset(0, 5),
+                ),
+              ],
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                StreamBuilder<List<LocalArticle>>(
+                  stream: _localArticleBloc.subject,
+                  builder: (context, snapshot) {
+                    return _buildNavigationItem(
+                      icon: Icons.shopping_basket_outlined,
+                      context: context,
+                      onTap: () => Navigator.of(context).pushNamed(
+                        Payment,
+                        arguments: snapshot.data,
+                      ),
+                    );
+                  },
+                ),
+                _buildNavigationItem(
+                  icon: Icons.search,
+                  context: context,
+                  onTap: () {
+                    setState(() {
+                      showSearchbar = !showSearchbar;
+                    });
+                  },
+                ),
+                _buildNavigationItem(
+                  icon: Icons.favorite,
+                  context: context,
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => FavoritePage(),
+                      ),
+                    );
+                  },
+                ),
+                _buildNavigationItem(
+                  icon: Icons.account_circle,
+                  context: context,
+                  onTap: () {},
+                ),
+                _buildNavigationItem(
+                  icon: Icons.exit_to_app,
+                  context: context,
+                ),
+              ],
+            ),
           ),
         ),
       ),

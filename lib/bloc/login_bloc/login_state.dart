@@ -14,7 +14,7 @@ class LoginInitial extends LoginState {}
 class LoginInProgress extends LoginState {}
 
 class LoginFailure extends LoginState {
-  final LoginResponse login;
+  final String login;
 
   const LoginFailure({@required this.login});
 

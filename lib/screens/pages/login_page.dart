@@ -44,7 +44,7 @@ class _LoginPageState extends State<LoginPage> {
               isLoading = false;
             });
             Fluttertoast.showToast(
-              msg: "${state.login.message}",
+              msg: "${state.login}",
               gravity: ToastGravity.TOP,
               backgroundColor: Colors.black.withOpacity(0.6),
             );
@@ -53,6 +53,7 @@ class _LoginPageState extends State<LoginPage> {
             Fluttertoast.showToast(
               msg: "${state.login.message}",
               gravity: ToastGravity.TOP,
+              toastLength: Toast.LENGTH_LONG,
               backgroundColor: Colors.black.withOpacity(0.6),
             );
             Navigator.of(context).pushReplacementNamed(Home);
@@ -127,7 +128,8 @@ class _LoginPageState extends State<LoginPage> {
                               height: 28,
                               width: 28,
                               child: CircularProgressIndicator(
-                                strokeWidth: 1,
+                                valueColor: new AlwaysStoppedAnimation<Color>(
+                                    Colors.white),
                               ),
                             )
                           : Text(

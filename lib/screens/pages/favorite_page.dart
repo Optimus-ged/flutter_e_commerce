@@ -168,90 +168,6 @@ class _FavoritePageState extends State<FavoritePage> {
                                 ],
                               ),
                             );
-                            // return SingleChildScrollView(
-                            // child: Column(
-                            //   children: [
-                            //     snapshot.data.length > 0
-                            //         ?
-                            //         Container(
-                            //             // color: AppTheme.blueColor,
-                            //             child: GridView.builder(
-                            //               padding: EdgeInsets.only(
-                            //                 bottom: 20,
-                            //                 top: 20,
-                            //                 left: 10,
-                            //                 right: 10,
-                            //               ),
-                            //               gridDelegate:
-                            //                   SliverGridDelegateWithFixedCrossAxisCount(
-                            //                 crossAxisSpacing: 10,
-                            //                 mainAxisSpacing: 20,
-                            //                 crossAxisCount: 2,
-                            //                 childAspectRatio: 0.60,
-                            //               ),
-                            //               primary: false,
-                            //               shrinkWrap: true,
-                            //               itemCount: snapshot.data.length,
-                            //               itemBuilder: (context, index) =>
-                            //                   InkWell(
-                            //                 onTap: () => _removeFromFavorite(
-                            //                   snapshot.data[index],
-                            //                 ),
-                            //                 child: Container(
-                            //                   child: Column(
-                            //                     children: [
-                            //                       CustomCashedImage(
-                            //                         imageUrl:
-                            //                             "${Endpoint.uplaod}${snapshot.data[index].photo}",
-                            //                         screen: screen,
-                            //                         isHomePage: true,
-                            //                       ),
-                            //                       SizedBox(height: 5),
-                            //                       SizedBox(
-                            //                         width: 80,
-                            //                         child: Text(
-                            //                           "${snapshot.data[index].designation}",
-                            //                           textAlign:
-                            //                               TextAlign.center,
-                            //                           style: TextStyle(
-                            //                             fontWeight:
-                            //                                 FontWeight.w600,
-                            //                             color: Colors.black45,
-                            //                             fontSize: 15,
-                            //                           ),
-                            //                         ),
-                            //                       ),
-                            //                     ],
-                            //                   ),
-                            //                 ),
-                            //               ),
-                            //             ),
-                            //           )
-                            //         : Expanded(
-                            //             child: Column(
-                            //               mainAxisAlignment:
-                            //                   MainAxisAlignment.center,
-                            //               children: [
-                            //                 Icon(
-                            //                   Icons
-                            //                       .remove_shopping_cart_outlined,
-                            //                   color: Colors.grey[50],
-                            //                   size: 100,
-                            //                 ),
-                            //                 Text(
-                            //                   "aucune favorie\ndiponible",
-                            //                   textAlign: TextAlign.center,
-                            //                   style: TextStyle(
-                            //                     color: Colors.grey[300],
-                            //                     fontSize: 13,
-                            //                   ),
-                            //                 ),
-                            //               ],
-                            //             ),
-                            //           ),
-                            //   ],
-                            // ),
-                            // );
                           }
                           return Center();
                         }),
@@ -276,16 +192,8 @@ class _FavoritePageState extends State<FavoritePage> {
     if (result == 200) {
       Fluttertoast.showToast(
         msg: "${data.designation} supprime des favoris avec succes",
-        gravity: ToastGravity.TOP,
         backgroundColor: Colors.black.withOpacity(0.6),
       );
     }
-  }
-
-  // Building list view item
-  Widget _buildListItem({List<LocalArticle> data, int index}) {
-    return Container(
-      child: Text('test'),
-    );
   }
 }
