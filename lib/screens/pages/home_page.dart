@@ -4,6 +4,8 @@ import 'package:e_commerce/routes/routes_constants.dart';
 import 'package:e_commerce/screens/pages/favorite_page.dart';
 
 class HomePage extends StatefulWidget {
+  final User user;
+  HomePage(this.user);
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -49,7 +51,6 @@ class _HomePageState extends State<HomePage> {
     allArticles.addAll(listArticles);
     widgetList = [];
     if (_searchController.text.isNotEmpty) {
-      print("Optimus is the ....");
       allArticles.retainWhere(
         (article) {
           test = allArticles.length;
@@ -152,22 +153,49 @@ class _HomePageState extends State<HomePage> {
           ),
           child: Row(
             children: [
-              Icon(Icons.search, color: Colors.white),
+              Icon(Icons.search, color: Colors.black87),
+              SizedBox(width: 10),
               Expanded(
-                  child: TextField(
-                onChanged: (value) {
-                  setState(() {});
-                },
-                cursorColor: Colors.black,
-                controller: _searchController,
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
+                child: TextField(
+                  onChanged: (value) {
+                    setState(() {});
+                  },
+                  cursorColor: Colors.black,
+                  controller: _searchController,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  decoration: InputDecoration.collapsed(
+                    hintText:
+                        '${widget.user.nom.split(' ').first} Rechercher ici !!!',
+                  ),
                 ),
-                decoration: InputDecoration.collapsed(
-                  hintText: 'Rechercher ici !!!',
+              ),
+              // CircleAvatar(
+              //   backgroundColor: Colors.black,
+              //   radius: 18,
+              //   child: Image.network(
+              //     "${Endpoint.uplaod}${widget.user.photo}",
+
+              //     fit: BoxFit.cover,
+              //   ),
+              // )
+              ClipRRect(
+                borderRadius: BorderRadius.circular(50),
+                child: Container(
+                  height: 35,
+                  width: 35,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.amber,
+                  ),
+                  child: Image.network(
+                    "${Endpoint.uplaod}${widget.user.photo}",
+                    fit: BoxFit.cover,
+                  ),
                 ),
-              ))
+              )
             ],
           ),
         ),

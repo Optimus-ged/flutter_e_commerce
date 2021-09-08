@@ -19,7 +19,11 @@ abstract class Routes {
         return MaterialPageRoute(builder: (context) => LoginPage());
         break;
       case Home:
-        return MaterialPageRoute(builder: (context) => HomePage());
+        return MaterialPageRoute(
+          builder: (context) => HomePage(
+            settings.arguments,
+          ),
+        );
         break;
       case Signup:
         return MaterialPageRoute(builder: (context) => SignupPage());
@@ -29,9 +33,7 @@ abstract class Routes {
         break;
       case Payment:
         return MaterialPageRoute(
-          builder: (context) => PaymentPage(
-            
-          ),
+          builder: (context) => PaymentPage(),
         );
         break;
       case Details:

@@ -16,6 +16,7 @@ class _LoginPageState extends State<LoginPage> {
   var _controllerPassword = TextEditingController();
   bool isLoading;
   LoginBloc _loginBloc;
+  User userData;
 
   @override
   void initState() {
@@ -50,13 +51,19 @@ class _LoginPageState extends State<LoginPage> {
             );
           }
           if (state is LoginSuccess) {
+            setState(() {
+              userData = state.login.user;
+            });
             Fluttertoast.showToast(
               msg: "${state.login.message}",
               gravity: ToastGravity.TOP,
               toastLength: Toast.LENGTH_LONG,
               backgroundColor: Colors.black.withOpacity(0.6),
             );
-            Navigator.of(context).pushReplacementNamed(Home);
+            Navigator.of(context).pushReplacementNamed(
+              Home,
+              arguments: state.login.user,
+            );
           }
         },
         child: BlocBuilder<LoginBloc, LoginState>(
