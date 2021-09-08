@@ -1,13 +1,16 @@
 import 'package:e_commerce/exports/all_exports.dart';
 
-class ProfilePage extends StatefulWidget {
-  @override
-  _ProfilePageState createState() => _ProfilePageState();
-}
+class ProfilePage extends StatelessWidget {
+  // const ProfilePage({ Key? key }) : super(key: key);
+  final User userData;
+  ProfilePage(this.userData);
 
-class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      body: Center(
+        child: Text('${userData.nom}'),
+      ),
+    );
   }
 }

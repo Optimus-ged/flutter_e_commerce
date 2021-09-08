@@ -2,6 +2,7 @@
 
 import 'package:e_commerce/exports/all_exports.dart';
 import 'package:e_commerce/routes/routes_constants.dart';
+import 'package:e_commerce/screens/pages/profile_page.dart';
 
 // import 'package:e_commerce/screens/pages/intro_page.dart';
 // import 'package:e_commerce/screens/pages/login_page.dart';
@@ -30,6 +31,11 @@ abstract class Routes {
         break;
       case Search:
         return MaterialPageRoute(builder: (context) => SearchPage());
+        break;
+      case Profile:
+        return MaterialPageRoute(builder: (context) => ProfilePage(
+                  settings.arguments,
+                ));
         break;
       case Payment:
         return MaterialPageRoute(

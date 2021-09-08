@@ -181,18 +181,24 @@ class _HomePageState extends State<HomePage> {
               //     fit: BoxFit.cover,
               //   ),
               // )
-              ClipRRect(
-                borderRadius: BorderRadius.circular(50),
-                child: Container(
-                  height: 35,
-                  width: 35,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.amber,
-                  ),
-                  child: Image.network(
-                    "${Endpoint.uplaod}${widget.user.photo}",
-                    fit: BoxFit.cover,
+              ClickAnimation(
+                onTap: () => Navigator.of(context).pushNamed(
+                  Profile,
+                  arguments: widget.user,
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(50),
+                  child: Container(
+                    height: 35,
+                    width: 35,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.amber,
+                    ),
+                    child: Image.network(
+                      "${Endpoint.uplaod}${widget.user.photo}",
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
               )
@@ -283,7 +289,10 @@ class _HomePageState extends State<HomePage> {
                 _buildNavigationItem(
                   icon: Icons.account_circle,
                   context: context,
-                  onTap: () {},
+                  onTap: () => Navigator.of(context).pushNamed(
+                    Profile,
+                    arguments: widget.user,
+                  ),
                 ),
                 _buildNavigationItem(
                   icon: Icons.exit_to_app,
