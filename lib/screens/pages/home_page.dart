@@ -16,12 +16,13 @@ class _HomePageState extends State<HomePage> {
   LocalArticleBloc get _localArticleBloc => locator.get<LocalArticleBloc>();
   FavoriteArticleBloc get _favoriteArticleBloc =>
       locator.get<FavoriteArticleBloc>();
-  List<Article> listArticles;
-  List<Widget> widgetList;
+  List<Article> listArticles = [];
+  List<Widget> widgetList = [];
+  int test = 0;
 
   @override
   void initState() {
-    listArticles = [];
+    // listArticles = [];
     widgetList = [];
     _scrollController = ScrollController();
     _listArticleBloc.getArticles();
@@ -31,6 +32,7 @@ class _HomePageState extends State<HomePage> {
     _searchController.addListener(() {
       filterList();
     });
+
     super.initState();
   }
 
@@ -43,12 +45,14 @@ class _HomePageState extends State<HomePage> {
   filterList({
     List<Article> allArticles,
   }) {
-    // allAgents = [];
-    // allArticles.addAll(listArticles);
-    // widgetList = [];
+    allArticles = [];
+    allArticles.addAll(listArticles);
+    widgetList = [];
     if (_searchController.text.isNotEmpty) {
+      print("Optimus is the ....");
       allArticles.retainWhere(
         (article) {
+          test = allArticles.length;
           return article.designation.toUpperCase().contains(
                 _searchController.text.toUpperCase(),
               );
@@ -56,17 +60,11 @@ class _HomePageState extends State<HomePage> {
       );
     }
 
-    if (widgetList.length == 0) {
-      allArticles.forEach(
-        (art) {
-          widgetList.add(BuildListItem(art));
-        },
-      );
-    }
-
-    // setState(() {
-    //   normalList;
-    // });
+    allArticles.forEach(
+      (art) {
+        widgetList.add(BuildListItem(art));
+      },
+    );
   }
 
   @override
@@ -82,29 +80,22 @@ class _HomePageState extends State<HomePage> {
       top: false,
       child: Scaffold(
         backgroundColor: AppTheme.whiteColor,
-        // appBar: PreferredSize(
-        //   preferredSize: Size.fromHeight(60),
-        //   child: Container(
-        //     color: Colors.transparent,
-        //   ),
-        // ),
         body: Stack(
           children: [
             StreamBuilder<ListeArticles>(
               stream: _listArticleBloc.stream,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  // listArticles.clear();
-                  // listArticles.addAll(snapshot.data.articles);
+                  listArticles.clear();
+                  listArticles.addAll(snapshot.data.articles);
                   filterList(
                     allArticles: snapshot.data.articles,
                   );
                   return BuildArticleList(
-                    screen: screen,
-                    data: snapshot.data,
-                    scrollController: _scrollController,
-                    widgetList : widgetList
-                  );
+                      screen: screen,
+                      data: snapshot.data,
+                      scrollController: _scrollController,
+                      widgetList: widgetList);
                 }
                 return BuildArticleList(
                   screen: screen,
@@ -116,8 +107,6 @@ class _HomePageState extends State<HomePage> {
             _buildNavigation(),
           ],
         ),
-        // floatingActionButton: _buildNavigation(),
-        // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       ),
     );
   }
@@ -125,13 +114,13 @@ class _HomePageState extends State<HomePage> {
   Widget _searchBar(screen) {
     return Positioned(
       top: 40,
-      left: 10,
-      right: 10,
+      left: 30,
+      right: 30,
       child: AnimatedBuilder(
         animation: _scrollController,
         builder: (context, child) {
           return AnimatedContainer(
-            height: 55,
+            height: 50,
             child: child,
             duration: Duration(milliseconds: 300),
             curve: Curves.ease,
@@ -142,7 +131,7 @@ class _HomePageState extends State<HomePage> {
           padding: EdgeInsets.symmetric(horizontal: 10),
           width: screen.width,
           decoration: BoxDecoration(
-            color: Colors.white.withOpacity(0.4),
+            color: Colors.white.withOpacity(0.8),
             border: Border.all(width: 1, color: Colors.white),
             borderRadius: BorderRadius.circular(10),
             boxShadow: [
@@ -166,14 +155,17 @@ class _HomePageState extends State<HomePage> {
               Icon(Icons.search, color: Colors.white),
               Expanded(
                   child: TextField(
+                onChanged: (value) {
+                  setState(() {});
+                },
                 cursorColor: Colors.black,
+                controller: _searchController,
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
                 decoration: InputDecoration.collapsed(
-                  // hintText: 'Rechercher ici !!!',
-                  hintText: '${widgetList.length}',
+                  hintText: 'Rechercher ici !!!',
                 ),
               ))
             ],

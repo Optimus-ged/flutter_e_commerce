@@ -11,7 +11,7 @@ class BuildArticleList extends StatefulWidget {
       {Key key,
       this.data,
       @required this.screen,
-      @required this.widgetList,
+       this.widgetList,
       @required this.scrollController})
       : super(key: key);
 
