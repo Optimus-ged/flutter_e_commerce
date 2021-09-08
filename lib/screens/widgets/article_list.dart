@@ -1,7 +1,7 @@
 import 'package:e_commerce/exports/all_exports.dart';
 import 'package:e_commerce/routes/routes_constants.dart';
 
-class BuildArticleList extends StatelessWidget {
+class BuildArticleList extends StatefulWidget {
   final ListeArticles data;
   final Size screen;
   final ScrollController scrollController;
@@ -12,10 +12,16 @@ class BuildArticleList extends StatelessWidget {
       @required this.screen,
       @required this.scrollController})
       : super(key: key);
+
+  @override
+  _BuildArticleListState createState() => _BuildArticleListState();
+}
+
+class _BuildArticleListState extends State<BuildArticleList> {
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
-      controller: scrollController,
+      controller: widget.scrollController,
       slivers: [
         SliverToBoxAdapter(
           child: GridView.builder(
@@ -38,13 +44,13 @@ class BuildArticleList extends StatelessWidget {
               otherwise we take the real length of the list wich comes from the
               snapshot
             */
-            itemCount: (data != null) ? data.length : 5,
+            itemCount: (widget.data != null) ? widget.data.length : 5,
             itemBuilder: (context, index) {
               /* If data variable is not null, we retreive the list from 
                 the snapshot, otherwise we retreive the shimmer list to specify
                 to the user that data are in loading process
               */
-              return data != null
+              return widget.data != null
                   ? _buildListData(index, context)
 
                   // when the application realise that snapshot data is null
@@ -59,58 +65,61 @@ class BuildArticleList extends StatelessWidget {
 
   Widget _buildListData(int index, BuildContext context) {
     return ClickAnimation(
-      onTap: () => Navigator.of(context).pushNamed(
-        Details,
-        arguments: data.articles[index],
-      ),
-      child: Column(
-        crossAxisAlignment: (index % 2 == 0)
-            ? CrossAxisAlignment.start
-            : CrossAxisAlignment.end,
-        children: [
-          Container(
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                colors: [
-                  AppTheme.radiantTopRight,
-                  AppTheme.radiantTop,
-                  AppTheme.radiantBotom
-                ],
-              ),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: CustomCashedImage(
-                imageUrl:
-                    "${Endpoint.uplaod}${data.articles[index].photoArticles[0].photoArticle}",
-                screen: screen,
-                isHomePage: true,
-              ),
-            ),
-          ),
-          SizedBox(height: 4),
-          Text(
-            "${data.articles[index].designation}",
-            style: TextStyle(
-                color: AppTheme.designationColor,
-                fontSize: 13,
-                fontWeight: FontWeight.w500),
-          ),
-          SizedBox(height: 2),
-          Text(
-            "${data.articles[index].pu}\$",
-            style: TextStyle(
-              color: AppTheme.puColor,
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
-            ),
-          )
-        ],
-      ),
+      onTap: () {
+        Navigator.of(context).pushNamed(
+          Details,
+          arguments: widget.data.articles[index],
+        );
+      },
+      child: BuildListItem(widget.data.articles[index]),
+      // child: Column(
+      //   crossAxisAlignment: (index % 2 == 0)
+      //       ? CrossAxisAlignment.start
+      //       : CrossAxisAlignment.end,
+      //   children: [
+      //     Container(
+      //       alignment: Alignment.center,
+      //       decoration: BoxDecoration(
+      //         gradient: LinearGradient(
+      //           begin: Alignment.topCenter,
+      //           end: Alignment.bottomCenter,
+      //           colors: [
+      //             AppTheme.radiantTopRight,
+      //             AppTheme.radiantTop,
+      //             AppTheme.radiantBotom
+      //           ],
+      //         ),
+      //         borderRadius: BorderRadius.circular(10),
+      //       ),
+      //       child: ClipRRect(
+      //         borderRadius: BorderRadius.circular(10),
+      //         child: CustomCashedImage(
+      //           imageUrl:
+      //               "${Endpoint.uplaod}${widget.data.articles[index].photoArticles[0].photoArticle}",
+      //           screen: widget.screen,
+      //           isHomePage: true,
+      //         ),
+      //       ),
+      //     ),
+      //     SizedBox(height: 4),
+      //     Text(
+      //       "${widget.data.articles[index].designation}",
+      //       style: TextStyle(
+      //           color: AppTheme.designationColor,
+      //           fontSize: 13,
+      //           fontWeight: FontWeight.w500),
+      //     ),
+      //     SizedBox(height: 2),
+      //     Text(
+      //       "${widget.data.articles[index].pu}\$",
+      //       style: TextStyle(
+      //         color: AppTheme.puColor,
+      //         fontSize: 16,
+      //         fontWeight: FontWeight.w500,
+      //       ),
+      //     )
+      //   ],
+      // ),
     );
   }
 
@@ -125,7 +134,7 @@ class BuildArticleList extends StatelessWidget {
             : CrossAxisAlignment.end,
         children: [
           Container(
-            height: screen.height * .32,
+            height: widget.screen.height * .32,
             width: 200,
             decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -144,16 +153,74 @@ class BuildArticleList extends StatelessWidget {
           Container(
             color: AppTheme.greyColor,
             height: 12,
-            width: screen.width * .35,
+            width: widget.screen.width * .35,
           ),
           SizedBox(height: 2),
           Container(
             color: AppTheme.greyColor,
             height: 15,
-            width: screen.width * .10,
+            width: widget.screen.width * .10,
           ),
         ],
       ),
+    );
+  }
+}
+
+class BuildListItem extends StatelessWidget {
+  // const BuildListItem({ Key? key }) : super(key: key);
+  final Article data;
+  BuildListItem(this.data);
+
+  @override
+  Widget build(BuildContext context) {
+    Size screen = MediaQuery.of(context).size;
+    return Column(
+      // crossAxisAlignment:
+      //     (index % 2 == 0) ? CrossAxisAlignment.start : CrossAxisAlignment.end,
+      children: [
+        Container(
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                AppTheme.radiantTopRight,
+                AppTheme.radiantTop,
+                AppTheme.radiantBotom
+              ],
+            ),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: CustomCashedImage(
+              imageUrl:
+                  "${Endpoint.uplaod}${data.photoArticles[0].photoArticle}",
+              screen: screen,
+              isHomePage: true,
+            ),
+          ),
+        ),
+        SizedBox(height: 4),
+        Text(
+          "${data.designation}",
+          style: TextStyle(
+              color: AppTheme.designationColor,
+              fontSize: 13,
+              fontWeight: FontWeight.w500),
+        ),
+        SizedBox(height: 2),
+        Text(
+          "${data.pu}\$",
+          style: TextStyle(
+            color: AppTheme.puColor,
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+          ),
+        )
+      ],
     );
   }
 }

@@ -10,19 +10,27 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   ScrollController _scrollController;
+  var _searchController = TextEditingController();
   bool showSearchbar;
   ListeArticleBloc get _listArticleBloc => locator.get<ListeArticleBloc>();
   LocalArticleBloc get _localArticleBloc => locator.get<LocalArticleBloc>();
   FavoriteArticleBloc get _favoriteArticleBloc =>
       locator.get<FavoriteArticleBloc>();
+  List<Article> listArticles;
+  List<Widget> widgetList;
 
   @override
   void initState() {
+    listArticles = [];
+    widgetList = [];
     _scrollController = ScrollController();
     _listArticleBloc.getArticles();
     _localArticleBloc.getLocalData();
     _favoriteArticleBloc.getFavoriteArticle();
     showSearchbar = false;
+    _searchController.addListener(() {
+      filterList();
+    });
     super.initState();
   }
 
@@ -30,6 +38,38 @@ class _HomePageState extends State<HomePage> {
   void dispose() {
     _scrollController.dispose();
     super.dispose();
+  }
+
+  filterList({
+    List<Article> allArticles,
+  }) {
+    // allAgents = [];
+    allArticles.addAll(listArticles);
+    widgetList = [];
+    if (_searchController.text.isNotEmpty) {
+      allArticles.retainWhere(
+        (article) {
+          return article.designation.toUpperCase().contains(
+                _searchController.text.toUpperCase(),
+              );
+        },
+      );
+    }
+
+    
+    // allArticles.forEach(
+    //   (agent) {
+    //     widgetList.add(
+    //       AgentItem(
+    //         agents: agent,
+    //       ),
+    //     );
+    //   },
+    // );
+
+    // setState(() {
+    //   normalList;
+    // });
   }
 
   @override
@@ -57,6 +97,13 @@ class _HomePageState extends State<HomePage> {
               stream: _listArticleBloc.stream,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
+                  if (listArticles.isNotEmpty) {
+                    listArticles.clear();
+                  }
+                  listArticles.addAll(snapshot.data.articles);
+                  filterList(
+                    allArticles: snapshot.data.articles,
+                  );
                   return BuildArticleList(
                     screen: screen,
                     data: snapshot.data,
@@ -128,8 +175,9 @@ class _HomePageState extends State<HomePage> {
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
-                decoration:
-                    InputDecoration.collapsed(hintText: 'Rechercher ici !!!'),
+                decoration: InputDecoration.collapsed(
+                  hintText: 'Rechercher ici !!!',
+                ),
               ))
             ],
           ),
