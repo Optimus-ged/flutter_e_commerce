@@ -44,8 +44,8 @@ class _HomePageState extends State<HomePage> {
     List<Article> allArticles,
   }) {
     // allAgents = [];
-    allArticles.addAll(listArticles);
-    widgetList = [];
+    // allArticles.addAll(listArticles);
+    // widgetList = [];
     if (_searchController.text.isNotEmpty) {
       allArticles.retainWhere(
         (article) {
@@ -56,16 +56,13 @@ class _HomePageState extends State<HomePage> {
       );
     }
 
-    
-    // allArticles.forEach(
-    //   (agent) {
-    //     widgetList.add(
-    //       AgentItem(
-    //         agents: agent,
-    //       ),
-    //     );
-    //   },
-    // );
+    if (widgetList.length == 0) {
+      allArticles.forEach(
+        (art) {
+          widgetList.add(BuildListItem(art));
+        },
+      );
+    }
 
     // setState(() {
     //   normalList;
@@ -97,10 +94,8 @@ class _HomePageState extends State<HomePage> {
               stream: _listArticleBloc.stream,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  if (listArticles.isNotEmpty) {
-                    listArticles.clear();
-                  }
-                  listArticles.addAll(snapshot.data.articles);
+                  // listArticles.clear();
+                  // listArticles.addAll(snapshot.data.articles);
                   filterList(
                     allArticles: snapshot.data.articles,
                   );
@@ -108,6 +103,7 @@ class _HomePageState extends State<HomePage> {
                     screen: screen,
                     data: snapshot.data,
                     scrollController: _scrollController,
+                    widgetList : widgetList
                   );
                 }
                 return BuildArticleList(
@@ -176,7 +172,8 @@ class _HomePageState extends State<HomePage> {
                   fontWeight: FontWeight.bold,
                 ),
                 decoration: InputDecoration.collapsed(
-                  hintText: 'Rechercher ici !!!',
+                  // hintText: 'Rechercher ici !!!',
+                  hintText: '${widgetList.length}',
                 ),
               ))
             ],
