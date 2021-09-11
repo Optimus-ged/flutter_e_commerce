@@ -1,4 +1,6 @@
 import 'package:e_commerce/exports/all_exports.dart';
+import 'package:e_commerce/screens/widgets/dimissable.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class PaymentPage extends StatefulWidget {
   @override
@@ -7,6 +9,7 @@ class PaymentPage extends StatefulWidget {
 
 class _PaymentPageState extends State<PaymentPage> {
   double totalPayment;
+  get _localArticleBloc => locator.get<LocalArticleBloc>();
 
   @override
   void initState() {
@@ -27,7 +30,7 @@ class _PaymentPageState extends State<PaymentPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: StreamBuilder<List<LocalArticle>>(
-        stream: locator.get<LocalArticleBloc>().subject,
+        stream: _localArticleBloc.subject,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             browseList(data: snapshot.data);
@@ -91,10 +94,19 @@ class _PaymentPageState extends State<PaymentPage> {
                                       // when data are so many
                                       primary: false,
                                       itemBuilder: (context, index) {
-                                        return _buildListItem(
-                                          data: snapshot.data,
-                                          index: index,
-                                        );
+                                        return DimissableWidget(
+                                            item: snapshot.data[index],
+                                            child: _buildListItem(
+                                              data: snapshot.data,
+                                              index: index,
+                                            ),
+                                            onDismiss: (direction) =>
+                                                _removeFromDataList(
+                                                  context,
+                                                  index,
+                                                  direction,
+                                                  snapshot.data[index],
+                                                ));
                                       },
                                     ),
                                   )
@@ -457,5 +469,27 @@ class _PaymentPageState extends State<PaymentPage> {
         ),
       ),
     );
+  }
+
+  // Deleting an item from list of favorites
+  _removeFromDataList(
+    BuildContext context,
+    index,
+    direction,
+    LocalArticle data,
+  ) {
+    final result = locator.get<LocalArticleBloc>().deleteLocalArticle(
+          id: data.id,
+        );
+
+    setState(() {
+      totalPayment = 0.0;
+    });
+    if (result == 200) {
+      // Fluttertoast.showToast(
+      //   msg: "${data.designation} supprime de la liste avec succes",
+      //   backgroundColor: Colors.black.withOpacity(0.6),
+      // );
+    }
   }
 }

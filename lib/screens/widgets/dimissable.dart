@@ -7,7 +7,7 @@ class DimissableWidget<T> extends StatelessWidget {
   const DimissableWidget({
     @required this.item,
     @required this.child,
-     @required this.onDismiss,
+    @required this.onDismiss,
     Key key,
   }) : super(
           key: key,
@@ -25,7 +25,7 @@ class DimissableWidget<T> extends StatelessWidget {
     return Container(
       alignment: Alignment.centerLeft,
       padding: EdgeInsets.symmetric(horizontal: 20),
-      color: Colors.green,
+      color: Colors.grey[300],
       child: Icon(Icons.delete),
     );
   }
