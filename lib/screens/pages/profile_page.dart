@@ -1,5 +1,12 @@
+import 'package:e_commerce/bloc/login_bloc/login_bloc.dart';
+import 'package:e_commerce/bloc/profile_bloc/profile_bloc.dart';
+import 'package:e_commerce/bloc/profile_bloc/profile_event.dart';
 import 'package:e_commerce/exports/all_exports.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'dart:io' as Io;
+
+import 'package:image_picker/image_picker.dart';
 
 class ProfilePage extends StatefulWidget {
   // const ProfilePage({ Key? key }) : super(key: key);
@@ -12,11 +19,24 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   bool isLoading;
+  ProfileBloc _profileBloc;
+  Io.File _image;
   var _controllerNom = TextEditingController();
   var _controllerContact = TextEditingController();
+  var _controllerPwd = TextEditingController();
+
+  Future getImage() async {
+    final pickedFile =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+    setState(() {
+      _image = Io.File(pickedFile.path);
+    });
+  }
+
   @override
   void initState() {
     isLoading = false;
+    _profileBloc = BlocProvider.of<ProfileBloc>(context);
     super.initState();
   }
 
@@ -148,21 +168,12 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   Future<void> _onUpdateButtonPressed() async {
-    String email = _controllerNom.text.trim();
-    String password = _controllerContact.text.trim();
+    Users _data = Users(
+      nom: _controllerNom.text.trim(),
+      contact: _controllerContact.text.trim(),
+      motDePasse: _controllerPwd.text.trim(),
+    );
 
-    if (email.trim().isEmpty || password.trim().isEmpty) {
-      Fluttertoast.showToast(
-        msg:
-            "Certains champs sont encore vide, veuillez les rempir tous SVP !!!",
-        gravity: ToastGravity.TOP,
-        backgroundColor: Colors.black.withOpacity(0.6),
-      );
-    } else {
-      _loginBloc.add(LoginButtonPressed(
-        email: email,
-        password: password,
-      ));
-    }
+    _profileBloc.add(ProfileButtonPressed(image: _image, data: _data));
   }
 }
