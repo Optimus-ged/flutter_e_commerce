@@ -106,7 +106,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         SizedBox(height: screen.height * .05),
                         ClickAnimation(
                           onTap: () {
-                            _onLoginButtonPressed();
+                            _onUpdateButtonPressed();
                           },
                           child: Container(
                             height: 38,
@@ -147,7 +147,7 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  Future<void> _onLoginButtonPressed() async {
+  Future<void> _onUpdateButtonPressed() async {
     String email = _controllerNom.text.trim();
     String password = _controllerContact.text.trim();
 

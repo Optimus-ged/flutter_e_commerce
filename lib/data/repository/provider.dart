@@ -45,7 +45,6 @@ class Provider {
   Future<SignUpResponse> signUp(
       {@override File file, @override Users userData}) async {
     String fileName = file.path.split('/').last;
-    print("??????????????????");
     try {
       FormData formData = FormData.fromMap({
         "photo": await MultipartFile.fromFile(file.path, filename: fileName),
@@ -72,28 +71,36 @@ class Provider {
     }
   }
 
-  // Future<SignUpResponse> signUpUser(SignUpResponse userData) async {
-  //   try {
-  //     final result = await _dio.post(
-  //       "${Endpoint.loginUser}",
-  //       data: userData,
-  //       options: Options(
-  //         contentType: Headers.formUrlEncodedContentType,
-  //         headers: {
-  //           "Accept": "application/json",
-  //           // "App": "Admin",
-  //           // "key": Endpoint.key
-  //         },
-  //       ),
-  //     );
-  //     return SignUpResponse.fromJson(result.data);
-  //   } catch (e) {
-  //     print("ERROR loginUser : ${e.toString()}");
-  //     throw e;
-  //   }
-  // }
+  // Signup
+  Future<SignUpResponse> updateUser(
+      {@override File file, @override Users userData}) async {
+    String fileName = file.path.split('/').last;
+    try {
+      FormData formData = FormData.fromMap({
+        "photo": await MultipartFile.fromFile(file.path, filename: fileName),
+        "nom": userData.nom,
+        "contact": userData.contact,
+        "mot_de_passe": userData.motDePasse
+      });
+      var response = await _dio.post(
+        "${Endpoint.updateUser}/${userData.id}",
+        data: formData,
+        options: Options(
+          contentType: Headers.formUrlEncodedContentType,
+          headers: {
+            "Accept": "application/json",
+            "Content-Type": "multipart/form-data"
+          },
+        ),
+      );
+      print(response.data);
+      return SignUpResponse.fromJson(response.data);
+    } catch (error, stacktrace) {
+      print("uploadImage error : $error, stacktrace : $stacktrace");
+      throw error;
+    }
+  }
 
-  // Handling get request for all users
   Future<UserResponse> getUsers(String token) async {
     try {
       Response response = await _dio.get(
