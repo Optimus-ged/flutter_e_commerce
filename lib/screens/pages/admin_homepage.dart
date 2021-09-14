@@ -21,6 +21,7 @@ class _AdminHomepageState extends State<AdminHomepage> {
   @override
   Widget build(BuildContext context) {
     var screen = MediaQuery.of(context).size;
+
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
         statusBarColor: AppTheme.whiteColor,
@@ -31,6 +32,20 @@ class _AdminHomepageState extends State<AdminHomepage> {
       top: false,
       child: Scaffold(
         backgroundColor: AppTheme.whiteColor,
+        drawer: Drawer(
+          child: Container(
+            color: Colors.amber,
+            child: Column(
+              children: [
+                Container(
+                  height: 100,
+                  width: 100,
+                  color: Colors.green,
+                )
+              ],
+            ),
+          ),
+        ),
         body: Stack(
           children: [
             CustomScrollView(
@@ -114,16 +129,92 @@ class _AdminHomepageState extends State<AdminHomepage> {
               ),
             ),
             ClickAnimation(
-              // onTap: () => Navigator.of(context).pushNamed(
-              //   Profile,
-              //   arguments: widget.user,
-              // ),
-              onTap: () {},
-              child: Icon(Icons.menu),
+              onTap: () {
+                _modalBotomsheet();
+              },
+              child: Container(
+                padding: EdgeInsets.all(5),
+                child: Icon(Icons.menu),
+              ),
             )
           ],
         ),
       ),
+    );
+  }
+
+  void _modalBotomsheet() {
+    showModalBottomSheet(
+      backgroundColor: Colors.transparent,
+      context: context,
+      builder: (context) {
+        return Container(
+          height: 230,
+          width: MediaQuery.of(context).size.width,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              stops: [0.0, 1.1],
+              colors: [
+                Color(0xffB90913),
+                Color(0xff800323),
+              ],
+            ),
+            borderRadius: BorderRadius.vertical(
+              top: Radius.circular(20),
+            ),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ClickAnimation(
+                onTap: () {},
+                child: Container(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Container(
+                        child: Text("op"),
+                      ),
+                      Text(
+                        'Heure  Normale',
+                        style: TextStyle(
+                          color: Colors.white.withOpacity(0.9),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 18),
+              ),
+              ClickAnimation(
+                onTap: () {},
+                child: Container(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        alignment: Alignment.topCenter,
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 45),
+                          child: Text("data"),
+                        ),
+                      ),
+                      Text(
+                        'Heure de Pause',
+                        style: TextStyle(
+                          color: Colors.white.withOpacity(0.9),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
