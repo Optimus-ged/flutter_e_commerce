@@ -63,7 +63,7 @@ class Provider {
           },
         ),
       );
-      print(response.data);
+      // print(response.data);
       return SignUpResponse.fromJson(response.data);
     } catch (error, stacktrace) {
       print("uploadImage error : $error, stacktrace : $stacktrace");
@@ -71,7 +71,7 @@ class Provider {
     }
   }
 
-  // Signup
+  // Update
   Future<SignUpResponse> updateUser(
       {@override File file, @override Users userData}) async {
     String fileName = file.path.split('/').last;
@@ -82,7 +82,7 @@ class Provider {
         "contact": userData.contact,
         "mot_de_passe": userData.motDePasse
       });
-      var response = await _dio.post(
+      var response = await _dio.put(
         "${Endpoint.updateUser}/${userData.id}",
         data: formData,
         options: Options(

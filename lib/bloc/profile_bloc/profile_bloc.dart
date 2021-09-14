@@ -20,14 +20,15 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     try {
       yield ProfileInProgress();
       SignUpResponse profile =
-          await _api.Profile(file: event.image, userData: event.data);
-      if (profile.status == 201) {
+          await _api.updateUser(file: event.image, userData: event.data);
+      if (profile.status == 200) {
         yield ProfileSuccess(data: profile);
       } else {
-        yield ProfileFailure(data: profile);
+        yield ProfileFailure(data: profile.message);
         return;
       }
     } catch (error, stackTrace) {
+      yield ProfileFailure(data: error);
       print(
           'ProfileBloc.MapEventToState ::: ERROR: $error, STACKTRACE: $stackTrace');
       return;

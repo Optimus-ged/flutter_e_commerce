@@ -37,6 +37,10 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
     isLoading = false;
+    _controllerNom = TextEditingController(text: '${widget.userData.nom}');
+    _controllerContact =
+        TextEditingController(text: '${widget.userData.contact}');
+    _controllerPwd = TextEditingController(text: 'oooooooo');
     _profileBloc = BlocProvider.of<ProfileBloc>(context);
     super.initState();
   }
@@ -60,7 +64,7 @@ class _ProfilePageState extends State<ProfilePage> {
               isLoading = false;
             });
             Fluttertoast.showToast(
-              msg: "${state.data.message}",
+              msg: "${state.data}",
               gravity: ToastGravity.TOP,
               backgroundColor: Colors.black.withOpacity(0.6),
             );
@@ -161,28 +165,15 @@ class _ProfilePageState extends State<ProfilePage> {
                               getImage();
                             },
                             child: Container(
-                              height: 38,
-                              width: 180,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                color: AppTheme.pinkColor,
-                                borderRadius: BorderRadius.circular(8),
+                              child: Padding(
+                                padding: const EdgeInsets.all(5),
+                                child: Text(
+                                  "Parcourir",
+                                  style: TextStyle(
+                                    decoration: TextDecoration.underline,
+                                  ),
+                                ),
                               ),
-                              child: isLoading
-                                  ? Container(
-                                      height: 28,
-                                      width: 28,
-                                      child: CircularProgressIndicator(
-                                        strokeWidth: 1,
-                                      ),
-                                    )
-                                  : Text(
-                                      "Modifier",
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 17,
-                                      ),
-                                    ),
                             ),
                           ),
                           CustomTextField(
@@ -226,7 +217,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                       child: CircularProgressIndicator(
                                         valueColor:
                                             new AlwaysStoppedAnimation<Color>(
-                                                Colors.white),
+                                          Colors.white,
+                                        ),
                                       ),
                                     )
                                   : Text(
@@ -253,6 +245,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Future<void> _onUpdateButtonPressed() async {
     Users _data = Users(
+      id: widget.userData.id,
       nom: _controllerNom.text.trim(),
       contact: _controllerContact.text.trim(),
       motDePasse: _controllerPwd.text.trim(),

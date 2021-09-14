@@ -15,7 +15,7 @@ class ProfileInitial extends ProfileState {}
 class ProfileInProgress extends ProfileState {}
 
 class ProfileFailure extends ProfileState {
-  final SignUpResponse data;
+  final String data;
 
   const ProfileFailure({@required this.data});
 
