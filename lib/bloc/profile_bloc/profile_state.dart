@@ -1,32 +1,33 @@
 import 'package:e_commerce/exports/all_exports.dart';
+import 'package:e_commerce/model/user_model/Profile_response.dart';
 import 'package:e_commerce/model/user_model/signup_response.dart';
 import 'package:equatable/equatable.dart';
 
 @immutable
-abstract class SignupState extends Equatable {
-  const SignupState();
+abstract class ProfileState extends Equatable {
+  const ProfileState();
 
   @override
   List<Object> get props => [];
 }
 
-class SignupInitial extends SignupState {}
+class ProfileInitial extends ProfileState {}
 
-class SignupInProgress extends SignupState {}
+class ProfileInProgress extends ProfileState {}
 
-class SignupFailure extends SignupState {
+class ProfileFailure extends ProfileState {
   final SignUpResponse data;
 
-  const SignupFailure({@required this.data});
+  const ProfileFailure({@required this.data});
 
   @override
   List<Object> get props => [data];
 }
 
-class SignupSuccess extends SignupState {
+class ProfileSuccess extends ProfileState {
   final SignUpResponse data;
 
-  const SignupSuccess({@required this.data});
+  const ProfileSuccess({@required this.data});
 
   @override
   List<Object> get props => [data];
