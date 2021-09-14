@@ -1,35 +1,35 @@
 import 'package:bloc/bloc.dart';
-import 'package:e_commerce/bloc/sign_bloc/signup_event.dart';
-import 'package:e_commerce/bloc/sign_bloc/signup_state.dart';
+import 'package:e_commerce/bloc/profile_bloc/profile_event.dart';
+import 'package:e_commerce/bloc/profile_bloc/profile_state.dart';
 import 'package:e_commerce/data/repository/provider.dart';
 import 'package:e_commerce/model/user_model/signup_response.dart';
 import 'package:e_commerce/utils/setup_locator.dart';
 
-class SignupBloc extends Bloc<SignUpEvent, SignupState> {
+class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   get _api => locator.get<Provider>();
-  SignupBloc() : super(SignupInitial());
+  ProfileBloc() : super(ProfileInitial());
 
   @override
-  Stream<SignupState> mapEventToState(SignUpEvent event) async* {
-    if (event is SignUpButtonPressed)
-      yield* _mapSignUpButtonPressedToState(event);
+  Stream<ProfileState> mapEventToState(ProfileEvent event) async* {
+    if (event is ProfileButtonPressed)
+      yield* _mapProfileButtonPressedToState(event);
   }
 
-  Stream<SignupState> _mapSignUpButtonPressedToState(
-      SignUpButtonPressed event) async* {
+  Stream<ProfileState> _mapProfileButtonPressedToState(
+      ProfileButtonPressed event) async* {
     try {
-      yield SignupInProgress();
-      SignUpResponse signUp =
-          await _api.signUp(file: event.image, userData: event.data);
-      if (signUp.status == 201) {
-        yield SignupSuccess(data: signUp);
+      yield ProfileInProgress();
+      SignUpResponse profile =
+          await _api.Profile(file: event.image, userData: event.data);
+      if (profile.status == 201) {
+        yield ProfileSuccess(data: profile);
       } else {
-        yield SignupFailure(data: signUp);
+        yield ProfileFailure(data: profile);
         return;
       }
     } catch (error, stackTrace) {
       print(
-          'SignUpBloc.MapEventToState ::: ERROR: $error, STACKTRACE: $stackTrace');
+          'ProfileBloc.MapEventToState ::: ERROR: $error, STACKTRACE: $stackTrace');
       return;
     }
   }

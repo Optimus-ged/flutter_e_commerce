@@ -1,5 +1,4 @@
 import 'package:e_commerce/exports/all_exports.dart';
-import 'package:e_commerce/model/user_model/Profile_response.dart';
 import 'package:e_commerce/model/user_model/signup_response.dart';
 import 'package:equatable/equatable.dart';
 
