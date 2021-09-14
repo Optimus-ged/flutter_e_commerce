@@ -1,4 +1,3 @@
-import 'package:e_commerce/bloc/login_bloc/login_bloc.dart';
 import 'package:e_commerce/bloc/profile_bloc/profile_bloc.dart';
 import 'package:e_commerce/bloc/profile_bloc/profile_event.dart';
 import 'package:e_commerce/bloc/profile_bloc/profile_state.dart';
