@@ -1,6 +1,5 @@
 import 'package:e_commerce/exports/all_exports.dart';
 import 'package:e_commerce/screens/widgets/dimissable.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class PaymentPage extends StatefulWidget {
   @override
@@ -471,7 +470,7 @@ class _PaymentPageState extends State<PaymentPage> {
     );
   }
 
-  // Deleting an item from list of favorites
+  // Deleting an item from list of local data
   _removeFromDataList(
     BuildContext context,
     index,
