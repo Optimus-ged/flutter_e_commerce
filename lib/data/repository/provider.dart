@@ -139,25 +139,4 @@ class Provider {
       throw error;
     }
   }
-
-  // Handling post request for users
-  // Future<UserResponse> signUp(String token, Users user) async {
-  //   try {
-  //     Response response = await _dio.post(
-  //       "${Endpoint.signUp}",
-  //       data: user.toJson(),
-  //       options: Options(
-  //         contentType: Headers.formUrlEncodedContentType,
-  //         headers: {
-  //           "Accept": "Application/json",
-  //           "Authorization": "$token",
-  //         },
-  //       ),
-  //     );
-  //     return UserResponse.fromJson(response.data);
-  //   } catch (error, stacktrace) {
-  //     print("SignUp Error : $error stacktrace : $stacktrace");
-  //     throw error;
-  //   }
-  // }
 }
