@@ -2,11 +2,25 @@ import 'package:e_commerce/exports/all_exports.dart';
 import 'package:e_commerce/utils/app_theme.dart';
 import 'package:flutter/material.dart';
 
-class AdminHomepage extends StatelessWidget {
+class AdminHomepage extends StatefulWidget {
   // const AdminHomepage({ Key? key }) : super(key: key);
+  @override
+  _AdminHomepageState createState() => _AdminHomepageState();
+}
+
+class _AdminHomepageState extends State<AdminHomepage> {
+  bool showSearchbar;
+  var _searchController = TextEditingController();
+
+  @override
+  void initState() {
+    showSearchbar = false;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+    var screen = MediaQuery.of(context).size;
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
         statusBarColor: AppTheme.whiteColor,
@@ -36,8 +50,8 @@ class AdminHomepage extends StatelessWidget {
                   ),
                 )
               ],
-            )
-            // showSearchbar ? _searchBar(screen) : Container(),
+            ),
+            _searchBar(screen)
             // _buildNavigation(),
           ],
         ),
@@ -45,6 +59,69 @@ class AdminHomepage extends StatelessWidget {
           backgroundColor: AppTheme.blueColor,
           child: Icon(Icons.add),
           onPressed: () {},
+        ),
+      ),
+    );
+  }
+
+  Widget _searchBar(screen) {
+    return Positioned(
+      top: 40,
+      left: 30,
+      right: 30,
+      child: Container(
+        height: 50,
+        padding: EdgeInsets.symmetric(horizontal: 10),
+        width: screen.width,
+        decoration: BoxDecoration(
+          color: Colors.white.withOpacity(0.8),
+          border: Border.all(width: 1, color: Colors.white),
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: [
+            // Top Shadow
+            BoxShadow(
+              color: Colors.black.withOpacity(0.01),
+              blurRadius: 5,
+              offset: Offset(0, -5),
+            ),
+
+            // Botom shadoow
+            BoxShadow(
+              color: Colors.black12.withOpacity(0.05),
+              blurRadius: 5,
+              offset: Offset(0, 5),
+            ),
+          ],
+        ),
+        child: Row(
+          children: [
+            Icon(Icons.search, color: Colors.black87),
+            SizedBox(width: 10),
+            Expanded(
+              child: TextField(
+                onChanged: (value) {
+                  setState(() {});
+                },
+                cursorColor: Colors.black,
+                controller: _searchController,
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+                decoration: InputDecoration.collapsed(
+                  hintText: 'Rechercher ici !!!',
+                ),
+              ),
+            ),
+            ClickAnimation(
+              // onTap: () => Navigator.of(context).pushNamed(
+              //   Profile,
+              //   arguments: widget.user,
+              // ),
+              onTap: () {},
+              child: Icon(Icons.menu),
+            )
+          ],
         ),
       ),
     );
@@ -73,7 +150,7 @@ class BuildAdminListItem extends StatelessWidget {
             child: Row(
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 5),
+                  padding: const EdgeInsets.symmetric(vertical: 2),
                   child: Text(
                     'Designation : ',
                     style: TextStyle(
@@ -109,21 +186,25 @@ class BuildAdminListItem extends StatelessWidget {
               'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni, ea? Consequatur, doloribus? Aut corrupti suscipit dolorem! Maxime atque deleniti rem commodi, incidunt assumenda, doloremque veniam laudantium nostrum tempora ullam consectetur.'),
           SizedBox(height: 5),
           ClickAnimation(
-              onTap: () {},
-              child: Container(
-                padding: EdgeInsets.all(10),
-                decoration: BoxDecoration(
+            onTap: () {},
+            child: Container(
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
                   color: AppTheme.blueColor,
-                  borderRadius: BorderRadius.circular(10),
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10),
+                    bottomRight: Radius.circular(10),
+                  )),
+              child: Text(
+                'Editer',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w500,
                 ),
-                child: Text(
-                  'Editer',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-              ))
+              ),
+            ),
+          )
         ],
       ),
     );
