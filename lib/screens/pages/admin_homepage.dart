@@ -107,6 +107,23 @@ class BuildAdminListItem extends StatelessWidget {
           ),
           Text(
               'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni, ea? Consequatur, doloribus? Aut corrupti suscipit dolorem! Maxime atque deleniti rem commodi, incidunt assumenda, doloremque veniam laudantium nostrum tempora ullam consectetur.'),
+          SizedBox(height: 5),
+          ClickAnimation(
+              onTap: () {},
+              child: Container(
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: AppTheme.blueColor,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Text(
+                  'Editer',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ))
         ],
       ),
     );
