@@ -8,17 +8,19 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size screen = MediaQuery.of(context).size;
+    var _controllerNom = TextEditingController();
+    var _controllerContact = TextEditingController();
     return Scaffold(
-        backgroundColor: Colors.white,
-        body: Container(
-          height: screen.height,
-          width: screen.width,
-          color: Colors.grey[50],
-          child: Column(
-            children: [
-              SizedBox(height: 24),
-              Container(
-                child: Container(
+        backgroundColor: Colors.black,
+        body: SingleChildScrollView(
+          child: Container(
+            height: screen.height,
+            width: screen.width,
+            color: Colors.grey[50],
+            child: Column(
+              children: [
+                SizedBox(height: 24),
+                Container(
                   width: screen.width,
                   padding: EdgeInsets.only(top: 15, bottom: 15, left: 20),
                   child: Stack(
@@ -29,7 +31,7 @@ class ProfilePage extends StatelessWidget {
                           onTap: () => Navigator.pop(context),
                           child: Icon(
                             Icons.arrow_back_ios,
-                            color: Colors.black,
+                            color: Colors.black45,
                           ),
                         ),
                       ),
@@ -46,49 +48,55 @@ class ProfilePage extends StatelessWidget {
                     ],
                   ),
                 ),
-              ),
-              Expanded(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.vertical(
-                    top: Radius.circular(20),
-                  ),
-                  child: Container(
-                    width: screen.width,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(50),
-                          child: Container(
-                            height: 100,
-                            width: 100,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: Colors.transparent,
-                            ),
-                            child: Image.network(
-                              "${Endpoint.uplaod}${userData.photo}",
-                              fit: BoxFit.cover,
+                Expanded(
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(20),
+                    ),
+                    child: Container(
+                      width: screen.width,
+                      padding: EdgeInsets.only(top: 50),
+                      child: Column(
+                        // mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(50),
+                            child: Container(
+                              height: 100,
+                              width: 100,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: Colors.transparent,
+                              ),
+                              child: Image.network(
+                                "${Endpoint.uplaod}${userData.photo}",
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
-                        ),
-                        Text('${userData.nom}'),
-                        Text('${userData.contact}'),
-                      ],
+                          CustomTextField(
+                            hint: "${userData.nom}",
+                            isFirst: true,
+                            obscureText: false,
+                            top: screen.height * .05,
+                            controller: _controllerNom,
+                          ),
+                          CustomTextField(
+                            hint: "${userData.contact}",
+                            isFirst: true,
+                            obscureText: false,
+                            top: screen.height * .05,
+                            controller: _controllerContact,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        )
-        // }
-        // return Center(
-        //   child: CircularProgressIndicator(),
-        // );
-        // },
-        // ),
-        );
+        ));
   }
 }
