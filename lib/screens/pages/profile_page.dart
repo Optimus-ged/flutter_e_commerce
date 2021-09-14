@@ -161,15 +161,28 @@ class _ProfilePageState extends State<ProfilePage> {
                               getImage();
                             },
                             child: Container(
-                              child: Padding(
-                                padding: const EdgeInsets.all(5),
-                                child: Text(
-                                  "Parcourir",
-                                  style: TextStyle(
-                                    decoration: TextDecoration.underline,
-                                  ),
-                                ),
+                              height: 38,
+                              width: 180,
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                color: AppTheme.pinkColor,
+                                borderRadius: BorderRadius.circular(8),
                               ),
+                              child: isLoading
+                                  ? Container(
+                                      height: 28,
+                                      width: 28,
+                                      child: CircularProgressIndicator(
+                                        strokeWidth: 1,
+                                      ),
+                                    )
+                                  : Text(
+                                      "Modifier",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 17,
+                                      ),
+                                    ),
                             ),
                           ),
                           CustomTextField(
