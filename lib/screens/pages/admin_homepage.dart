@@ -3,7 +3,6 @@ import 'package:e_commerce/utils/app_theme.dart';
 import 'package:flutter/material.dart';
 
 class AdminHomepage extends StatefulWidget {
-  // const AdminHomepage({ Key? key }) : super(key: key);
   @override
   _AdminHomepageState createState() => _AdminHomepageState();
 }
@@ -11,10 +10,38 @@ class AdminHomepage extends StatefulWidget {
 class _AdminHomepageState extends State<AdminHomepage> {
   bool showSearchbar;
   var _searchController = TextEditingController();
+  ListeArticleBloc get _listArticleBloc => locator.get<ListeArticleBloc>();
+  List<Widget> widgetList = [];
+  List<Article> listArticles = [];
+
+  filterList({
+    List<Article> allArticles,
+  }) {
+    allArticles = [];
+    allArticles.addAll(listArticles);
+    widgetList = [];
+    if (_searchController.text.isNotEmpty) {
+      allArticles.retainWhere(
+        (article) {
+          return article.designation.toUpperCase().contains(
+                _searchController.text.toUpperCase(),
+              );
+        },
+      );
+    }
+
+    allArticles.forEach(
+      (art) {
+        widgetList.add(BuildAdminListItem(art));
+      },
+    );
+  }
 
   @override
   void initState() {
     showSearchbar = false;
+    widgetList = [];
+    _listArticleBloc.getArticles();
     super.initState();
   }
 
@@ -48,23 +75,36 @@ class _AdminHomepageState extends State<AdminHomepage> {
         ),
         body: Stack(
           children: [
-            CustomScrollView(
-              slivers: [
-                SliverToBoxAdapter(
-                  child: ListView.builder(
-                    padding: EdgeInsets.only(
-                      bottom: 70,
-                      top: 30,
-                      left: 10,
-                      right: 10,
-                    ),
-                    primary: false,
-                    shrinkWrap: true,
-                    itemCount: 5,
-                    itemBuilder: (context, index) => BuildAdminListItem(),
-                  ),
-                )
-              ],
+            StreamBuilder<ListeArticles>(
+              stream: _listArticleBloc.stream,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  listArticles.clear();
+                  listArticles.addAll(snapshot.data.articles);
+                  filterList(
+                    allArticles: snapshot.data.articles,
+                  );
+                  return CustomScrollView(
+                    slivers: [
+                      SliverToBoxAdapter(
+                        child: ListView.builder(
+                          padding: EdgeInsets.only(
+                            bottom: 70,
+                            top: 30,
+                            left: 10,
+                            right: 10,
+                          ),
+                          primary: false,
+                          shrinkWrap: true,
+                          itemCount: widgetList.length,
+                          itemBuilder: (context, index) => widgetList[index],
+                        ),
+                      )
+                    ],
+                  );
+                }
+                return CircularProgressIndicator();
+              },
             ),
             _searchBar(screen)
             // _buildNavigation(),
@@ -149,14 +189,16 @@ class _AdminHomepageState extends State<AdminHomepage> {
       context: context,
       builder: (context) {
         return Container(
-          height: 230,
+          height: 100,
           width: MediaQuery.of(context).size.width,
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              stops: [0.0, 1.1],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
               colors: [
-                Color(0xffB90913),
-                Color(0xff800323),
+                AppTheme.radiantTopRight,
+                AppTheme.radiantTop,
+                AppTheme.radiantBotom
               ],
             ),
             borderRadius: BorderRadius.vertical(
@@ -164,53 +206,20 @@ class _AdminHomepageState extends State<AdminHomepage> {
             ),
           ),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               ClickAnimation(
                 onTap: () {},
                 child: Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        child: Text("op"),
-                      ),
-                      Text(
-                        'Heure  Normale',
-                        style: TextStyle(
-                          color: Colors.white.withOpacity(0.9),
-                        ),
-                      )
-                    ],
-                  ),
+                  child: Text('Menu'),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 18),
               ),
               ClickAnimation(
                 onTap: () {},
                 child: Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Container(
-                        alignment: Alignment.topCenter,
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 45),
-                          child: Text("data"),
-                        ),
-                      ),
-                      Text(
-                        'Heure de Pause',
-                        style: TextStyle(
-                          color: Colors.white.withOpacity(0.9),
-                        ),
-                      )
-                    ],
-                  ),
+                  child: Text('Menu'),
                 ),
-              ),
+              )
             ],
           ),
         );
@@ -220,8 +229,11 @@ class _AdminHomepageState extends State<AdminHomepage> {
 }
 
 class BuildAdminListItem extends StatelessWidget {
+  final Article art;
+  BuildAdminListItem(this.art);
   @override
   Widget build(BuildContext context) {
+    var screen = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.only(bottom: 50),
       child: Column(
@@ -230,9 +242,9 @@ class BuildAdminListItem extends StatelessWidget {
           Container(
             child: Row(
               children: [
-                buildItem(),
-                buildItem(),
-                buildItem(),
+                buildItem(screen, art, 0),
+                buildItem(screen, art, 1),
+                buildItem(screen, art, 2),
               ],
             ),
           ),
@@ -251,7 +263,7 @@ class BuildAdminListItem extends StatelessWidget {
                   ),
                 ),
                 SizedBox(width: 10),
-                Text('designation')
+                Text('${art.designation}')
               ],
             ),
           ),
@@ -269,12 +281,11 @@ class BuildAdminListItem extends StatelessWidget {
                   ),
                 ),
                 SizedBox(width: 10),
-                Text('pu')
+                Text('${art.pu}')
               ],
             ),
           ),
-          Text(
-              'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magni, ea? Consequatur, doloribus? Aut corrupti suscipit dolorem! Maxime atque deleniti rem commodi, incidunt assumenda, doloremque veniam laudantium nostrum tempora ullam consectetur.'),
+          Text('${art.aPropos}'),
           SizedBox(height: 5),
           ClickAnimation(
             onTap: () {},
@@ -301,7 +312,7 @@ class BuildAdminListItem extends StatelessWidget {
     );
   }
 
-  buildItem() {
+  buildItem(screen, data, int index) {
     return Expanded(
       child: Container(
         height: 150,
@@ -318,6 +329,15 @@ class BuildAdminListItem extends StatelessWidget {
             ],
           ),
           borderRadius: BorderRadius.circular(10),
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(10),
+          child: CustomCashedImage(
+            imageUrl:
+                "${Endpoint.uplaod}${data.photoArticles[index].photoArticle}",
+            screen: screen,
+            isHomePage: true,
+          ),
         ),
       ),
     );
