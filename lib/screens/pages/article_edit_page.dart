@@ -13,18 +13,8 @@ class EditArticlePage extends StatefulWidget {
 }
 
 class _EditArticlePageState extends State<EditArticlePage> {
-  
-  
-  Io.File _image;
   bool isLoading;
 
-  Future getImage() async {
-    final pickedFile =
-        await ImagePicker().pickImage(source: ImageSource.gallery);
-    setState(() {
-      _image = Io.File(pickedFile.path);
-    });
-  }
   @override
   Widget build(BuildContext context) {
     var screen = MediaQuery.of(context).size;
@@ -96,7 +86,33 @@ class _EditArticlePageState extends State<EditArticlePage> {
   }
 }
 
-class BuildAdminListItem extends StatelessWidget {
+class BuildAdminListItem extends StatefulWidget {
+  @override
+  _BuildAdminListItemState createState() => _BuildAdminListItemState();
+}
+
+class _BuildAdminListItemState extends State<BuildAdminListItem> {
+  Io.File _image1;
+  Io.File _image2;
+  Io.File _image3;
+  bool isLoading;
+
+  Future getImage({int index}) async {
+    final pickedFile =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+    setState(() {
+      if (index == 1) {
+        _image1 = Io.File(pickedFile.path);
+      }
+      if (index == 2) {
+        _image2 = Io.File(pickedFile.path);
+      }
+      if (index == 3) {
+        _image3 = Io.File(pickedFile.path);
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     var screen = MediaQuery.of(context).size;
@@ -108,9 +124,9 @@ class BuildAdminListItem extends StatelessWidget {
           Container(
             child: Row(
               children: [
-                buildItem(),
-                buildItem(),
-                buildItem(),
+                buildItem(1),
+                buildItem(2),
+                buildItem(3),
               ],
             ),
           ),
@@ -165,27 +181,58 @@ class BuildAdminListItem extends StatelessWidget {
     );
   }
 
-  buildItem() {
+  buildItem(int index) {
+    var image;
+    if (index == 1) {
+      setState(() {
+        image = _image1;
+      });
+    } else if (index == 2) {
+      setState(() {
+        image = _image2;
+      });
+    } else if (index == 3) {
+      setState(() {
+        image = _image3;
+      });
+    }
     return Expanded(
-      child: Container(
-        height: 150,
-        width: 100,
-        margin: EdgeInsets.symmetric(horizontal: 2),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              AppTheme.radiantTopRight,
-              AppTheme.radiantTop,
-              AppTheme.radiantBotom
-            ],
+      child: ClickAnimation(
+        onTap: () {
+          getImage(index: index);
+        },
+        child: Container(
+          height: 150,
+          width: 100,
+          margin: EdgeInsets.symmetric(horizontal: 2),
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                AppTheme.radiantTopRight,
+                AppTheme.radiantTop,
+                AppTheme.radiantBotom
+              ],
+            ),
+            borderRadius: BorderRadius.circular(10),
           ),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(10),
-          child: Icon(Icons.add_a_photo),
+          child: image == null
+              ? ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Icon(Icons.add_a_photo),
+                )
+              : ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Container(
+                    height: 80,
+                    width: 80,
+                    child: Image.file(
+                      image,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
         ),
       ),
     );
