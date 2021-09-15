@@ -1,17 +1,167 @@
 import 'package:e_commerce/exports/all_exports.dart';
 
-class EditArticle extends StatefulWidget {
+class EditArticlePage extends StatefulWidget {
   // const EditArticle({ Key? key }) : super(key: key);
 
   @override
-  _EditArticleState createState() => _EditArticleState();
+  _EditArticlePageState createState() => _EditArticlePageState();
 }
 
-class _EditArticleState extends State<EditArticle> {
+class _EditArticlePageState extends State<EditArticlePage> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      
+    var screen = MediaQuery.of(context).size;
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Container(
+        height: screen.height,
+        width: screen.width,
+        color: Colors.grey[50],
+        child: Column(
+          children: [
+            SizedBox(height: 24),
+            Container(
+              width: screen.width,
+              padding: EdgeInsets.only(top: 15, bottom: 15, left: 20),
+              child: Stack(
+                children: [
+                  Positioned(
+                    left: 0,
+                    child: ClickAnimation(
+                      onTap: () => Navigator.pop(context),
+                      child: Icon(
+                        Icons.arrow_back_ios,
+                        color: Colors.black45,
+                      ),
+                    ),
+                  ),
+                  Center(
+                    child: Text(
+                      "AJOUT ARTICLE",
+                      style: TextStyle(
+                        color: Colors.grey[300],
+                        fontWeight: FontWeight.w700,
+                        fontSize: 20,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 30),
+            BuildAdminListItem()
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class BuildAdminListItem extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    var screen = MediaQuery.of(context).size;
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            child: Row(
+              children: [
+                buildItem(),
+                buildItem(),
+                buildItem(),
+              ],
+            ),
+          ),
+          SizedBox(height: 5),
+          Container(
+            child: Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 2),
+                  child: Text(
+                    'Designation : ',
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.grey[700]),
+                  ),
+                ),
+                SizedBox(width: 10),
+                Text(' hhh ')
+              ],
+            ),
+          ),
+          Container(
+            child: Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 5),
+                  child: Text(
+                    'Pu : ',
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w700,
+                        color: Colors.grey[700]),
+                  ),
+                ),
+                SizedBox(width: 10),
+                Text('pp')
+              ],
+            ),
+          ),
+          Text('art.aPropos'),
+          SizedBox(height: 5),
+          ClickAnimation(
+            onTap: () {},
+            child: Container(
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                  color: AppTheme.blueColor,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10),
+                    bottomRight: Radius.circular(10),
+                  )),
+              child: Text(
+                'Editer',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  buildItem() {
+    return Expanded(
+      child: Container(
+        height: 150,
+        width: 100,
+        margin: EdgeInsets.symmetric(horizontal: 2),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              AppTheme.radiantTopRight,
+              AppTheme.radiantTop,
+              AppTheme.radiantBotom
+            ],
+          ),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(10),
+          child: Icon(Icons.add_a_photo),
+        ),
+      ),
     );
   }
 }

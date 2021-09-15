@@ -6,3 +6,4 @@ const String Search = '/search_page';
 const String Details = '/details_page';
 const String Payment = '/payment_page';
 const String Profile = '/profile_page';
+const String EditArticle = '/edit_article';

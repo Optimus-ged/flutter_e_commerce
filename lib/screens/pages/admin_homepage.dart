@@ -1,4 +1,5 @@
 import 'package:e_commerce/exports/all_exports.dart';
+import 'package:e_commerce/routes/routes_constants.dart';
 import 'package:e_commerce/utils/app_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -89,7 +90,6 @@ class _AdminHomepageState extends State<AdminHomepage> {
                       SliverToBoxAdapter(
                         child: ListView.builder(
                           padding: EdgeInsets.only(
-                            bottom: 70,
                             top: 30,
                             left: 10,
                             right: 10,
@@ -113,7 +113,9 @@ class _AdminHomepageState extends State<AdminHomepage> {
         floatingActionButton: FloatingActionButton(
           backgroundColor: AppTheme.blueColor,
           child: Icon(Icons.add),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).pushNamed(EditArticle);
+          },
         ),
       ),
     );
