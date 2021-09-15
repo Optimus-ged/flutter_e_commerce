@@ -103,7 +103,7 @@ class _AdminHomepageState extends State<AdminHomepage> {
                     ],
                   );
                 }
-                return CircularProgressIndicator();
+                return Center(child: CircularProgressIndicator());
               },
             ),
             _searchBar(screen)
@@ -283,7 +283,7 @@ class BuildAdminListItem extends StatelessWidget {
                   ),
                 ),
                 SizedBox(width: 10),
-                Text('${art.pu}')
+                Text('${art.pu}\$')
               ],
             ),
           ),

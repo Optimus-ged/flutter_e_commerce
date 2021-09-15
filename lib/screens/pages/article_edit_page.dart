@@ -1,5 +1,8 @@
 import 'package:e_commerce/exports/all_exports.dart';
 import 'package:e_commerce/routes/routes_constants.dart';
+import 'dart:io' as Io;
+
+import 'package:image_picker/image_picker.dart';
 
 class EditArticlePage extends StatefulWidget {
   final Article art;
@@ -10,6 +13,18 @@ class EditArticlePage extends StatefulWidget {
 }
 
 class _EditArticlePageState extends State<EditArticlePage> {
+  
+  
+  Io.File _image;
+  bool isLoading;
+
+  Future getImage() async {
+    final pickedFile =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+    setState(() {
+      _image = Io.File(pickedFile.path);
+    });
+  }
   @override
   Widget build(BuildContext context) {
     var screen = MediaQuery.of(context).size;
@@ -107,9 +122,7 @@ class BuildAdminListItem extends StatelessWidget {
           buildTextField(screen, hint: "a props"),
           SizedBox(height: 10),
           ClickAnimation(
-            onTap: () {
-              Navigator.of(context).pushNamed(EditArticle);
-            },
+            onTap: () {},
             child: Container(
               padding: EdgeInsets.symmetric(vertical: 15, horizontal: 50),
               decoration: BoxDecoration(
