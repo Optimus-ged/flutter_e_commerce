@@ -1,5 +1,6 @@
 import 'package:e_commerce/exports/all_exports.dart';
 import 'package:e_commerce/routes/routes_constants.dart';
+import 'package:e_commerce/screens/widgets/dimissable.dart';
 import 'package:e_commerce/utils/app_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -97,7 +98,15 @@ class _AdminHomepageState extends State<AdminHomepage> {
                           primary: false,
                           shrinkWrap: true,
                           itemCount: widgetList.length,
-                          itemBuilder: (context, index) => widgetList[index],
+                          itemBuilder: (context, index) {
+                            return DimissableWidget(
+                              item: widgetList[index],
+                              child: BuildAdminListItem(
+                                snapshot.data.articles[index],
+                              ),
+                              onDismiss: (direction) {},
+                            );
+                          },
                         ),
                       )
                     ],

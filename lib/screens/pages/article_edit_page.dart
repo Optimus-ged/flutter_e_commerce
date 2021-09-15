@@ -206,9 +206,11 @@ class _BuildAdminListItemState extends State<BuildAdminListItem> {
     }
     return Expanded(
       child: ClickAnimation(
-        onTap: () {
-          getImage(index: index);
-        },
+        onTap: data == null
+            ? () {
+                getImage(index: index);
+              }
+            : null,
         child: Container(
           height: 150,
           width: 100,
