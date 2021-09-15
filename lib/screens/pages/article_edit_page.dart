@@ -77,7 +77,7 @@ class _EditArticlePageState extends State<EditArticlePage> {
                 ),
               ),
               SizedBox(height: 30),
-              BuildAdminListItem()
+              BuildAdminListItem(articleData: widget.art)
             ],
           ),
         ),
@@ -87,6 +87,10 @@ class _EditArticlePageState extends State<EditArticlePage> {
 }
 
 class BuildAdminListItem extends StatefulWidget {
+  final Article articleData;
+
+  const BuildAdminListItem({Key key, this.articleData}) : super(key: key);
+
   @override
   _BuildAdminListItemState createState() => _BuildAdminListItemState();
 }
@@ -100,17 +104,19 @@ class _BuildAdminListItemState extends State<BuildAdminListItem> {
   Future getImage({int index}) async {
     final pickedFile =
         await ImagePicker().pickImage(source: ImageSource.gallery);
-    setState(() {
-      if (index == 1) {
-        _image1 = Io.File(pickedFile.path);
-      }
-      if (index == 2) {
-        _image2 = Io.File(pickedFile.path);
-      }
-      if (index == 3) {
-        _image3 = Io.File(pickedFile.path);
-      }
-    });
+    if (index != null) {
+      setState(() {
+        if (index == 1) {
+          _image1 = Io.File(pickedFile.path);
+        }
+        if (index == 2) {
+          _image2 = Io.File(pickedFile.path);
+        }
+        if (index == 3) {
+          _image3 = Io.File(pickedFile.path);
+        }
+      });
+    }
   }
 
   @override
@@ -124,9 +130,9 @@ class _BuildAdminListItemState extends State<BuildAdminListItem> {
           Container(
             child: Row(
               children: [
-                buildItem(1),
-                buildItem(2),
-                buildItem(3),
+                buildItem(1, screen, data: widget.articleData, i: 0),
+                buildItem(2, screen, data: widget.articleData, i: 1),
+                buildItem(3, screen, data: widget.articleData, i: 2),
               ],
             ),
           ),
@@ -181,20 +187,22 @@ class _BuildAdminListItemState extends State<BuildAdminListItem> {
     );
   }
 
-  buildItem(int index) {
+  buildItem(int index, screen, {Article data, int i}) {
     var image;
-    if (index == 1) {
-      setState(() {
-        image = _image1;
-      });
-    } else if (index == 2) {
-      setState(() {
-        image = _image2;
-      });
-    } else if (index == 3) {
-      setState(() {
-        image = _image3;
-      });
+    if (index != null) {
+      if (index == 1) {
+        setState(() {
+          image = _image1;
+        });
+      } else if (index == 2) {
+        setState(() {
+          image = _image2;
+        });
+      } else if (index == 3) {
+        setState(() {
+          image = _image3;
+        });
+      }
     }
     return Expanded(
       child: ClickAnimation(
@@ -217,20 +225,30 @@ class _BuildAdminListItemState extends State<BuildAdminListItem> {
             ),
             borderRadius: BorderRadius.circular(10),
           ),
-          child: image == null
-              ? ClipRRect(
-                  borderRadius: BorderRadius.circular(10),
-                  child: Icon(Icons.add_a_photo),
-                )
+          child: data == null
+              ? image == null
+                  ? ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Icon(Icons.add_a_photo),
+                    )
+                  : ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Container(
+                        height: 80,
+                        width: 80,
+                        child: Image.file(
+                          image,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    )
               : ClipRRect(
                   borderRadius: BorderRadius.circular(10),
-                  child: Container(
-                    height: 80,
-                    width: 80,
-                    child: Image.file(
-                      image,
-                      fit: BoxFit.cover,
-                    ),
+                  child: CustomCashedImage(
+                    imageUrl:
+                        "${Endpoint.uplaod}${data.photoArticles[i].photoArticle}",
+                    screen: screen,
+                    isHomePage: true,
                   ),
                 ),
         ),
