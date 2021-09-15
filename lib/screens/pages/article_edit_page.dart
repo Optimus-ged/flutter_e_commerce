@@ -17,40 +17,42 @@ class _EditArticlePageState extends State<EditArticlePage> {
         height: screen.height,
         width: screen.width,
         color: Colors.grey[50],
-        child: Column(
-          children: [
-            SizedBox(height: 24),
-            Container(
-              width: screen.width,
-              padding: EdgeInsets.only(top: 15, bottom: 15, left: 20),
-              child: Stack(
-                children: [
-                  Positioned(
-                    left: 0,
-                    child: ClickAnimation(
-                      onTap: () => Navigator.pop(context),
-                      child: Icon(
-                        Icons.arrow_back_ios,
-                        color: Colors.black45,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(height: 24),
+              Container(
+                width: screen.width,
+                padding: EdgeInsets.only(top: 15, bottom: 15, left: 20),
+                child: Stack(
+                  children: [
+                    Positioned(
+                      left: 0,
+                      child: ClickAnimation(
+                        onTap: () => Navigator.pop(context),
+                        child: Icon(
+                          Icons.arrow_back_ios,
+                          color: Colors.black45,
+                        ),
                       ),
                     ),
-                  ),
-                  Center(
-                    child: Text(
-                      "AJOUT ARTICLE",
-                      style: TextStyle(
-                        color: Colors.grey[300],
-                        fontWeight: FontWeight.w700,
-                        fontSize: 20,
+                    Center(
+                      child: Text(
+                        "AJOUT ARTICLE",
+                        style: TextStyle(
+                          color: Colors.grey[300],
+                          fontWeight: FontWeight.w700,
+                          fontSize: 20,
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            SizedBox(height: 30),
-            BuildAdminListItem()
-          ],
+              SizedBox(height: 30),
+              BuildAdminListItem()
+            ],
+          ),
         ),
       ),
     );
@@ -64,7 +66,7 @@ class BuildAdminListItem extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 10),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
             child: Row(
@@ -75,56 +77,21 @@ class BuildAdminListItem extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: 5),
-          Container(
-            child: Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 2),
-                  child: Text(
-                    'Designation : ',
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.grey[700]),
-                  ),
-                ),
-                SizedBox(width: 10),
-                Text(' hhh ')
-              ],
-            ),
-          ),
-          Container(
-            child: Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 5),
-                  child: Text(
-                    'Pu : ',
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.grey[700]),
-                  ),
-                ),
-                SizedBox(width: 10),
-                Text('pp')
-              ],
-            ),
-          ),
-          Text('art.aPropos'),
-          SizedBox(height: 5),
+          SizedBox(height: 20),
+          buildTextField(screen, hint: "designation"),
+          SizedBox(height: 20),
+          buildTextField(screen, hint: "pu"),
+          SizedBox(height: 20),
+          buildTextField(screen, hint: "a props"),
+          SizedBox(height: 10),
           ClickAnimation(
             onTap: () {},
             child: Container(
-              padding: EdgeInsets.all(10),
+              padding: EdgeInsets.symmetric(vertical: 15, horizontal: 50),
               decoration: BoxDecoration(
-                  color: AppTheme.blueColor,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(10),
-                    topRight: Radius.circular(10),
-                    bottomRight: Radius.circular(10),
-                  )),
+                color: AppTheme.blueColor,
+                borderRadius: BorderRadius.circular(10),
+              ),
               child: Text(
                 'Editer',
                 style: TextStyle(
@@ -133,9 +100,31 @@ class BuildAdminListItem extends StatelessWidget {
                 ),
               ),
             ),
-          )
+          ),
+          SizedBox(height: 20),
         ],
       ),
+    );
+  }
+
+  buildTextField(screen, {String hint}) {
+    return Column(
+      children: [
+        Container(
+          width: screen.width * .80,
+          child: TextField(
+            textAlign: TextAlign.center,
+            textInputAction: TextInputAction.newline,
+            keyboardType: TextInputType.multiline,
+            maxLines: 6,
+            minLines: 1,
+            decoration: InputDecoration.collapsed(
+              hintText: '$hint',
+            ),
+          ),
+        ),
+        Divider()
+      ],
     );
   }
 
