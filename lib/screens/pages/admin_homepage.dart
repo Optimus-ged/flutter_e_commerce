@@ -290,7 +290,9 @@ class BuildAdminListItem extends StatelessWidget {
           Text('${art.aPropos}'),
           SizedBox(height: 5),
           ClickAnimation(
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).pushNamed(EditArticle, arguments: art);
+            },
             child: Container(
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(

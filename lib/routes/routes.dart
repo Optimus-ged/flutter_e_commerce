@@ -40,7 +40,10 @@ abstract class Routes {
                 ));
         break;
       case EditArticle:
-        return MaterialPageRoute(builder: (context) => EditArticlePage());
+        return MaterialPageRoute(
+            builder: (context) => EditArticlePage(
+                  art: settings.arguments,
+                ));
         break;
       case Payment:
         return MaterialPageRoute(

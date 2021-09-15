@@ -1,7 +1,9 @@
 import 'package:e_commerce/exports/all_exports.dart';
+import 'package:e_commerce/routes/routes_constants.dart';
 
 class EditArticlePage extends StatefulWidget {
-  // const EditArticle({ Key? key }) : super(key: key);
+  final Article art;
+  EditArticlePage({this.art});
 
   @override
   _EditArticlePageState createState() => _EditArticlePageState();
@@ -30,15 +32,19 @@ class _EditArticlePageState extends State<EditArticlePage> {
                       left: 0,
                       child: ClickAnimation(
                         onTap: () => Navigator.pop(context),
-                        child: Icon(
-                          Icons.arrow_back_ios,
-                          color: Colors.black45,
+                        child: Container(
+                          width: 50,
+                          alignment: Alignment.centerLeft,
+                          child: Icon(
+                            Icons.arrow_back_ios,
+                            color: Colors.black45,
+                          ),
                         ),
                       ),
                     ),
                     Center(
                       child: Text(
-                        "AJOUT ARTICLE",
+                        widget.art == null ? "AJOUT ARTICLE" : "EDITER",
                         style: TextStyle(
                           color: Colors.grey[300],
                           fontWeight: FontWeight.w700,
@@ -46,6 +52,22 @@ class _EditArticlePageState extends State<EditArticlePage> {
                         ),
                       ),
                     ),
+                    widget.art != null
+                        ? Positioned(
+                            right: 20,
+                            child: ClickAnimation(
+                              onTap: () => Navigator.pop(context),
+                              child: Container(
+                                width: 50,
+                                alignment: Alignment.centerRight,
+                                child: Icon(
+                                  Icons.delete,
+                                  color: Colors.black45,
+                                ),
+                              ),
+                            ),
+                          )
+                        : Container(),
                   ],
                 ),
               ),
@@ -85,7 +107,9 @@ class BuildAdminListItem extends StatelessWidget {
           buildTextField(screen, hint: "a props"),
           SizedBox(height: 10),
           ClickAnimation(
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).pushNamed(EditArticle);
+            },
             child: Container(
               padding: EdgeInsets.symmetric(vertical: 15, horizontal: 50),
               decoration: BoxDecoration(
