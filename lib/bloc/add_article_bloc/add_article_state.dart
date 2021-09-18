@@ -14,12 +14,12 @@ class AddArticleInitial extends AddArticleState {}
 class AddArticleInProgress extends AddArticleState {}
 
 class AddArticleFailure extends AddArticleState {
-  final ListeArticles data;
+  final String message;
 
-  const AddArticleFailure({@required this.data});
+  const AddArticleFailure({@required this.message});
 
   @override
-  List<Object> get props => [data];
+  List<Object> get props => [message];
 }
 
 class AddArticleSuccess extends AddArticleState {
