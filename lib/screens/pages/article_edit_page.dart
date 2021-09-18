@@ -151,7 +151,7 @@ class _BuildAdminListItemState extends State<BuildAdminListItem> {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Text(
-                'Editer',
+                'Enregistrer',
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w500,

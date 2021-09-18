@@ -139,4 +139,41 @@ class Provider {
       throw error;
     }
   }
+
+  // Add article
+  Future<ListeArticles> addArticle(
+      {@required File file1,
+      @required File file2,
+      @required File file3,
+      @required Article articleData}) async {
+    String fileName1 = file1.path.split('/').last;
+    String fileName2 = file2.path.split('/').last;
+    String fileName3 = file3.path.split('/').last;
+    try {
+      FormData formData = FormData.fromMap({
+        "designation": articleData.designation,
+        "pu": articleData.pu,
+        "a_propos": articleData.aPropos,
+        "photo": await MultipartFile.fromFile(file1.path, filename: fileName1),
+        "photo": await MultipartFile.fromFile(file3.path, filename: fileName3),
+        "photo": await MultipartFile.fromFile(file2.path, filename: fileName2),
+      });
+      var response = await _dio.post(
+        "${Endpoint.addArticle}",
+        data: formData,
+        options: Options(
+          contentType: Headers.formUrlEncodedContentType,
+          headers: {
+            "Accept": "application/json",
+            "Content-Type": "multipart/form-data"
+          },
+        ),
+      );
+      // print(response.data);
+      return ListeArticles.fromJson(response.data);
+    } catch (error, stacktrace) {
+      print("uploadImage error : $error, stacktrace : $stacktrace");
+      throw error;
+    }
+  }
 }
