@@ -3,6 +3,7 @@ import 'package:e_commerce/bloc/add_article_bloc/add_article_event.dart';
 import 'package:e_commerce/bloc/add_article_bloc/add_article_state.dart';
 import 'package:e_commerce/bloc/update_article_bloc/update_article_bloc.dart';
 import 'package:e_commerce/bloc/update_article_bloc/update_article_event.dart';
+import 'package:e_commerce/bloc/update_article_bloc/update_article_state.dart';
 import 'package:e_commerce/exports/all_exports.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -92,9 +93,8 @@ class _EditArticlePageState extends State<EditArticlePage> {
 
 class BuildAdminListItem extends StatefulWidget {
   final Article articleData;
-  final VoidCallback onTap;
 
-  const BuildAdminListItem({Key key, this.articleData, this.onTap})
+  const BuildAdminListItem({Key key, this.articleData})
       : super(key: key);
 
   @override
@@ -205,21 +205,62 @@ class _BuildAdminListItemState extends State<BuildAdminListItem> {
             buildTextField(screen,
                 hint: "a props", controller: _aProposController),
             SizedBox(height: 10),
-            ClickAnimation(
-              onTap: () {
-                _onAddButtonPressed();
+            BlocListener<UpdateArticleBloc, UpdateArticleState>(
+              bloc: _updateArticleBloc,
+              listener: (context, state) {
+                if (state is UpdateArticleInProgress) {
+                  setState(() {
+                    isLoading = true;
+                  });
+                }
+                if (state is UpdateArticleFailure) {
+                  setState(() {
+                    isLoading = false;
+                  });
+                  Fluttertoast.showToast(
+                    msg: "${state.message}",
+                    gravity: ToastGravity.TOP,
+                    backgroundColor: Colors.black.withOpacity(0.6),
+                  );
+                }
+                if (state is UpdateArticleSuccess) {
+                  // setState(() {
+                  //   userData = state.login.user;
+                  // });
+                  Fluttertoast.showToast(
+                    msg: "${state.data.message}",
+                    gravity: ToastGravity.TOP,
+                    toastLength: Toast.LENGTH_LONG,
+                    backgroundColor: Colors.black.withOpacity(0.6),
+                  );
+                  //   if (state.data.user.nom == "Admin") {
+                  //     // Navigator.of(context).pushReplacementNamed(
+                  //     //   AdminHomepage
+                  //     // );
+                  //   } else {
+                  //     Navigator.of(context).pushReplacementNamed(
+                  //       Home,
+                  //       arguments: state.login.user,
+                  //     );
+                  //   }
+                }
               },
-              child: Container(
-                padding: EdgeInsets.symmetric(vertical: 15, horizontal: 50),
-                decoration: BoxDecoration(
-                  color: AppTheme.blueColor,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Text(
-                  'Enregistrer',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w500,
+              child: ClickAnimation(
+                onTap: () {
+                      _onAddButtonPressed();
+                },
+                child: Container(
+                  padding: EdgeInsets.symmetric(vertical: 15, horizontal: 50),
+                  decoration: BoxDecoration(
+                    color: AppTheme.blueColor,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Text(
+                    'Enregistrer',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                 ),
               ),
