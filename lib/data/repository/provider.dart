@@ -176,4 +176,26 @@ class Provider {
       throw error;
     }
   }
+
+  // Update article
+  Future<ListeArticles> updateArticle({@required Article articleData}) async {
+    try {
+      var response = await _dio.put(
+        "${Endpoint.updateArticle}",
+        data: articleData.toJson(),
+        options: Options(
+          contentType: Headers.formUrlEncodedContentType,
+          headers: {
+            "Accept": "application/json",
+            "Content-Type": "multipart/form-data"
+          },
+        ),
+      );
+      // print(response.data);
+      return ListeArticles.fromJson(response.data);
+    } catch (error, stacktrace) {
+      print("uploadImage error : $error, stacktrace : $stacktrace");
+      throw error;
+    }
+  }
 }

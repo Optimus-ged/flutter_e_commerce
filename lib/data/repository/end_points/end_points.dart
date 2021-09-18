@@ -17,4 +17,5 @@ class Endpoint {
   static const String signUpUser = "/users/signup";
   static const String updateUser = "/users";
   static const String addArticle = "/article/add";
+  static const String updateArticle = "/article/update";
 }

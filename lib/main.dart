@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:e_commerce/bloc/add_article_bloc/add_article_bloc.dart';
 import 'package:e_commerce/bloc/profile_bloc/profile_bloc.dart';
 import 'package:e_commerce/bloc/sign_bloc/signup_bloc.dart';
 import 'package:e_commerce/exports/all_exports.dart';
@@ -62,6 +63,9 @@ void main() async {
             ),
             BlocProvider<ProfileBloc>(
               create: (context) => ProfileBloc(),
+            ),
+            BlocProvider<AddArticleBloc>(
+              create: (context) => AddArticleBloc(),
             ),
           ],
           child: MyApp(),

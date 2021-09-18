@@ -19,9 +19,12 @@ class AddArticleBloc extends Bloc<AddArticleEvent, AddArticleState> {
       AddArticleButtonPressed event) async* {
     try {
       yield AddArticleInProgress();
-      ListeArticles addArticle =
-          await _api.addArticle(
-            file1: event.image1, file2: event.image2, file3: event.image3, articleData: event.data);
+      ListeArticles addArticle = await _api.addArticle(
+        file1: event.image1,
+        file2: event.image2,
+        file3: event.image3,
+        articleData: event.data,
+      );
       if (addArticle.status == 201) {
         yield AddArticleSuccess(data: addArticle);
       } else {
@@ -29,7 +32,7 @@ class AddArticleBloc extends Bloc<AddArticleEvent, AddArticleState> {
         return;
       }
     } catch (error, stackTrace) {
-       yield AddArticleFailure(message: error);
+      yield AddArticleFailure(message: error);
       print(
           'SignUpBloc.MapEventToState ::: ERROR: $error, STACKTRACE: $stackTrace');
       return;

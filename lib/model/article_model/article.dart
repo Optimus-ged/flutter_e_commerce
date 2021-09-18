@@ -20,6 +20,15 @@ class Article {
       });
     }
   }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['designation'] = this.designation;
+    data['pu'] = this.pu;
+    data['a_propos'] = this.aPropos;
+    return data;
+  }
 }
 
 class PhotoArticles {
