@@ -1,4 +1,9 @@
+import 'package:e_commerce/bloc/add_article_bloc/add_article_bloc.dart';
+import 'package:e_commerce/bloc/add_article_bloc/add_article_state.dart';
+import 'package:e_commerce/bloc/update_article_bloc/update_article_bloc.dart';
 import 'package:e_commerce/exports/all_exports.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'dart:io' as Io;
 
 import 'package:image_picker/image_picker.dart';
@@ -13,71 +18,122 @@ class EditArticlePage extends StatefulWidget {
 
 class _EditArticlePageState extends State<EditArticlePage> {
   bool isLoading;
+  AddArticleBloc _addArticleBloc;
+  UpdateArticleBloc _updateArticleBloc;
+
+  @override
+    void initState() {
+       isLoading = false;
+    _addArticleBloc = BlocProvider.of<AddArticleBloc>(context);
+    _updateArticleBloc = BlocProvider.of<UpdateArticleBloc>(context);
+      super.initState();
+    }
 
   @override
   Widget build(BuildContext context) {
     var screen = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Container(
-        height: screen.height,
-        width: screen.width,
-        color: Colors.grey[50],
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              SizedBox(height: 24),
-              Container(
-                width: screen.width,
-                padding: EdgeInsets.only(top: 15, bottom: 15, left: 20),
-                child: Stack(
-                  children: [
-                    Positioned(
-                      left: 0,
-                      child: ClickAnimation(
-                        onTap: () => Navigator.pop(context),
-                        child: Container(
-                          width: 50,
-                          alignment: Alignment.centerLeft,
-                          child: Icon(
-                            Icons.arrow_back_ios,
-                            color: Colors.black45,
+      body: BlocListener<AddArticleBloc, AddArticleState>(
+        bloc: _addArticleBloc,
+        listener: (context, state) {
+          if (state is AddArticleInProgress) {
+            setState(() {
+              isLoading = true;
+            });
+          }
+          if (state is AddArticleFailure) {
+            setState(() {
+              isLoading = false;
+            });
+            Fluttertoast.showToast(
+              msg: "${state.message}",
+              gravity: ToastGravity.TOP,
+              backgroundColor: Colors.black.withOpacity(0.6),
+            );
+          }
+          if (state is AddArticleSuccess) {
+            // setState(() {
+            //   userData = state.login.user;
+            // });
+            Fluttertoast.showToast(
+              msg: "${state.data.message}",
+              gravity: ToastGravity.TOP,
+              toastLength: Toast.LENGTH_LONG,
+              backgroundColor: Colors.black.withOpacity(0.6),
+            );
+          //   if (state.data.user.nom == "Admin") {
+          //     // Navigator.of(context).pushReplacementNamed(
+          //     //   AdminHomepage
+          //     // );
+          //   } else {
+          //     Navigator.of(context).pushReplacementNamed(
+          //       Home,
+          //       arguments: state.login.user,
+          //     );
+          //   }
+          }
+        },
+        child: Container(
+          height: screen.height,
+          width: screen.width,
+          color: Colors.grey[50],
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(height: 24),
+                Container(
+                  width: screen.width,
+                  padding: EdgeInsets.only(top: 15, bottom: 15, left: 20),
+                  child: Stack(
+                    children: [
+                      Positioned(
+                        left: 0,
+                        child: ClickAnimation(
+                          onTap: () => Navigator.pop(context),
+                          child: Container(
+                            width: 50,
+                            alignment: Alignment.centerLeft,
+                            child: Icon(
+                              Icons.arrow_back_ios,
+                              color: Colors.black45,
+                            ),
                           ),
                         ),
                       ),
-                    ),
-                    Center(
-                      child: Text(
-                        widget.art == null ? "AJOUT ARTICLE" : "EDITER",
-                        style: TextStyle(
-                          color: Colors.grey[300],
-                          fontWeight: FontWeight.w700,
-                          fontSize: 20,
+                      Center(
+                        child: Text(
+                          widget.art == null ? "AJOUT ARTICLE" : "EDITER",
+                          style: TextStyle(
+                            color: Colors.grey[300],
+                            fontWeight: FontWeight.w700,
+                            fontSize: 20,
+                          ),
                         ),
                       ),
-                    ),
-                    widget.art != null
-                        ? Positioned(
-                            right: 20,
-                            child: ClickAnimation(
-                              onTap: () => Navigator.pop(context),
-                              child: Container(
-                                width: 50,
-                                alignment: Alignment.centerRight,
-                                child: Icon(
-                                  Icons.delete,
-                                  color: Colors.black45,
+                      widget.art != null
+                          ? Positioned(
+                              right: 20,
+                              child: ClickAnimation(
+                                onTap: () => Navigator.pop(context),
+                                child: Container(
+                                  width: 50,
+                                  alignment: Alignment.centerRight,
+                                  child: Icon(
+                                    Icons.delete,
+                                    color: Colors.black45,
+                                  ),
                                 ),
                               ),
-                            ),
-                          )
-                        : Container(),
-                  ],
+                            )
+                          : Container(),
+                    ],
+                  ),
                 ),
-              ),
-              SizedBox(height: 30),
-              BuildAdminListItem(articleData: widget.art)
-            ],
+                SizedBox(height: 30),
+                BuildAdminListItem(articleData: widget.art)
+              ],
+            ),
           ),
         ),
       ),
