@@ -11,10 +11,10 @@ abstract class UpdateArticleEvent extends Equatable {
 
 class UpdateArticleButtonPressed extends UpdateArticleEvent {
   final Article data;
-  
+
 
   const UpdateArticleButtonPressed(
-      {@required this.data,
+      {@required this.data
      });
 
   @override

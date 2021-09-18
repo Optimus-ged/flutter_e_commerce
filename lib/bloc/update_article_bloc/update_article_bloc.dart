@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'package:e_commerce/bloc/Update_article_bloc/Update_article_event.dart';
-import 'package:e_commerce/bloc/Update_article_bloc/Update_article_state.dart';
+import 'package:e_commerce/bloc/update_article_bloc/update_article_event.dart';
+import 'package:e_commerce/bloc/update_article_bloc/update_article_state.dart';
 import 'package:e_commerce/data/repository/provider.dart';
 import 'package:e_commerce/exports/all_exports.dart';
 import 'package:e_commerce/utils/setup_locator.dart';
@@ -12,14 +12,15 @@ class UpdateArticleBloc extends Bloc<UpdateArticleEvent, UpdateArticleState> {
   @override
   Stream<UpdateArticleState> mapEventToState(UpdateArticleEvent event) async* {
     if (event is UpdateArticleButtonPressed)
-      yield* _mapUpdateArticleButtonPressedToState(event);
+      yield* _mapAddArticleButtonPressedToState(event);
   }
 
-  Stream<UpdateArticleState> _mapUpdateArticleButtonPressedToState(
+  Stream<UpdateArticleState> _mapAddArticleButtonPressedToState(
       UpdateArticleButtonPressed event) async* {
     try {
       yield UpdateArticleInProgress();
-      ListeArticles updateArticle = await _api.updateArticle(
+      ListeArticles updateArticle = await _api.addArticle(
+       
         articleData: event.data,
       );
       if (updateArticle.status == 201) {

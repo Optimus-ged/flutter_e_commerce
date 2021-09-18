@@ -1,6 +1,8 @@
 import 'package:e_commerce/bloc/add_article_bloc/add_article_bloc.dart';
+import 'package:e_commerce/bloc/add_article_bloc/add_article_event.dart';
 import 'package:e_commerce/bloc/add_article_bloc/add_article_state.dart';
 import 'package:e_commerce/bloc/update_article_bloc/update_article_bloc.dart';
+import 'package:e_commerce/bloc/update_article_bloc/update_article_event.dart';
 import 'package:e_commerce/exports/all_exports.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -17,123 +19,70 @@ class EditArticlePage extends StatefulWidget {
 }
 
 class _EditArticlePageState extends State<EditArticlePage> {
-  bool isLoading;
-  AddArticleBloc _addArticleBloc;
-  UpdateArticleBloc _updateArticleBloc;
-
-  @override
-    void initState() {
-       isLoading = false;
-    _addArticleBloc = BlocProvider.of<AddArticleBloc>(context);
-    _updateArticleBloc = BlocProvider.of<UpdateArticleBloc>(context);
-      super.initState();
-    }
-
   @override
   Widget build(BuildContext context) {
     var screen = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.white,
-      body: BlocListener<AddArticleBloc, AddArticleState>(
-        bloc: _addArticleBloc,
-        listener: (context, state) {
-          if (state is AddArticleInProgress) {
-            setState(() {
-              isLoading = true;
-            });
-          }
-          if (state is AddArticleFailure) {
-            setState(() {
-              isLoading = false;
-            });
-            Fluttertoast.showToast(
-              msg: "${state.message}",
-              gravity: ToastGravity.TOP,
-              backgroundColor: Colors.black.withOpacity(0.6),
-            );
-          }
-          if (state is AddArticleSuccess) {
-            // setState(() {
-            //   userData = state.login.user;
-            // });
-            Fluttertoast.showToast(
-              msg: "${state.data.message}",
-              gravity: ToastGravity.TOP,
-              toastLength: Toast.LENGTH_LONG,
-              backgroundColor: Colors.black.withOpacity(0.6),
-            );
-          //   if (state.data.user.nom == "Admin") {
-          //     // Navigator.of(context).pushReplacementNamed(
-          //     //   AdminHomepage
-          //     // );
-          //   } else {
-          //     Navigator.of(context).pushReplacementNamed(
-          //       Home,
-          //       arguments: state.login.user,
-          //     );
-          //   }
-          }
-        },
-        child: Container(
-          height: screen.height,
-          width: screen.width,
-          color: Colors.grey[50],
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                SizedBox(height: 24),
-                Container(
-                  width: screen.width,
-                  padding: EdgeInsets.only(top: 15, bottom: 15, left: 20),
-                  child: Stack(
-                    children: [
-                      Positioned(
-                        left: 0,
-                        child: ClickAnimation(
-                          onTap: () => Navigator.pop(context),
-                          child: Container(
-                            width: 50,
-                            alignment: Alignment.centerLeft,
-                            child: Icon(
-                              Icons.arrow_back_ios,
-                              color: Colors.black45,
-                            ),
+      body: Container(
+        height: screen.height,
+        width: screen.width,
+        color: Colors.grey[50],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(height: 24),
+              Container(
+                width: screen.width,
+                padding: EdgeInsets.only(top: 15, bottom: 15, left: 20),
+                child: Stack(
+                  children: [
+                    Positioned(
+                      left: 0,
+                      child: ClickAnimation(
+                        onTap: () => Navigator.pop(context),
+                        child: Container(
+                          width: 50,
+                          alignment: Alignment.centerLeft,
+                          child: Icon(
+                            Icons.arrow_back_ios,
+                            color: Colors.black45,
                           ),
                         ),
                       ),
-                      Center(
-                        child: Text(
-                          widget.art == null ? "AJOUT ARTICLE" : "EDITER",
-                          style: TextStyle(
-                            color: Colors.grey[300],
-                            fontWeight: FontWeight.w700,
-                            fontSize: 20,
-                          ),
+                    ),
+                    Center(
+                      child: Text(
+                        widget.art == null ? "AJOUT ARTICLE" : "EDITER",
+                        style: TextStyle(
+                          color: Colors.grey[300],
+                          fontWeight: FontWeight.w700,
+                          fontSize: 20,
                         ),
                       ),
-                      widget.art != null
-                          ? Positioned(
-                              right: 20,
-                              child: ClickAnimation(
-                                onTap: () => Navigator.pop(context),
-                                child: Container(
-                                  width: 50,
-                                  alignment: Alignment.centerRight,
-                                  child: Icon(
-                                    Icons.delete,
-                                    color: Colors.black45,
-                                  ),
+                    ),
+                    widget.art != null
+                        ? Positioned(
+                            right: 20,
+                            child: ClickAnimation(
+                              onTap: () => Navigator.pop(context),
+                              child: Container(
+                                width: 50,
+                                alignment: Alignment.centerRight,
+                                child: Icon(
+                                  Icons.delete,
+                                  color: Colors.black45,
                                 ),
                               ),
-                            )
-                          : Container(),
-                    ],
-                  ),
+                            ),
+                          )
+                        : Container(),
+                  ],
                 ),
-                SizedBox(height: 30),
-                BuildAdminListItem(articleData: widget.art)
-              ],
-            ),
+              ),
+              SizedBox(height: 30),
+              BuildAdminListItem(articleData: widget.art)
+            ],
           ),
         ),
       ),
@@ -143,18 +92,34 @@ class _EditArticlePageState extends State<EditArticlePage> {
 
 class BuildAdminListItem extends StatefulWidget {
   final Article articleData;
+  final VoidCallback onTap;
 
-  const BuildAdminListItem({Key key, this.articleData}) : super(key: key);
+  const BuildAdminListItem({Key key, this.articleData, this.onTap})
+      : super(key: key);
 
   @override
   _BuildAdminListItemState createState() => _BuildAdminListItemState();
 }
 
 class _BuildAdminListItemState extends State<BuildAdminListItem> {
+  bool isLoading;
+  AddArticleBloc _addArticleBloc;
+  UpdateArticleBloc _updateArticleBloc;
+  var _designationController = TextEditingController();
+  var _puController = TextEditingController();
+  var _aProposController = TextEditingController();
+
   Io.File _image1;
   Io.File _image2;
   Io.File _image3;
-  bool isLoading;
+
+  @override
+  void initState() {
+    isLoading = false;
+    _addArticleBloc = BlocProvider.of<AddArticleBloc>(context);
+    _updateArticleBloc = BlocProvider.of<UpdateArticleBloc>(context);
+    super.initState();
+  }
 
   Future getImage({int index}) async {
     final pickedFile =
@@ -177,56 +142,102 @@ class _BuildAdminListItemState extends State<BuildAdminListItem> {
   @override
   Widget build(BuildContext context) {
     var screen = MediaQuery.of(context).size;
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Container(
-            child: Row(
-              children: [
-                buildItem(1, screen, data: widget.articleData, i: 0),
-                buildItem(2, screen, data: widget.articleData, i: 1),
-                buildItem(3, screen, data: widget.articleData, i: 2),
-              ],
-            ),
-          ),
-          SizedBox(height: 20),
-          buildTextField(screen, hint: "designation"),
-          SizedBox(height: 20),
-          buildTextField(screen, hint: "pu"),
-          SizedBox(height: 20),
-          buildTextField(screen, hint: "a props"),
-          SizedBox(height: 10),
-          ClickAnimation(
-            onTap: () {},
-            child: Container(
-              padding: EdgeInsets.symmetric(vertical: 15, horizontal: 50),
-              decoration: BoxDecoration(
-                color: AppTheme.blueColor,
-                borderRadius: BorderRadius.circular(10),
+    return BlocListener<AddArticleBloc, AddArticleState>(
+      bloc: _addArticleBloc,
+      listener: (context, state) {
+        if (state is AddArticleInProgress) {
+          setState(() {
+            isLoading = true;
+          });
+        }
+        if (state is AddArticleFailure) {
+          setState(() {
+            isLoading = false;
+          });
+          Fluttertoast.showToast(
+            msg: "${state.message}",
+            gravity: ToastGravity.TOP,
+            backgroundColor: Colors.black.withOpacity(0.6),
+          );
+        }
+        if (state is AddArticleSuccess) {
+          // setState(() {
+          //   userData = state.login.user;
+          // });
+          Fluttertoast.showToast(
+            msg: "${state.data.message}",
+            gravity: ToastGravity.TOP,
+            toastLength: Toast.LENGTH_LONG,
+            backgroundColor: Colors.black.withOpacity(0.6),
+          );
+          //   if (state.data.user.nom == "Admin") {
+          //     // Navigator.of(context).pushReplacementNamed(
+          //     //   AdminHomepage
+          //     // );
+          //   } else {
+          //     Navigator.of(context).pushReplacementNamed(
+          //       Home,
+          //       arguments: state.login.user,
+          //     );
+          //   }
+        }
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              child: Row(
+                children: [
+                  buildItem(1, screen, data: widget.articleData, i: 0),
+                  buildItem(2, screen, data: widget.articleData, i: 1),
+                  buildItem(3, screen, data: widget.articleData, i: 2),
+                ],
               ),
-              child: Text(
-                'Enregistrer',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w500,
+            ),
+            SizedBox(height: 20),
+            buildTextField(screen,
+                hint: "designation", controller: _designationController),
+            SizedBox(height: 20),
+            buildTextField(screen, hint: "pu", controller: _puController),
+            SizedBox(height: 20),
+            buildTextField(screen,
+                hint: "a props", controller: _aProposController),
+            SizedBox(height: 10),
+            ClickAnimation(
+              onTap: () {
+                _onAddButtonPressed();
+              },
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 15, horizontal: 50),
+                decoration: BoxDecoration(
+                  color: AppTheme.blueColor,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Text(
+                  'Enregistrer',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
               ),
             ),
-          ),
-          SizedBox(height: 20),
-        ],
+            SizedBox(height: 20),
+          ],
+        ),
       ),
     );
   }
 
-  buildTextField(screen, {String hint}) {
+  buildTextField(screen, {String hint, TextEditingController controller}) {
     return Column(
       children: [
         Container(
           width: screen.width * .80,
           child: TextField(
+            controller: controller,
             textAlign: TextAlign.center,
             textInputAction: TextInputAction.newline,
             keyboardType: TextInputType.multiline,
@@ -311,5 +322,28 @@ class _BuildAdminListItemState extends State<BuildAdminListItem> {
         ),
       ),
     );
+  }
+
+  Future<void> _onAddButtonPressed() async {
+    Article data = Article(
+        designation: _designationController.text.trim(),
+        pu: _puController.text.trim(),
+        aPropos: _aProposController.text.trim());
+    _addArticleBloc.add(
+      AddArticleButtonPressed(
+        data: data,
+        image1: _image1,
+        image2: _image2,
+        image3: _image3,
+      ),
+    );
+  }
+
+  Future<void> _onUpdateButtonPressed() async {
+    Article data = Article(
+        designation: _designationController.text.trim(),
+        pu: _puController.text.trim(),
+        aPropos: _aProposController.text.trim());
+    _updateArticleBloc.add(UpdateArticleButtonPressed(data: data));
   }
 }
