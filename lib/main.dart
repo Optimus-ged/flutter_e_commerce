@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:e_commerce/bloc/add_article_bloc/add_article_bloc.dart';
 import 'package:e_commerce/bloc/profile_bloc/profile_bloc.dart';
 import 'package:e_commerce/bloc/sign_bloc/signup_bloc.dart';
+import 'package:e_commerce/bloc/update_article_bloc/update_article_bloc.dart';
 import 'package:e_commerce/exports/all_exports.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -66,6 +67,9 @@ void main() async {
             ),
             BlocProvider<AddArticleBloc>(
               create: (context) => AddArticleBloc(),
+            ),
+            BlocProvider<UpdateArticleBloc>(
+              create: (context) => UpdateArticleBloc(),
             ),
           ],
           child: MyApp(),
