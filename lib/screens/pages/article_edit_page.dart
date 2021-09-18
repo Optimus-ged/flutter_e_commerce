@@ -1,5 +1,4 @@
 import 'package:e_commerce/exports/all_exports.dart';
-import 'package:e_commerce/routes/routes_constants.dart';
 import 'dart:io' as Io;
 
 import 'package:image_picker/image_picker.dart';

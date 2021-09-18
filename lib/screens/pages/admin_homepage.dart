@@ -100,13 +100,14 @@ class _AdminHomepageState extends State<AdminHomepage> {
                           itemCount: widgetList.length,
                           itemBuilder: (context, index) {
                             return DimissableWidget(
-                              item: widgetList[index],
-                              child: BuildAdminListItem(
+                              item: BuildAdminListItem(
                                 snapshot.data.articles[index],
                               ),
+                              child: widgetList[index],
                               onDismiss: (direction) {},
                             );
                           },
+                          
                         ),
                       )
                     ],

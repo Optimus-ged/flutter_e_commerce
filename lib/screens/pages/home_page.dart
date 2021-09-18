@@ -53,7 +53,6 @@ class _HomePageState extends State<HomePage> {
     if (_searchController.text.isNotEmpty) {
       allArticles.retainWhere(
         (article) {
-          test = allArticles.length;
           return article.designation.toUpperCase().contains(
                 _searchController.text.toUpperCase(),
               );
