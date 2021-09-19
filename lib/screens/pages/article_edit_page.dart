@@ -107,6 +107,7 @@ class _BuildAdminListItemState extends State<BuildAdminListItem> {
   var _designationController = TextEditingController();
   var _puController = TextEditingController();
   var _aProposController = TextEditingController();
+  ListeArticleBloc get _listArticleBloc => locator.get<ListeArticleBloc>();
 
   Io.File _image1;
   Io.File _image2;
@@ -128,6 +129,12 @@ class _BuildAdminListItemState extends State<BuildAdminListItem> {
     }
 
     super.initState();
+  }
+
+  @override
+  void deactivate() {
+    _listArticleBloc.stream;
+    super.deactivate();
   }
 
   Future getImage({int index}) async {
@@ -233,6 +240,7 @@ class _BuildAdminListItemState extends State<BuildAdminListItem> {
                   );
                 }
                 if (state is UpdateArticleSuccess) {
+                  Navigator.of(context).pop();
                   // setState(() {
                   //   userData = state.login.user;
                   // });
@@ -260,20 +268,25 @@ class _BuildAdminListItemState extends State<BuildAdminListItem> {
                       ? _onAddButtonPressed()
                       : _onUpdateButtonPressed();
                 },
-                child: Container(
-                  padding: EdgeInsets.symmetric(vertical: 15, horizontal: 50),
-                  decoration: BoxDecoration(
-                    color: AppTheme.blueColor,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Text(
-                    'Enregistrer',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
+                child: !isLoading
+                    ? Container(
+                        padding:
+                            EdgeInsets.symmetric(vertical: 15, horizontal: 50),
+                        decoration: BoxDecoration(
+                          color: AppTheme.blueColor,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Text(
+                          'Enregistrer',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ))
+                    : CircularProgressIndicator(
+                        valueColor:
+                            new AlwaysStoppedAnimation<Color>(Colors.grey[400]),
+                      ),
               ),
             ),
             SizedBox(height: 20),
