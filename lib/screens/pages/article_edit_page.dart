@@ -94,8 +94,7 @@ class _EditArticlePageState extends State<EditArticlePage> {
 class BuildAdminListItem extends StatefulWidget {
   final Article articleData;
 
-  const BuildAdminListItem({Key key, this.articleData})
-      : super(key: key);
+  const BuildAdminListItem({Key key, this.articleData}) : super(key: key);
 
   @override
   _BuildAdminListItemState createState() => _BuildAdminListItemState();
@@ -118,6 +117,16 @@ class _BuildAdminListItemState extends State<BuildAdminListItem> {
     isLoading = false;
     _addArticleBloc = BlocProvider.of<AddArticleBloc>(context);
     _updateArticleBloc = BlocProvider.of<UpdateArticleBloc>(context);
+
+    if (widget.articleData != null) {
+      _designationController =
+          TextEditingController(text: widget.articleData.designation);
+      _puController =
+          TextEditingController(text: widget.articleData.pu.toString());
+      _aProposController =
+          TextEditingController(text: widget.articleData.aPropos);
+    }
+
     super.initState();
   }
 
@@ -247,7 +256,9 @@ class _BuildAdminListItemState extends State<BuildAdminListItem> {
               },
               child: ClickAnimation(
                 onTap: () {
-                      _onAddButtonPressed();
+                  widget.articleData == null
+                      ? _onAddButtonPressed()
+                      : _onUpdateButtonPressed();
                 },
                 child: Container(
                   padding: EdgeInsets.symmetric(vertical: 15, horizontal: 50),
@@ -382,6 +393,7 @@ class _BuildAdminListItemState extends State<BuildAdminListItem> {
 
   Future<void> _onUpdateButtonPressed() async {
     Article data = Article(
+        id: widget.articleData.id,
         designation: _designationController.text.trim(),
         pu: _puController.text.trim(),
         aPropos: _aProposController.text.trim());

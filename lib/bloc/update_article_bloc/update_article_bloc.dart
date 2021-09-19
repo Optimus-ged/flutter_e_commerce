@@ -32,7 +32,7 @@ class UpdateArticleBloc extends Bloc<UpdateArticleEvent, UpdateArticleState> {
     } catch (error, stackTrace) {
       yield UpdateArticleFailure(message: error);
       print(
-          'SignUpBloc.MapEventToState ::: ERROR: $error, STACKTRACE: $stackTrace');
+          'UpdateArticleBloc.MapEventToState ::: ERROR: $error, STACKTRACE: $stackTrace');
       return;
     }
   }
