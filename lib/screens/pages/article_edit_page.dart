@@ -107,7 +107,6 @@ class _BuildAdminListItemState extends State<BuildAdminListItem> {
   var _designationController = TextEditingController();
   var _puController = TextEditingController();
   var _aProposController = TextEditingController();
-  ListeArticleBloc get _listArticleBloc => locator.get<ListeArticleBloc>();
 
   Io.File _image1;
   Io.File _image2;
@@ -129,12 +128,6 @@ class _BuildAdminListItemState extends State<BuildAdminListItem> {
     }
 
     super.initState();
-  }
-
-  @override
-  void deactivate() {
-    _listArticleBloc.stream;
-    super.deactivate();
   }
 
   Future getImage({int index}) async {
@@ -180,6 +173,7 @@ class _BuildAdminListItemState extends State<BuildAdminListItem> {
           // setState(() {
           //   userData = state.login.user;
           // });
+          Navigator.of(context).pop();
           Fluttertoast.showToast(
             msg: "${state.data.message}",
             gravity: ToastGravity.TOP,

@@ -154,9 +154,11 @@ class Provider {
         "designation": articleData.designation,
         "pu": articleData.pu,
         "a_propos": articleData.aPropos,
-        "photo": await MultipartFile.fromFile(file1.path, filename: fileName1),
-        "photo": await MultipartFile.fromFile(file3.path, filename: fileName3),
-        "photo": await MultipartFile.fromFile(file2.path, filename: fileName2),
+        "photo": [
+          await MultipartFile.fromFile(file1.path, filename: fileName1),
+          await MultipartFile.fromFile(file2.path, filename: fileName2),
+          await MultipartFile.fromFile(file3.path, filename: fileName3),
+        ],
       });
       var response = await _dio.post(
         "${Endpoint.addArticle}",
