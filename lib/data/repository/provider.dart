@@ -181,7 +181,7 @@ class Provider {
   Future<ListeArticles> updateArticle({@required Article articleData}) async {
     try {
       var response = await _dio.put(
-        "${Endpoint.updateArticle}",
+        "${Endpoint.updateArticle}/${articleData.id}",
         data: articleData.toJson(),
         options: Options(
           contentType: Headers.formUrlEncodedContentType,

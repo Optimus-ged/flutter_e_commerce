@@ -19,8 +19,7 @@ class UpdateArticleBloc extends Bloc<UpdateArticleEvent, UpdateArticleState> {
       UpdateArticleButtonPressed event) async* {
     try {
       yield UpdateArticleInProgress();
-      ListeArticles updateArticle = await _api.addArticle(
-       
+      ListeArticles updateArticle = await _api.updateArticle(
         articleData: event.data,
       );
       if (updateArticle.status == 201) {
@@ -30,7 +29,7 @@ class UpdateArticleBloc extends Bloc<UpdateArticleEvent, UpdateArticleState> {
         return;
       }
     } catch (error, stackTrace) {
-      yield UpdateArticleFailure(message: error);
+      yield UpdateArticleFailure(message: '$error');
       print(
           'UpdateArticleBloc.MapEventToState ::: ERROR: $error, STACKTRACE: $stackTrace');
       return;
