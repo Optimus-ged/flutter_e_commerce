@@ -1,8 +1,10 @@
+import 'package:e_commerce/exercices/providers/user_provider.dart';
 import 'package:e_commerce/exports/all_exports.dart';
 import 'package:e_commerce/routes/routes_constants.dart';
 import 'package:e_commerce/screens/widgets/dimissable.dart';
 import 'package:e_commerce/utils/app_theme.dart';
 import 'package:flutter/material.dart';
+
 
 class AdminHomepage extends StatefulWidget {
   @override
@@ -81,6 +83,7 @@ class _AdminHomepageState extends State<AdminHomepage> {
               stream: _listArticleBloc.stream,
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
+                  // context.read<UserTest>().username = 'Successsss';
                   listArticles.clear();
                   listArticles.addAll(snapshot.data.articles);
                   filterList(
@@ -124,6 +127,13 @@ class _AdminHomepageState extends State<AdminHomepage> {
           child: Icon(Icons.add),
           onPressed: () {
             Navigator.of(context).pushNamed(EditArticle);
+            // Navigator.of(context).push(
+            //   MaterialPageRoute(
+            //     builder: (context) => EditArticlePage(
+            //       listArticles: listArticles,
+            //     ),
+            //   ),
+            // );
           },
         ),
       ),
@@ -165,6 +175,7 @@ class _AdminHomepageState extends State<AdminHomepage> {
             SizedBox(width: 10),
             Expanded(
               child: TextField(
+                autofocus: false,
                 onChanged: (value) {
                   setState(() {});
                 },

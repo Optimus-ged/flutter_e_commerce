@@ -4,6 +4,7 @@ import 'package:e_commerce/bloc/add_article_bloc/add_article_state.dart';
 import 'package:e_commerce/bloc/update_article_bloc/update_article_bloc.dart';
 import 'package:e_commerce/bloc/update_article_bloc/update_article_event.dart';
 import 'package:e_commerce/bloc/update_article_bloc/update_article_state.dart';
+import 'package:e_commerce/exercices/providers/user_provider.dart';
 import 'package:e_commerce/exports/all_exports.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -12,6 +13,7 @@ import 'dart:io' as Io;
 import 'package:image_picker/image_picker.dart';
 
 class EditArticlePage extends StatefulWidget {
+  // final List<Article> listArticles;
   final Article art;
   EditArticlePage({this.art});
 
@@ -20,6 +22,14 @@ class EditArticlePage extends StatefulWidget {
 }
 
 class _EditArticlePageState extends State<EditArticlePage> {
+  ListeArticleBloc get _listArticleBloc => locator.get<ListeArticleBloc>();
+
+  @override
+  void deactivate() {
+    _listArticleBloc.getArticles();
+    super.deactivate();
+  }
+
   @override
   Widget build(BuildContext context) {
     var screen = MediaQuery.of(context).size;
@@ -54,7 +64,9 @@ class _EditArticlePageState extends State<EditArticlePage> {
                     ),
                     Center(
                       child: Text(
-                        widget.art == null ? "AJOUT ARTICLE" : "EDITER",
+                        widget.art == null
+                            ? "AJOUT ARTICLE"
+                            : "EDITER",
                         style: TextStyle(
                           color: Colors.grey[300],
                           fontWeight: FontWeight.w700,
@@ -93,8 +105,13 @@ class _EditArticlePageState extends State<EditArticlePage> {
 
 class BuildAdminListItem extends StatefulWidget {
   final Article articleData;
+  final List<Article> listArticles;
 
-  const BuildAdminListItem({Key key, this.articleData}) : super(key: key);
+  const BuildAdminListItem({
+    Key key,
+    this.articleData,
+    this.listArticles,
+  }) : super(key: key);
 
   @override
   _BuildAdminListItemState createState() => _BuildAdminListItemState();
@@ -173,6 +190,7 @@ class _BuildAdminListItemState extends State<BuildAdminListItem> {
           // setState(() {
           //   userData = state.login.user;
           // });
+          // widget.listArticles.add(state.data.articles.)
           Navigator.of(context).pop();
           Fluttertoast.showToast(
             msg: "${state.data.message}",

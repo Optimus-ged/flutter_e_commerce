@@ -5,7 +5,6 @@ import 'package:e_commerce/bloc/sign_bloc/signup_bloc.dart';
 import 'package:e_commerce/bloc/update_article_bloc/update_article_bloc.dart';
 import 'package:e_commerce/exports/all_exports.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'bloc/login_bloc/login_bloc.dart';
 
 class SimpleBlocObserver extends BlocObserver {
@@ -31,16 +30,6 @@ class SimpleBlocObserver extends BlocObserver {
     super.onError(bloc, error, stackTrace);
   }
 }
-// void main() async {
-//   WidgetsFlutterBinding.ensureInitialized();
-//   setup();
-//   await SystemChrome.setPreferredOrientations(
-//     <DeviceOrientation>[
-//       DeviceOrientation.portraitUp,
-//       DeviceOrientation.portraitDown
-//     ],
-//   ).then((_) => runApp(MyApp()));
-// }
 
 void main() async {
   try {

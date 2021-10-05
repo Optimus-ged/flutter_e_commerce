@@ -11,12 +11,13 @@ class ListeArticleBloc {
     //     "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJub20iOiJPcHRpbXVzIHlhbGEiLCJpZCI6NCwiaWF0IjoxNjIxNzA1NDY2LCJleHAiOjE2MjE5NjQ2NjZ9.lzJ5ogGXEkLbkZVZIyUqfSwZbuePqJLy0a-JMq8Xk2k");
     String _token = await locator.get<SharedPreferencesHelper>().authToken;
     // print("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbb " + _token);
-    ListeArticles _response =
-        await locator.get<Provider>().getArticles(_token);
+    ListeArticles _response = await locator.get<Provider>().getArticles(_token);
     _subject.sink.add(_response);
   }
 
   dispose() {
     _subject.close();
   }
+
+  addArticle({Article article}) async {}
 }
