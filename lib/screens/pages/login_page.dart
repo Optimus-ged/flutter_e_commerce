@@ -3,6 +3,7 @@ import 'package:e_commerce/bloc/login_bloc/login_event.dart';
 import 'package:e_commerce/bloc/login_bloc/login_state.dart';
 import 'package:e_commerce/exports/all_exports.dart';
 import 'package:e_commerce/routes/routes_constants.dart';
+import 'package:e_commerce/screens/pages/admin_homepage.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -22,8 +23,8 @@ class _LoginPageState extends State<LoginPage> {
   void initState() {
     isLoading = false;
     _loginBloc = BlocProvider.of<LoginBloc>(context);
-    _controllerNom = TextEditingController(text: 'Optimus yala');
-    _controllerPassword = TextEditingController(text: 'optimus');
+    _controllerNom = TextEditingController(text: 'Admin');
+    _controllerPassword = TextEditingController(text: 'admin');
     super.initState();
   }
 
@@ -60,10 +61,15 @@ class _LoginPageState extends State<LoginPage> {
               toastLength: Toast.LENGTH_LONG,
               backgroundColor: Colors.black.withOpacity(0.6),
             );
-            Navigator.of(context).pushReplacementNamed(
-              Home,
-              arguments: state.login.user,
-            );
+            if (state.login.user.nom == 'Admin') {
+              Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(builder: (context) => AdminHomepage()));
+            } else {
+              Navigator.of(context).pushReplacementNamed(
+                Home,
+                arguments: state.login.user,
+              );
+            }
           }
         },
         child: BlocBuilder<LoginBloc, LoginState>(

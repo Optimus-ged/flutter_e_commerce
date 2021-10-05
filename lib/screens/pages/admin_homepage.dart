@@ -107,7 +107,9 @@ class _AdminHomepageState extends State<AdminHomepage> {
                                 snapshot.data.articles[index],
                               ),
                               child: widgetList[index],
-                              onDismiss: (direction) {},
+                              onDismiss: (direction) {
+                                
+                              },
                             );
                           },
                         ),

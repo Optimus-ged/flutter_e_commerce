@@ -1,5 +1,5 @@
 import 'package:e_commerce/exports/all_exports.dart';
-import 'package:e_commerce/screens/pages/admin_homepage.dart';
+
 
 class MyApp extends StatelessWidget {
   @override
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
         platform: TargetPlatform.iOS,
       ),
       onGenerateRoute: Routes.materialRoutes,
-      home: AdminHomepage(),
+      home: LoginPage(),
     );
   }
 }
