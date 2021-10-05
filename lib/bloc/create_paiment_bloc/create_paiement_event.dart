@@ -10,10 +10,10 @@ abstract class CreatePaiemenrEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class CreatePaiemenrButtonPressed extends CreatePaiemenrEvent {
+class CreatePaiemenButtonPressed extends CreatePaiemenrEvent {
   final CreatePaiement paiementData;
 
-  const CreatePaiemenrButtonPressed({@required this.paiementData});
+  const CreatePaiemenButtonPressed({@required this.paiementData});
 
   @override
   List<Object> get props => [paiementData];
