@@ -12,7 +12,6 @@ class PaymentPage extends StatefulWidget {
 
 class _PaymentPageState extends State<PaymentPage> {
   double totalPayment;
-  // List<LocalArticle> dataArticle = [];
   get _localArticleBloc => locator.get<LocalArticleBloc>();
 
   @override
@@ -36,8 +35,6 @@ class _PaymentPageState extends State<PaymentPage> {
         stream: _localArticleBloc.subject,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            // dataArticle.clear();
-            // dataArticle.addAll(snapshot.data);
             browseList(data: snapshot.data);
             return Container(
               height: screen.height,
@@ -516,6 +513,6 @@ class _PaymentPageState extends State<PaymentPage> {
       dataList: dataList,
     );
 
-    
+
   }
 }

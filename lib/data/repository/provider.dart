@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:e_commerce/exports/all_exports.dart';
+import 'package:e_commerce/model/paiement/create_paiement.dart';
 import 'package:e_commerce/model/user_model/signup_response.dart';
 
 class Provider {
@@ -198,6 +199,28 @@ class Provider {
     } catch (error, stacktrace) {
       print("uploadImage error : $error, stacktrace : $stacktrace");
       throw error;
+    }
+  }
+
+  //
+  Future<LoginResponse> createPaiement(CreatePaiement articleData) async {
+    try {
+      final result = await _dio.post(
+        "/paiements/add",
+        data: articleData.toJson(),
+        options: Options(
+          contentType: Headers.formUrlEncodedContentType,
+          headers: {
+            "Accept": "application/json",
+            // "App": "Admin",
+            // "key": Endpoint.key
+          },
+        ),
+      );
+      return LoginResponse.fromJson(result.data);
+    } catch (e) {
+      print("ERROR createPaiement : ${e.toString()}");
+      throw e;
     }
   }
 }
