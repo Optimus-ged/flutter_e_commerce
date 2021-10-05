@@ -4,7 +4,6 @@ import 'package:e_commerce/bloc/add_article_bloc/add_article_state.dart';
 import 'package:e_commerce/bloc/update_article_bloc/update_article_bloc.dart';
 import 'package:e_commerce/bloc/update_article_bloc/update_article_event.dart';
 import 'package:e_commerce/bloc/update_article_bloc/update_article_state.dart';
-import 'package:e_commerce/exercices/providers/user_provider.dart';
 import 'package:e_commerce/exports/all_exports.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';

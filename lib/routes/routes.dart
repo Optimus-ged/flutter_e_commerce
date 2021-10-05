@@ -45,11 +45,11 @@ abstract class Routes {
                   art: settings.arguments,
                 ));
         break;
-      case Payment:
-        return MaterialPageRoute(
-          builder: (context) => PaymentPage(),
-        );
-        break;
+      // case Payment:
+      //   return MaterialPageRoute(
+      //     builder: (context) => PaymentPage(),
+      //   );
+      //   break;
       case Details:
         return MaterialPageRoute(
           builder: (context) => DetailPage(

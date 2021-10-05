@@ -249,9 +249,16 @@ class _HomePageState extends State<HomePage> {
                     return _buildNavigationItem(
                       icon: Icons.shopping_basket_outlined,
                       context: context,
-                      onTap: () => Navigator.of(context).pushNamed(
-                        Payment,
-                        arguments: snapshot.data,
+                      // onTap: () => Navigator.of(context).pushNamed(
+                      //   Payment,
+                      //   arguments: snapshot.data,
+                      // ),
+                      onTap: () => Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => PaymentPage(
+                            userData: widget.user,
+                          ),
+                        ),
                       ),
                     );
                   },

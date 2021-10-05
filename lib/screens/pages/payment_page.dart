@@ -1,19 +1,23 @@
 import 'package:e_commerce/exports/all_exports.dart';
+import 'package:e_commerce/model/paiement/create_paiement.dart';
 import 'package:e_commerce/screens/widgets/dimissable.dart';
 
 class PaymentPage extends StatefulWidget {
+  final User userData;
+  PaymentPage({this.userData});
+
   @override
   _PaymentPageState createState() => _PaymentPageState();
 }
 
 class _PaymentPageState extends State<PaymentPage> {
   double totalPayment;
+  // List<LocalArticle> dataArticle = [];
   get _localArticleBloc => locator.get<LocalArticleBloc>();
 
   @override
   void initState() {
     totalPayment = 0;
-
     super.initState();
   }
 
@@ -32,6 +36,8 @@ class _PaymentPageState extends State<PaymentPage> {
         stream: _localArticleBloc.subject,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
+            // dataArticle.clear();
+            // dataArticle.addAll(snapshot.data);
             browseList(data: snapshot.data);
             return Container(
               height: screen.height,
@@ -94,18 +100,19 @@ class _PaymentPageState extends State<PaymentPage> {
                                       primary: false,
                                       itemBuilder: (context, index) {
                                         return DimissableWidget(
-                                            item: snapshot.data[index],
-                                            child: _buildListItem(
-                                              data: snapshot.data,
-                                              index: index,
-                                            ),
-                                            onDismiss: (direction) =>
-                                                _removeFromDataList(
-                                                  context,
-                                                  index,
-                                                  direction,
-                                                  snapshot.data[index],
-                                                ));
+                                          item: snapshot.data[index],
+                                          child: _buildListItem(
+                                            data: snapshot.data,
+                                            index: index,
+                                          ),
+                                          onDismiss: (direction) =>
+                                              _removeFromDataList(
+                                            context,
+                                            index,
+                                            direction,
+                                            snapshot.data[index],
+                                          ),
+                                        );
                                       },
                                     ),
                                   )
@@ -490,5 +497,25 @@ class _PaymentPageState extends State<PaymentPage> {
       //   backgroundColor: Colors.black.withOpacity(0.6),
       // );
     }
+  }
+
+  _createPaiement({
+    List<LocalArticle> dataArticle,
+  }) {
+    List<DataList> dataList = [];
+
+    for (var i in dataArticle) {
+      dataList.add(
+        DataList(idArticle: i.id, qteAchete: i.qte),
+      );
+    }
+
+    CreatePaiement data = CreatePaiement(
+      idUser: widget.userData.id,
+      montant: totalPayment,
+      dataList: dataList,
+    );
+
+    
   }
 }
