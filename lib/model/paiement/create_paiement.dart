@@ -28,21 +28,21 @@ class CreatePaiement {
 }
 
 class DataList {
-  int idEntete;
+  // int idEntete;
   int idArticle;
-  double qteAchete;
+  var qteAchete;
 
-  DataList({this.idEntete, this.idArticle, this.qteAchete});
+  DataList({this.idArticle, this.qteAchete});
 
   DataList.fromJson(Map<String, dynamic> json) {
-    idEntete = json['idEntete'];
+    // idEntete = json['idEntete'];
     idArticle = json['idArticle'];
     qteAchete = json['qte_achete'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['idEntete'] = this.idEntete;
+    // data['idEntete'] = this.idEntete;
     data['idArticle'] = this.idArticle;
     data['qte_achete'] = this.qteAchete;
     return data;

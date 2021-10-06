@@ -1,6 +1,9 @@
+import 'package:e_commerce/bloc/create_paiment_bloc/create_paiement_bloc.dart';
+import 'package:e_commerce/bloc/create_paiment_bloc/create_paiement_event.dart';
 import 'package:e_commerce/exports/all_exports.dart';
 import 'package:e_commerce/model/paiement/create_paiement.dart';
 import 'package:e_commerce/screens/widgets/dimissable.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PaymentPage extends StatefulWidget {
   final User userData;
@@ -11,12 +14,14 @@ class PaymentPage extends StatefulWidget {
 }
 
 class _PaymentPageState extends State<PaymentPage> {
+  CreatePaiementBloc _createPaiementBloc;
   double totalPayment;
   get _localArticleBloc => locator.get<LocalArticleBloc>();
 
   @override
   void initState() {
     totalPayment = 0;
+    _createPaiementBloc = BlocProvider.of<CreatePaiementBloc>(context);
     super.initState();
   }
 
@@ -152,7 +157,8 @@ class _PaymentPageState extends State<PaymentPage> {
                               onTap: () {
                                 return showDialog(
                                   context: context,
-                                  builder: (context) => _paymentDialog(),
+                                  builder: (context) =>
+                                      _paymentDialog(snapshot.data),
                                 );
                               },
                             ),
@@ -329,7 +335,7 @@ class _PaymentPageState extends State<PaymentPage> {
   }
 
   // Building Payment showdialog
-  Widget _paymentDialog() {
+  Widget _paymentDialog(List<LocalArticle> data) {
     return Padding(
       padding: EdgeInsets.only(
         top: 100,
@@ -385,7 +391,8 @@ class _PaymentPageState extends State<PaymentPage> {
                       CustomButton(
                         title: "Confirmer",
                         onTap: () {
-                          Navigator.of(context).pop();
+                          _onPaiementButtonPressed(dataArticle: data);
+                          // Navigator.of(context).pop();
                         },
                       ),
                       SizedBox(height: 20)
@@ -496,7 +503,7 @@ class _PaymentPageState extends State<PaymentPage> {
     }
   }
 
-  _createPaiement({
+  _onPaiementButtonPressed({
     List<LocalArticle> dataArticle,
   }) {
     List<DataList> dataList = [];
@@ -513,6 +520,6 @@ class _PaymentPageState extends State<PaymentPage> {
       dataList: dataList,
     );
 
-
+    _createPaiementBloc.add(CreatePaiementButtonPressed(paiementData: data));
   }
 }

@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:e_commerce/bloc/add_article_bloc/add_article_bloc.dart';
+import 'package:e_commerce/bloc/create_paiment_bloc/create_paiement_bloc.dart';
 import 'package:e_commerce/bloc/profile_bloc/profile_bloc.dart';
 import 'package:e_commerce/bloc/sign_bloc/signup_bloc.dart';
 import 'package:e_commerce/bloc/update_article_bloc/update_article_bloc.dart';
@@ -59,6 +60,9 @@ void main() async {
             ),
             BlocProvider<UpdateArticleBloc>(
               create: (context) => UpdateArticleBloc(),
+            ),
+            BlocProvider<CreatePaiementBloc>(
+              create: (context) => CreatePaiementBloc(),
             ),
           ],
           child: MyApp(),

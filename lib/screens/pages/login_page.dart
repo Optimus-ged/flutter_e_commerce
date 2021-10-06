@@ -23,8 +23,8 @@ class _LoginPageState extends State<LoginPage> {
   void initState() {
     isLoading = false;
     _loginBloc = BlocProvider.of<LoginBloc>(context);
-    _controllerNom = TextEditingController(text: 'Admin');
-    _controllerPassword = TextEditingController(text: 'admin');
+    _controllerNom = TextEditingController(text: 'Optimus yala');
+    _controllerPassword = TextEditingController(text: 'optimus');
     super.initState();
   }
 
