@@ -1,7 +1,11 @@
 import 'package:e_commerce/bloc/article_bloc/favorite_article_bloc.dart';
+import 'package:e_commerce/bloc/user_identity_bloc/user_identity_bloc.dart';
+import 'package:e_commerce/bloc/user_identity_bloc/user_identity_event.dart';
+import 'package:e_commerce/bloc/user_identity_bloc/user_identity_state.dart';
 import 'package:e_commerce/exports/all_exports.dart';
 import 'package:e_commerce/routes/routes_constants.dart';
 import 'package:e_commerce/screens/pages/favorite_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class HomePage extends StatefulWidget {
@@ -12,7 +16,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  Users userIdentity;
   ScrollController _scrollController;
+  UserIdentityBloc _userIdentityBloc;
   var _searchController = TextEditingController();
   bool showSearchbar;
   ListeArticleBloc get _listArticleBloc => locator.get<ListeArticleBloc>();
@@ -26,8 +32,15 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     // listArticles = [];
+    userIdentity = Users();
     widgetList = [];
     _scrollController = ScrollController();
+    _userIdentityBloc = BlocProvider.of<UserIdentityBloc>(context)
+      ..add(
+        LoadUserIdentity(
+          userId: widget.user.id,
+        ),
+      );
     _listArticleBloc.getArticles();
     _localArticleBloc.getLocalData();
     _favoriteArticleBloc.getFavoriteArticle();
@@ -168,7 +181,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   decoration: InputDecoration.collapsed(
                     hintText:
-                        '${widget.user.nom.split(' ').first} Rechercher ici !!!',
+                        '${widget.user.nom.split(' ').first} Rechercher ici !!! ${userIdentity.nom}',
                   ),
                 ),
               ),
@@ -201,106 +214,116 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildNavigation() {
-    return Positioned(
-      bottom: 10,
-      left: 0,
-      right: 0,
-      child: AnimatedBuilder(
-        animation: _scrollController,
-        builder: (context, child) {
-          return AnimatedContainer(
-            height: (_scrollController.position.userScrollDirection ==
-                    ScrollDirection.reverse)
-                ? 0
-                : 65,
-            child: child,
-            duration: Duration(milliseconds: 300),
-            curve: Curves.ease,
-          );
-        },
-        child: Padding(
-          padding: EdgeInsets.only(bottom: 10, left: 10, right: 10),
-          child: Container(
-            height: 55,
-            decoration: BoxDecoration(
-              color: AppTheme.blueColor,
-              borderRadius: BorderRadius.circular(35),
-              boxShadow: [
-                // Top Shadow
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.01),
-                  blurRadius: 5,
-                  offset: Offset(0, -5),
-                ),
+    return BlocListener<UserIdentityBloc, UserIdentityState>(
+      bloc: _userIdentityBloc,
+      listener: (context, state) {
+        if (state is UserIdentitySuccess) {
+          setState(() {
+            userIdentity = state.userResponse.user;
+          });
+        }
+      },
+      child: Positioned(
+        bottom: 10,
+        left: 0,
+        right: 0,
+        child: AnimatedBuilder(
+          animation: _scrollController,
+          builder: (context, child) {
+            return AnimatedContainer(
+              height: (_scrollController.position.userScrollDirection ==
+                      ScrollDirection.reverse)
+                  ? 0
+                  : 65,
+              child: child,
+              duration: Duration(milliseconds: 300),
+              curve: Curves.ease,
+            );
+          },
+          child: Padding(
+            padding: EdgeInsets.only(bottom: 10, left: 10, right: 10),
+            child: Container(
+              height: 55,
+              decoration: BoxDecoration(
+                color: AppTheme.blueColor,
+                borderRadius: BorderRadius.circular(35),
+                boxShadow: [
+                  // Top Shadow
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.01),
+                    blurRadius: 5,
+                    offset: Offset(0, -5),
+                  ),
 
-                // Botom shadoow
-                BoxShadow(
-                  color: Colors.black12.withOpacity(0.05),
-                  blurRadius: 5,
-                  offset: Offset(0, 5),
-                ),
-              ],
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                StreamBuilder<List<LocalArticle>>(
-                  stream: _localArticleBloc.subject,
-                  builder: (context, snapshot) {
-                    return _buildNavigationItem(
-                      icon: Icons.shopping_basket_outlined,
-                      context: context,
-                      // onTap: () => Navigator.of(context).pushNamed(
-                      //   Payment,
-                      //   arguments: snapshot.data,
-                      // ),
-                      onTap: () => Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) => PaymentPage(
-                            userData: widget.user,
+                  // Botom shadoow
+                  BoxShadow(
+                    color: Colors.black12.withOpacity(0.05),
+                    blurRadius: 5,
+                    offset: Offset(0, 5),
+                  ),
+                ],
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  StreamBuilder<List<LocalArticle>>(
+                    stream: _localArticleBloc.subject,
+                    builder: (context, snapshot) {
+                      return _buildNavigationItem(
+                        icon: Icons.shopping_basket_outlined,
+                        context: context,
+                        // onTap: () => Navigator.of(context).pushNamed(
+                        //   Payment,
+                        //   arguments: snapshot.data,
+                        // ),
+                        onTap: () => Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => PaymentPage(
+                              userData: widget.user,
+                            ),
                           ),
                         ),
-                      ),
-                    );
-                  },
-                ),
-                _buildNavigationItem(
-                  icon: Icons.search,
-                  context: context,
-                  onTap: () {
-                    setState(() {
-                      showSearchbar = !showSearchbar;
-                    });
-                  },
-                ),
-                _buildNavigationItem(
-                  icon: Icons.favorite,
-                  context: context,
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => FavoritePage(),
-                      ),
-                    );
-                  },
-                ),
-                _buildNavigationItem(
-                  icon: Icons.refresh,
-                  context: context,
-                  onTap: () {
-                    _listArticleBloc.getArticles();
-                    Fluttertoast.showToast(
-                      msg: "Donnees rafraichies",
-                      gravity: ToastGravity.TOP,
-                      backgroundColor: Colors.black.withOpacity(0.6),
-                    );
-                  },
-                ),
-                _buildNavigationItem(
-                  icon: Icons.exit_to_app,
-                  context: context,
-                ),
-              ],
+                      );
+                    },
+                  ),
+                  _buildNavigationItem(
+                    icon: Icons.search,
+                    context: context,
+                    onTap: () {
+                      setState(() {
+                        showSearchbar = !showSearchbar;
+                      });
+                    },
+                  ),
+                  _buildNavigationItem(
+                    icon: Icons.favorite,
+                    context: context,
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => FavoritePage(),
+                        ),
+                      );
+                    },
+                  ),
+                  _buildNavigationItem(
+                    icon: Icons.refresh,
+                    context: context,
+                    onTap: () {
+                      _listArticleBloc.getArticles();
+                      Fluttertoast.showToast(
+                        msg: "Donnees rafraichies",
+                        gravity: ToastGravity.TOP,
+                        backgroundColor: Colors.black.withOpacity(0.6),
+                      );
+                    },
+                  ),
+                  _buildNavigationItem(
+                    icon: Icons.exit_to_app,
+                    context: context,
+                  ),
+                ],
+              ),
             ),
           ),
         ),
