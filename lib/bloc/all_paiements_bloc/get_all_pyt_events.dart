@@ -9,4 +9,4 @@ abstract class GetAllPaiementsEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class LoadGetAllPaiements extends GetAllPaiementsEvent {}
+class LoadAllPaiements extends GetAllPaiementsEvent {}
