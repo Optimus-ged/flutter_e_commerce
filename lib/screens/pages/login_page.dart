@@ -63,7 +63,10 @@ class _LoginPageState extends State<LoginPage> {
             );
             if (state.login.user.nom == 'Admin') {
               Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => AdminHomepage()));
+                MaterialPageRoute(
+                  builder: (context) => AdminHomepage(),
+                ),
+              );
             } else {
               Navigator.of(context).pushReplacementNamed(
                 Home,
