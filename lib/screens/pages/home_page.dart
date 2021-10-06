@@ -2,6 +2,7 @@ import 'package:e_commerce/bloc/article_bloc/favorite_article_bloc.dart';
 import 'package:e_commerce/exports/all_exports.dart';
 import 'package:e_commerce/routes/routes_constants.dart';
 import 'package:e_commerce/screens/pages/favorite_page.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class HomePage extends StatefulWidget {
   final User user;
@@ -284,12 +285,16 @@ class _HomePageState extends State<HomePage> {
                   },
                 ),
                 _buildNavigationItem(
-                  icon: Icons.account_circle,
+                  icon: Icons.refresh,
                   context: context,
-                  onTap: () => Navigator.of(context).pushNamed(
-                    Profile,
-                    arguments: widget.user,
-                  ),
+                  onTap: () {
+                    _listArticleBloc.getArticles();
+                    Fluttertoast.showToast(
+                      msg: "Donnees rafraichies",
+                      gravity: ToastGravity.TOP,
+                      backgroundColor: Colors.black.withOpacity(0.6),
+                    );
+                  },
                 ),
                 _buildNavigationItem(
                   icon: Icons.exit_to_app,

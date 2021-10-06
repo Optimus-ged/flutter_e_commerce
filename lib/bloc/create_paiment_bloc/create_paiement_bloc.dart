@@ -4,13 +4,14 @@ import 'package:e_commerce/data/repository/provider.dart';
 import 'package:e_commerce/utils/setup_locator.dart';
 import 'create_paiement_state.dart';
 
-
-class CreatePaiementBloc extends Bloc<CreatePaiementEvent, CreatePaiementState> {
+class CreatePaiementBloc
+    extends Bloc<CreatePaiementEvent, CreatePaiementState> {
   get _api => locator.get<Provider>();
   CreatePaiementBloc() : super(CreatePaiementInitial());
 
   @override
-  Stream<CreatePaiementState> mapEventToState(CreatePaiementEvent event) async* {
+  Stream<CreatePaiementState> mapEventToState(
+      CreatePaiementEvent event) async* {
     if (event is CreatePaiementButtonPressed)
       yield* _mapCreatePaiementButtonPressedToState(event);
   }
@@ -23,7 +24,7 @@ class CreatePaiementBloc extends Bloc<CreatePaiementEvent, CreatePaiementState> 
       if (paiement.status == 200) {
         yield CreatePaiementSuccess(paiementResponse: paiement);
       } else {
-        yield CreatePaiementFailure(message: paiement.message);
+        yield CreatePaiementFailure(message: 'paiement non effectue');
         return;
       }
     } catch (error, stackTrace) {

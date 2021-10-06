@@ -1,9 +1,11 @@
 import 'package:e_commerce/bloc/create_paiment_bloc/create_paiement_bloc.dart';
 import 'package:e_commerce/bloc/create_paiment_bloc/create_paiement_event.dart';
+import 'package:e_commerce/bloc/create_paiment_bloc/create_paiement_state.dart';
 import 'package:e_commerce/exports/all_exports.dart';
 import 'package:e_commerce/model/paiement/create_paiement.dart';
 import 'package:e_commerce/screens/widgets/dimissable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class PaymentPage extends StatefulWidget {
   final User userData;
@@ -15,6 +17,7 @@ class PaymentPage extends StatefulWidget {
 
 class _PaymentPageState extends State<PaymentPage> {
   CreatePaiementBloc _createPaiementBloc;
+  bool isProcessing = false;
   double totalPayment;
   get _localArticleBloc => locator.get<LocalArticleBloc>();
 
@@ -336,71 +339,107 @@ class _PaymentPageState extends State<PaymentPage> {
 
   // Building Payment showdialog
   Widget _paymentDialog(List<LocalArticle> data) {
-    return Padding(
-      padding: EdgeInsets.only(
-        top: 100,
-        bottom: 200,
-        left: 20,
-        right: 20,
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(5),
-        child: Container(
-          height: 200,
-          width: 200,
-          decoration: BoxDecoration(
-            color: Colors.grey[50],
-            borderRadius: BorderRadiusDirectional.circular(5),
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: Text(
-                  'Voulez vous vraiment effectuer ce\npaiement ?',
-                  style: TextStyle(
-                    color: Colors.grey[500],
-                    fontWeight: FontWeight.w500,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              Expanded(
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(
-                        20,
-                      ),
+    return BlocListener<CreatePaiementBloc, CreatePaiementState>(
+      bloc: _createPaiementBloc,
+      listener: (context, state) {
+        if (state is CreatePaiementInProgress) {
+          print('AAAAAAAAAAAAAAAAAAAAAAAAAA');
+          setState(() {
+            isProcessing = true;
+            totalPayment = 0.0;
+          });
+        }
+        if (state is CreatePaiementFailure) {
+          setState(() {
+            isProcessing = false;
+            totalPayment = 0.0;
+          });
+          Fluttertoast.showToast(
+            msg: "${state.message}",
+            backgroundColor: Colors.black.withOpacity(0.6),
+          );
+        }
+        if (state is CreatePaiementSuccess) {
+          setState(() {
+            isProcessing = false;
+            totalPayment = 0.0;
+          });
+          Fluttertoast.showToast(
+            gravity: ToastGravity.TOP,
+            msg: "${state.paiementResponse.message}",
+            backgroundColor: Colors.black.withOpacity(0.6),
+          );
+          Navigator.of(context).pop();
+        }
+      },
+      child: Padding(
+        padding: EdgeInsets.only(
+          top: 100,
+          bottom: 200,
+          left: 20,
+          right: 20,
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(5),
+          child: Container(
+            height: 200,
+            width: 200,
+            decoration: BoxDecoration(
+              color: Colors.grey[50],
+              borderRadius: BorderRadiusDirectional.circular(5),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: Text(
+                    'Voulez vous vraiment effectuer ce\npaiement ?',
+                    style: TextStyle(
+                      color: Colors.grey[500],
+                      fontWeight: FontWeight.w500,
                     ),
+                    textAlign: TextAlign.center,
                   ),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: [
-                      Spacer(),
-                      Container(
-                        alignment: Alignment.center,
-                        width: double.infinity,
-                        child: Text(
-                          'Total a Payer : $totalPayment\$',
+                ),
+                Expanded(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(
+                          20,
                         ),
                       ),
-                      Spacer(),
-                      CustomButton(
-                        title: "Confirmer",
-                        onTap: () {
-                          _onPaiementButtonPressed(dataArticle: data);
-                          // Navigator.of(context).pop();
-                        },
-                      ),
-                      SizedBox(height: 20)
-                    ],
+                    ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.max,
+                      children: [
+                        Spacer(),
+                        Container(
+                          alignment: Alignment.center,
+                          width: double.infinity,
+                          child: Text(
+                            'Total a Payer : $totalPayment\$',
+                          ),
+                        ),
+                        Spacer(),
+                        !isProcessing
+                            ? CustomButton(
+                                title: "Confirmer",
+                                onTap: () {
+                                  _onPaiementButtonPressed(dataArticle: data);
+                                  //
+                                },
+                              )
+                            : CircularProgressIndicator(),
+                        SizedBox(height: 20)
+                      ],
+                    ),
                   ),
-                ),
-              )
-            ],
+                )
+              ],
+            ),
           ),
         ),
       ),
@@ -520,6 +559,10 @@ class _PaymentPageState extends State<PaymentPage> {
       dataList: dataList,
     );
 
-    _createPaiementBloc.add(CreatePaiementButtonPressed(paiementData: data));
+    _createPaiementBloc.add(
+      CreatePaiementButtonPressed(
+        paiementData: data,
+      ),
+    );
   }
 }
