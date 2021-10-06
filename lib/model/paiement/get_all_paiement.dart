@@ -56,7 +56,7 @@ class Response {
     updatedAt = json['updatedAt'];
     user = json['user'] != null ? new User.fromJson(json['user']) : null;
     if (json['details_paiements'] != null) {
-      detailsPaiements = new List<DetailsPaiements>();
+      detailsPaiements = <DetailsPaiements>[];
       json['details_paiements'].forEach((v) {
         detailsPaiements.add(new DetailsPaiements.fromJson(v));
       });
@@ -157,7 +157,7 @@ class Article {
     pu = json['pu'];
     aPropos = json['a_propos'];
     if (json['photo_articles'] != null) {
-      photoArticles = new List<PhotoArticles>();
+      photoArticles = <PhotoArticles>[];
       json['photo_articles'].forEach((v) {
         photoArticles.add(new PhotoArticles.fromJson(v));
       });
