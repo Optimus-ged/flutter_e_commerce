@@ -5,12 +5,14 @@ import 'package:e_commerce/model/paiement/get_all_paiement.dart';
 import 'package:e_commerce/utils/setup_locator.dart';
 import 'get_all_pyt_state.dart';
 
-class GetAllPaiementsBloc extends Bloc<GetAllPaiementsEvent, GetAllPaimentsState> {
+class GetAllPaiementsBloc
+    extends Bloc<GetAllPaiementsEvent, GetAllPaimentsState> {
   get _api => locator.get<Provider>();
   GetAllPaiementsBloc() : super(GetAllPaimentsInitial());
 
   @override
-  Stream<GetAllPaimentsState> mapEventToState(GetAllPaiementsEvent event) async* {
+  Stream<GetAllPaimentsState> mapEventToState(
+      GetAllPaiementsEvent event) async* {
     if (event is LoadAllPaiements)
       yield* _mapGetAllPaiementsButtonPressedToState(event);
   }
@@ -19,7 +21,7 @@ class GetAllPaiementsBloc extends Bloc<GetAllPaiementsEvent, GetAllPaimentsState
       LoadAllPaiements event) async* {
     try {
       yield GetAllPaimentsInProgress();
-      AllPaiementsResponse getAllPaiements = await _api.getOneUser(event.userId);
+      AllPaiementsResponse getAllPaiements = await _api.getAllPaiements();
       if (getAllPaiements.status == 200) {
         yield GetAllPaimentsSuccess(allPaiementsResponse: getAllPaiements);
       } else {
