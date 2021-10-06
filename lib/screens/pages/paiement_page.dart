@@ -12,13 +12,37 @@ class AllPaiementsPage extends StatefulWidget {
 
 class _AllPaiementsPageState extends State<AllPaiementsPage> {
   get _allPaiements => locator.get<GetPaiementsBloc>();
+  var _searchController = TextEditingController();
   List<Response> _allPaiementsList = [];
-  List<Widget> _allPaiementsListWidgets = [];
+  List<Widget> allPaiementsListWidgets = [];
 
   @override
   void initState() {
     _allPaiements.getAllPaiemenst();
     super.initState();
+  }
+
+  _filterList(List<Response> allPaiementsList) {
+    allPaiementsList = [];
+    allPaiementsList.addAll(_allPaiementsList);
+    allPaiementsListWidgets = [];
+    if (_searchController.text.isNotEmpty) {
+      allPaiementsList.retainWhere(
+        (e) {
+          return e.user.nom.toUpperCase().contains(
+                _searchController.text.toUpperCase(),
+              );
+        },
+      );
+    }
+
+    allPaiementsList.forEach(
+      (e) {
+        allPaiementsListWidgets.add(
+          _buildListItem(e),
+        );
+      },
+    );
   }
 
   @override
@@ -59,33 +83,40 @@ class _AllPaiementsPageState extends State<AllPaiementsPage> {
               ),
             ),
             StreamBuilder<AllPaiementsResponse>(
-                stream: _allPaiements.stream,
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    _allPaiementsList.addAll(snapshot.data.response);
-                    return Container(
-                      child: ListView.builder(
-                        primary: false,
-                        shrinkWrap: true,
-                        itemCount: snapshot.data.response.length,
-                        itemBuilder: (context, index) => _buildListItem(),
-                      ),
-                    );
-                  }
-                  return Center(child: CircularProgressIndicator());
-                })
+              stream: _allPaiements.stream,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  _allPaiementsList.clear();
+                  _allPaiementsList.addAll(snapshot.data.response);
+                  _filterList(snapshot.data.response);
+                  return Container(
+                    color: Colors.black,
+                    child: ListView.builder(
+                      padding: EdgeInsets.all(0),
+                      primary: false,
+                      shrinkWrap: true,
+                      itemCount: allPaiementsListWidgets.length,
+                      itemBuilder: (context, index) =>
+                          allPaiementsListWidgets[index],
+                    ),
+                  );
+                }
+                return Center(child: CircularProgressIndicator());
+              },
+            )
           ],
         ),
       ),
     );
   }
 
-  _buildListItem() {
+  _buildListItem(Response paieData) {
     return Container(
-      margin: EdgeInsets.all(20),
+      alignment: Alignment.center,
       height: 100,
       width: 100,
       color: Colors.amber,
+      child: Text('${paieData.user.nom}'),
     );
   }
 }
