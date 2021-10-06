@@ -2,7 +2,7 @@ import 'package:e_commerce/exports/all_exports.dart';
 import 'package:e_commerce/model/paiement/get_all_paiement.dart';
 import 'package:rxdart/rxdart.dart';
 
-class GetAllPaiementsBloc {
+class GetPaiementsBloc {
   //BehaviorSubject<AllPaiementsResponse>
   final _subject = BehaviorSubject<AllPaiementsResponse>();
   get stream => _subject.stream;

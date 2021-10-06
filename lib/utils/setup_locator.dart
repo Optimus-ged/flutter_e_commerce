@@ -1,5 +1,5 @@
-import 'package:e_commerce/bloc/all_paiements_bloc/get_all_pyt_bloc.dart';
 import 'package:e_commerce/bloc/article_bloc/favorite_article_bloc.dart';
+import 'package:e_commerce/bloc/paiemenst_bloc/all_paiements.dart';
 import 'package:e_commerce/exports/all_exports.dart';
 
 final locator = GetIt.I;
@@ -11,7 +11,7 @@ void setup() async {
 
   // All module instances
   locator.registerLazySingleton<ListeArticleBloc>(() => ListeArticleBloc());
-  locator.registerLazySingleton<GetAllPaiementsBloc>(() => GetAllPaiementsBloc());
+  locator.registerLazySingleton<GetPaiementsBloc>(() => GetPaiementsBloc());
   locator.registerLazySingleton<LocalArticleBloc>(() => LocalArticleBloc());
   locator
       .registerLazySingleton<FavoriteArticleBloc>(() => FavoriteArticleBloc());
