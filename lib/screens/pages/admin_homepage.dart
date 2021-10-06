@@ -231,11 +231,15 @@ class _AdminHomepageState extends State<AdminHomepage> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               ClickAnimation(
-                onTap: () => Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => AllPaiementsPage(),
-                  ),
-                ),
+                onTap: () {
+                  Navigator.of(context).pop();
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => AllPaiementsPage(),
+                    ),
+                  );
+                  //
+                },
                 child: Container(
                   child: Text('Menu'),
                 ),
