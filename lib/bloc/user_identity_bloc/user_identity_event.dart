@@ -9,5 +9,5 @@ abstract class UserIdentityEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class UserIdentityButtonPressed extends UserIdentityEvent {}
+class LoadUserIdentity extends UserIdentityEvent {}
 
