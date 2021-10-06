@@ -11,10 +11,3 @@ abstract class UserIdentityEvent extends Equatable {
 
 class UserIdentityButtonPressed extends UserIdentityEvent {}
 
-
-// final IdentityResponse userResponse;
-
-//   const UserIdentityButtonPressed({@required this.userResponse});
-
-//   @override
-//   List<Object> get props => [userResponse];
