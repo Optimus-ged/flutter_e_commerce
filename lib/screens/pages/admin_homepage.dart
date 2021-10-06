@@ -1,10 +1,10 @@
 import 'package:e_commerce/exercices/providers/user_provider.dart';
 import 'package:e_commerce/exports/all_exports.dart';
 import 'package:e_commerce/routes/routes_constants.dart';
+import 'package:e_commerce/screens/pages/paiement_page.dart';
 import 'package:e_commerce/screens/widgets/dimissable.dart';
 import 'package:e_commerce/utils/app_theme.dart';
 import 'package:flutter/material.dart';
-
 
 class AdminHomepage extends StatefulWidget {
   @override
@@ -107,9 +107,7 @@ class _AdminHomepageState extends State<AdminHomepage> {
                                 snapshot.data.articles[index],
                               ),
                               child: widgetList[index],
-                              onDismiss: (direction) {
-                                
-                              },
+                              onDismiss: (direction) {},
                             );
                           },
                         ),
@@ -233,7 +231,11 @@ class _AdminHomepageState extends State<AdminHomepage> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               ClickAnimation(
-                onTap: () {},
+                onTap: () => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => AllPaiementsPage(),
+                  ),
+                ),
                 child: Container(
                   child: Text('Menu'),
                 ),
