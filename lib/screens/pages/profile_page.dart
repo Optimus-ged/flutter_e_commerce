@@ -10,7 +10,7 @@ import 'package:image_picker/image_picker.dart';
 
 class ProfilePage extends StatefulWidget {
   // const ProfilePage({ Key? key }) : super(key: key);
-  final User userData;
+  final Users userData;
   ProfilePage(this.userData);
 
   @override

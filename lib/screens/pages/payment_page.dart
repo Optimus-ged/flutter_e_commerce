@@ -8,7 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class PaymentPage extends StatefulWidget {
-  final User userData;
+  final Users userData;
   PaymentPage({this.userData});
 
   @override

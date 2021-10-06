@@ -181,14 +181,14 @@ class _HomePageState extends State<HomePage> {
                   ),
                   decoration: InputDecoration.collapsed(
                     hintText:
-                        '${widget.user.nom.split(' ').first} Rechercher ici !!! ${userIdentity.nom}',
+                        '${userIdentity.nom.split(' ').first} Rechercher ici !!!',
                   ),
                 ),
               ),
               ClickAnimation(
                 onTap: () => Navigator.of(context).pushNamed(
                   Profile,
-                  arguments: widget.user,
+                  arguments: userIdentity,
                 ),
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(50),
@@ -200,7 +200,7 @@ class _HomePageState extends State<HomePage> {
                       color: Colors.transparent,
                     ),
                     child: Image.network(
-                      "${Endpoint.uplaod}${widget.user.photo}",
+                      "${Endpoint.uplaod}${userIdentity.photo}",
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -272,14 +272,10 @@ class _HomePageState extends State<HomePage> {
                       return _buildNavigationItem(
                         icon: Icons.shopping_basket_outlined,
                         context: context,
-                        // onTap: () => Navigator.of(context).pushNamed(
-                        //   Payment,
-                        //   arguments: snapshot.data,
-                        // ),
                         onTap: () => Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (context) => PaymentPage(
-                              userData: widget.user,
+                              userData: userIdentity,
                             ),
                           ),
                         ),
@@ -311,6 +307,14 @@ class _HomePageState extends State<HomePage> {
                     context: context,
                     onTap: () {
                       _listArticleBloc.getArticles();
+                      _userIdentityBloc =
+                          BlocProvider.of<UserIdentityBloc>(context)
+                            ..add(
+                              LoadUserIdentity(
+                                userId: widget.user.id,
+                              ),
+                            );
+
                       Fluttertoast.showToast(
                         msg: "Donnees rafraichies",
                         gravity: ToastGravity.TOP,

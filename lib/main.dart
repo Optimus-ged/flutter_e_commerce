@@ -4,6 +4,7 @@ import 'package:e_commerce/bloc/create_paiment_bloc/create_paiement_bloc.dart';
 import 'package:e_commerce/bloc/profile_bloc/profile_bloc.dart';
 import 'package:e_commerce/bloc/sign_bloc/signup_bloc.dart';
 import 'package:e_commerce/bloc/update_article_bloc/update_article_bloc.dart';
+import 'package:e_commerce/bloc/user_identity_bloc/user_identity_bloc.dart';
 import 'package:e_commerce/exports/all_exports.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'bloc/login_bloc/login_bloc.dart';
@@ -63,6 +64,9 @@ void main() async {
             ),
             BlocProvider<CreatePaiementBloc>(
               create: (context) => CreatePaiementBloc(),
+            ),
+            BlocProvider<UserIdentityBloc>(
+              create: (context) => UserIdentityBloc(),
             ),
           ],
           child: MyApp(),
