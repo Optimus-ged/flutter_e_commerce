@@ -9,5 +9,11 @@ abstract class UserIdentityEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class LoadUserIdentity extends UserIdentityEvent {}
+class LoadUserIdentity extends UserIdentityEvent {
+  final int userId;
 
+  const LoadUserIdentity({@required this.userId});
+
+  @override
+  List<Object> get props => [userId];
+}

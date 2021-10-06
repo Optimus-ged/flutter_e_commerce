@@ -1,10 +1,7 @@
 import 'package:bloc/bloc.dart';
-import 'package:e_commerce/bloc/UserIdentity_bloc/UserIdentity_event.dart';
-import 'package:e_commerce/bloc/UserIdentity_bloc/UserIdentity_state.dart';
 import 'package:e_commerce/bloc/user_identity_bloc/user_identity_event.dart';
 import 'package:e_commerce/bloc/user_identity_bloc/user_identity_state.dart';
 import 'package:e_commerce/data/repository/provider.dart';
-import 'package:e_commerce/model/user_model/signup_response.dart';
 import 'package:e_commerce/model/user_model/user_response.dart';
 import 'package:e_commerce/utils/setup_locator.dart';
 
@@ -22,8 +19,7 @@ class UserIdentityBloc extends Bloc<UserIdentityEvent, UserIdentityState> {
       LoadUserIdentity event) async* {
     try {
       yield UserIdentityInProgress();
-      IdentityResponse userIdentity =
-          await _api.updateUser(file: event.image, userData: event.data);
+      IdentityResponse userIdentity = await _api.getOneUser(event.userId);
       if (userIdentity.status == 200) {
         yield UserIdentitySuccess(userResponse: userIdentity);
       } else {
@@ -33,7 +29,8 @@ class UserIdentityBloc extends Bloc<UserIdentityEvent, UserIdentityState> {
     } catch (error, stackTrace) {
       yield UserIdentityFailure(message: '$error');
       print(
-          'UserIdentityBloc.MapEventToState ::: ERROR: $error, STACKTRACE: $stackTrace');
+        'UserIdentityBloc.MapEventToState ::: ERROR: $error, STACKTRACE: $stackTrace',
+      );
       return;
     }
   }

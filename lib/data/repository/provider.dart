@@ -121,7 +121,7 @@ class Provider {
     }
   }
 
-  Future<IdentityResponse> getOneUser({int userId}) async {
+  Future<IdentityResponse> getOneUser(int userId) async {
     try {
       Response response = await _dio.get(
         "/users/one/$userId",
