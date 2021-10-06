@@ -1,12 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:e_commerce/bloc/all_paiements_bloc/get_all_pyt_events.dart';
-import 'package:e_commerce/bloc/user_identity_bloc/user_identity_event.dart';
-import 'package:e_commerce/bloc/user_identity_bloc/user_identity_state.dart';
 import 'package:e_commerce/data/repository/provider.dart';
 import 'package:e_commerce/model/paiement/get_all_paiement.dart';
-import 'package:e_commerce/model/user_model/user_response.dart';
 import 'package:e_commerce/utils/setup_locator.dart';
-
 import 'get_all_pyt_state.dart';
 
 class GetAllPaiementsBloc extends Bloc<GetAllPaiementsEvent, GetAllPaimentsState> {

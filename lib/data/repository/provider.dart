@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:e_commerce/exports/all_exports.dart';
 import 'package:e_commerce/model/paiement/create_paiement.dart';
+import 'package:e_commerce/model/paiement/get_all_paiement.dart' as all;
 import 'package:e_commerce/model/user_model/signup_response.dart';
 
 class Provider {
@@ -134,6 +135,25 @@ class Provider {
         ),
       );
       return IdentityResponse.fromJson(response.data);
+    } catch (error, stacktrace) {
+      print("GetUsers error : $error, stacktrace : $stacktrace");
+      throw error;
+    }
+  }
+
+  Future<all.AllPaiementsResponse> getAllPaiements() async {
+    try {
+      Response response = await _dio.get(
+        "/paiements",
+        options: Options(
+          contentType: Headers.formUrlEncodedContentType,
+          // headers: {
+          //   "Accept": "application/json",
+          //   "Authorization": "$token",
+          // },
+        ),
+      );
+      return all.AllPaiementsResponse.fromJson(response.data);
     } catch (error, stacktrace) {
       print("GetUsers error : $error, stacktrace : $stacktrace");
       throw error;
