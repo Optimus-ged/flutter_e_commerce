@@ -121,6 +121,25 @@ class Provider {
     }
   }
 
+  Future<IdentityResponse> getOneUser({int userId}) async {
+    try {
+      Response response = await _dio.get(
+        "/users/one/$userId",
+        options: Options(
+          contentType: Headers.formUrlEncodedContentType,
+          // headers: {
+          //   "Accept": "application/json",
+          //   "Authorization": "$token",
+          // },
+        ),
+      );
+      return IdentityResponse.fromJson(response.data);
+    } catch (error, stacktrace) {
+      print("GetUsers error : $error, stacktrace : $stacktrace");
+      throw error;
+    }
+  }
+
   // Handling get request for all articles
   Future<ListeArticles> getArticles(String token) async {
     try {
