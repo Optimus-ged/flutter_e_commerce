@@ -3,17 +3,17 @@ import 'package:e_commerce/model/paiement/create_paiement.dart';
 import 'package:equatable/equatable.dart';
 
 @immutable
-abstract class CreatePaiemenrEvent extends Equatable {
-  const CreatePaiemenrEvent();
+abstract class CreatePaiementEvent extends Equatable {
+  const CreatePaiementEvent();
 
   @override
   List<Object> get props => [];
 }
 
-class CreatePaiemenButtonPressed extends CreatePaiemenrEvent {
+class CreatePaiementButtonPressed extends CreatePaiementEvent {
   final CreatePaiement paiementData;
 
-  const CreatePaiemenButtonPressed({@required this.paiementData});
+  const CreatePaiementButtonPressed({@required this.paiementData});
 
   @override
   List<Object> get props => [paiementData];
