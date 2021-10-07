@@ -59,7 +59,7 @@ class Nloginn extends StatelessWidget {
               InkWell(
                 onTap: () => Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => NHomePage(),
+                    builder: (context) => NAgentPage(),
                   ),
                 ),
                 child: Container(

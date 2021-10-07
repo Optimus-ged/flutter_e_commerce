@@ -16,7 +16,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter UI',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark().copyWith(
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        // fontFamily: AppTheme.fontName,
+        // platform: TargetPlatform.iOS,
         dividerTheme: DividerThemeData(space: 0),
       ),
       onGenerateRoute: Routes.materialRoutes,
