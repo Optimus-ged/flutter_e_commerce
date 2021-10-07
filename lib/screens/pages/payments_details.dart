@@ -70,25 +70,12 @@ class _PaymentsDetailsState extends State<PaymentsDetails> {
                   Expanded(
                     child: Container(
                       alignment: Alignment.bottomCenter,
-                      child: PageView.builder(
-                        controller: _pageviewController,
-                        itemBuilder: (context, index) => Container(
-                          alignment: Alignment.bottomCenter,
-                          child: CustomCashedImage(
-                            imageUrl:
-                                "${Endpoint.uplaod}${widget.paiementData.detailsPaiements[index].article.photoArticles[0].photoArticle}",
-                            screen: screen,
-                          ),
-                        ),
-                        itemCount: 3,
-                        onPageChanged: (value) {
-                          curentIndex = value;
-                          setState(() {});
-                        },
+                      child: _buildPageView(
+                        screen,
+                        detailsPaiements: widget.paiementData.detailsPaiements,
                       ),
                     ),
                   ),
-                  
                 ],
               ),
             ),
@@ -105,18 +92,37 @@ class _PaymentsDetailsState extends State<PaymentsDetails> {
     return Positioned(
       bottom: 0,
       child: Container(
-        height: screen.height * .45,
+        padding: EdgeInsets.only(bottom: 20, top: 10, left: 20),
         width: screen.width,
-        alignment: Alignment.bottomCenter,
-        color: AppTheme.whiteColor,
+        alignment: Alignment.bottomLeft,
         child: PageView.builder(
           controller: _pageviewController,
           itemBuilder: (context, index) => Container(
             alignment: Alignment.bottomCenter,
-            child: CustomCashedImage(
-              imageUrl:
-                  "${Endpoint.uplaod}${detailsPaiements[index].article.photoArticles[0]}",
-              screen: screen,
+            child: Row(
+              children: [
+                Container(
+                  height: screen.height * .30,
+                  width: screen.width * .40,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      colors: [
+                        AppTheme.radiantTopRight,
+                        AppTheme.radiantTop,
+                        AppTheme.radiantBotom
+                      ],
+                    ),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: CustomCashedImage(
+                    imageUrl:
+                        "${Endpoint.uplaod}${detailsPaiements[index].article.photoArticles[0].photoArticle}",
+                    screen: screen,
+                  ),
+                ),
+              ],
             ),
           ),
           itemCount: 3,
