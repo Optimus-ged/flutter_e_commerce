@@ -112,18 +112,19 @@ class _AllPaiementsPageState extends State<AllPaiementsPage> {
 
   _buildListItem(Response paieData) {
     return Container(
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       alignment: Alignment.center,
-      height: 100,
-      width: 100,
-      color: Colors.amber,
+      // height: 100,
+      // width: 100,
+      color: Colors.white,
       // child: Text('${paieData.user.nom}'),
       child: Row(
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(50),
             child: Container(
-              height: 35,
-              width: 35,
+              height: 60,
+              width: 60,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: Colors.transparent,
@@ -137,13 +138,19 @@ class _AllPaiementsPageState extends State<AllPaiementsPage> {
           SizedBox(width: 10),
           Container(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('${paieData.user.nom}'),
-                Text('${paieData.user.contact}'),
+                Text(
+                  '${paieData.user.nom.toUpperCase()}',
+                  style: TextStyle(fontWeight: FontWeight.w600),
+                ),
+                // Text('${paieData.user.contact}'),
+                Text('Achat : ${paieData.montant}\$'),
               ],
             ),
           ),
-          Text('${paieData.createdAt}'),
+          Spacer(),
+          Text('${paieData.createdAt.split(' ').last}'),
         ],
       ),
     );
