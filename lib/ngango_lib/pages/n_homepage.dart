@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class NHomePage extends StatelessWidget {
-  const NHomePage({ Key key }) : super(key: key);
+  const NHomePage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -18,13 +18,13 @@ class NHomePage extends StatelessWidget {
                   children: [
                     Positioned(
                       left: 0,
-                       child: InkWell(
-                         onTap: () => Navigator.pop(context),
-                         child: Icon(
+                      child: InkWell(
+                        onTap: () => Navigator.pop(context),
+                        child: Icon(
                           Icons.arrow_back_ios,
                           color: Colors.black45,
+                        ),
                       ),
-                       ),
                     ),
                     Center(
                       child: Text(
@@ -37,6 +37,17 @@ class NHomePage extends StatelessWidget {
                       ),
                     ),
                   ],
+                ),
+              ),
+            ),
+            ListView.builder(
+              itemCount: 5,
+              itemBuilder: (context, index) => Padding(
+                padding: const EdgeInsets.only(bottom: 5),
+                child: Container(
+                  height: 50,
+                  width: 200,
+                  color: Colors.green,
                 ),
               ),
             ),
