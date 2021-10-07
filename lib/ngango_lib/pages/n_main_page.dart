@@ -33,9 +33,49 @@ class _NMainPageState extends State<NMainPage> {
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: (){},
+        onPressed: () {},
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BottomAppBar(
+        shape: CircularNotchedRectangle(),
+        notchMargin: 10,
+        child: Container(
+          height: 60,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  MaterialButton(
+                    minWidth: 40,
+                    onPressed: () {
+                      setState(() {
+                        currentScreen = NAgentPage();
+                        currentTap = 0;
+                      });
+                    },
+                    child: Column(
+                      children: [
+                        Icon(
+                          Icons.dashboard,
+                          color: currentTap == 0 ? Colors.blue : Colors.grey,
+                        ),
+                        Text(
+                          'Agents',
+                          style: TextStyle(
+                            color: currentTap == 0 ? Colors.blue : Colors.grey,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
+      ),
     );
-    
   }
 }
