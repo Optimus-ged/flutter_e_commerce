@@ -57,14 +57,25 @@ class _PaymentsDetailsState extends State<PaymentsDetails> {
                 children: [
                   SizedBox(height: 20),
                   Padding(
-                    padding: EdgeInsets.only(left: 20, bottom: 10),
-                    child: Text(
-                      "details achat",
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white54,
-                        fontSize: 19,
-                      ),
+                    padding: EdgeInsets.only(left: 20, right: 20, bottom: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "details achat",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white54,
+                            fontSize: 19,
+                          ),
+                        ),
+                        Text(
+                          '${widget.paiementData.createdAt.split(' ').first}',
+                          style: TextStyle(
+                            color: Colors.white54,
+                          ),
+                        )
+                      ],
                     ),
                   ),
                   Expanded(
@@ -122,6 +133,53 @@ class _PaymentsDetailsState extends State<PaymentsDetails> {
                     screen: screen,
                   ),
                 ),
+                SizedBox(width: 10),
+                Container(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      _richtextItem(
+                        'designation',
+                        detailsPaiements[index].article.designation,
+                      ),
+                      _richtextItem(
+                        'pu',
+                        detailsPaiements[index].article.pu,
+                        isPu: true,
+                      ),
+                      _richtextItem(
+                        'pt',
+                        detailsPaiements[index].article.pu *
+                            detailsPaiements[index].qteAchete,
+                        isPu: true,
+                      ),
+                      SizedBox(
+                        width: screen.width / 2,
+                        child: Text(
+                          'monsieur ${widget.paiementData.user.nom} a acheté ${widget.paiementData.detailsPaiements[index].qteAchete} ${widget.paiementData.detailsPaiements[index].article.designation}',
+                          style: TextStyle(color: Colors.white54, fontSize: 12),
+                        ),
+                      )
+                      // RichText(
+                      //   text: TextSpan(
+                      //     text: 'designation : \n',
+                      //     style: TextStyle(
+                      //       color: Colors.white,
+                      //     ),
+                      //     children: [
+                      //       TextSpan(
+                      //         text:
+                      //             '${detailsPaiements[index].article.designation}',
+                      //         style: TextStyle(
+                      //             color: Colors.white54, fontSize: 12),
+                      //       )
+                      //     ],
+                      //   ),
+                      // )
+                    ],
+                  ),
+                )
               ],
             ),
           ),
@@ -130,6 +188,26 @@ class _PaymentsDetailsState extends State<PaymentsDetails> {
             curentIndex = value;
             setState(() {});
           },
+        ),
+      ),
+    );
+  }
+
+  _richtextItem(title, subTitle, {bool isPu = false}) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10),
+      child: RichText(
+        text: TextSpan(
+          text: '$title : \n',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+          children: [
+            TextSpan(
+              text: isPu ? '$subTitle\$' : '$subTitle',
+              style: TextStyle(color: Colors.white54, fontSize: 12),
+            )
+          ],
         ),
       ),
     );
