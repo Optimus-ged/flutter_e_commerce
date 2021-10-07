@@ -3,6 +3,8 @@ import 'package:e_commerce/exports/all_exports.dart';
 import 'package:e_commerce/model/paiement/get_all_paiement.dart';
 import 'package:flutter/material.dart';
 
+import 'payments_details.dart';
+
 class AllPaiementsPage extends StatefulWidget {
   const AllPaiementsPage({Key key}) : super(key: key);
 
@@ -111,47 +113,54 @@ class _AllPaiementsPageState extends State<AllPaiementsPage> {
   }
 
   _buildListItem(Response paieData) {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-      alignment: Alignment.center,
-      // height: 100,
-      // width: 100,
-      color: Colors.white,
-      // child: Text('${paieData.user.nom}'),
-      child: Row(
-        children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(50),
-            child: Container(
-              height: 60,
-              width: 60,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.transparent,
-              ),
-              child: Image.network(
-                "${Endpoint.uplaod}${paieData.user.photo}",
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          SizedBox(width: 10),
-          Container(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  '${paieData.user.nom.toUpperCase()}',
-                  style: TextStyle(fontWeight: FontWeight.w600),
+    return InkWell(
+      onTap: () => Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => PaymentsDetails(),
+        ),
+      ),
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        alignment: Alignment.center,
+        // height: 100,
+        // width: 100,
+        color: Colors.white,
+        // child: Text('${paieData.user.nom}'),
+        child: Row(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(50),
+              child: Container(
+                height: 60,
+                width: 60,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.transparent,
                 ),
-                // Text('${paieData.user.contact}'),
-                Text('Achat : ${paieData.montant}\$'),
-              ],
+                child: Image.network(
+                  "${Endpoint.uplaod}${paieData.user.photo}",
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
-          ),
-          Spacer(),
-          Text('${paieData.createdAt.split(' ').last}'),
-        ],
+            SizedBox(width: 10),
+            Container(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '${paieData.user.nom.toUpperCase()}',
+                    style: TextStyle(fontWeight: FontWeight.w600),
+                  ),
+                  // Text('${paieData.user.contact}'),
+                  Text('Achat : ${paieData.montant}\$'),
+                ],
+              ),
+            ),
+            Spacer(),
+            Text('${paieData.createdAt.split(' ').last}'),
+          ],
+        ),
       ),
     );
   }

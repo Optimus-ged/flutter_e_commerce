@@ -1,3 +1,4 @@
+import 'package:e_commerce/exports/all_exports.dart';
 import 'package:e_commerce/utils/app_theme.dart';
 import 'package:flutter/material.dart';
 
@@ -17,9 +18,7 @@ class PaymentsDetails extends StatelessWidget {
               width: screen.width,
               child: Stack(
                 children: [
-                  // _buildPageView(screen, data: widget.data.photoArticles),
-                  // PageviewIndicator(curentIndex),
-                  // BackwardButton(color: AppTheme.blueColor),
+                  BackwardButton(color: AppTheme.blueColor),
                 ],
               ),
             ),
@@ -57,39 +56,6 @@ class PaymentsDetails extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          // _buildChoice(
-                          //   color: AppTheme.lessPinkColor,
-                          //   isCliked: choice1,
-                          //   onTap: () {
-                          //     setState(() {
-                          //       choice1 = true;
-                          //       choice2 = false;
-                          //       choice3 = false;
-                          //     });
-                          //   },
-                          // ),
-                          // _buildChoice(
-                          //   color: AppTheme.yellowColor,
-                          //   isCliked: choice2,
-                          //   onTap: () {
-                          //     setState(() {
-                          //       choice2 = true;
-                          //       choice1 = false;
-                          //       choice3 = false;
-                          //     });
-                          //   },
-                          // ),
-                          // _buildChoice(
-                          //   color: AppTheme.pinkColor,
-                          //   isCliked: choice3,
-                          //   onTap: () {
-                          //     setState(() {
-                          //       choice3 = true;
-                          //       choice1 = false;
-                          //       choice2 = false;
-                          //     });
-                          //   },
-                          // )
                         ],
                       ),
                     ),
@@ -126,48 +92,11 @@ class PaymentsDetails extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 10),
-                  // Center(
-                  //   child: CustomButton(
-                  //     onTap: () {
-                  //       _addToChart(widget.data);
-                  //     },
-                  //     icon: Icon(
-                  //       Icons.shopping_cart_outlined,
-                  //       color: AppTheme.whiteColor,
-                  //     ),
-                  //   ),
-                  // ),
                   SizedBox(height: 20)
                 ],
               ),
             ),
           ),
-          // Positioned(
-          //   bottom: screen.height * .52,
-          //   right: 50,
-          //   child: Material(
-          //     elevation: 10,
-          //     color: Colors.transparent,
-          //     borderRadius: BorderRadius.circular(10),
-          //     child: ClickAnimation(
-          //       onTap: () {
-          //         _addFavorite(widget.data);
-          //       },
-          //       child: Container(
-          //         height: 50,
-          //         width: 45,
-          //         decoration: BoxDecoration(
-          //           color: AppTheme.pinkColor,
-          //           borderRadius: BorderRadius.circular(10),
-          //         ),
-          //         child: Icon(
-          //           Icons.favorite,
-          //           color: Colors.white,
-          //         ),
-          //       ),
-          //     ),
-          //   ),
-          // ),
         ],
       ),
     );
