@@ -116,7 +116,28 @@ class _AllPaiementsPageState extends State<AllPaiementsPage> {
       height: 100,
       width: 100,
       color: Colors.amber,
-      child: Text('${paieData.user.nom}'),
+      // child: Text('${paieData.user.nom}'),
+      child: Row(
+        children: [
+           ClipRRect(
+             
+            borderRadius: BorderRadius.circular(50),
+            child: Container(
+              
+              height: 35,
+              width: 35,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.transparent,
+              ),
+              child: Image.network(
+                "${Endpoint.uplaod}${paieData.user.photo}",
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
