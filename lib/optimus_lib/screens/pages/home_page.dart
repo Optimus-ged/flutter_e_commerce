@@ -5,7 +5,6 @@ import 'package:e_commerce/optimus_lib/bloc/user_identity_bloc/user_identity_sta
 import 'package:e_commerce/optimus_lib/exports/all_exports.dart';
 import 'package:e_commerce/optimus_lib/screens/pages/favorite_page.dart';
 
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -326,6 +325,11 @@ class _HomePageState extends State<HomePage> {
                   _buildNavigationItem(
                     icon: Icons.exit_to_app,
                     context: context,
+                    onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => LoginPage(),
+                      ),
+                    ),
                   ),
                 ],
               ),

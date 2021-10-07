@@ -247,13 +247,42 @@ class _AdminHomepageState extends State<AdminHomepage> {
                   //
                 },
                 child: Container(
-                  child: Text('Paiements'),
+                  alignment: Alignment.bottomCenter,
+                  padding: EdgeInsets.only(bottom: 10, top: 20),
+                  child: Column(
+                    children: [
+                      Icon(
+                        Icons.payments,
+                        size: 45,
+                      ),
+                      Text('paiements')
+                    ],
+                  ),
                 ),
               ),
               ClickAnimation(
-                onTap: () {},
+                onTap: () {
+                  // Navigator.of(context).pop();
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => LoginPage(),
+                    ),
+                  );
+                },
                 child: Container(
-                  child: Text('Menu'),
+                  child: Container(
+                    alignment: Alignment.bottomCenter,
+                    padding: EdgeInsets.only(bottom: 10, top: 20),
+                    child: Column(
+                      children: [
+                        Icon(
+                          Icons.exit_to_app,
+                          size: 45,
+                        ),
+                        Text('quitter')
+                      ],
+                    ),
+                  ),
                 ),
               )
             ],
