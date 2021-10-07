@@ -1,7 +1,5 @@
 import 'package:e_commerce/ngango_lib/pages/n_loginn.dart';
 import 'package:e_commerce/optimus_lib/routes/routes.dart';
-import 'package:e_commerce/optimus_lib/screens/pages/login_page.dart';
-import 'package:e_commerce/optimus_lib/utils/app_theme.dart';
 import 'exports/all_exports.dart';
 
 class MyApp extends StatelessWidget {
@@ -18,14 +16,25 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter UI',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        fontFamily: AppTheme.fontName,
+      theme: ThemeData.dark().copyWith(
+        
         platform: TargetPlatform.iOS,
         dividerTheme: DividerThemeData(space: 0),
       ),
       onGenerateRoute: Routes.materialRoutes,
       home: Nloginn(),
     );
+    // return MaterialApp(
+    //   title: 'Flutter UI',
+    //   debugShowCheckedModeBanner: false,
+    //   theme: ThemeData.dark(
+    //     primarySwatch: Colors.blue,
+    //     fontFamily: AppTheme.fontName,
+    //     platform: TargetPlatform.iOS,
+    //     dividerTheme: DividerThemeData(space: 0),
+    //   ),
+    //   onGenerateRoute: Routes.materialRoutes,
+    //   home: Nloginn(),
+    // );
   }
 }
