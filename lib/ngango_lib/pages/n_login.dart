@@ -1,3 +1,4 @@
+import 'package:e_commerce/ngango_lib/pages/n_homepage.dart';
 import 'package:flutter/material.dart';
 
 class Nloginn extends StatelessWidget {
@@ -56,13 +57,23 @@ class Nloginn extends StatelessWidget {
               ),
               SizedBox(height: 20),
               InkWell(
+                onTap: () => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => NHomePage(),
+                  ),
+                ),
                 child: Container(
                   padding: EdgeInsets.symmetric(vertical: 15, horizontal: 40),
                   decoration: BoxDecoration(
                     color: Color(0xffAA000A),
                     borderRadius: BorderRadius.circular(30),
                   ),
-                  child: Text('Connection', style: TextStyle(color: Colors.white,),),
+                  child: Text(
+                    'Connection',
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
               )
             ],

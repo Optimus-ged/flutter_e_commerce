@@ -39,26 +39,28 @@ class NHomePage extends StatelessWidget {
                 ),
               ),
             ),
-            ListView.builder(
-              itemCount: 5,
-              itemBuilder: (context, index) => Padding(
-                padding: const EdgeInsets.only(bottom: 5),
-                child: Container(
-                  color: Colors.green,
-                  child: Row(
-                    children: [
-                      Container(
-                        height: 60,
-                        width: 60,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle
+            Expanded(
+              child: ListView.builder(
+                itemCount: 5,
+                itemBuilder: (context, index) => Padding(
+                  padding: const EdgeInsets.only(bottom: 5),
+                  child: Container(
+                    color: Colors.green,
+                    child: Row(
+                      children: [
+                        Container(
+                          height: 60,
+                          width: 60,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle
+                          ),
+                          // child: Image.network(src),
                         ),
-                        // child: Image.network(src),
-                      ),
-                      SizedBox(width: 10,),
-                      Text('nom postnom'),
-                      Text('telephone')
-                    ],
+                        SizedBox(width: 10,),
+                        Text('nom postnom'),
+                        Text('telephone')
+                      ],
+                    ),
                   ),
                 ),
               ),
