@@ -42,6 +42,7 @@ class Nloginn extends StatelessWidget {
                   children: [
                     Container(
                       child: TextField(
+                        obscureText: true,
                         textAlign: TextAlign.center,
                         decoration: InputDecoration.collapsed(
                           hintText: 'mot de passe',
