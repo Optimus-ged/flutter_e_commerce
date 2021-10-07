@@ -1,4 +1,4 @@
-import 'package:e_commerce/ngango_lib/pages/n_homepage.dart';
+import 'package:e_commerce/ngango_lib/pages/n_agent_page.dart';
 import 'package:flutter/material.dart';
 
 class Nloginn extends StatelessWidget {
@@ -78,6 +78,26 @@ class Nloginn extends StatelessWidget {
               )
             ],
           ),
+        ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        shape: CircularNotchedRectangle(),
+        notchMargin: 10,
+        child: Container(
+          height: 60,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                MaterialButton(
+                  minWidth: 40,
+                  onPressed: (){}),
+              ],
+            )
+          ],
+        ),
         ),
       ),
     );
