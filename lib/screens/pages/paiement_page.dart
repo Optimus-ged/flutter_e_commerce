@@ -119,10 +119,9 @@ class _AllPaiementsPageState extends State<AllPaiementsPage> {
       // child: Text('${paieData.user.nom}'),
       child: Row(
         children: [
-           ClipRRect(
+          ClipRRect(
             borderRadius: BorderRadius.circular(50),
             child: Container(
-              
               height: 35,
               width: 35,
               decoration: BoxDecoration(
@@ -143,7 +142,8 @@ class _AllPaiementsPageState extends State<AllPaiementsPage> {
                 Text('${paieData.user.contact}'),
               ],
             ),
-          )
+          ),
+          Text('${paieData.createdAt}'),
         ],
       ),
     );
