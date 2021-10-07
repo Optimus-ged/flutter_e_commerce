@@ -1,4 +1,5 @@
 import 'package:e_commerce/ngango_lib/pages/n_agent_page.dart';
+import 'package:e_commerce/ngango_lib/pages/n_main_page.dart';
 import 'package:flutter/material.dart';
 
 class Nloginn extends StatelessWidget {
@@ -59,7 +60,7 @@ class Nloginn extends StatelessWidget {
               InkWell(
                 onTap: () => Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (context) => NAgentPage(),
+                    builder: (context) => NMainPage(),
                   ),
                 ),
                 child: Container(

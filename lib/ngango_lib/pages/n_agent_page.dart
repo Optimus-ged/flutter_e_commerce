@@ -6,6 +6,7 @@ class NAgentPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Container(
         child: Column(
           children: [
@@ -43,7 +44,7 @@ class NAgentPage extends StatelessWidget {
             Expanded(
               child: ListView.builder(
                 padding: EdgeInsets.all(0),
-                itemCount: 5,
+                itemCount: 20,
                 itemBuilder: (context, index) => Padding(
                   padding: const EdgeInsets.only(bottom: 5),
                   child: Container(

@@ -43,7 +43,7 @@ class NPaiementPage extends StatelessWidget {
             Expanded(
               child: ListView.builder(
                 padding: EdgeInsets.all(0),
-                itemCount: 5,
+                itemCount: 3,
                 itemBuilder: (context, index) => Padding(
                   padding: const EdgeInsets.only(bottom: 5),
                   child: Container(

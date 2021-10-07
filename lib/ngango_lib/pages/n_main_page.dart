@@ -27,6 +27,7 @@ class _NMainPageState extends State<NMainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       body: PageStorage(
         bucket: bucket,
         child: currentScreen,
@@ -38,9 +39,11 @@ class _NMainPageState extends State<NMainPage> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
         shape: CircularNotchedRectangle(),
+        elevation: 0,
         notchMargin: 10,
         child: Container(
-          height: 60,
+          height: 100,
+          padding: EdgeInsets.only(top: 10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -65,6 +68,80 @@ class _NMainPageState extends State<NMainPage> {
                           'Agents',
                           style: TextStyle(
                             color: currentTap == 0 ? Colors.blue : Colors.grey,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  MaterialButton(
+                    minWidth: 40,
+                    onPressed: () {
+                      setState(() {
+                        currentScreen = NClientPage();
+                        currentTap = 1;
+                      });
+                    },
+                    child: Column(
+                      children: [
+                        Icon(
+                          Icons.dashboard,
+                          color: currentTap == 1 ? Colors.blue : Colors.grey,
+                        ),
+                        Text(
+                          'Clients',
+                          style: TextStyle(
+                            color: currentTap == 1 ? Colors.blue : Colors.grey,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  MaterialButton(
+                    minWidth: 40,
+                    onPressed: () {
+                      setState(() {
+                        currentScreen = NReservationPage();
+                        currentTap = 2;
+                      });
+                    },
+                    child: Column(
+                      children: [
+                        Icon(
+                          Icons.dashboard,
+                          color: currentTap == 2 ? Colors.blue : Colors.grey,
+                        ),
+                        Text(
+                          'Agents',
+                          style: TextStyle(
+                            color: currentTap == 2 ? Colors.blue : Colors.grey,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  MaterialButton(
+                    minWidth: 40,
+                    onPressed: () {
+                      setState(() {
+                        currentScreen = NPaiementPage();
+                        currentTap = 3;
+                      });
+                    },
+                    child: Column(
+                      children: [
+                        Icon(
+                          Icons.dashboard,
+                          color: currentTap == 3 ? Colors.blue : Colors.grey,
+                        ),
+                        Text(
+                          'Clients',
+                          style: TextStyle(
+                            color: currentTap == 3 ? Colors.blue : Colors.grey,
                           ),
                         )
                       ],
