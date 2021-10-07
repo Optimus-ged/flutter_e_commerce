@@ -1,15 +1,15 @@
+import 'package:e_commerce/ngango_lib/pages/n_loginn.dart';
 import 'package:e_commerce/optimus_lib/routes/routes.dart';
 import 'package:e_commerce/optimus_lib/screens/pages/login_page.dart';
 import 'package:e_commerce/optimus_lib/utils/app_theme.dart';
 import 'exports/all_exports.dart';
 
-
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: AppTheme.blueColor,
-      statusBarIconBrightness: Brightness.light,
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
       statusBarBrightness:
           Platform.isAndroid ? Brightness.dark : Brightness.light,
       systemNavigationBarDividerColor: Colors.transparent,
@@ -22,9 +22,10 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         fontFamily: AppTheme.fontName,
         platform: TargetPlatform.iOS,
+        dividerTheme: DividerThemeData(space: 0),
       ),
       onGenerateRoute: Routes.materialRoutes,
-      home: LoginPage(),
+      home: Nloginn(),
     );
   }
 }
