@@ -45,9 +45,20 @@ class NHomePage extends StatelessWidget {
               itemBuilder: (context, index) => Padding(
                 padding: const EdgeInsets.only(bottom: 5),
                 child: Container(
-                  height: 50,
-                  width: 200,
                   color: Colors.green,
+                  child: Row(
+                    children: [
+                      Container(
+                        height: 60,
+                        width: 60,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle
+                        ),
+                        // child: Image.network(src),
+                      ),
+                      SizedBox(width: 10,)
+                    ],
+                  ),
                 ),
               ),
             ),
