@@ -1,9 +1,29 @@
 import 'package:e_commerce/exports/all_exports.dart';
+import 'package:e_commerce/model/paiement/get_all_paiement.dart';
 import 'package:e_commerce/utils/app_theme.dart';
 import 'package:flutter/material.dart';
 
-class PaymentsDetails extends StatelessWidget {
-  const PaymentsDetails({Key key}) : super(key: key);
+class PaymentsDetails extends StatefulWidget {
+  final Response paiementData;
+  // static
+  const PaymentsDetails({
+    Key key,
+    @required this.paiementData,
+  }) : super(key: key);
+
+  @override
+  _PaymentsDetailsState createState() => _PaymentsDetailsState();
+}
+
+class _PaymentsDetailsState extends State<PaymentsDetails> {
+  PageController _pageviewController = PageController();
+  int curentIndex;
+
+  @override
+  void initState() {
+    _pageviewController = PageController(initialPage: 0);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,13 +46,11 @@ class PaymentsDetails extends StatelessWidget {
           Positioned(
             bottom: 0,
             child: Container(
-              height: screen.height * .55,
+              height: screen.height * .40,
               width: screen.width,
               decoration: BoxDecoration(
                 color: AppTheme.blueColor,
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(60),
-                ),
+                borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,7 +59,7 @@ class PaymentsDetails extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.only(left: 20, bottom: 10),
                     child: Text(
-                      "designation",
+                      "details achat",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         color: Colors.white54,
@@ -49,55 +67,64 @@ class PaymentsDetails extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 16),
-                    child: SizedBox(
-                      width: 72,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 5),
-                  Container(
-                    padding: EdgeInsets.only(left: 20, right: 20),
-                    height: screen.height * .27,
-                    child: SingleChildScrollView(
-                      child: Column(
-                        children: [
-                          Text(
-                            "aPropos",
-                            style: TextStyle(
-                              color: Colors.white54,
-                              fontSize: 15,
-                              height: 1.5,
-                            ),
+                  Expanded(
+                    child: Container(
+                      alignment: Alignment.bottomCenter,
+                      child: PageView.builder(
+                        controller: _pageviewController,
+                        itemBuilder: (context, index) => Container(
+                          alignment: Alignment.bottomCenter,
+                          child: CustomCashedImage(
+                            imageUrl:
+                                "${Endpoint.uplaod}${widget.paiementData.detailsPaiements[index].article.photoArticles[0].photoArticle}",
+                            screen: screen,
                           ),
-                        ],
+                        ),
+                        itemCount: 3,
+                        onPageChanged: (value) {
+                          curentIndex = value;
+                          setState(() {});
+                        },
                       ),
                     ),
                   ),
-                  Spacer(),
-                  Center(
-                    child: Text(
-                      "Prix : pu\$",
-                      style: TextStyle(
-                        color: Colors.white54,
-                        fontSize: 17,
-                        height: 1.5,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  SizedBox(height: 20)
+                  
                 ],
               ),
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  _buildPageView(
+    Size screen, {
+    List<DetailsPaiements> detailsPaiements,
+  }) {
+    return Positioned(
+      bottom: 0,
+      child: Container(
+        height: screen.height * .45,
+        width: screen.width,
+        alignment: Alignment.bottomCenter,
+        color: AppTheme.whiteColor,
+        child: PageView.builder(
+          controller: _pageviewController,
+          itemBuilder: (context, index) => Container(
+            alignment: Alignment.bottomCenter,
+            child: CustomCashedImage(
+              imageUrl:
+                  "${Endpoint.uplaod}${detailsPaiements[index].article.photoArticles[0]}",
+              screen: screen,
+            ),
+          ),
+          itemCount: 3,
+          onPageChanged: (value) {
+            curentIndex = value;
+            setState(() {});
+          },
+        ),
       ),
     );
   }

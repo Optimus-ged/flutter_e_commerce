@@ -92,7 +92,7 @@ class _AllPaiementsPageState extends State<AllPaiementsPage> {
                   _allPaiementsList.addAll(snapshot.data.response);
                   _filterList(snapshot.data.response);
                   return Container(
-                    color: Colors.black,
+                    // color: Colors.black,
                     child: ListView.builder(
                       padding: EdgeInsets.all(0),
                       primary: false,
@@ -103,7 +103,13 @@ class _AllPaiementsPageState extends State<AllPaiementsPage> {
                     ),
                   );
                 }
-                return Center(child: CircularProgressIndicator());
+                return Container(
+                  height: MediaQuery.of(context).size.height / 2,
+                  alignment: Alignment.center,
+                  child: Text(
+                    'Chargement...',
+                  ),
+                );
               },
             )
           ],
@@ -116,16 +122,16 @@ class _AllPaiementsPageState extends State<AllPaiementsPage> {
     return InkWell(
       onTap: () => Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (context) => PaymentsDetails(),
+          builder: (context) => PaymentsDetails(
+            paiementData: paieData,
+          ),
         ),
       ),
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        margin: EdgeInsets.only(bottom: 5),
         alignment: Alignment.center,
-        // height: 100,
-        // width: 100,
         color: Colors.white,
-        // child: Text('${paieData.user.nom}'),
         child: Row(
           children: [
             ClipRRect(
@@ -152,13 +158,35 @@ class _AllPaiementsPageState extends State<AllPaiementsPage> {
                     '${paieData.user.nom.toUpperCase()}',
                     style: TextStyle(fontWeight: FontWeight.w600),
                   ),
-                  // Text('${paieData.user.contact}'),
-                  Text('Achat : ${paieData.montant}\$'),
+                  SizedBox(height: 2),
+
+                  RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(
+                            text: 'Achat : ',
+                            style: TextStyle(color: Colors.black)),
+                        TextSpan(
+                          text: '${paieData.montant}\$',
+                          style: TextStyle(
+                            color: Colors.green,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  // Text('Achat : ${paieData.montant}\$',
+                  //     style: TextStyle(color: Colors.green)),
                 ],
               ),
             ),
             Spacer(),
-            Text('${paieData.createdAt.split(' ').last}'),
+            Text('${paieData.createdAt.split(' ').last.substring(0, 5)}',
+                style: TextStyle(
+                  color: Colors.red[400],
+                  fontWeight: FontWeight.w600,
+                )),
           ],
         ),
       ),
