@@ -21,11 +21,21 @@ class _NMainPageState extends State<NMainPage> {
     NPaiementPage()
   ];
 
-  final pageStorageBucket bucket = PageStorageBucket();
+  final PageStorageBucket bucket = PageStorageBucket();
   Widget currentScreen = NAgentPage();
-  
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      body: PageStorage(
+        bucket: bucket,
+        child: currentScreen,
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.add),
+        onPressed: (){},
+        ),
+    );
+    
   }
 }
