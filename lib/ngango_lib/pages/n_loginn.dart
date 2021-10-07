@@ -18,44 +18,50 @@ class Nloginn extends StatelessWidget {
           width: screen.width,
           child: Column(
             children: [
-              Text('Login'),
+              // Text('Login'),
               Container(
-                color: Colors.green,
                 child: Column(
                   children: [
                     Container(
                       child: TextField(
+                        textAlign: TextAlign.center,
                         decoration: InputDecoration.collapsed(
                           hintText: 'username',
                         ),
                       ),
                     ),
+                    SizedBox(height: 5),
                     Divider()
                   ],
                 ),
               ),
+              SizedBox(height: 20),
               Container(
-                color: Colors.green,
+                // color: Colors.green,
                 child: Column(
                   children: [
                     Container(
                       child: TextField(
+                        textAlign: TextAlign.center,
                         decoration: InputDecoration.collapsed(
                           hintText: 'mot de passe',
                         ),
                       ),
                     ),
+                    SizedBox(height: 5),
                     Divider()
                   ],
                 ),
               ),
+              SizedBox(height: 20),
               InkWell(
                 child: Container(
+                  padding: EdgeInsets.symmetric(vertical: 15, horizontal: 40),
                   decoration: BoxDecoration(
-                    color: Colors.green,
+                    color: Color(0xffAA000A),
                     borderRadius: BorderRadius.circular(30),
                   ),
-                  child: Text('Connection'),
+                  child: Text('Connection', style: TextStyle(color: Colors.white,),),
                 ),
               )
             ],
