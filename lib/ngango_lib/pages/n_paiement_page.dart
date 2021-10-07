@@ -28,7 +28,7 @@ class NPaiementPage extends StatelessWidget {
                     ),
                     Center(
                       child: Text(
-                        "TOUTES LES RESERVATIONS",
+                        "TOUS LES PAIEMENTS",
                         style: TextStyle(
                           color: Colors.grey[300],
                           fontWeight: FontWeight.w700,
