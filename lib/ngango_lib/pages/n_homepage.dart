@@ -11,7 +11,6 @@ class NHomePage extends StatelessWidget {
           children: [
             Container(
               child: Container(
-                // width: screen.width,
                 padding: EdgeInsets.only(top: 15, bottom: 15, left: 20),
                 color: Color(0xffAA000A),
                 child: Stack(
@@ -28,7 +27,7 @@ class NHomePage extends StatelessWidget {
                     ),
                     Center(
                       child: Text(
-                        "UTILISATEURS",
+                        "AGENTS",
                         style: TextStyle(
                           color: Colors.grey[300],
                           fontWeight: FontWeight.w700,
@@ -56,7 +55,9 @@ class NHomePage extends StatelessWidget {
                         ),
                         // child: Image.network(src),
                       ),
-                      SizedBox(width: 10,)
+                      SizedBox(width: 10,),
+                      Text('nom postnom'),
+                      Text('telephone')
                     ],
                   ),
                 ),
