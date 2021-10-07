@@ -1,4 +1,4 @@
-import 'package:e_commerce/ngango_lib/pages/n_loginn.dart';
+import 'package:e_commerce/ngango_lib/pages/n_login.dart';
 import 'package:e_commerce/optimus_lib/routes/routes.dart';
 import 'exports/all_exports.dart';
 
