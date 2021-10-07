@@ -241,7 +241,7 @@ class _AdminHomepageState extends State<AdminHomepage> {
                   //
                 },
                 child: Container(
-                  child: Text('Menu'),
+                  child: Text('Paiements'),
                 ),
               ),
               ClickAnimation(
