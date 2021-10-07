@@ -120,7 +120,6 @@ class _AllPaiementsPageState extends State<AllPaiementsPage> {
       child: Row(
         children: [
            ClipRRect(
-             
             borderRadius: BorderRadius.circular(50),
             child: Container(
               
@@ -136,6 +135,15 @@ class _AllPaiementsPageState extends State<AllPaiementsPage> {
               ),
             ),
           ),
+          SizedBox(width: 10),
+          Container(
+            child: Column(
+              children: [
+                Text('${paieData.user.nom}'),
+                Text('${paieData.user.contact}'),
+              ],
+            ),
+          )
         ],
       ),
     );
