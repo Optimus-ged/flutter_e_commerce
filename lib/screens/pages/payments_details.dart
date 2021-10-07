@@ -34,11 +34,94 @@ class _PaymentsDetailsState extends State<PaymentsDetails> {
           Positioned(
             top: 0,
             child: Container(
-              height: screen.height * .45,
+              height: screen.height * .55,
               width: screen.width,
               child: Stack(
                 children: [
-                  BackwardButton(color: AppTheme.blueColor),
+                  Positioned(
+                    top: 65,
+                    child: Padding(
+                      padding:
+                          const EdgeInsets.only(left: 20, right: 20, top: 30),
+                      child: Row(
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(50),
+                            child: Container(
+                              height: 100,
+                              width: 100,
+                              decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                    colors: [
+                                      AppTheme.radiantTopRight,
+                                      AppTheme.radiantTop,
+                                      AppTheme.radiantBotom
+                                    ],
+                                  ),
+                                  shape: BoxShape.circle),
+                              child: CustomCashedImage(
+                                imageUrl:
+                                    "${Endpoint.uplaod}${widget.paiementData.user.photo}",
+                                screen: screen,
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 10),
+                          Container(
+                            // color: Colors.amber,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                _richtextItem(
+                                  'nom',
+                                  '${widget.paiementData.user.nom}',
+                                  isontop: true,
+                                ),
+                                _richtextItem('contact',
+                                    '${widget.paiementData.user.contact}',
+                                    isontop: true),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  // BackwardButton(color: AppTheme.blueColor),
+                  Positioned(
+                    top: 24,
+                    child: Container(
+                      // color: Colors.amber,
+                      width: screen.width,
+                      padding: EdgeInsets.only(top: 15, bottom: 15, left: 20),
+                      child: Stack(
+                        children: [
+                          Positioned(
+                            left: 0,
+                            child: ClickAnimation(
+                              onTap: () => Navigator.pop(context),
+                              child: Icon(
+                                Icons.arrow_back_ios,
+                                color: Colors.black45,
+                              ),
+                            ),
+                          ),
+                          Center(
+                            child: Text(
+                              "DETAILS",
+                              style: TextStyle(
+                                color: Colors.grey[300],
+                                fontWeight: FontWeight.w700,
+                                fontSize: 20,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -72,8 +155,8 @@ class _PaymentsDetailsState extends State<PaymentsDetails> {
                         Text(
                           '${widget.paiementData.createdAt.split(' ').first}',
                           style: TextStyle(
-                            color: Colors.white54,
-                          ),
+                              color: Colors.white54,
+                              decoration: TextDecoration.underline),
                         )
                       ],
                     ),
@@ -161,22 +244,6 @@ class _PaymentsDetailsState extends State<PaymentsDetails> {
                           style: TextStyle(color: Colors.white54, fontSize: 12),
                         ),
                       )
-                      // RichText(
-                      //   text: TextSpan(
-                      //     text: 'designation : \n',
-                      //     style: TextStyle(
-                      //       color: Colors.white,
-                      //     ),
-                      //     children: [
-                      //       TextSpan(
-                      //         text:
-                      //             '${detailsPaiements[index].article.designation}',
-                      //         style: TextStyle(
-                      //             color: Colors.white54, fontSize: 12),
-                      //       )
-                      //     ],
-                      //   ),
-                      // )
                     ],
                   ),
                 )
@@ -193,19 +260,21 @@ class _PaymentsDetailsState extends State<PaymentsDetails> {
     );
   }
 
-  _richtextItem(title, subTitle, {bool isPu = false}) {
+  _richtextItem(title, subTitle, {bool isPu = false, bool isontop = false}) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: RichText(
         text: TextSpan(
           text: '$title : \n',
           style: TextStyle(
-            color: Colors.white,
+            color: !isontop ? Colors.white : Colors.black,
           ),
           children: [
             TextSpan(
               text: isPu ? '$subTitle\$' : '$subTitle',
-              style: TextStyle(color: Colors.white54, fontSize: 12),
+              style: TextStyle(
+                  color: !isontop ? Colors.white54 : Colors.black54,
+                  fontSize: 12),
             )
           ],
         ),
