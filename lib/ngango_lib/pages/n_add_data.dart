@@ -12,7 +12,7 @@ class NAddData extends StatelessWidget {
         child: Column(
           children: [
             MyAppbar(
-              title: currentTap == 0 ? 'AJOUTER UN AGENT' : 'AJOUTER UN CLIENT',
+              title: 'AJOUTER UN AGENT',
             ),
             Expanded(
               child: Container(

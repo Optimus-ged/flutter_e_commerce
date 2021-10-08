@@ -1,4 +1,3 @@
-import 'package:e_commerce/ngango_lib/pages/n_agent_page.dart';
 import 'package:e_commerce/ngango_lib/pages/n_main_page.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +11,7 @@ class Nloginn extends StatelessWidget {
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.only(
-            top: screen.height * .40,
+            top: screen.height * .50,
             left: 40,
             right: 40,
           ),
