@@ -42,7 +42,7 @@ class _NMainPageState extends State<NMainPage> {
         elevation: 0,
         notchMargin: 10,
         child: Container(
-          height: 100,
+          height: 60,
           padding: EdgeInsets.only(top: 10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

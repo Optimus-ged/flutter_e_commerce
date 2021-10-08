@@ -1,3 +1,4 @@
+import 'package:e_commerce/ngango_lib/widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
 
 class NReservationPage extends StatelessWidget {
@@ -9,37 +10,7 @@ class NReservationPage extends StatelessWidget {
       body: Container(
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 24),
-              child: Container(
-                padding: EdgeInsets.only(top: 15, bottom: 15, left: 20),
-                color: Colors.grey,
-                child: Stack(
-                  children: [
-                    Positioned(
-                      left: 0,
-                      child: InkWell(
-                        onTap: () => Navigator.pop(context),
-                        child: Icon(
-                          Icons.arrow_back_ios,
-                          color: Colors.black45,
-                        ),
-                      ),
-                    ),
-                    Center(
-                      child: Text(
-                        "TOUTES LES RESERVATIONS",
-                        style: TextStyle(
-                          color: Colors.grey[300],
-                          fontWeight: FontWeight.w700,
-                          fontSize: 20,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+             MyAppbar(title: 'TOUS LES RESERVATION'),
             Expanded(
               child: ListView.builder(
                 padding: EdgeInsets.all(0),
@@ -66,7 +37,10 @@ class NReservationPage extends StatelessWidget {
                         Container(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [Text('nom postnom'), Text('telephone')],
+                            children: [
+                              Text('nom postnom'),
+                              Text('telephone'),
+                            ],
                           ),
                         ),
                       ],
