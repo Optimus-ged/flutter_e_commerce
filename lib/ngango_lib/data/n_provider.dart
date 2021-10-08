@@ -1,10 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:e_commerce/optimus_lib/exports/all_exports.dart';
-import 'package:e_commerce/optimus_lib/model/paiement/create_paiement.dart';
-import 'package:e_commerce/optimus_lib/model/paiement/get_all_paiement.dart'
-    as all;
-import 'package:e_commerce/optimus_lib/model/user_model/signup_response.dart';
-
+   
 class Provider {
   Dio _dio;
 

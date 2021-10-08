@@ -2,7 +2,6 @@ import 'package:e_commerce/optimus_lib/bloc/login_bloc/login_bloc.dart';
 import 'package:e_commerce/optimus_lib/bloc/login_bloc/login_event.dart';
 import 'package:e_commerce/optimus_lib/bloc/login_bloc/login_state.dart';
 import 'package:e_commerce/optimus_lib/exports/all_exports.dart';
-import 'package:e_commerce/optimus_lib/model/paiement/get_all_paiement.dart' as u;
 import 'package:e_commerce/optimus_lib/routes/routes_constants.dart';
 import 'package:e_commerce/optimus_lib/screens/widgets/click_animation.dart';
 import 'package:e_commerce/optimus_lib/screens/widgets/custon_textfield.dart';

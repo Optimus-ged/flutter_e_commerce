@@ -18,7 +18,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     try {
       yield LoginInProgress();
       final login = await _api.loginUser(event.email, event.password);
-      if (login.status == 200) {
+      if (login.status == true) {
         yield LoginSuccess(login: login);
         await locator.get<SharedPreferencesHelper>().saveAuthToken(login.token);
       } else {
