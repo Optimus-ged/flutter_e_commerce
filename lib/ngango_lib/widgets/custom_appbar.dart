@@ -25,7 +25,7 @@ class MyAppbar extends StatelessWidget {
             ),
             Center(
               child: Text(
-                "TOUS LES AGENTS",
+                "$title",
                 style: TextStyle(
                   color: Colors.grey[300],
                   fontWeight: FontWeight.w700,

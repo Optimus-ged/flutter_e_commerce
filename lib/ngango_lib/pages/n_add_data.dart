@@ -2,7 +2,8 @@ import 'package:e_commerce/ngango_lib/widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
 
 class NAddData extends StatelessWidget {
-  const NAddData({ Key key }) : super(key: key);
+  final int currentTap;
+  const NAddData({Key key, @required this.currentTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +11,19 @@ class NAddData extends StatelessWidget {
       body: Container(
         child: Column(
           children: [
-            MyAppbar(title: 'AJOUTER UN AGENT')
+            MyAppbar(
+              title: currentTap == 0 ? 'AJOUTER UN AGENT' : 'AJOUTER UN CLIENT',
+            ),
+            Expanded(
+              child: Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('chargement...'),
+                  ],
+                ),
+              ),
+            )
           ],
         ),
       ),
