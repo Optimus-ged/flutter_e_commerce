@@ -1,10 +1,10 @@
 import 'package:bloc/bloc.dart';
+import 'package:e_commerce/ngango_lib/data/n_provider.dart';
 import 'package:e_commerce/optimus_lib/bloc/login_bloc/login_event.dart';
 import 'package:e_commerce/optimus_lib/exports/all_exports.dart';
 import 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  get _api => locator.get<Provider>();
   LoginBloc() : super(LoginInitial());
 
   @override
@@ -17,7 +17,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       LoginButtonPressed event) async* {
     try {
       yield LoginInProgress();
-      final login = await _api.loginUser(event.email, event.password);
+      final login = await myProvider.loginUser(event.email, event.password);
       if (login.status == true) {
         yield LoginSuccess(login: login);
         await locator.get<SharedPreferencesHelper>().saveAuthToken(login.token);

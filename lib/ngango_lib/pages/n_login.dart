@@ -15,7 +15,7 @@ class Nloginn extends StatefulWidget {
 class _NloginnState extends State<Nloginn> {
   var _controllerNom = TextEditingController();
   var _controllerPassword = TextEditingController();
-  bool isLoading;
+  bool isLoading = false;
   LoginBloc _loginBloc;
 
   @override
@@ -66,6 +66,7 @@ class _NloginnState extends State<Nloginn> {
                     children: [
                       Container(
                         child: TextField(
+                          controller: _controllerNom,
                           textAlign: TextAlign.center,
                           decoration: InputDecoration.collapsed(
                             hintText: 'username',
@@ -84,6 +85,7 @@ class _NloginnState extends State<Nloginn> {
                     children: [
                       Container(
                         child: TextField(
+                          controller: _controllerPassword,
                           obscureText: true,
                           textAlign: TextAlign.center,
                           decoration: InputDecoration.collapsed(
@@ -97,26 +99,31 @@ class _NloginnState extends State<Nloginn> {
                   ),
                 ),
                 SizedBox(height: 20),
-                InkWell(
-                  onTap: () => Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => NMainPage(),
-                    ),
-                  ),
-                  child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 15, horizontal: 40),
-                    decoration: BoxDecoration(
-                      color: Color(0xffAA000A),
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    child: Text(
-                      'Connection',
-                      style: TextStyle(
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                )
+                !isLoading
+                    ? InkWell(
+                        onTap: () => Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => NMainPage(),
+                          ),
+                        ),
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                              vertical: 15, horizontal: 40),
+                          decoration: BoxDecoration(
+                            color: Color(0xffAA000A),
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          child: Text(
+                            'Connection',
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      )
+                    : CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation(Color(0xffAA000A)),
+                      )
               ],
             ),
           ),
