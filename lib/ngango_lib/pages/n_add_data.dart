@@ -1,5 +1,7 @@
 import 'package:e_commerce/ngango_lib/bloc/ajout_agent_bloc/n_ajout_agent_bloc.dart';
+import 'package:e_commerce/ngango_lib/bloc/ajout_agent_bloc/n_ajout_agent_event.dart';
 import 'package:e_commerce/ngango_lib/bloc/ajout_agent_bloc/n_ajout_agent_state.dart';
+import 'package:e_commerce/ngango_lib/model/all_agents_model.dart';
 import 'package:e_commerce/ngango_lib/widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,6 +28,9 @@ class _NAddDataState extends State<NAddData> {
   var _addresseomController = TextEditingController();
   var _passwordController = TextEditingController();
 
+  String sexeChoosed = '';
+  String etatCivilChoosed = '';
+
   Io.File _image;
   bool isLoading = false;
   AjoutAgentBloc _ajoutAgentBloc;
@@ -39,10 +44,10 @@ class _NAddDataState extends State<NAddData> {
   }
 
   @override
-    void initState() {
-      _ajoutAgentBloc = BlocProvider.of<AjoutAgentBloc>(context);
-      super.initState();
-    }
+  void initState() {
+    _ajoutAgentBloc = BlocProvider.of<AjoutAgentBloc>(context);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -161,6 +166,7 @@ class _NAddDataState extends State<NAddData> {
                                   setState(
                                     () {
                                       // sexe.text = value.toString();
+                                      etatCivilChoosed = value;
                                     },
                                   )
                                 },
@@ -194,7 +200,7 @@ class _NAddDataState extends State<NAddData> {
                                 onChanged: (value) => {
                                   setState(
                                     () {
-                                      // sexe.text = value.toString();
+                                      sexeChoosed = value;
                                     },
                                   )
                                 },
@@ -207,6 +213,7 @@ class _NAddDataState extends State<NAddData> {
                         InkWell(
                           onTap: () {
                             // _onSignupButtonPressed();
+                            _onAjoutagentButtonPressed();
                           },
                           child: Container(
                             height: 38,
@@ -260,6 +267,23 @@ class _NAddDataState extends State<NAddData> {
           ),
         ),
       ),
+    );
+  }
+
+  Future<void> _onAjoutagentButtonPressed() async {
+    CreateAgent agentData = CreateAgent(
+      adressephysique: _addresseomController.text.trim(),
+      etatcivil: etatCivilChoosed,
+      lieunaissance: _lieuController.text.trim(),
+      nom: _nomController.text.trim(),
+      postnom: _postnomController.text.trim(),
+      sexe: sexeChoosed,
+      prenom: _prenomController.text.trim(),
+      telephone: _phoneController.text.trim(),
+      motDePasse: _passwordController.text.trim(),
+    );
+    _ajoutAgentBloc.add(
+      AjoutAgentButtonPressed(agentData: agentData, file: _image),
     );
   }
 }
