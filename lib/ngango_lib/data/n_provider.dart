@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:e_commerce/ngango_lib/model/all_agents_model.dart';
 import 'package:e_commerce/ngango_lib/model/all_clients_model.dart';
@@ -80,6 +82,34 @@ class NProvider {
         ),
       );
       return ClientsModel.fromJson(result.data);
+    } catch (e) {
+      print("ERROR loginUser : ${e.toString()}");
+      throw e;
+    }
+  }
+
+   // Login
+  Future<CreateAgent> postAgent({File file, CreateAgent agentData}) async {
+    String fileName = file.path.split('/').last;
+    try {
+      FormData formData = FormData.fromMap({
+        ...agentData.toJson(),
+        "photo": await MultipartFile.fromFile(file.path, filename: fileName),
+      });
+
+      final result = await _dio.post(
+        "/agents/signup",
+        data: formData,
+        options: Options(
+          contentType: Headers.formUrlEncodedContentType,
+          headers: {
+            "Accept": "application/json",
+            // "App": "Admin",
+            // "key": Endpoint.key
+          },
+        ),
+      );
+      return CreateAgent.fromJson(result.data);
     } catch (e) {
       print("ERROR loginUser : ${e.toString()}");
       throw e;

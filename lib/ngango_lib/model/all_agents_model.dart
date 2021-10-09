@@ -81,7 +81,6 @@ class Agents {
   }
 }
 
-
 class CreateAgent {
   int id;
   String adressephysique;
