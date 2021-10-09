@@ -11,6 +11,7 @@
 // import 'optimus_lib/utils/setup_locator.dart';
 
 import 'package:bloc/bloc.dart';
+import 'package:e_commerce/ngango_lib/bloc/ajout_agent_bloc/n_ajout_agent_bloc.dart';
 import 'package:e_commerce/ngango_lib/bloc/login_bloc/n_login_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -94,6 +95,9 @@ void main() async {
         providers: [
           BlocProvider<LoginBloc>(
             create: (context) => LoginBloc(),
+          ),
+          BlocProvider<AjoutAgentBloc>(
+            create: (context) => AjoutAgentBloc(),
           ),
         ],
         child: MyApp(),
