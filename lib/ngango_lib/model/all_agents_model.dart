@@ -24,6 +24,28 @@ class AllAgents {
   }
 }
 
+class CreateAgentResponse {
+  bool status;
+  Agents agent;
+
+  CreateAgentResponse({this.status, this.agent});
+
+  CreateAgentResponse.fromJson(Map<String, dynamic> json) {
+    status = json['status'];
+    agent =
+        json['response'] != null ? new Agents.fromJson(json['response']) : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['status'] = this.status;
+    if (this.agent != null) {
+      data['response'] = this.agent.toJson();
+    }
+    return data;
+  }
+}
+
 class Agents {
   int id;
   String adressephysique;
