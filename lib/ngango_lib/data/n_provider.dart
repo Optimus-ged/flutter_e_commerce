@@ -63,6 +63,27 @@ class NProvider {
       throw e;
     }
   }
+
+  // Login
+  Future<AllAgents> getAllClients() async {
+    try {
+      final result = await _dio.get(
+        "/clients",
+        options: Options(
+          contentType: Headers.formUrlEncodedContentType,
+          headers: {
+            "Accept": "application/json",
+            // "App": "Admin",
+            // "key": Endpoint.key
+          },
+        ),
+      );
+      return AllAgents.fromJson(result.data);
+    } catch (e) {
+      print("ERROR loginUser : ${e.toString()}");
+      throw e;
+    }
+  }
 }
 
 final myProvider = NProvider();
