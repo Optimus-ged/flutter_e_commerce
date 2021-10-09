@@ -13,7 +13,6 @@ class MyAppbar extends StatelessWidget {
         // color: Colors.grey,
         child: Stack(
           children: [
-           
             Center(
               child: Text(
                 "$title",

@@ -80,3 +80,61 @@ class Agents {
     return data;
   }
 }
+
+
+class CreateAgent {
+  int id;
+  String adressephysique;
+  String etatcivil;
+  String lieunaissance;
+  String nom;
+  String photo;
+  String postnom;
+  String sexe;
+  String prenom;
+  String telephone;
+  String motDePasse;
+
+  CreateAgent(
+      {this.id,
+      this.adressephysique,
+      this.etatcivil,
+      this.lieunaissance,
+      this.nom,
+      this.photo,
+      this.postnom,
+      this.sexe,
+      this.prenom,
+      this.telephone,
+      this.motDePasse});
+
+  CreateAgent.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    adressephysique = json['adressephysique'];
+    etatcivil = json['etatcivil'];
+    lieunaissance = json['lieunaissance'];
+    nom = json['nom'];
+    photo = json['photo'];
+    postnom = json['postnom'];
+    sexe = json['sexe'];
+    prenom = json['prenom'];
+    telephone = json['telephone'];
+    motDePasse = json['password_from_body'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['adressephysique'] = this.adressephysique;
+    data['etatcivil'] = this.etatcivil;
+    data['lieunaissance'] = this.lieunaissance;
+    data['nom'] = this.nom;
+    data['photo'] = this.photo;
+    data['postnom'] = this.postnom;
+    data['sexe'] = this.sexe;
+    data['prenom'] = this.prenom;
+    data['telephone'] = this.telephone;
+    data['password_from_body'] = this.motDePasse;
+    return data;
+  }
+}
