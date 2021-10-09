@@ -73,7 +73,7 @@ class _NClientPageState extends State<NClientPage> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        '${client.nom.toUpperCase()} ${client.prenom.toUpperCase()}',
+                                        '${client.nom.toUpperCase()} ${client.prenom.toUpperCase()}',style: TextStyle(fontWeight: FontWeight.bold,),
                                       ),
                                       Text('${client.telephone}')
                                     ],

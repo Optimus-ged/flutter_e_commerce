@@ -67,8 +67,8 @@ class _NAgentPageState extends State<NAgentPage> {
                                       Text(
                                         '${agent.nom.toUpperCase()} ${agent.postnom.toUpperCase()} ${agent.prenom.toUpperCase()}',
                                         style: TextStyle(
-                                            color: Colors.black87,
-                                            fontWeight: FontWeight.w600),
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold),
                                       ),
                                       Text('${agent.telephone}'),
                                       Text('${agent.etatcivil}'),

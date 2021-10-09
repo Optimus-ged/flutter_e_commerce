@@ -13,21 +13,12 @@ class MyAppbar extends StatelessWidget {
         // color: Colors.grey,
         child: Stack(
           children: [
-            Positioned(
-              left: 0,
-              child: InkWell(
-                onTap: () => Navigator.pop(context),
-                child: Icon(
-                  Icons.arrow_back_ios,
-                  color: Colors.black45,
-                ),
-              ),
-            ),
+           
             Center(
               child: Text(
                 "$title",
                 style: TextStyle(
-                  color: Colors.grey[300],
+                  color: Colors.grey[500],
                   fontWeight: FontWeight.w700,
                   fontSize: 20,
                 ),
