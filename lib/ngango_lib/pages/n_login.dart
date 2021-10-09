@@ -131,4 +131,20 @@ class _NloginnState extends State<Nloginn> {
       ),
     );
   }
+
+  // Future<void> _onLoginButtonPressed() async {
+  //   String email = _controllerNom.text.trim();
+  //   String password = _controllerPassword.text.trim();
+
+  //   if (email.trim().isEmpty || password.trim().isEmpty) {
+  //     Fluttertoast.showToast(
+  //       msg:
+  //           "Certains champs sont encore vide, veuillez les rempir tous SVP !!!",
+  //       gravity: ToastGravity.TOP,
+  //       backgroundColor: Colors.black.withOpacity(0.6),
+  //     );
+  //   } else {
+  //     _loginBloc.add(LoginButtonPressed(email: email, password: password));
+  //   }
+  // }
 }

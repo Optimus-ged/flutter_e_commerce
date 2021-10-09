@@ -1,14 +1,14 @@
 import 'package:dio/dio.dart';
+import 'package:e_commerce/ngango_lib/model/all_agents_model.dart';
 import 'package:e_commerce/ngango_lib/model/login.dart';
-
 import 'connection_settings/n_interceptors.dart';
 
 
-class Provider {
+class NProvider {
   Dio _dio;
 
   // Initialisation of dio options
-  Provider() {
+  NProvider() {
     if (_dio == null) {
       BaseOptions options = BaseOptions(
         baseUrl: "http://192.168.137.1:3535/api",
@@ -42,6 +42,27 @@ class Provider {
       throw e;
     }
   }
+
+  // Login
+  Future<AllAgents> getAllAgents() async {
+    try {
+      final result = await _dio.get(
+        "/agents",
+        options: Options(
+          contentType: Headers.formUrlEncodedContentType,
+          headers: {
+            "Accept": "application/json",
+            // "App": "Admin",
+            // "key": Endpoint.key
+          },
+        ),
+      );
+      return AllAgents.fromJson(result.data);
+    } catch (e) {
+      print("ERROR loginUser : ${e.toString()}");
+      throw e;
+    }
+  }
 }
 
-final myProvider = Provider();
+final myProvider = NProvider();

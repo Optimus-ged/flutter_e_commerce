@@ -1,6 +1,7 @@
 
-import 'package:e_commerce/optimus_lib/exports/all_exports.dart';
+// import 'package:e_commerce/optimus_lib/exports/all_exports.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 
 @immutable
 abstract class LoginEvent extends Equatable {
@@ -22,5 +23,7 @@ class LoginButtonPressed extends LoginEvent {
   @override
   List<Object> get props => [email, password];
 }
+
+class Test extends LoginEvent{}
 
 
