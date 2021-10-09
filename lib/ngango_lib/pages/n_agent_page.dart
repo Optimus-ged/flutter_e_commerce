@@ -53,7 +53,9 @@ class _NAgentPageState extends State<NAgentPage> {
                                       color: Color(0xffAA000A),
                                     ),
                                     child: Image.network(
-                                        'http://192.168.137.1:3535/images/${agent.photo}', fit: BoxFit.cover,),
+                                      'http://192.168.137.1:3535/images/${agent.photo}',
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
                                 ),
                                 SizedBox(width: 10),
@@ -62,8 +64,14 @@ class _NAgentPageState extends State<NAgentPage> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text('${agent.nom}'),
-                                      Text('${agent.telephone}')
+                                      Text(
+                                        '${agent.nom.toUpperCase()} ${agent.postnom.toUpperCase()} ${agent.prenom.toUpperCase()}',
+                                        style: TextStyle(
+                                            color: Colors.black87,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                      Text('${agent.telephone}'),
+                                      Text('${agent.etatcivil}'),
                                     ],
                                   ),
                                 ),
