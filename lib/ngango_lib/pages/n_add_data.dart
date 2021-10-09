@@ -1,5 +1,8 @@
 import 'package:e_commerce/ngango_lib/widgets/custom_appbar.dart';
 import 'package:flutter/material.dart';
+import 'dart:io' as Io;
+
+import 'package:image_picker/image_picker.dart';
 
 class NAddData extends StatefulWidget {
   final int currentTap;
@@ -19,6 +22,17 @@ class _NAddDataState extends State<NAddData> {
   var _addresseomController = TextEditingController();
   var _passwordController = TextEditingController();
 
+  Io.File _image;
+  bool isLoading = false;
+
+  Future getImage() async {
+    final pickedFile =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+    setState(() {
+      _image = Io.File(pickedFile.path);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,14 +48,51 @@ class _NAddDataState extends State<NAddData> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      _card(_nomController, title:'Nom'),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20, bottom: 20),
+                        child: InkWell(
+                          onTap: () {
+                            getImage();
+                          },
+                          child: _image == null
+                              ? ClipRRect(
+                                  borderRadius: BorderRadius.circular(40),
+                                  child: Container(
+                                    height: 80,
+                                    width: 80,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xffAA000A),
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: Icon(
+                                      Icons.add_a_photo,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                )
+                              : ClipRRect(
+                                  borderRadius: BorderRadius.circular(40),
+                                  child: Container(
+                                    height: 80,
+                                    width: 80,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xffAA000A),
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: Image.file(
+                                      _image,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                ),
+                        ),
+                      ),
+                      _card(_nomController, title: 'Nom'),
                       _card(_postnomController, title: 'Postnom'),
                       _card(_prenomController, title: 'Prenom'),
-
-                       _card(_phoneController, title: 'Telephone'),
+                      _card(_phoneController, title: 'Telephone'),
                       _card(_lieuController, title: 'Lieu de naiss'),
                       _card(_addresseomController, title: 'Addresse physique'),
-                      
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: Card(
@@ -75,7 +126,6 @@ class _NAddDataState extends State<NAddData> {
                           ),
                         ),
                       ),
-
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: Card(
@@ -109,8 +159,40 @@ class _NAddDataState extends State<NAddData> {
                           ),
                         ),
                       ),
-
                       _card(_passwordController, title: 'Mot de passe'),
+                      SizedBox(
+                        height: 20
+                      ),
+                      InkWell(
+                        onTap: () {
+                          // _onSignupButtonPressed();
+                        },
+                        child: Container(
+                          height: 38,
+                          width: 180,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: Color(0xffAA000A),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: isLoading
+                              ? Container(
+                                  height: 28,
+                                  width: 28,
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 1,
+                                  ),
+                                )
+                              : Text(
+                                  "Creer un compte",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 17,
+                                  ),
+                                ),
+                        ),
+                      ),
+                       SizedBox(height: 50),
                     ],
                   ),
                 ),
