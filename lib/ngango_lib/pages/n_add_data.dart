@@ -32,7 +32,7 @@ class _NAddDataState extends State<NAddData> {
   String etatCivilChoosed = '';
 
   Io.File _image;
-  bool isLoading = false;
+  bool isLoading;
   AjoutAgentBloc _ajoutAgentBloc;
 
   Future getImage() async {
@@ -45,6 +45,7 @@ class _NAddDataState extends State<NAddData> {
 
   @override
   void initState() {
+    isLoading = false;
     _ajoutAgentBloc = BlocProvider.of<AjoutAgentBloc>(context);
     super.initState();
   }
@@ -215,30 +216,31 @@ class _NAddDataState extends State<NAddData> {
                             // _onSignupButtonPressed();
                             _onAjoutagentButtonPressed();
                           },
-                          child: Container(
-                            height: 38,
-                            width: 180,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              color: Color(0xffAA000A),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: isLoading
-                                ? Container(
-                                    height: 28,
-                                    width: 28,
-                                    child: CircularProgressIndicator(
-                                      strokeWidth: 1,
-                                    ),
-                                  )
-                                : Text(
+                          child: !isLoading
+                              ? Container(
+                                  height: 38,
+                                  width: 180,
+                                  alignment: Alignment.center,
+                                  decoration: BoxDecoration(
+                                    color: Color(0xffAA000A),
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  child: Text(
                                     "Creer un compte",
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontSize: 17,
                                     ),
                                   ),
-                          ),
+                                )
+                              : Container(
+                                  height: 28,
+                                  width: 28,
+                                  child: CircularProgressIndicator(
+                                    valueColor: AlwaysStoppedAnimation(
+                                        Color(0xffAA000A)),
+                                  ),
+                                ),
                         ),
                         SizedBox(height: 50),
                       ],
