@@ -21,6 +21,8 @@ class _NloginnState extends State<Nloginn> {
 
   @override
   void initState() {
+    _controllerNom = TextEditingController(text: 'ngango');
+    _controllerPassword = TextEditingController(text: 'ngango');
     _loginBloc = BlocProvider.of<LoginBloc>(context);
     super.initState();
   }

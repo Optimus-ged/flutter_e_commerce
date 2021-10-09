@@ -33,41 +33,45 @@ class _NAgentPageState extends State<NAgentPage> {
                     child: ListView.builder(
                       padding: EdgeInsets.all(0),
                       itemCount: snapshot.data.agents.length,
-                      itemBuilder: (context, index){ 
-                         final agent = snapshot.data.agents[index];
+                      itemBuilder: (context, index) {
+                        final agent = snapshot.data.agents[index];
                         return Padding(
-                        padding: const EdgeInsets.only(bottom: 5),
-                        child: Container(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 20, vertical: 5),
-                          // color: Colors.green,
-                          child: Row(
-                            children: [
-                              Container(
-                                height: 60,
-                                width: 60,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: Color(0xffAA000A),
+                          padding: const EdgeInsets.only(bottom: 5),
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 5),
+                            // color: Colors.green,
+                            child: Row(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(30),
+                                  child: Container(
+                                    height: 60,
+                                    width: 60,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: Color(0xffAA000A),
+                                    ),
+                                    child: Image.network(
+                                        'http://192.168.137.1:3535/images/${agent.photo}', fit: BoxFit.cover,),
+                                  ),
                                 ),
-                                // child: Image.network(src),
-                              ),
-                              SizedBox(
-                                width: 10
-                              ),
-                              Container(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text('${agent.nom}'),
-                                    Text('${agent.telephone}')
-                                  ],
+                                SizedBox(width: 10),
+                                Container(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text('${agent.nom}'),
+                                      Text('${agent.telephone}')
+                                    ],
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
-                      );},
+                        );
+                      },
                     ),
                   );
                 }
