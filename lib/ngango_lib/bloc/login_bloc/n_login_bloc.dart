@@ -20,7 +20,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       final login = await myProvider.loginUser(event.email, event.password);
       if (login.status == true) {
         yield LoginSuccess(login: login);
-        await locator.get<SharedPreferencesHelper>().saveAuthToken(login.token);
       } else {
         yield LoginFailure(login: login.message);
         return;

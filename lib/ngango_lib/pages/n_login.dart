@@ -1,5 +1,6 @@
 import 'package:e_commerce/ngango_lib/bloc/login_bloc/n_login_bloc.dart';
 import 'package:e_commerce/ngango_lib/bloc/login_bloc/n_login_state.dart';
+import 'package:e_commerce/ngango_lib/pages/n_main_page.dart';
 import 'package:e_commerce/optimus_lib/bloc/login_bloc/login_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -52,6 +53,11 @@ class _NloginnState extends State<Nloginn> {
               gravity: ToastGravity.TOP,
               toastLength: Toast.LENGTH_LONG,
               backgroundColor: Colors.black.withOpacity(0.6),
+            );
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => NMainPage(),
+              ),
             );
           }
         },

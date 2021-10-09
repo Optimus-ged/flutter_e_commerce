@@ -88,20 +88,18 @@ class SimpleBlocObserver extends BlocObserver {
 
 void main() async {
   try {
-    Bloc.observer = SimpleBlocObserver();
+    // Bloc.observer = SimpleBlocObserver();
     runApp(
-        MultiBlocProvider(
-          providers: [
-            BlocProvider<LoginBloc>(
-              create: (context) => LoginBloc(),
-            ),
-           
-          ],
-          child: MyApp(),
-        ),
+      MultiBlocProvider(
+        providers: [
+          BlocProvider<LoginBloc>(
+            create: (context) => LoginBloc(),
+          ),
+        ],
+        child: MyApp(),
+      ),
     );
   } catch (error, stacktrace) {
     debugPrint('Main.Main ::: ERROR: $error & STACKTRACE: $stacktrace');
   }
 }
-

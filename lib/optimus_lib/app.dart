@@ -18,24 +18,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
-        // fontFamily: AppTheme.fontName,
-        // platform: TargetPlatform.iOS,
         dividerTheme: DividerThemeData(space: 0),
       ),
       onGenerateRoute: Routes.materialRoutes,
       home: Nloginn(),
     );
-    // return MaterialApp(
-    //   title: 'Flutter UI',
-    //   debugShowCheckedModeBanner: false,
-    //   theme: ThemeData.dark(
-    //     primarySwatch: Colors.blue,
-    //     fontFamily: AppTheme.fontName,
-    //     platform: TargetPlatform.iOS,
-    //     dividerTheme: DividerThemeData(space: 0),
-    //   ),
-    //   onGenerateRoute: Routes.materialRoutes,
-    //   home: Nloginn(),
-    // );
   }
 }

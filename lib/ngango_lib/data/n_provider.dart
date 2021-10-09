@@ -26,7 +26,7 @@ class NProvider {
   Future<LoginResponse> loginUser(String nom, String password) async {
     try {
       final result = await _dio.post(
-        "/agents/signup",
+        "/agents/signin",
         data: {"nom": nom, "mot_de_passe": password},
         options: Options(
           contentType: Headers.formUrlEncodedContentType,
