@@ -1,9 +1,9 @@
 import 'package:e_commerce/ngango_lib/data/n_provider.dart';
-import 'package:e_commerce/ngango_lib/model/all_agents_model.dart';
+import 'package:e_commerce/ngango_lib/model/all_clients_model.dart';
 import 'package:rxdart/rxdart.dart';
 
 class ListClientsBloc {
-  final _subject = BehaviorSubject<AllAgents>();
+  final _subject = BehaviorSubject<ClientsModel>();
   get stream => _subject.stream;
 
   // Get data function

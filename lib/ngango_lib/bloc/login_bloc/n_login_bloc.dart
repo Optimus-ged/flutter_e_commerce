@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:e_commerce/ngango_lib/data/n_provider.dart';
 import 'package:e_commerce/optimus_lib/bloc/login_bloc/login_event.dart';
 import 'package:e_commerce/optimus_lib/exports/all_exports.dart';
-import 'login_state.dart';
+import 'n_login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc() : super(LoginInitial());

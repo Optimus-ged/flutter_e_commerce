@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:e_commerce/ngango_lib/model/all_agents_model.dart';
+import 'package:e_commerce/ngango_lib/model/all_clients_model.dart';
 import 'package:e_commerce/ngango_lib/model/login.dart';
 import 'connection_settings/n_interceptors.dart';
 
@@ -65,7 +66,7 @@ class NProvider {
   }
 
   // Login
-  Future<AllAgents> getAllClients() async {
+  Future<ClientsModel> getAllClients() async {
     try {
       final result = await _dio.get(
         "/clients",
@@ -78,7 +79,7 @@ class NProvider {
           },
         ),
       );
-      return AllAgents.fromJson(result.data);
+      return ClientsModel.fromJson(result.data);
     } catch (e) {
       print("ERROR loginUser : ${e.toString()}");
       throw e;

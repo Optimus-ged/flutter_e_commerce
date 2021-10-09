@@ -1,6 +1,6 @@
-import 'package:e_commerce/ngango_lib/bloc/login_bloc/login_bloc.dart';
-import 'package:e_commerce/ngango_lib/bloc/login_bloc/login_state.dart';
-import 'package:e_commerce/ngango_lib/pages/n_main_page.dart';
+import 'package:e_commerce/ngango_lib/bloc/login_bloc/n_login_bloc.dart';
+import 'package:e_commerce/ngango_lib/bloc/login_bloc/n_login_state.dart';
+import 'package:e_commerce/optimus_lib/bloc/login_bloc/login_event.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -17,6 +17,12 @@ class _NloginnState extends State<Nloginn> {
   var _controllerPassword = TextEditingController();
   bool isLoading = false;
   LoginBloc _loginBloc;
+
+  @override
+  void initState() {
+    _loginBloc = BlocProvider.of<LoginBloc>(context);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -101,11 +107,7 @@ class _NloginnState extends State<Nloginn> {
                 SizedBox(height: 20),
                 !isLoading
                     ? InkWell(
-                        onTap: () => Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => NMainPage(),
-                          ),
-                        ),
+                        onTap: () => _onLoginButtonPressed(),
                         child: Container(
                           padding: EdgeInsets.symmetric(
                               vertical: 15, horizontal: 40),
@@ -132,19 +134,19 @@ class _NloginnState extends State<Nloginn> {
     );
   }
 
-  // Future<void> _onLoginButtonPressed() async {
-  //   String email = _controllerNom.text.trim();
-  //   String password = _controllerPassword.text.trim();
+  Future<void> _onLoginButtonPressed() async {
+    String email = _controllerNom.text.trim();
+    String password = _controllerPassword.text.trim();
 
-  //   if (email.trim().isEmpty || password.trim().isEmpty) {
-  //     Fluttertoast.showToast(
-  //       msg:
-  //           "Certains champs sont encore vide, veuillez les rempir tous SVP !!!",
-  //       gravity: ToastGravity.TOP,
-  //       backgroundColor: Colors.black.withOpacity(0.6),
-  //     );
-  //   } else {
-  //     _loginBloc.add(LoginButtonPressed(email: email, password: password));
-  //   }
-  // }
+    if (email.trim().isEmpty || password.trim().isEmpty) {
+      Fluttertoast.showToast(
+        msg:
+            "Certains champs sont encore vide, veuillez les rempir tous SVP !!!",
+        gravity: ToastGravity.TOP,
+        backgroundColor: Colors.black.withOpacity(0.6),
+      );
+    } else {
+      _loginBloc.add(LoginButtonPressed(email: email, password: password));
+    }
+  }
 }
