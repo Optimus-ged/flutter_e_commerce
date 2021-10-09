@@ -35,7 +35,8 @@ class _NMainPageState extends State<NMainPage> {
         child: currentScreen,
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
+        backgroundColor: Color(0xffAA000A),
+        child: Icon(Icons.add, color: Colors.white,),
         onPressed: () => Navigator.of(context).push(
           MaterialPageRoute(
             builder: (context) => NAddData(currentTap: currentTap),
@@ -71,13 +72,13 @@ class _NMainPageState extends State<NMainPage> {
                         children: [
                           Icon(
                             Icons.dashboard,
-                            color: currentTap == 0 ? Colors.blue : Colors.grey,
+                            color: currentTap == 0 ? Color(0xffAA000A) : Colors.grey,
                           ),
                           Text(
                             'Agents',
                             style: TextStyle(
                               color:
-                                  currentTap == 0 ? Colors.blue : Colors.grey,
+                                  currentTap == 0 ? Color(0xffAA000A) : Colors.grey,
                             ),
                           )
                         ],
@@ -95,13 +96,13 @@ class _NMainPageState extends State<NMainPage> {
                         children: [
                           Icon(
                             Icons.dashboard,
-                            color: currentTap == 1 ? Colors.blue : Colors.grey,
+                            color: currentTap == 1 ? Color(0xffAA000A) : Colors.grey,
                           ),
                           Text(
                             'Clients',
                             style: TextStyle(
                               color:
-                                  currentTap == 1 ? Colors.blue : Colors.grey,
+                                  currentTap == 1 ? Color(0xffAA000A) : Colors.grey,
                             ),
                           )
                         ],
@@ -129,13 +130,13 @@ class _NMainPageState extends State<NMainPage> {
                         children: [
                           Icon(
                             Icons.dashboard,
-                            color: currentTap == 2 ? Colors.blue : Colors.grey,
+                            color: currentTap == 2 ? Color(0xffAA000A) : Colors.grey,
                           ),
                           Text(
                             'Reservations',
                             style: TextStyle(
                               color:
-                                  currentTap == 2 ? Colors.blue : Colors.grey,
+                                  currentTap == 2 ? Color(0xffAA000A) : Colors.grey,
                             ),
                           )
                         ],
@@ -154,13 +155,13 @@ class _NMainPageState extends State<NMainPage> {
                         children: [
                           Icon(
                             Icons.dashboard,
-                            color: currentTap == 3 ? Colors.blue : Colors.grey,
+                            color: currentTap == 3 ? Color(0xffAA000A) : Colors.grey,
                           ),
                           Text(
                             'Paiements',
                             style: TextStyle(
                               color:
-                                  currentTap == 3 ? Colors.blue : Colors.grey,
+                                  currentTap == 3 ? Color(0xffAA000A) : Colors.grey,
                             ),
                           )
                         ],
