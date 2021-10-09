@@ -89,7 +89,7 @@ class NProvider {
   }
 
    // Login
-  Future<CreateAgent> postAgent({File file, CreateAgent agentData}) async {
+  Future<CreateAgentResponse> postAgent({File file, CreateAgent agentData}) async {
     String fileName = file.path.split('/').last;
     try {
       FormData formData = FormData.fromMap({
@@ -109,7 +109,7 @@ class NProvider {
           },
         ),
       );
-      return CreateAgent.fromJson(result.data);
+      return CreateAgentResponse.fromJson(result.data);
     } catch (e) {
       print("ERROR loginUser : ${e.toString()}");
       throw e;
