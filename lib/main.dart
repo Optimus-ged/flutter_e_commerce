@@ -1,5 +1,7 @@
+import 'package:e_commerce/bloc/localisation/pay_taxe_bloc.dart';
 import 'package:e_commerce/utils/observer.dart';
 import 'package:e_commerce/views/shared/shared_index.dart';
+import 'bloc/localisation/ticker.dart';
 import 'utils/setup_locator.dart';
 import 'app.dart';
 
@@ -19,6 +21,11 @@ void main() async {
           providers: [
             BlocProvider<LoginBloc>(create: (context) => LoginBloc()),
             BlocProvider<SignupBloc>(create: (context) => SignupBloc()),
+            BlocProvider<PayTaxeBloc>(
+              create: (context) => PayTaxeBloc(
+                ticker: Ticker(),
+              ),
+            ),
             BlocProvider<UpdateProfileBloc>(
               create: (context) => UpdateProfileBloc(),
             ),
