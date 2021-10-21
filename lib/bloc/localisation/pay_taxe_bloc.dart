@@ -8,17 +8,17 @@ import 'ticker.dart';
 part 'pay_taxe_event.dart';
 part 'pay_taxe_state.dart';
 
-class LocalisationBloc extends Bloc<LocalisationEvent, LocalisationState> {
+class PayTaxeBloc extends Bloc<PayTaxeEvent, PayTaxeState> {
   get _api => locator.get<DataRepository>();
   final Ticker _ticker;
   static const int _duration = 1000;
 
   StreamSubscription<int> _tickerSubscription;
 
-  LocalisationBloc({@required Ticker ticker})
+  PayTaxeBloc({@required Ticker ticker})
       : assert(ticker != null),
         _ticker = ticker,
-        super(LocalisationInitial(_duration));
+        super(PayTaxeInitial(_duration));
 
   @override
   Future<void> close() {
@@ -27,11 +27,11 @@ class LocalisationBloc extends Bloc<LocalisationEvent, LocalisationState> {
   }
 
   @override
-  Stream<LocalisationState> mapEventToState(LocalisationEvent event) async* {
+  Stream<PayTaxeState> mapEventToState(PayTaxeEvent event) async* {
     if (event is StartLocation)
       yield* _mapStartLocationToState(event);
-    else if (event is TickedLocalisation)
-      yield* _mapTickedLocalisationToState(event);
+    else if (event is TickedPayTaxe)
+      yield* _mapTickedPayTaxeToState(event);
     else if (event is RefreshLocation)
       yield* _mapRefreshLocationToState(event);
     // else if (event is FetchLocation)
@@ -40,56 +40,56 @@ class LocalisationBloc extends Bloc<LocalisationEvent, LocalisationState> {
       yield* _mapStopLocationToState(event);
   }
 
-  Stream<LocalisationState> _mapStartLocationToState(
+  Stream<PayTaxeState> _mapStartLocationToState(
       StartLocation event) async* {
     try {
-      yield LocalisationInProgress(event.duration);
+      yield PayTaxeInProgress(event.duration);
       _tickerSubscription = _ticker
           .tick(ticks: event.duration)
-          .listen((duration) => add(TickedLocalisation(duration: duration)));
+          .listen((duration) => add(TickedPayTaxe(duration: duration)));
     } catch (error, stackTrace) {
-      print('CarteBloc.MapStartLocationToState ::: '
+      print('PayTaxebloc.MapStartLocationToState ::: '
           'ERROR: $error, STACKTRACE: $stackTrace');
-      yield LocalisationFailure(status: error.statusCode);
+      yield PayTaxeFailure(status: error.statusCode);
     }
   }
 
-  Stream<LocalisationState> _mapRefreshLocationToState(
+  Stream<PayTaxeState> _mapRefreshLocationToState(
       RefreshLocation refresh) async* {
-    yield LocalisationInProgress(_duration);
+    yield PayTaxeInProgress(_duration);
     _tickerSubscription = _ticker
         .tick(ticks: _duration)
-        .listen((duration) => add(TickedLocalisation(duration: duration)));
+        .listen((duration) => add(TickedPayTaxe(duration: duration)));
   }
 
-  Stream<LocalisationState> _mapStopLocationToState(
+  Stream<PayTaxeState> _mapStopLocationToState(
       StopLocation refresh) async* {
     _tickerSubscription?.cancel();
-    yield LocalisationInitial(_duration);
+    yield PayTaxeInitial(_duration);
   }
 
-  Stream<LocalisationState> _mapTickedLocalisationToState(
-      TickedLocalisation tick) async* {
+  Stream<PayTaxeState> _mapTickedPayTaxeToState(
+      TickedPayTaxe tick) async* {
     yield tick.duration > 0
-        ? LocalisationInProgress(tick.duration)
-        : LocalisationRestart(0);
+        ? PayTaxeInProgress(tick.duration)
+        : PayTaxeRestart(0);
   }
 
-  // Stream<LocalisationState> _mapFetchLocationToState(
+  // Stream<PayTaxeState> _mapFetchLocationToState(
   //     FetchLocation event) async* {
   //   try {
   //     // String token = await _sharedPreferencesHelper.authToken;
-  //     final response = await _api.postLocalisation(token, event.localisation);
+  //     final response = await _api.postPayTaxe(token, event.PayTaxe);
   //     if (response.status == 200) {
-  //       yield LocalisationSuccess(localisation: response);
+  //       yield PayTaxeSuccess(PayTaxe: response);
   //     } else {
-  //       yield LocalisationFailure();
+  //       yield PayTaxeFailure();
   //       return;
   //     }
   //   } catch (error, stackTrace) {
   //     print('CarteBloc.MapFetchLocationToState ::: '
   //         'ERROR: $error, STACKTRACE: $stackTrace');
-  //     yield LocalisationFailure(status: error.statusCode);
+  //     yield PayTaxeFailure(status: error.statusCode);
   //   }
   // }
 }

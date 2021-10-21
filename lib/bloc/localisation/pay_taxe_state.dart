@@ -1,41 +1,41 @@
 part of 'pay_taxe_bloc.dart';
 
 @immutable
-abstract class LocalisationState extends Equatable  {
+abstract class PayTaxeState extends Equatable  {
   final int duration;
 
-  const LocalisationState(this.duration);
+  const PayTaxeState(this.duration);
 
   @override
   List<Object> get props => [duration];
 }
 
-class LocalisationInitial extends LocalisationState {
-  const LocalisationInitial(int duration) : super(duration);
+class PayTaxeInitial extends PayTaxeState {
+  const PayTaxeInitial(int duration) : super(duration);
 }
 
-class LocalisationInProgress extends LocalisationState {
-  const LocalisationInProgress(int duration) : super(duration);
+class PayTaxeInProgress extends PayTaxeState {
+  const PayTaxeInProgress(int duration) : super(duration);
 }
 
-class LocalisationFailure extends LocalisationState {
+class PayTaxeFailure extends PayTaxeState {
   final int status;
 
-  const LocalisationFailure({this.status}) : super(0);
+  const PayTaxeFailure({this.status}) : super(0);
 
   @override
   List<Object> get props => [status];
 }
 
-class LocalisationRestart extends LocalisationState {
-  const LocalisationRestart(int duration) : super(0);
+class PayTaxeRestart extends PayTaxeState {
+  const PayTaxeRestart(int duration) : super(0);
 }
 
-// class LocalisationSuccess extends LocalisationState {
-//   final LocalisationData localisation;
+// class PayTaxeSuccess extends PayTaxeState {
+//   final PayTaxeData PayTaxe;
 
-//   const LocalisationSuccess({@required this.localisation}) : super(0);
+//   const PayTaxeSuccess({@required this.PayTaxe}) : super(0);
 
 //   @override
-//   List<Object> get props => [localisation];
+//   List<Object> get props => [PayTaxe];
 // }
