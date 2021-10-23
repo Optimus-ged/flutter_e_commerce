@@ -25,7 +25,7 @@ class GetAllEnterpriseFailure extends GetAllEnterpriseState {
 }
 
 class GetAllEnterpriseSuccess extends GetAllEnterpriseState {
-  final GetAllEnterpriseSuccess enterpriseData;
+  final GetAllEnterprisesResponse enterpriseData;
 
   const GetAllEnterpriseSuccess({@required this.enterpriseData});
 
