@@ -26,7 +26,7 @@ class _EnterprisePageState extends State<EnterprisePage> {
     _updateProfileBloc = BlocProvider.of<UpdateProfileBloc>(context);
     _getAllEnterpriseBloc = BlocProvider.of<GetAllEnterpriseBloc>(context)
       ..add(LoadEnterprises(userId: widget.contribuable.id));
-    
+
     super.initState();
   }
 
@@ -54,7 +54,7 @@ class _EnterprisePageState extends State<EnterprisePage> {
         if (state is GetAllEnterpriseSuccess) {
           GlobalData.entreprises.clear();
           state.enterpriseData.entreprises.forEach((e) {
-            GlobalData.entreprises.add(_enterpriseItem(enterprise: e));
+            GlobalData.entreprises.add(_enterpriseItem(context, enterprise: e));
           });
         }
       },
@@ -78,10 +78,14 @@ class _EnterprisePageState extends State<EnterprisePage> {
                               builder: (context, state) {
                                 if (state is UpdateProfileSuccess) {
                                   return _userInformations(
-                                      state.updateProfile.contribuable, screen);
+                                    state.updateProfile.contribuable,
+                                    screen,
+                                  );
                                 }
                                 return _userInformations(
-                                    widget.contribuable, screen);
+                                  widget.contribuable,
+                                  screen,
+                                );
                               }),
                           Padding(
                             padding: const EdgeInsets.only(bottom: 5),
@@ -102,9 +106,28 @@ class _EnterprisePageState extends State<EnterprisePage> {
                         ],
                       ),
                     ),
-                    Column(
-                      children: GlobalData.entreprises,
-                    )
+                    BlocBuilder<GetAllEnterpriseBloc, GetAllEnterpriseState>(
+                        bloc: _getAllEnterpriseBloc,
+                        builder: (context, state) {
+                          if (state is GetAllEnterpriseSuccess) {
+                            return Column(
+                              children: GlobalData.entreprises,
+                            );
+                            
+                          }
+                          return Column(
+                            children: [
+                              SizedBox(height: screen.height / 2.8),
+                              Text(
+                                'chargement...',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                  color: CustomTheme.orangeColor,
+                                ),
+                              ),
+                            ],
+                          );
+                        }),
                   ],
                 ),
               ),
@@ -115,7 +138,7 @@ class _EnterprisePageState extends State<EnterprisePage> {
     );
   }
 
-  _enterpriseItem({Enterprise enterprise}) {
+  _enterpriseItem(BuildContext context, {Enterprise enterprise}) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 10),
       child: InkWell(
@@ -130,7 +153,7 @@ class _EnterprisePageState extends State<EnterprisePage> {
           child: Container(
             child: Column(
               children: [
-               ClipRRect(
+                ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Container(
                     height: 180,
@@ -171,7 +194,6 @@ class _EnterprisePageState extends State<EnterprisePage> {
             width: 50,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              
             ),
             child: CustomCashedImage(
               imageUrl: "$upload/${cont.photo}",
