@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:e_commerce/data/dio/interceptors.dart';
+import 'package:e_commerce/model/enterprise/get_all_enterprises.dart';
 import 'package:e_commerce/model/models_index.dart';
 
 const upload = 'http://192.168.137.1:3050/images/';
@@ -57,5 +58,12 @@ class DataRepository {
       data: _formData,
     );
     return SignupResponse.fromJson(result.data);
+  }
+
+  Future<GetAllEnterprisesResponse> getAllEnterprises(int id) async {
+    final result = await _dio.get(
+      "/contribuable/all/$id",
+    );
+    return GetAllEnterprisesResponse.fromJson(result.data);
   }
 }
