@@ -19,6 +19,8 @@ class _LoginPageState extends State<LoginPage> {
   void initState() {
     _loginBloc = BlocProvider.of<LoginBloc>(context);
     _signupBloc = BlocProvider.of<SignupBloc>(context);
+    _usernameCtrl = TextEditingController(text: 'Yala ged');
+    _passwordCtrl = TextEditingController(text: 'yala');
     super.initState();
   }
 

@@ -1,5 +1,8 @@
 import 'package:e_commerce/bloc/enterprise/get_enterprise/get_all_enterprise_bloc.dart';
+import 'package:e_commerce/bloc/enterprise/get_enterprise/get_all_enterprise_event.dart';
 import 'package:e_commerce/bloc/enterprise/get_enterprise/get_all_enterprise_state.dart';
+import 'package:e_commerce/global/global_objects.dart';
+import 'package:e_commerce/model/enterprise/enterprise.dart';
 import 'package:e_commerce/model/models_index.dart';
 import 'package:e_commerce/views/shared/custom_cached_img.dart';
 import 'package:e_commerce/views/shared/shared_index.dart';
@@ -21,7 +24,9 @@ class _EnterprisePageState extends State<EnterprisePage> {
   @override
   void initState() {
     _updateProfileBloc = BlocProvider.of<UpdateProfileBloc>(context);
-    _getAllEnterpriseBloc = BlocProvider.of<GetAllEnterpriseBloc>(context);
+    _getAllEnterpriseBloc = BlocProvider.of<GetAllEnterpriseBloc>(context)
+      ..add(LoadEnterprises(userId: widget.contribuable.id));
+    
     super.initState();
   }
 
@@ -47,7 +52,10 @@ class _EnterprisePageState extends State<EnterprisePage> {
           );
         }
         if (state is GetAllEnterpriseSuccess) {
-          
+          GlobalData.entreprises.clear();
+          state.enterpriseData.entreprises.forEach((e) {
+            GlobalData.entreprises.add(_enterpriseItem(enterprise: e));
+          });
         }
       },
       child: Scaffold(
@@ -94,8 +102,9 @@ class _EnterprisePageState extends State<EnterprisePage> {
                         ],
                       ),
                     ),
-                    _enterpriseItem(),
-                    _enterpriseItem(),
+                    Column(
+                      children: GlobalData.entreprises,
+                    )
                   ],
                 ),
               ),
@@ -106,7 +115,7 @@ class _EnterprisePageState extends State<EnterprisePage> {
     );
   }
 
-  _enterpriseItem() {
+  _enterpriseItem({Enterprise enterprise}) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 10),
       child: InkWell(
@@ -121,24 +130,24 @@ class _EnterprisePageState extends State<EnterprisePage> {
           child: Container(
             child: Column(
               children: [
-                ClipRRect(
+               ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: Container(
-                    height: 150,
-                    margin: EdgeInsets.symmetric(horizontal: 10),
+                    height: 180,
                     decoration: BoxDecoration(
-                      color: CustomTheme.orangeColor,
                       borderRadius: BorderRadius.circular(10),
                     ),
-                    child: Center(
-                        // child: Text('test'),
-                        ),
+                    child: CustomCashedImage(
+                      imageUrl: "$upload/${enterprise.photo}",
+                      screen: MediaQuery.of(context).size,
+                      isHomePage: true,
+                    ),
                   ),
                 ),
                 Container(
                   margin: EdgeInsets.symmetric(horizontal: 30, vertical: 5),
                   child: Text(
-                    "Non corporis consequuntur, neque sapiente id maxime, beatae, incidunt dignissimos repudiandae similique fugit ullam nam vitae delectus nostrum quidem lit. Numquam, dignissimos ad.",
+                    "${enterprise.description} ",
                   ),
                 )
               ],
@@ -162,11 +171,7 @@ class _EnterprisePageState extends State<EnterprisePage> {
             width: 50,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              // image: DecorationImage(
-              //   image: AssetImage(
-              //     'assets/images/noAvatar.png',
-              //   ),
-              // ),
+              
             ),
             child: CustomCashedImage(
               imageUrl: "$upload/${cont.photo}",

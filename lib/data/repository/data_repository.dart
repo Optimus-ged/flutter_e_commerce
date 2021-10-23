@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:e_commerce/data/dio/interceptors.dart';
 import 'package:e_commerce/model/enterprise/get_all_enterprises.dart';
 import 'package:e_commerce/model/models_index.dart';
+import 'package:flutter/rendering.dart';
 
 const upload = 'http://192.168.137.1:3050/images/';
 
@@ -60,9 +61,9 @@ class DataRepository {
     return SignupResponse.fromJson(result.data);
   }
 
-  Future<GetAllEnterprisesResponse> getAllEnterprises(int id) async {
+  Future<GetAllEnterprisesResponse> getAllEnterprises(String id) async {
     final result = await _dio.get(
-      "/contribuable/all/$id",
+      "/enterprise/all/$id",
     );
     return GetAllEnterprisesResponse.fromJson(result.data);
   }

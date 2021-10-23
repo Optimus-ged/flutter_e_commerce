@@ -1,3 +1,4 @@
+import 'package:e_commerce/bloc/enterprise/get_enterprise/get_all_enterprise_bloc.dart';
 import 'package:e_commerce/utils/observer.dart';
 import 'package:e_commerce/views/shared/shared_index.dart';
 import 'app.dart';
@@ -40,6 +41,9 @@ void main() async {
             BlocProvider<SignupBloc>(create: (context) => SignupBloc()),
             BlocProvider<UpdateProfileBloc>(
               create: (context) => UpdateProfileBloc(),
+            ),
+            BlocProvider<GetAllEnterpriseBloc>(
+              create: (context) => GetAllEnterpriseBloc(),
             ),
           ],
           child: MyApp(),

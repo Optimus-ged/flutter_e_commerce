@@ -10,7 +10,7 @@ abstract class GetAllEnterpriseEvent extends Equatable {
 }
 
 class LoadEnterprises extends GetAllEnterpriseEvent {
-  final int userId;
+  final String userId;
 
   const LoadEnterprises({@required this.userId})
       : assert(userId != null);
