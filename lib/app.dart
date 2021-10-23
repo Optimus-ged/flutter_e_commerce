@@ -9,13 +9,21 @@ class MyApp extends StatelessWidget {
       statusBarBrightness: Brightness.dark,
       statusBarIconBrightness: Brightness.dark,
     ));
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      onGenerateRoute: Routes.materialRoutes,
-      theme: ThemeData(
-        primarySwatch: Colors.grey,
-        fontFamily: '${CustomTheme.secondaryFont}'),
-      home: IntroPage(),
+    return GestureDetector(
+      onTap: () {
+        FocusScopeNode currentFocus = FocusScope.of(context);
+        if (!currentFocus.hasPrimaryFocus) {
+          currentFocus.unfocus();
+        }
+      },
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        onGenerateRoute: Routes.materialRoutes,
+        theme: ThemeData(
+          primarySwatch: Colors.grey,
+          fontFamily: '${CustomTheme.secondaryFont}'),
+        home: IntroPage(),
+      ),
     );
   }
 }
