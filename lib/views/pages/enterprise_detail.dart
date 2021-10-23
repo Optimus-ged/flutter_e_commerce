@@ -1,7 +1,10 @@
+import 'package:e_commerce/model/enterprise/enterprise.dart';
+import 'package:e_commerce/views/shared/custom_cached_img.dart';
 import 'package:e_commerce/views/shared/shared_index.dart';
 
 class EnterpriseDetail extends StatelessWidget {
-  const EnterpriseDetail({Key key}) : super(key: key);
+  final Enterprise enterprise;
+  const EnterpriseDetail({Key key, this.enterprise}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,19 +37,23 @@ class EnterpriseDetail extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 5),
-                  Container(
-                    height: 150,
-                    margin: EdgeInsets.symmetric(horizontal: 20),
-                    decoration: BoxDecoration(
-                      color: CustomTheme.orangeColor,
-                      borderRadius: BorderRadius.circular(10),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Container(
+                      height: 180,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: CustomCashedImage(
+                        imageUrl: "$upload/${enterprise.photo}",
+                        screen: MediaQuery.of(context).size,
+                        isHomePage: true,
+                      ),
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.symmetric(horizontal: 40, vertical: 5),
-                    child: Text(
-                      "Non corporis consequuntur, neque sapiente id maxime, beatae, incidunt dignissimos repudiandae similique fugit ullam nam vitae delectus nostrum quidem lit. Numquam, dignissimos ad.",
-                    ),
+                    margin: EdgeInsets.symmetric(horizontal: 30, vertical: 5),
+                    child: Text("${enterprise.description} "),
                   ),
                   SizedBox(height: 20),
                   // Container(
