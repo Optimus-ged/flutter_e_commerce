@@ -14,11 +14,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   Stream<LoginState> _mapLoginButtonPressedToState(
       LoginButtonPressed event) async* {
+
     try {
       yield LoginInProgress();
       final login = await _api.loginUser(event.submitData);
       if (login.status == 200) {
         yield LoginSuccess(login: login);
+        
       } else {
         yield LoginFailure(login: login.message);
       }

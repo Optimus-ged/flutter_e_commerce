@@ -1,7 +1,6 @@
 import 'package:e_commerce/views/shared/shared_index.dart';
 import 'routes/routes.dart';
 
-
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

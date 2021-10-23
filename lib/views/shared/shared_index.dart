@@ -8,7 +8,8 @@ export 'package:fluttertoast/fluttertoast.dart';
 export 'package:provider/provider.dart';
 export 'package:flutter_bloc/flutter_bloc.dart';
 export 'package:bloc/bloc.dart';
-// export 'package:image_picker/image_picker.dart';
+export 'package:workmanager/workmanager.dart';
+export 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 // others
 export 'package:flutter/material.dart';

@@ -1,5 +1,8 @@
 import 'package:e_commerce/model/models_index.dart';
 import 'package:e_commerce/views/shared/shared_index.dart';
+import 'dart:io' as io;
+
+import 'package:image_picker/image_picker.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({Key key}) : super(key: key);
@@ -24,6 +27,15 @@ class _SignupPageState extends State<SignupPage> {
     _numImpotCtrl = TextEditingController(text: '45454545tttyyrrew34343434');
     _signupBloc = BlocProvider.of<SignupBloc>(context);
     super.initState();
+  }
+
+  io.File _image;
+  Future getImage() async {
+    final pickedFile =
+        await ImagePicker().pickImage(source: ImageSource.gallery);
+    setState(() {
+      _image = io.File(pickedFile.path);
+    });
   }
 
   @override
@@ -249,28 +261,43 @@ class _SignupPageState extends State<SignupPage> {
           child: Stack(
             children: [
               Center(
-                child: Container(
-                  height: 100,
-                  width: 100,
-                  decoration: BoxDecoration(
-                    // borderRadius: BorderRadius.circular(30),
-                    shape: BoxShape.circle,
-                    border: Border.all(
-                      color: CustomTheme.greyColor,
-                      width: 0.1,
-                    ),
-                    image: DecorationImage(
-                      image: AssetImage('assets/images/noAvatar.png'),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
+                child: _image == null
+                    ? Container(
+                        height: 100,
+                        width: 100,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(40),
+                          color: Colors.white,
+                          border: Border.all(
+                            color: CustomTheme.greyColor,
+                            width: 0.1,
+                          ),
+                          image: DecorationImage(
+                            image: AssetImage('assets/images/noAvatar.png'),
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      )
+                    : ClipRRect(
+                        borderRadius: BorderRadius.circular(40),
+                        child: Container(
+                          height: 100,
+                          width: 100,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                          ),
+                          child: Image.file(
+                            _image,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
               ),
               Positioned(
                 top: 0,
                 right: 15,
                 child: InkWell(
-                  onTap: () => print('aaaaaaaaa'),
+                  onTap: () => getImage(),
                   child: Container(
                     padding: EdgeInsets.all(8),
                     decoration: BoxDecoration(

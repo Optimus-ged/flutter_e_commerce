@@ -49,89 +49,89 @@ class EnterpriseDetail extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 20),
-                  Container(
-                    padding: EdgeInsets.only(left: 40),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text('Tranche'),
-                        SizedBox(height: 10),
-                        Container(
-                          child: Row(
-                            children: [
-                              Material(
-                                elevation: 4,
-                                borderRadius: BorderRadius.circular(25),
-                                child: Container(
-                                  height: 50,
-                                  width: 50,
-                                  alignment: Alignment.center,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: CustomTheme.greyColor,
-                                    // boxShadow: [
-                                    //   BoxShadow(
-                                    //     blurRadius: 2,
-                                    //     color: Colors.black45,
-                                    //     offset: Offset(-2, 2),
-                                    //   ),
-                                    //   BoxShadow(
-                                    //     blurRadius: 2,
-                                    //     color: Colors.grey[200],
-                                    //     offset: Offset(2, -2),
-                                    //   )
-                                    // ]
-                                  ),
-                                  child: Text(
-                                    '1ere',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        fontSize: 12,
-                                        color: Colors.grey,
-                                        fontWeight: FontWeight.w600),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(width: 20),
-                              Material(
-                                elevation: 4,
-                                borderRadius: BorderRadius.circular(25),
-                                child: Container(
-                                  alignment: Alignment.center,
-                                  height: 50,
-                                  width: 50,
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    color: CustomTheme.greyColor,
-                                    // boxShadow: [
-                                    //   BoxShadow(
-                                    //     blurRadius: 2,
-                                    //     color: Colors.grey[200],
-                                    //     offset: Offset(-2, 2),
-                                    //   ),
-                                    //   BoxShadow(
-                                    //     blurRadius: 2,
-                                    //     color: Colors.grey[200],
-                                    //     offset: Offset(2, -2),
-                                    //   )
-                                    // ]
-                                  ),
-                                  child: Text(
-                                    '2eme',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        fontSize: 12,
-                                        color: Colors.grey,
-                                        fontWeight: FontWeight.w600),
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  )
+                  // Container(
+                  //   padding: EdgeInsets.only(left: 40),
+                  //   child: Column(
+                  //     crossAxisAlignment: CrossAxisAlignment.start,
+                  //     children: [
+                  //       Text('Tranche'),
+                  //       SizedBox(height: 10),
+                  //       Container(
+                  //         child: Row(
+                  //           children: [
+                  //             Material(
+                  //               elevation: 4,
+                  //               borderRadius: BorderRadius.circular(25),
+                  //               child: Container(
+                  //                 height: 50,
+                  //                 width: 50,
+                  //                 alignment: Alignment.center,
+                  //                 decoration: BoxDecoration(
+                  //                   shape: BoxShape.circle,
+                  //                   color: CustomTheme.greyColor,
+                  //                   // boxShadow: [
+                  //                   //   BoxShadow(
+                  //                   //     blurRadius: 2,
+                  //                   //     color: Colors.black45,
+                  //                   //     offset: Offset(-2, 2),
+                  //                   //   ),
+                  //                   //   BoxShadow(
+                  //                   //     blurRadius: 2,
+                  //                   //     color: Colors.grey[200],
+                  //                   //     offset: Offset(2, -2),
+                  //                   //   )
+                  //                   // ]
+                  //                 ),
+                  //                 child: Text(
+                  //                   '1ere',
+                  //                   textAlign: TextAlign.center,
+                  //                   style: TextStyle(
+                  //                       fontSize: 12,
+                  //                       color: Colors.grey,
+                  //                       fontWeight: FontWeight.w600),
+                  //                 ),
+                  //               ),
+                  //             ),
+                  //             SizedBox(width: 20),
+                  //             Material(
+                  //               elevation: 4,
+                  //               borderRadius: BorderRadius.circular(25),
+                  //               child: Container(
+                  //                 alignment: Alignment.center,
+                  //                 height: 50,
+                  //                 width: 50,
+                  //                 decoration: BoxDecoration(
+                  //                   shape: BoxShape.circle,
+                  //                   color: CustomTheme.greyColor,
+                  //                   // boxShadow: [
+                  //                   //   BoxShadow(
+                  //                   //     blurRadius: 2,
+                  //                   //     color: Colors.grey[200],
+                  //                   //     offset: Offset(-2, 2),
+                  //                   //   ),
+                  //                   //   BoxShadow(
+                  //                   //     blurRadius: 2,
+                  //                   //     color: Colors.grey[200],
+                  //                   //     offset: Offset(2, -2),
+                  //                   //   )
+                  //                   // ]
+                  //                 ),
+                  //                 child: Text(
+                  //                   '2eme',
+                  //                   textAlign: TextAlign.center,
+                  //                   style: TextStyle(
+                  //                       fontSize: 12,
+                  //                       color: Colors.grey,
+                  //                       fontWeight: FontWeight.w600),
+                  //                 ),
+                  //               ),
+                  //             )
+                  //           ],
+                  //         ),
+                  //       )
+                  //     ],
+                  //   ),
+                  // )
                   // Container(
                   //   // color: Colors.green,
                   //   margin: EdgeInsets.only(left: 40, top: 10),

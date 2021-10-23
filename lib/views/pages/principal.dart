@@ -1,6 +1,8 @@
 import 'package:e_commerce/model/models_index.dart';
 import 'package:e_commerce/views/pages/pages_index.dart';
 import 'package:e_commerce/views/shared/shared_index.dart';
+import 'package:timezone/data/latest.dart' as tz;
+
 
 class Principal extends StatefulWidget {
   final Contribuable contribuable;
@@ -14,9 +16,13 @@ class _PrincipalState extends State<Principal> {
   int currentTap = 0;
   final PageStorageBucket bucket = PageStorageBucket();
   Widget currentScreen;
+  
 
   @override
   void initState() {
+    // _loginBloc = BlocProvider.of<LoginBloc>(context);
+    tz.initializeTimeZones();
+    
     currentScreen = HomePage(
       contribuable: widget.contribuable,
     );
@@ -143,8 +149,6 @@ class _PrincipalState extends State<Principal> {
               ),
               Expanded(
                 child: Container(
-                  // width: MediaQuery.of(context).size.width * .50,
-                  // color: Colors.red,
                   child: MaterialButton(
                     minWidth: 40,
                     onPressed: () {

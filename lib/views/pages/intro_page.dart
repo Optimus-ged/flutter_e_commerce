@@ -1,4 +1,4 @@
-
+import 'package:e_commerce/views/shared/local_notification.dart';
 import 'package:e_commerce/views/shared/shared_index.dart';
 
 class IntroPage extends StatelessWidget {
@@ -75,6 +75,11 @@ class IntroPage extends StatelessWidget {
                                     builder: (context) => LoginPage(),
                                   ),
                                 ),
+                                // onTap: () => NotificationService().showNotification(
+                                //     1,
+                                //     "Optimus test",
+                                //     " Specifies an Android ndroid process has started. This theme is isible to the user",
+                                //     10),
                                 child: Text(
                                   'Next',
                                   style: TextStyle(
