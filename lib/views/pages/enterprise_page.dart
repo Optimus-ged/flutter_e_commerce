@@ -1,5 +1,4 @@
 import 'package:e_commerce/bloc/enterprise/get_enterprise/get_all_enterprise_bloc.dart';
-import 'package:e_commerce/bloc/enterprise/get_enterprise/get_all_enterprise_event.dart';
 import 'package:e_commerce/bloc/enterprise/get_enterprise/get_all_enterprise_state.dart';
 import 'package:e_commerce/global/global_objects.dart';
 import 'package:e_commerce/model/enterprise/enterprise.dart';
@@ -24,9 +23,7 @@ class _EnterprisePageState extends State<EnterprisePage> {
   @override
   void initState() {
     _updateProfileBloc = BlocProvider.of<UpdateProfileBloc>(context);
-    _getAllEnterpriseBloc = BlocProvider.of<GetAllEnterpriseBloc>(context)
-      ..add(LoadEnterprises(userId: widget.contribuable.id));
-
+    _getAllEnterpriseBloc = BlocProvider.of<GetAllEnterpriseBloc>(context);
     super.initState();
   }
 
@@ -36,27 +33,27 @@ class _EnterprisePageState extends State<EnterprisePage> {
     return BlocListener<GetAllEnterpriseBloc, GetAllEnterpriseState>(
       bloc: _getAllEnterpriseBloc,
       listener: (context, state) {
-        if (state is GetAllEnterpriseInProgress) {
-          setState(() {
-            isLoading = true;
-          });
-        }
-        if (state is GetAllEnterpriseFailure) {
-          setState(() {
-            isLoading = false;
-          });
-          Fluttertoast.showToast(
-            msg: "${state.enterpriseData}",
-            gravity: ToastGravity.TOP,
-            backgroundColor: Colors.black.withOpacity(0.6),
-          );
-        }
-        if (state is GetAllEnterpriseSuccess) {
-          GlobalData.entreprises.clear();
-          state.enterpriseData.entreprises.forEach((e) {
-            GlobalData.entreprises.add(_enterpriseItem(context, enterprise: e));
-          });
-        }
+        // if (state is GetAllEnterpriseInProgress) {
+        //   setState(() {
+        //     isLoading = true;
+        //   });
+        // }
+        // if (state is GetAllEnterpriseFailure) {
+        //   setState(() {
+        //     isLoading = false;
+        //   });
+        //   Fluttertoast.showToast(
+        //     msg: "${state.enterpriseData}",
+        //     gravity: ToastGravity.TOP,
+        //     backgroundColor: Colors.black.withOpacity(0.6),
+        //   );
+        // }
+        // if (state is GetAllEnterpriseSuccess) {
+        //   GlobalData.entreprises.clear();
+        //   state.enterpriseData.entreprises.forEach((e) {
+        //     GlobalData.entreprises.add(_enterpriseItem(context, enterprise: e));
+        //   });
+        // }
       },
       child: Scaffold(
         body: Container(
@@ -113,7 +110,6 @@ class _EnterprisePageState extends State<EnterprisePage> {
                             return Column(
                               children: GlobalData.entreprises,
                             );
-                            
                           }
                           return Column(
                             children: [
@@ -145,7 +141,9 @@ class _EnterprisePageState extends State<EnterprisePage> {
         borderRadius: BorderRadius.circular(10),
         onTap: () => Navigator.of(context).push(
           MaterialPageRoute(
-            builder: (context) => EnterpriseDetail(),
+            builder: (context) => EnterpriseDetail(
+              enterprise: enterprise,
+            ),
           ),
         ),
         child: Padding(

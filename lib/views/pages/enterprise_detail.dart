@@ -4,7 +4,7 @@ import 'package:e_commerce/views/shared/shared_index.dart';
 
 class EnterpriseDetail extends StatelessWidget {
   final Enterprise enterprise;
-  const EnterpriseDetail({Key key, this.enterprise}) : super(key: key);
+  const EnterpriseDetail({Key key, @required this.enterprise}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
