@@ -189,9 +189,7 @@ class _EnterpriseDetailState extends State<EnterpriseDetail> {
                                               fontWeight: FontWeight.w600),
                                           decoration: InputDecoration.collapsed(
                                             hintText: 'montant',
-                                            
                                             hintStyle: TextStyle(
-
                                               fontWeight: FontWeight.normal,
                                             ),
                                           ),
@@ -216,7 +214,7 @@ class _EnterpriseDetailState extends State<EnterpriseDetail> {
                   children: [
                     SizedBox(height: 15),
                     Text(
-                      'A payer : 10000Fc',
+                      'A payer : ${widget.enterprise.declaration.paiement.montant} Fc',
                       style: TextStyle(
                           color: Colors.black38,
                           decoration: TextDecoration.underline,
