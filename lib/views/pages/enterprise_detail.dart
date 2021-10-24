@@ -24,16 +24,16 @@ class _EnterpriseDetailState extends State<EnterpriseDetail> {
     return Scaffold(
       body: Container(
         height: screen.height,
+        // color: Colors.red,
         margin: EdgeInsets.only(top: 24),
         child: SingleChildScrollView(
-          padding: EdgeInsets.only(bottom: 20),
+          physics: ClampingScrollPhysics(),
           child: Column(
             children: [
               SingleChildScrollView(
                 physics: ClampingScrollPhysics(),
                 child: Container(
-                  
-                  height: screen.height - 130,
+                  height: screen.height - 140,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -97,50 +97,73 @@ class _EnterpriseDetailState extends State<EnterpriseDetail> {
                                         isByMobile = false;
                                       });
                                     },
-                                    child: Material(
-                                      elevation: 4,
-                                      borderRadius: BorderRadius.circular(25),
-                                      child: Container(
-                                        height: 50,
-                                        width: 50,
-                                        alignment: Alignment.center,
-                                        decoration: BoxDecoration(
-                                          shape: BoxShape.circle,
-                                          color: !isByMobile
-                                              ? CustomTheme.redColor
-                                              : CustomTheme.greyColor,
+                                    child: Column(
+                                      children: [
+                                        Material(
+                                          elevation: 4,
+                                          borderRadius:
+                                              BorderRadius.circular(25),
+                                          child: Container(
+                                            height: 50,
+                                            width: 50,
+                                            alignment: Alignment.center,
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              color: !isByMobile
+                                                  ? CustomTheme.redColor
+                                                  : CustomTheme.greyColor,
+                                            ),
+                                            child: Icon(
+                                              Icons.bookmarks_rounded,
+                                              color: Colors.white,
+                                            ),
+                                          ),
                                         ),
-                                        child: Icon(
-                                          Icons.bookmarks_rounded,
-                                          color: Colors.white,
+                                        SizedBox(height: 5),
+                                        Text(
+                                          'payer par mobile\nmoney',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(fontSize: 10),
                                         ),
-                                      ),
+                                      ],
                                     ),
                                   ),
-                                  SizedBox(width: 20),
+                                  SizedBox(width: 10),
                                   InkWell(
                                     onTap: () {
                                       setState(() {
                                         isByMobile = true;
                                       });
                                     },
-                                    child: Material(
-                                      elevation: 4,
-                                      borderRadius: BorderRadius.circular(25),
-                                      child: Container(
-                                          alignment: Alignment.center,
-                                          height: 50,
-                                          width: 50,
-                                          decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            color: !isByMobile
-                                                ? CustomTheme.greyColor
-                                                : CustomTheme.redColor,
+                                    child: Column(
+                                      children: [
+                                        Material(
+                                          elevation: 4,
+                                          borderRadius:
+                                              BorderRadius.circular(25),
+                                          child: Container(
+                                            alignment: Alignment.center,
+                                            height: 50,
+                                            width: 50,
+                                            decoration: BoxDecoration(
+                                              shape: BoxShape.circle,
+                                              color: !isByMobile
+                                                  ? CustomTheme.greyColor
+                                                  : CustomTheme.redColor,
+                                            ),
+                                            child: Icon(
+                                              Icons.payments_sharp,
+                                              color: Colors.white,
+                                            ),
                                           ),
-                                          child: Icon(
-                                            Icons.payments_sharp,
-                                            color: Colors.white,
-                                          )),
+                                        ),
+                                        SizedBox(height: 5),
+                                        Text(
+                                          'payer par cheque\nbancaire',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(fontSize: 10),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                   SizedBox(width: 20),
@@ -166,7 +189,9 @@ class _EnterpriseDetailState extends State<EnterpriseDetail> {
                                               fontWeight: FontWeight.w600),
                                           decoration: InputDecoration.collapsed(
                                             hintText: 'montant',
+                                            
                                             hintStyle: TextStyle(
+
                                               fontWeight: FontWeight.normal,
                                             ),
                                           ),
@@ -185,6 +210,7 @@ class _EnterpriseDetailState extends State<EnterpriseDetail> {
                 ),
               ),
               Container(
+                // color: Colors.green,
                 padding: EdgeInsets.symmetric(horizontal: 40),
                 child: Column(
                   children: [
@@ -218,6 +244,7 @@ class _EnterpriseDetailState extends State<EnterpriseDetail> {
                         ),
                       ),
                     ),
+                    SizedBox(height: 20),
                   ],
                 ),
               )
